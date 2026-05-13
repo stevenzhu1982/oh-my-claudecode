@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026暑假 · 家庭出游计划</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -309,16 +308,176 @@ body {
   font-weight: 500;
 }
 
-/* ===== Map Section ===== */
-#map {
+/* ===== Visual Map ===== */
+.vis-map {
+  position: relative;
   width: 100%;
-  height: 320px;
+  height: 380px;
   border-radius: 16px;
+  background: linear-gradient(160deg, #0c1a32 0%, #132a4a 30%, #1a3a5c 60%, #1f4a6e 100%);
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  user-select: none;
+}
+/* Grid lines */
+.vis-map::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 12.5%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 10%);
+  pointer-events: none;
+}
+/* Decorative glow dots (ocean texture) */
+.vis-map .ocean-dot {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+/* Map label top-left */
+.vis-map .map-title {
+  position: absolute;
+  top: 14px; left: 16px;
+  color: rgba(255,255,255,0.25);
+  font-size: 11px;
+  letter-spacing: 2px;
+  pointer-events: none;
+  font-weight: 600;
+}
+/* Destination dot */
+.map-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+}
+.map-dot .dot-ring {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: dotPulse 2s ease-in-out infinite;
+  opacity: 0.3;
+}
+@keyframes dotPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.1; }
+}
+.map-dot .dot-core {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 12px rgba(255,255,255,0.2);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+}
+.map-dot:hover .dot-core {
+  transform: translate(-50%, -50%) scale(1.6);
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  z-index: 10;
+}
+.map-dot .dot-label {
+  position: absolute;
+  left: 18px; top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.map-dot:hover .dot-label {
+  opacity: 1;
+}
+.map-dot .dot-label-flag { margin-right: 2px; }
+
+/* Origin dot (Shanghai) */
+.map-dot-origin .dot-core {
+  width: 10px; height: 10px;
+  background: #f6ad55;
+  border-color: rgba(255,255,255,0.6);
+}
+.map-dot-origin .dot-ring {
+  border: 2px dashed #f6ad55;
+  animation: none;
+  width: 30px; height: 30px;
+  opacity: 0.5;
+}
+
+/* Connecting lines via SVG */
+.map-lines {
+  position: absolute; inset: 0;
+  pointer-events: none;
   z-index: 1;
 }
-.map-container { position: relative; }
+
+/* Map legend */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 0 4px;
+}
+.map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #718096;
+  padding: 3px 8px;
+  background: #f7fafc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.map-legend-item:hover {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+.map-legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Map tooltip */
+.map-tooltip {
+  position: absolute;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+.map-tooltip.show { opacity: 1; }
+.map-tooltip a { color: #90cdf4; text-decoration: none; font-weight: 600; }
+
+/* Map click hint */
+.map-hint {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.2);
+  font-size: 11px;
+  pointer-events: none;
+}
 
 /* ===== Info Card ===== */
 .info-card {
@@ -422,7 +581,7 @@ body {
   .dest-img { height: 130px; }
   .dest-body { padding: 12px 14px 14px; }
   .info-grid { grid-template-columns: 1fr 1fr; }
-  #map { height: 240px; }
+  .vis-map { height: 260px; }
   .comment-card { padding: 18px 16px; }
   .msg-text { padding-left: 0; margin-top: 6px; }
 }
@@ -478,11 +637,15 @@ body {
   <div class="section" id="sec-map">
     <div class="section-header">
       <h2>📍 目的地分布</h2>
-      <p>看看这些地方都在哪里</p>
+      <p>悬停或点击查看目的地</p>
     </div>
-    <div class="map-container">
-      <div id="map"></div>
+    <div class="vis-map" id="vis-map">
+      <div class="map-title">EAST ASIA · SOUTHEAST ASIA</div>
+      <svg class="map-lines" id="map-lines"></svg>
+      <div class="map-hint">把滑鼠移到圆点上查看地名</div>
     </div>
+    <div class="map-legend" id="map-legend"></div>
+    <div class="map-tooltip" id="map-tooltip"></div>
   </div>
 
   <!-- Trip Info -->
@@ -523,8 +686,7 @@ body {
 <div class="footer">✈️ 家庭出游计划 · 2026 年 暑假</div>
 <div id="toast" class="toast"></div>
 
-<!-- ===== Leaflet ===== -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- ===== Custom Visual Map ===== -->
 
 <script>
 /* ===== Destination Data ===== */
@@ -662,29 +824,127 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 renderDests('all');
 
-/* ===== Leaflet Map ===== */
-(function initMap() {
-  const container = document.getElementById('map');
-  if (!container) return;
+/* ===== Custom Visual Map ===== */
+(function initVisMap() {
+  const mapEl = document.getElementById('vis-map');
+  if (!mapEl) return;
 
-  const map = L.map('map', {
-    center: [28, 115],
-    zoom: 4,
-    zoomControl: false,
-    attributionControl: false
+  // Map bounds: lat 0-50°N, lng 75-125°E
+  const toPct = (lat, lng) => ({
+    top: 100 - (lat / 50 * 100),     // lat 0=bottom, 50=top
+    left: (lng - 75) / 50 * 100
   });
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 18,
-  }).addTo(map);
+  // Origin: Shanghai
+  const origin = toPct(31.2, 121.5);
 
-  DESTINATIONS.forEach(d => {
-    const color = d.color || '#2b6cb0';
-    const markerHtml = `<div style="background:${color};width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>`;
-    const icon = L.divIcon({ html: markerHtml, iconSize: [14, 14], className: '' });
-    L.marker(d.latlng, { icon })
-      .addTo(map)
-      .bindPopup(`<strong>${d.flag} ${d.name}</strong><br><a href="${d.page}" style="color:#2b6cb0;">查看行程 →</a>`, { closeButton: false });
+  // Generate decorative ocean dots
+  for (let i = 0; i < 60; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'ocean-dot';
+    dot.style.left = (Math.random() * 96 + 2) + '%';
+    dot.style.top = (Math.random() * 96 + 2) + '%';
+    dot.style.width = dot.style.height = (Math.random() * 2 + 1) + 'px';
+    mapEl.appendChild(dot);
+  }
+
+  // Draw connecting lines from origin to each destination
+  const svg = document.getElementById('map-lines');
+  const mapRect = mapEl.getBoundingClientRect();
+
+  function addLine(x1, y1, x2, y2, color) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1 + '%');
+    line.setAttribute('y1', y1 + '%');
+    line.setAttribute('x2', x2 + '%');
+    line.setAttribute('y2', y2 + '%');
+    line.setAttribute('stroke', color || 'rgba(255,255,255,0.08)');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('stroke-dasharray', '3,4');
+    svg.appendChild(line);
+  }
+
+  DESTINATIONS.forEach((d, idx) => {
+    const pos = toPct(d.latlng[0], d.latlng[1]);
+    addLine(origin.left, origin.top, pos.left, pos.top, d.color + '33');
+
+    // Dot element
+    const dot = document.createElement('div');
+    dot.className = 'map-dot';
+    dot.style.left = pos.left + '%';
+    dot.style.top = pos.top + '%';
+
+    const ring = document.createElement('div');
+    ring.className = 'dot-ring';
+    ring.style.background = d.color;
+    dot.appendChild(ring);
+
+    const core = document.createElement('div');
+    core.className = 'dot-core';
+    core.style.background = d.color;
+    dot.appendChild(core);
+
+    const label = document.createElement('div');
+    label.className = 'dot-label';
+    label.innerHTML = `<span class="dot-label-flag">${d.flag}</span>${d.name}`;
+    dot.appendChild(label);
+
+    // Click → navigate
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = d.page;
+    });
+
+    // Hover tooltip
+    dot.addEventListener('mouseenter', () => {
+      const tt = document.getElementById('map-tooltip');
+      tt.innerHTML = `<strong>${d.flag} ${d.name}</strong> · <a href="${d.page}">查看行程 →</a>`;
+      tt.classList.add('show');
+    });
+    dot.addEventListener('mousemove', (e) => {
+      const tt = document.getElementById('map-tooltip');
+      const r = mapEl.getBoundingClientRect();
+      let x = e.clientX - r.left + 16;
+      let y = e.clientY - r.top - 10;
+      if (x + 200 > r.width) x = e.clientX - r.left - 180;
+      if (y < 0) y = 10;
+      tt.style.left = x + 'px';
+      tt.style.top = y + 'px';
+    });
+    dot.addEventListener('mouseleave', () => {
+      document.getElementById('map-tooltip').classList.remove('show');
+    });
+
+    mapEl.appendChild(dot);
+
+    // Legend item
+    const leg = document.getElementById('map-legend');
+    const item = document.createElement('a');
+    item.className = 'map-legend-item';
+    item.href = d.page;
+    item.innerHTML = `<span class="map-legend-dot" style="background:${d.color}"></span>${d.flag} ${d.name}`;
+    leg.appendChild(item);
+  });
+
+  // Origin dot
+  const originDot = document.createElement('div');
+  originDot.className = 'map-dot map-dot-origin';
+  originDot.style.left = origin.left + '%';
+  originDot.style.top = origin.top + '%';
+  const or = document.createElement('div'); or.className = 'dot-ring'; originDot.appendChild(or);
+  const oc = document.createElement('div'); oc.className = 'dot-core'; originDot.appendChild(oc);
+  const ol = document.createElement('div'); ol.className = 'dot-label';
+  ol.innerHTML = '<span class="dot-label-flag">📍</span>上海（出发地）';
+  originDot.appendChild(ol);
+  mapEl.appendChild(originDot);
+
+  // Redraw lines on resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // SVG lines are in %, so no recalculation needed
+    }, 200);
   });
 })();
 
