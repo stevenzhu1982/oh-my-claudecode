@@ -8,7 +8,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #f0f2f5; color: #333; padding: 20px 16px 60px; line-height: 1.8;
+    background: #f0f4f8; color: #2d3748; padding: 0 0 60px; line-height: 1.8;
   }
   .container { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
   h1 { font-size: 22px; text-align: center; color: #BF360C; margin-bottom: 6px; font-weight: 700; line-height: 1.4; }
@@ -34,9 +34,51 @@
     p, .day-item, .highlight, .note-box { font-size: 14px; }
     .day-card { padding: 12px 14px; }
   }
+  .hero-bar {
+    background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 40%, #2c7a7b 100%);
+    padding: 36px 20px 32px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bar::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1596178060671-7a80dc7c2b1c?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.15;
+  }
+  .hero-bar h2 {
+    position: relative;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+  }
+  .hero-bar .sub {
+    position: relative;
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+  .hero-bar .wave {
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23f0f4f8'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
 </style>
 </head>
 <body>
+<div class="hero-bar">
+  <h2>🇨🇳 青岛</h2>
+  <div class="sub">红瓦绿树 · 碧海蓝天 · 5天4晚</div>
+  <div class="wave"></div>
+</div>
 <div class="container">
   <h1>🇨🇳 青岛 · 暑假家庭游<br>推荐行程方案</h1>
   <div class="subtitle">红瓦绿树 · 碧海蓝天 · 5天4晚</div>

@@ -4,263 +4,702 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>2026暑假 · 家庭出游计划</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    padding: 40px 20px;
-    color: #333;
-  }
-  .container { max-width: 600px; margin: 0 auto; }
-  .hero { text-align: center; color: #fff; margin-bottom: 30px; }
-  .hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
-  .hero p { font-size: 15px; opacity: 0.9; line-height: 1.6; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f0f4f8;
+  color: #2d3748;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-  .card { background: #fff; border-radius: 16px; padding: 24px 20px; margin-bottom: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-  .card-title { font-size: 18px; font-weight: 700; color: #1a4c7a; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 40%, #2c7a7b 100%);
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.3;
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,54,93,0.85) 0%, rgba(43,108,176,0.75) 50%, rgba(44,122,123,0.8) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-emoji {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  letter-spacing: 2px;
+}
+.hero p {
+  font-size: clamp(15px, 2.5vw, 19px);
+  color: rgba(255,255,255,0.85);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.hero-wave {
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23f0f4f8'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 70px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 24px; height: 40px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-indicator::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 4px; height: 8px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 2px;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.3; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
 
-  .dest-list { display: flex; flex-direction: column; gap: 10px; }
-  .dest-item {
-    display: flex; align-items: center;
-    background: #f7f9fc; border: 1px solid #e8e8e8; border-radius: 12px;
-    padding: 14px 16px; text-decoration: none; color: #333;
-    transition: all 0.15s; gap: 12px;
-  }
-  .dest-item:hover { background: #f0f2f5; border-color: #ccc; }
-  .dest-item:active { transform: scale(0.99); }
-  .dest-flag { font-size: 28px; flex-shrink: 0; width: 42px; text-align: center; }
-  .dest-info { flex: 1; min-width: 0; }
-  .dest-name { font-size: 15px; font-weight: 600; }
-  .dest-desc { font-size: 12px; color: #888; }
-  .dest-arrow { color: #bbb; font-size: 18px; flex-shrink: 0; }
+/* ===== Container ===== */
+.container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
 
-  .badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-left: 6px; font-weight: 600; vertical-align: middle; }
-  .badge-new { background: #fde8e8; color: #c0392b; }
+/* ===== Section ===== */
+.section {
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 4px;
+}
+.section-header p {
+  font-size: 14px;
+  color: #718096;
+}
 
-  .section-label {
-    font-size: 13px; font-weight: 600; color: #999; margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
+/* ===== Tab Filter ===== */
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.tab-btn {
+  padding: 8px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 20px;
+  background: #fff;
+  color: #4a5568;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.tab-btn:hover { border-color: #2b6cb0; color: #2b6cb0; }
+.tab-btn.active {
+  background: #2b6cb0;
+  border-color: #2b6cb0;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(43,108,176,0.3);
+}
 
-  .info-card { font-size: 14px; color: #555; line-height: 1.8; }
-  .info-card strong { color: #333; }
+/* ===== Proposal Card ===== */
+.proposal-card {
+  background: linear-gradient(135deg, #ebf8ff, #e0edff);
+  border: 2px dashed #2b6cb0;
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.proposal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(43,108,176,0.15);
+  border-color: #1a365d;
+}
+.proposal-card .icon { font-size: 36px; display: block; margin-bottom: 8px; }
+.proposal-card .title { font-size: 17px; font-weight: 700; color: #1a365d; }
+.proposal-card .desc { font-size: 13px; color: #4a5568; margin-top: 4px; }
+.proposal-card .badge-proposal {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 14px;
+  background: #2b6cb0;
+  color: #fff;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
 
-  .footer { text-align: center; color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 30px; }
+/* ===== Destination Grid ===== */
+.dest-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.dest-grid.show-2 { grid-template-columns: 1fr 1fr; }
 
-  /* 留言板样式 */
-  .msg-form { display: flex; flex-direction: column; gap: 10px; }
-  .msg-form input, .msg-form textarea {
-    font-family: inherit; font-size: 14px; padding: 10px 14px;
-    border: 1px solid #ddd; border-radius: 8px; outline: none; resize: none;
-    transition: border-color 0.15s;
-  }
-  .msg-form input:focus, .msg-form textarea:focus { border-color: #667eea; }
-  .msg-form .row { display: flex; gap: 10px; }
-  .msg-form .row input { flex: 1; }
-  .msg-form textarea { min-height: 70px; }
-  .msg-form .btn-submit {
-    align-self: flex-end; background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff; border: none; padding: 10px 28px; border-radius: 8px;
-    font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.15s;
-  }
-  .msg-form .btn-submit:hover { opacity: 0.85; }
-  .msg-form .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
-  .msg-form .msg-tip { font-size: 12px; color: #999; text-align: right; }
+.dest-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+.dest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+.dest-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
+}
+.dest-card:hover .dest-img {
+  transform: scale(1.05);
+}
+.dest-img-placeholder {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.dest-overlay {
+  position: absolute;
+  top: 8px; left: 8px;
+  display: flex;
+  gap: 4px;
+}
+.dest-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+.dest-tag-region {
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+}
+.dest-tag-new {
+  background: rgba(237,137,54,0.9);
+  color: #fff;
+}
+.dest-body {
+  padding: 14px 16px 16px;
+}
+.dest-body-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.dest-flag { font-size: 20px; }
+.dest-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a202c;
+  flex: 1;
+}
+.dest-arrow {
+  color: #cbd5e0;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.dest-card:hover .dest-arrow {
+  color: #2b6cb0;
+  transform: translateX(4px);
+}
+.dest-desc {
+  font-size: 13px;
+  color: #718096;
+  line-height: 1.5;
+  display: -webkit-box;
 
-  .msg-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; max-height: 400px; overflow-y: auto; }
-  .msg-item { background: #f7f9fc; border-radius: 10px; padding: 12px 14px; }
-  .msg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .msg-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-  .msg-name { font-size: 13px; font-weight: 600; color: #333; }
-  .msg-time { font-size: 11px; color: #aaa; margin-left: auto; }
-  .msg-text { font-size: 14px; color: #555; line-height: 1.6; padding-left: 36px; word-break: break-all; }
-  .msg-empty { text-align: center; color: #ccc; font-size: 14px; padding: 30px 0; }
-  .msg-loading { text-align: center; color: #999; font-size: 13px; padding: 20px 0; }
-  .msg-error { text-align: center; color: #e74c3c; font-size: 13px; padding: 10px 0; }
+  overflow: hidden;
+}
+.dest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.dest-tag-feature {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  border-radius: 8px;
+  font-weight: 500;
+}
 
-  @media (max-width: 480px) {
-    body { padding: 20px 12px; }
-    .hero h1 { font-size: 24px; }
-    .card { padding: 18px 16px; }
-    .dest-item { padding: 12px 14px; }
-    .dest-flag { font-size: 24px; width: 36px; }
-    .msg-form .row { flex-direction: column; }
-  }
+/* ===== Map Section ===== */
+#map {
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  z-index: 1;
+}
+.map-container { position: relative; }
+
+/* ===== Info Card ===== */
+.info-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  text-align: center;
+}
+.info-card .icon { font-size: 32px; margin-bottom: 8px; display: block; }
+.info-card h3 { font-size: 17px; color: #1a365d; margin-bottom: 12px; }
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: center;
+}
+.info-item {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 12px 10px;
+}
+.info-item .label { font-size: 11px; color: #a0aec0; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+.info-item .value { font-size: 14px; font-weight: 600; color: #2d3748; }
+
+/* ===== Comment Section ===== */
+.comment-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.comment-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.msg-form { display: flex; flex-direction: column; gap: 10px; }
+.msg-form input, .msg-form textarea {
+  font-family: inherit; font-size: 14px; padding: 12px 16px;
+  border: 2px solid #e2e8f0; border-radius: 10px; outline: none; resize: none;
+  transition: border-color 0.2s; background: #f7fafc;
+}
+.msg-form input:focus, .msg-form textarea:focus { border-color: #2b6cb0; background: #fff; }
+.msg-form textarea { min-height: 80px; }
+.msg-form .btn-submit {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #2b6cb0, #2c7a7b);
+  color: #fff; border: none; padding: 10px 32px; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; font-family: inherit;
+}
+.msg-form .btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(43,108,176,0.3);
+}
+.msg-form .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.msg-form .msg-tip { font-size: 12px; color: #a0aec0; text-align: right; }
+
+.msg-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; max-height: 420px; overflow-y: auto; }
+.msg-item { background: #f7fafc; border-radius: 12px; padding: 14px 16px; }
+.msg-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.msg-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #2b6cb0, #2c7a7b);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.msg-name { font-size: 14px; font-weight: 600; color: #2d3748; }
+.msg-time { font-size: 11px; color: #a0aec0; margin-left: auto; }
+.msg-text { font-size: 14px; color: #4a5568; line-height: 1.6; padding-left: 40px; word-break: break-all; }
+.msg-empty { text-align: center; color: #cbd5e0; font-size: 14px; padding: 30px 0; }
+.msg-loading { text-align: center; color: #a0aec0; font-size: 13px; padding: 20px 0; }
+
+/* ===== Footer ===== */
+.footer { text-align: center; padding: 32px 16px; color: #a0aec0; font-size: 13px; }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: #1a202c; color: #fff; padding: 12px 24px; border-radius: 10px;
+  font-size: 14px; z-index: 1000; opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (min-width: 600px) {
+  .dest-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 70vh; }
+  .hero-emoji { font-size: 40px; }
+  .tab-btn { padding: 6px 16px; font-size: 13px; }
+  .dest-img { height: 130px; }
+  .dest-body { padding: 12px 14px 14px; }
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  #map { height: 240px; }
+  .comment-card { padding: 18px 16px; }
+  .msg-text { padding-left: 0; margin-top: 6px; }
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="hero">
-    <h1>🏖️ 2026 暑假 · 家庭出游</h1>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-emoji">🏖️</span>
+    <h1>2026 暑假 · 家庭出游</h1>
     <p>几个家庭一起，带上老人和孩子<br>选一个心仪的目的地，出发！</p>
   </div>
+  <div class="scroll-indicator"></div>
+  <div class="hero-wave"></div>
+</section>
 
-  <!-- 征求意见稿 -->
-  <div class="card">
-    <div class="card-title">📋 出行意向 · 征求意见</div>
-    <div class="dest-list">
-      <a href="proposal.html" class="dest-item">
-        <span class="dest-flag">📄</span>
-        <span class="dest-info">
-          <span class="dest-name">家庭出游征求意见稿</span>
-          <span class="dest-desc">10 个目的地方案对比 · 回执表</span>
-        </span>
-        <span class="dest-arrow">→</span>
-      </a>
+<!-- ===== Main Content ===== -->
+<div class="container">
+
+  <!-- Proposal Card -->
+  <div class="section" id="sec-proposal">
+    <a href="proposal.html" class="proposal-card">
+      <span class="icon">📋</span>
+      <div class="title">家庭出游征求意见稿</div>
+      <div class="desc">10 个目的地方案对比 · 在线回执 · 大家来投票</div>
+      <span class="badge-proposal">查看详情 →</span>
+    </a>
+  </div>
+
+  <!-- Destinations -->
+  <div class="section" id="sec-dests">
+    <div class="section-header">
+      <h2>🗺️ 心仪目的地</h2>
+      <p>点击查看详细行程安排</p>
+    </div>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" data-filter="all">🌏 全部</button>
+      <button class="tab-btn" data-filter="domestic">🇨🇳 国内</button>
+      <button class="tab-btn" data-filter="international">🌴 国外</button>
+    </div>
+
+    <div class="dest-grid" id="dest-grid">
+      <!-- Cards injected by JS -->
     </div>
   </div>
 
-  <!-- 推荐行程 -->
-  <div class="card">
-    <div class="card-title">🗺️ 各目的地 · 推荐行程</div>
-    <div class="section-label">点击查看详细行程安排</div>
-    <div class="dest-list">
-
-      <a href="itinerary-xinjiang.html" class="dest-item">
-        <span class="dest-flag">🇨🇳</span>
-        <span class="dest-info">
-          <span class="dest-name">新疆 · 北疆伊犁</span>
-          <span class="dest-desc">7天6晚 · 草原雪山 · 夏季避暑</span>
-        </span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-weihai.html" class="dest-item">
-        <span class="dest-flag">🇨🇳</span>
-        <span class="dest-info">
-          <span class="dest-name">威海</span>
-          <span class="dest-desc">5天4晚 · 最干净海滨 · 海鲜慢城</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-dalian.html" class="dest-item">
-        <span class="dest-flag">🇨🇳</span>
-        <span class="dest-info">
-          <span class="dest-name">大连</span>
-          <span class="dest-desc">5天4晚 · 浪漫海滨 · 海鲜烧烤</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-qingdao.html" class="dest-item">
-        <span class="dest-flag">🇨🇳</span>
-        <span class="dest-info">
-          <span class="dest-name">青岛</span>
-          <span class="dest-desc">5天4晚 · 红瓦绿树 · 啤酒海鲜</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-yantai.html" class="dest-item">
-        <span class="dest-flag">🇨🇳</span>
-        <span class="dest-info">
-          <span class="dest-name">烟台</span>
-          <span class="dest-desc">5天4晚 · 人间仙境 · 慢生活</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
+  <!-- Map -->
+  <div class="section" id="sec-map">
+    <div class="section-header">
+      <h2>📍 目的地分布</h2>
+      <p>看看这些地方都在哪里</p>
+    </div>
+    <div class="map-container">
+      <div id="map"></div>
     </div>
   </div>
 
-  <!-- 国外推荐 -->
-  <div class="card">
-    <div class="card-title">🌏 国外目的地 · 推荐行程</div>
-    <div class="section-label">飞行不超过5小时 · 靠海吃躺逛</div>
-    <div class="dest-list">
-
-      <a href="itinerary-penang.html" class="dest-item">
-        <span class="dest-flag">🇲🇾</span>
-        <span class="dest-info">
-          <span class="dest-name">马来西亚 · 槟城</span>
-          <span class="dest-desc">6天5晚 · 美食天堂 · 华人文化</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-langkawi.html" class="dest-item">
-        <span class="dest-flag">🇲🇾</span>
-        <span class="dest-info">
-          <span class="dest-name">马来西亚 · 兰卡威</span>
-          <span class="dest-desc">5天4晚 · 免税海岛 · 度假天堂</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-sabah.html" class="dest-item">
-        <span class="dest-flag">🇲🇾</span>
-        <span class="dest-info">
-          <span class="dest-name">马来西亚 · 沙巴（亚庇）</span>
-          <span class="dest-desc">6天5晚 · 世界日落 · 海岛浮潜</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-boracay.html" class="dest-item">
-        <span class="dest-flag">🇵🇭</span>
-        <span class="dest-info">
-          <span class="dest-name">菲律宾 · 长滩岛</span>
-          <span class="dest-desc">6天5晚 · 世界最美白沙滩 · 躺平</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-      <a href="itinerary-hongkong.html" class="dest-item">
-        <span class="dest-flag">🇭🇰</span>
-        <span class="dest-info">
-          <span class="dest-name">香港</span>
-          <span class="dest-desc">5天4晚 · 维港美食 · 亲子首选</span>
-        </span>
-        <span class="badge badge-new">NEW</span>
-        <span class="dest-arrow">→</span>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- 出游信息 -->
-  <div class="card info-card">
-    <div class="card-title">💡 关于本次出游</div>
-    <strong>时间：</strong>2026 年 7 月中下旬 ~ 8 月上旬<br>
-    <strong>成员：</strong>几个家庭，有老人和小孩<br>
-    <strong>风格：</strong>慢节奏、不赶路、舒适为主<br>
-    <strong>当前阶段：</strong>目的地意向征集<br>
-    <div style="margin-top:10px;font-size:13px;color:#999;">
-      请各家庭先看征求意见稿，再查看感兴趣的行程，反馈目的地偏好。
-    </div>
-  </div>
-
-  <!-- 留言板 -->
-  <div class="card">
-    <div class="card-title">💬 大家来说说</div>
-    <div class="msg-form">
-      <div class="row">
-        <input type="text" id="msg-name" placeholder="你的称呼" maxlength="20">
+  <!-- Trip Info -->
+  <div class="section" id="sec-info">
+    <div class="info-card">
+      <span class="icon">💡</span>
+      <h3>关于本次出游</h3>
+      <div class="info-grid">
+        <div class="info-item"><div class="label">时间</div><div class="value">7月中 ~ 8月上旬</div></div>
+        <div class="info-item"><div class="label">风格</div><div class="value">慢节奏 · 舒适</div></div>
+        <div class="info-item"><div class="label">成员</div><div class="value">几个家庭</div></div>
+        <div class="info-item"><div class="label">阶段</div><div class="value">目的地意向征集</div></div>
       </div>
-      <textarea id="msg-content" placeholder="说说你的想法…（选哪个目的地？有什么建议？）" maxlength="500"></textarea>
-      <button class="btn-submit" id="msg-submit" onclick="submitMsg()">发表留言</button>
-      <div class="msg-tip"><span id="msg-count">0</span>/500</div>
-    </div>
-    <div class="msg-list" id="msg-list">
-      <div class="msg-loading">加载中…</div>
+      <p style="font-size:13px;color:#a0aec0;margin-top:14px;">
+        请各家庭先看征求意见稿，再查看感兴趣的行程，反馈目的地偏好 🙌
+      </p>
     </div>
   </div>
 
-  <div class="footer">家庭出游计划 · 2026 年 暑假</div>
+  <!-- Comment -->
+  <div class="section" id="sec-comment">
+    <div class="comment-card">
+      <h3>💬 大家来说说</h3>
+      <div class="msg-form">
+        <input type="text" id="msg-name" placeholder="你的称呼" maxlength="20">
+        <textarea id="msg-content" placeholder="说说你的想法…（选哪个目的地？有什么建议？）" maxlength="500"></textarea>
+        <button class="btn-submit" id="msg-submit" onclick="submitMsg()">发表留言</button>
+        <div class="msg-tip"><span id="msg-count">0</span>/500</div>
+      </div>
+      <div class="msg-list" id="msg-list">
+        <div class="msg-loading">⏳ 加载中…</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<div class="footer">✈️ 家庭出游计划 · 2026 年 暑假</div>
+<div id="toast" class="toast"></div>
+
+<!-- ===== Leaflet ===== -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
+/* ===== Destination Data ===== */
+const DESTINATIONS = [
+  {
+    id: 'xinjiang', name: '新疆 · 北疆伊犁', flag: '🇨🇳',
+    region: 'domestic', desc: '7天6晚 · 草原雪山 · 夏季避暑',
+    features: ['夏季凉爽', '无需签证', '风景壮丽'],
+    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
+    color: '#CD853F',
+    latlng: [43.9, 81.3],
+    page: 'itinerary-xinjiang.html'
+  },
+  {
+    id: 'weihai', name: '威海', flag: '🇨🇳',
+    region: 'domestic', desc: '5天4晚 · 最干净海滨 · 海鲜慢城',
+    features: ['飞行1.5h', '海鲜多', '性价比高'],
+    img: 'https://images.unsplash.com/photo-1580137189272-f9379ed3c0fd?w=600&q=80',
+    color: '#0D47A1',
+    latlng: [37.5, 122.1],
+    page: 'itinerary-weihai.html'
+  },
+  {
+    id: 'dalian', name: '大连', flag: '🇨🇳',
+    region: 'domestic', desc: '5天4晚 · 浪漫海滨 · 海鲜烧烤',
+    features: ['飞行1.5h', '气候凉爽', '亲子设施好'],
+    img: 'https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600&q=80',
+    color: '#1565C0',
+    latlng: [38.9, 121.6],
+    page: 'itinerary-dalian.html'
+  },
+  {
+    id: 'qingdao', name: '青岛', flag: '🇨🇳',
+    region: 'domestic', desc: '5天4晚 · 红瓦绿树 · 啤酒海鲜',
+    features: ['高铁3h', '欧式风情', '沙滩棒'],
+    img: 'https://images.unsplash.com/photo-1596178060671-7a80dc7c2b1c?w=600&q=80',
+    color: '#E65100',
+    latlng: [36.1, 120.4],
+    page: 'itinerary-qingdao.html'
+  },
+  {
+    id: 'yantai', name: '烟台', flag: '🇨🇳',
+    region: 'domestic', desc: '5天4晚 · 人间仙境 · 慢生活',
+    features: ['飞行1.5h', '海鲜便宜', '清静'],
+    img: 'https://images.unsplash.com/photo-1580137189272-f9379ed3c0fd?w=600&q=80',
+    color: '#00796B',
+    latlng: [37.5, 121.4],
+    page: 'itinerary-yantai.html'
+  },
+  {
+    id: 'penang', name: '马来西亚 · 槟城', flag: '🇲🇾',
+    region: 'international', desc: '6天5晚 · 美食天堂 · 华人文化',
+    features: ['美食无敌', '中文通用', '消费低'],
+    img: 'https://images.unsplash.com/photo-1596424154655-5c6e155e4ece?w=600&q=80',
+    color: '#6A1B9A',
+    latlng: [5.4, 100.3],
+    page: 'itinerary-penang.html'
+  },
+  {
+    id: 'langkawi', name: '马来西亚 · 兰卡威', flag: '🇲🇾',
+    region: 'international', desc: '5天4晚 · 免税海岛 · 度假天堂',
+    features: ['免税购物', '天空之桥', '沙滩度假'],
+    img: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&q=80',
+    color: '#00838F',
+    latlng: [6.3, 99.8],
+    page: 'itinerary-langkawi.html'
+  },
+  {
+    id: 'sabah', name: '马来西亚 · 沙巴', flag: '🇲🇾',
+    region: 'international', desc: '6天5晚 · 世界日落 · 海岛浮潜',
+    features: ['世界日落', '萤火虫', '海鲜便宜'],
+    img: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=600&q=80',
+    color: '#E65100',
+    latlng: [5.9, 116.1],
+    page: 'itinerary-sabah.html'
+  },
+  {
+    id: 'boracay', name: '菲律宾 · 长滩岛', flag: '🇵🇭',
+    region: 'international', desc: '6天5晚 · 白沙滩 · 躺平',
+    features: ['白沙滩', '落日风帆', '性价比高'],
+    img: 'https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=600&q=80',
+    color: '#00695C',
+    latlng: [11.9, 121.9],
+    page: 'itinerary-boracay.html'
+  },
+  {
+    id: 'hongkong', name: '香港', flag: '🇭🇰',
+    region: 'international', desc: '5天4晚 · 维港美食 · 亲子首选',
+    features: ['飞行2.5h', '中文通用', '美食购物'],
+    img: 'https://images.unsplash.com/photo-1536599018100-9f4a2c4c8e6a?w=600&q=80',
+    color: '#B71C1C',
+    latlng: [22.3, 114.2],
+    page: 'itinerary-hongkong.html'
+  }
+];
+
+/* ===== Render Destinations ===== */
+function renderDests(filter) {
+  const grid = document.getElementById('dest-grid');
+  const filtered = filter === 'all' ? DESTINATIONS : DESTINATIONS.filter(d => d.region === filter);
+
+  grid.innerHTML = filtered.map(d => {
+    const features = d.features.map(f => `<span class="dest-tag-feature">${f}</span>`).join('');
+    const regionLabel = d.region === 'domestic' ? '国内' : '国外';
+
+    return `
+      <a href="${d.page}" class="dest-card">
+        <img class="dest-img" src="${d.img}" alt="${d.name}" loading="lazy"
+          onerror="this.style.display='none'">
+        <div class="dest-overlay">
+          <span class="dest-tag dest-tag-region">${regionLabel}</span>
+        </div>
+        <div class="dest-body">
+          <div class="dest-body-header">
+            <span class="dest-flag">${d.flag}</span>
+            <span class="dest-name">${d.name}</span>
+            <span class="dest-arrow">→</span>
+          </div>
+          <div class="dest-desc">${d.desc}</div>
+          <div class="dest-tags">${features}</div>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+/* ===== Tab Filter ===== */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderDests(this.dataset.filter);
+  });
+});
+
+renderDests('all');
+
+/* ===== Leaflet Map ===== */
+(function initMap() {
+  const container = document.getElementById('map');
+  if (!container) return;
+
+  const map = L.map('map', {
+    center: [28, 115],
+    zoom: 4,
+    zoomControl: false,
+    attributionControl: false
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+  }).addTo(map);
+
+  DESTINATIONS.forEach(d => {
+    const color = d.color || '#2b6cb0';
+    const markerHtml = `<div style="background:${color};width:14px;height:14px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);"></div>`;
+    const icon = L.divIcon({ html: markerHtml, iconSize: [14, 14], className: '' });
+    L.marker(d.latlng, { icon })
+      .addTo(map)
+      .bindPopup(`<strong>${d.flag} ${d.name}</strong><br><a href="${d.page}" style="color:#2b6cb0;">查看行程 →</a>`, { closeButton: false });
+  });
+})();
+
+/* ===== Scroll Animations ===== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+/* ===== Comments ===== */
 const API = '/api/comments';
 
 async function loadMsgs() {
@@ -274,8 +713,8 @@ async function loadMsgs() {
       return;
     }
     list.innerHTML = data.comments.map(m => {
-      const date = m.created_at.slice(0, 16).replace('T', ' ');
-      const initial = m.name.charAt(0);
+      const date = (m.created_at || '').slice(0, 16).replace('T', ' ');
+      const initial = (m.name || '?').charAt(0);
       return '<div class="msg-item">' +
         '<div class="msg-header">' +
           '<div class="msg-avatar">' + initial + '</div>' +
@@ -286,11 +725,12 @@ async function loadMsgs() {
       '</div>';
     }).join('');
   } catch (e) {
-    list.innerHTML = '<div class="msg-error">加载留言失败，请刷新重试</div>';
+    list.innerHTML = '<div class="msg-empty" style="color:#e53e3e;">加载留言失败，请刷新重试</div>';
   }
 }
 
 function escHtml(s) {
+  if (!s) return '';
   const d = document.createElement('div');
   d.textContent = s;
   return d.innerHTML;
@@ -300,8 +740,8 @@ async function submitMsg() {
   const name = document.getElementById('msg-name').value.trim();
   const content = document.getElementById('msg-content').value.trim();
   const btn = document.getElementById('msg-submit');
-  if (!name) { alert('请填写你的称呼'); return; }
-  if (!content) { alert('请填写留言内容'); return; }
+  if (!name) { showToast('请填写你的称呼'); return; }
+  if (!content) { showToast('请填写留言内容'); return; }
   btn.disabled = true;
   btn.textContent = '提交中…';
   try {
@@ -315,22 +755,34 @@ async function submitMsg() {
       document.getElementById('msg-name').value = '';
       document.getElementById('msg-content').value = '';
       document.getElementById('msg-count').textContent = '0';
+      showToast('✅ 留言发表成功！');
       await loadMsgs();
     } else {
-      alert(data.error || '提交失败');
+      showToast('❌ ' + (data.error || '提交失败'));
     }
   } catch (e) {
-    alert('网络错误，请重试');
+    showToast('❌ 网络错误，请重试');
   }
   btn.disabled = false;
   btn.textContent = '发表留言';
 }
 
-document.getElementById('msg-content').addEventListener('input', function() {
-  document.getElementById('msg-count').textContent = this.value.length;
-});
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
 
-loadMsgs();
+document.addEventListener('DOMContentLoaded', function() {
+  loadMsgs();
+  const ta = document.getElementById('msg-content');
+  if (ta) {
+    ta.addEventListener('input', function() {
+      document.getElementById('msg-count').textContent = this.value.length;
+    });
+  }
+});
 </script>
 
 </body>
