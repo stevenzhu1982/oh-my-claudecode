@@ -602,34 +602,61 @@ body {
   <div class="hero-wave"></div>
 </section>
 
-<!-- ===== Main Content ===== -->
-<div class="container">
-
-  <!-- Proposal Card -->
-  <div class="section" id="sec-proposal">
-    <a href="proposal.html" class="proposal-card">
-      <span class="icon">📋</span>
-      <div class="title">家庭出游征求意见稿</div>
-      <div class="desc">10 个目的地方案对比 · 在线回执 · 大家来投票</div>
-      <span class="badge-proposal">查看详情 →</span>
-    </a>
+<!-- 公告栏 -->
+<div class="card" style="border: 2px solid #e67e22; background: #fffaf0;">
+  <div class="card-title" style="color:#e67e22;">📢 各位家人，请先看这里</div>
+  <div style="font-size:14px;color:#555;line-height:1.9;">
+    <p style="margin-bottom:10px;">
+      目前目的地<strong style="color:#c0392b;">还没有最终确定</strong>，需要大家一起商量。以下是本次出行的前提条件，请大家先了解：
+    </p>
+    <ul style="padding-left:20px;margin:0 0 10px 0;">
+      <li><strong>🌡️ 夏天要凉快</strong> — 7~8 月出行，优先考虑避暑目的地，太热的地方不考虑</li>
+      <li><strong>✈️ 飞行不超过 5 小时</strong> — 有老人和孩子，航程太长太辛苦</li>
+      <li><strong>👨‍👩‍👧‍👦 老少皆宜</strong> — 节奏慢、不赶路，适合老人和小孩的活动都要有</li>
+      <li><strong>💰 性价比优先</strong> — 预算合理，不追求奢华</li>
+      <li><strong>📅 行程 7~10 天</strong> — 不长不短，大家都能安排得开</li>
+      <li><strong>🍜 饮食要合口</strong> — 保证有适合老人孩子的餐食，最好中餐选择多</li>
+    </ul>
+    <div style="background:#fff8e1;border-radius:8px;padding:10px 14px;margin-bottom:10px;font-size:13px;color:#8d6e00;">
+      💬 <strong>已收到的意见：</strong>大家普遍希望节奏慢一点、景点少一点，"吃吃躺躺逛逛"就很好；
+      年长者舒适度很重要；倾向凉快的地方；预算适中即可。
+    </div>
+    <p style="margin-bottom:6px;">
+      <strong>推荐目的地（5 个国内 + 5 个国外）：</strong>
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+      <span style="background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:12px;font-size:13px;">🇨🇳 新疆·北疆伊犁</span>
+      <span style="background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:12px;font-size:13px;">🇨🇳 威海</span>
+      <span style="background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:12px;font-size:13px;">🇨🇳 大连</span>
+      <span style="background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:12px;font-size:13px;">🇨🇳 青岛</span>
+      <span style="background:#e8f5e9;color:#2e7d32;padding:4px 12px;border-radius:12px;font-size:13px;">🇨🇳 烟台</span>
+      <span style="background:#e3f2fd;color:#1565c0;padding:4px 12px;border-radius:12px;font-size:13px;">🇲🇾 马来西亚·槟城</span>
+      <span style="background:#e3f2fd;color:#1565c0;padding:4px 12px;border-radius:12px;font-size:13px;">🇲🇾 马来西亚·兰卡威</span>
+      <span style="background:#e3f2fd;color:#1565c0;padding:4px 12px;border-radius:12px;font-size:13px;">🇵🇭 菲律宾·长滩岛</span>
+      <span style="background:#e3f2fd;color:#1565c0;padding:4px 12px;border-radius:12px;font-size:13px;">🇻🇳 越南·岘港</span>
+      <span style="background:#e3f2fd;color:#1565c0;padding:4px 12px;border-radius:12px;font-size:13px;">🇮🇩 印尼·巴厘岛</span>
+    </div>
+    <p style="margin-bottom:8px;">
+      <strong>📣 请大家按以上条件，看看哪些目的地中意，再到留言板说说你的想法！</strong>
+    </p>
+    <p style="font-size:13px;color:#999;">
+      步骤：先看下方的「征求意见稿」了解方案对比 → 查看感兴趣的行程详情 → 在留言板发表意见
+    </p>
   </div>
+</div>
 
-  <!-- Destinations -->
-  <div class="section" id="sec-dests">
-    <div class="section-header">
-      <h2>🗺️ 心仪目的地</h2>
-      <p>点击查看详细行程安排</p>
-    </div>
-
-    <div class="tab-bar">
-      <button class="tab-btn active" data-filter="all">🌏 全部</button>
-      <button class="tab-btn" data-filter="domestic">🇨🇳 国内</button>
-      <button class="tab-btn" data-filter="international">🌴 国外</button>
-    </div>
-
-    <div class="dest-grid" id="dest-grid">
-      <!-- Cards injected by JS -->
+<!-- 征求意见稿 -->
+<div class="card">
+  <div class="card-title">📋 出行意向 · 征求意见</div>
+  <div class="dest-list">
+    <a href="proposal.html" class="dest-item">
+      <span class="dest-flag">📄</span>
+      <span class="dest-info">
+        <span class="dest-name">家庭出游征求意见稿</span>
+        <span class="dest-desc">10 个目的地方案对比 · 回执表</span>
+      </span>
+      <span class="dest-arrow">→</span>
+    </a>
     </div>
   </div>
 
@@ -648,20 +675,74 @@ body {
     <div class="map-tooltip" id="map-tooltip"></div>
   </div>
 
-  <!-- Trip Info -->
-  <div class="section" id="sec-info">
-    <div class="info-card">
-      <span class="icon">💡</span>
-      <h3>关于本次出游</h3>
-      <div class="info-grid">
-        <div class="info-item"><div class="label">时间</div><div class="value">7月中 ~ 8月上旬</div></div>
-        <div class="info-item"><div class="label">风格</div><div class="value">慢节奏 · 舒适</div></div>
-        <div class="info-item"><div class="label">成员</div><div class="value">几个家庭</div></div>
-        <div class="info-item"><div class="label">阶段</div><div class="value">目的地意向征集</div></div>
-      </div>
-      <p style="font-size:13px;color:#a0aec0;margin-top:14px;">
-        请各家庭先看征求意见稿，再查看感兴趣的行程，反馈目的地偏好 🙌
-      </p>
+  <!-- 国外推荐 -->
+  <div class="card">
+    <div class="card-title">🌏 国外目的地 · 推荐行程</div>
+    <div class="section-label">飞行不超过5小时 · 靠海吃躺逛</div>
+    <div class="dest-list">
+
+      <a href="itinerary-penang.html" class="dest-item">
+        <span class="dest-flag">🇲🇾</span>
+        <span class="dest-info">
+          <span class="dest-name">马来西亚 · 槟城</span>
+          <span class="dest-desc">6天5晚 · 美食天堂 · 华人文化</span>
+        </span>
+        <span class="badge badge-new">NEW</span>
+        <span class="dest-arrow">→</span>
+      </a>
+
+      <a href="itinerary-langkawi.html" class="dest-item">
+        <span class="dest-flag">🇲🇾</span>
+        <span class="dest-info">
+          <span class="dest-name">马来西亚 · 兰卡威</span>
+          <span class="dest-desc">5天4晚 · 免税海岛 · 度假天堂</span>
+        </span>
+        <span class="badge badge-new">NEW</span>
+        <span class="dest-arrow">→</span>
+      </a>
+
+      <a href="itinerary-vietnam.html" class="dest-item">
+        <span class="dest-flag">🇻🇳</span>
+        <span class="dest-info">
+          <span class="dest-name">越南 · 岘港</span>
+          <span class="dest-desc">5天4晚 · 海滩度假 · 性价比高</span>
+        </span>
+        <span class="badge badge-new">NEW</span>
+        <span class="dest-arrow">→</span>
+      </a>
+
+      <a href="itinerary-boracay.html" class="dest-item">
+        <span class="dest-flag">🇵🇭</span>
+        <span class="dest-info">
+          <span class="dest-name">菲律宾 · 长滩岛</span>
+          <span class="dest-desc">6天5晚 · 世界最美白沙滩 · 躺平</span>
+        </span>
+        <span class="badge badge-new">NEW</span>
+        <span class="dest-arrow">→</span>
+      </a>
+
+      <a href="itinerary-bali.html" class="dest-item">
+        <span class="dest-flag">🇮🇩</span>
+        <span class="dest-info">
+          <span class="dest-name">印尼 · 巴厘岛</span>
+          <span class="dest-desc">6天5晚 · 度假天堂 · 文化体验</span>
+        </span>
+        <span class="badge badge-new">NEW</span>
+        <span class="dest-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- 出游信息 -->
+  <div class="card info-card">
+    <div class="card-title">💡 关于本次出游</div>
+    <strong>时间：</strong>2026 年 7 月中下旬 ~ 8 月上旬<br>
+    <strong>成员：</strong>几个家庭，有老人和小孩<br>
+    <strong>风格：</strong>慢节奏、不赶路、舒适为主<br>
+    <strong>当前阶段：</strong>目的地意向征集<br>
+    <div style="margin-top:10px;font-size:13px;color:#999;">
+      请各家庭先看征求意见稿，再查看感兴趣的行程，反馈目的地偏好。
     </div>
   </div>
 
