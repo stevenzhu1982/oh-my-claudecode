@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巴厘岛 · 推荐行程</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f0f4f8; color: #2d3748; padding: 0 0 60px; line-height: 1.8;
+  }
+  .container { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  h1 { font-size: 22px; text-align: center; color: #0d4f4f; margin-bottom: 6px; font-weight: 700; line-height: 1.4; }
+  .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 28px; }
+  .section-title { font-size: 18px; color: #0d4f4f; font-weight: 700; margin-top: 28px; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid #38a89d; }
+  p { font-size: 15px; margin-bottom: 10px; }
+  .highlight { background: #e6f7f7; border-radius: 8px; padding: 14px 16px; margin: 16px 0; font-size: 14px; color: #0a3a3a; border-left: 4px solid #38a89d; }
+  .day-card { background: #fafbfc; border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
+  .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .day-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #38a89d; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; flex-shrink: 0; }
+  .day-title { font-size: 16px; font-weight: 700; color: #0d4f4f; }
+  .day-tag { display: inline-block; font-size: 11px; background: #e0f5f5; color: #1a7a7a; padding: 1px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; font-weight: 600; }
+  .day-city { font-size: 12px; color: #999; margin-bottom: 6px; }
+  .day-item { font-size: 14px; padding: 3px 0; padding-left: 20px; position: relative; }
+  .day-item::before { content: ""; position: absolute; left: 4px; top: 11px; width: 6px; height: 6px; background: #bbb; border-radius: 50%; }
+  .day-item strong { color: #333; }
+  .day-meal { font-size: 13px; color: #888; padding-left: 20px; margin-top: 4px; }
+  .note-box { background: #e0f5f5; border: 1px solid #7acfcf; border-radius: 8px; padding: 14px 16px; margin: 16px 0; font-size: 14px; color: #0a3a3a; }
+  hr { border: none; height: 1px; background: #e0e0e0; margin: 28px 0; }
+  @media (max-width: 480px) {
+    body { padding: 10px 8px 40px; }
+    .container { padding: 20px 16px; }
+    h1 { font-size: 19px; } .section-title { font-size: 16px; }
+    p, .day-item, .highlight, .note-box { font-size: 14px; }
+    .day-card { padding: 12px 14px; }
+  }
+  .hero-bar {
+    background: linear-gradient(135deg, #0d4f4f 0%, #1a7a7a 40%, #38a89d 100%);
+    padding: 36px 20px 32px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bar::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.12;
+  }
+  .hero-bar h2 {
+    position: relative;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+  }
+  .hero-bar .sub {
+    position: relative;
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+  .hero-bar .wave {
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23f0f4f8'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
+</style>
+</head>
+<body>
+<div class="hero-bar">
+  <h2>🇮🇩 巴厘岛</h2>
+  <div class="sub">海岛度假 · 亲子天堂 · 7天6晚</div>
+  <div class="wave"></div>
+</div>
+<div class="container">
+  <h1>🇮🇩 巴厘岛 · 暑假家庭游 / 推荐行程方案</h1>
+  <div class="subtitle">海岛度假 · 亲子天堂 · 7天6晚</div>
+
+  <div class="highlight">
+    <strong>设计思路：</strong>巴厘岛被誉为"众神之岛"，7-8月正值旱季，天气凉爽舒适（25-30°C），是巴厘岛最佳旅游季节。行程融合海滩休闲、文化体验、亲子活动，节奏舒缓，包车交通便利且便宜，非常适合带老人和孩子出游。
+  </div>
+
+  <div class="section-title">行程安排 · 7天6晚</div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">1</span><span class="day-title">抵达巴厘岛</span><span class="day-tag">入住 · 海滩</span></div>
+    <div class="day-city">📍 努沙杜瓦 / 库塔</div>
+    <div class="day-item"><strong>上午/下午：</strong>上海直飞巴厘岛（约6h），酒店入住（推荐努沙杜瓦或库塔区域）</div>
+    <div class="day-item"><strong>傍晚：</strong>库塔海滩散步，看日落，孩子们玩沙</div>
+    <div class="day-meal">🍽 晚餐：海滩餐厅（海鲜烧烤、印尼炒饭）</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">2</span><span class="day-title">南湾水上活动</span><span class="day-tag">海龟岛 · 玻璃底船</span></div>
+    <div class="day-city">📍 南湾 → 金巴兰</div>
+    <div class="day-item"><strong>上午：</strong>南湾水上中心——玻璃底船（老人不湿身看珊瑚）、海龟岛（孩子超爱）</div>
+    <div class="day-item"><strong>午餐：</strong>南湾附近中餐厅</div>
+    <div class="day-item"><strong>下午：</strong>回酒店午休，泳池时间</div>
+    <div class="day-item"><strong>傍晚：</strong>金巴兰海滩吃海鲜 BBQ，看日落</div>
+    <div class="day-meal">🍽 晚餐：金巴兰海鲜 BBQ</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">3</span><span class="day-title">乌布文化日</span><span class="day-tag">圣猴森林 · 梯田</span></div>
+    <div class="day-city">📍 乌布</div>
+    <div class="day-item"><strong>上午：</strong>乌布皇宫、乌布市场逛街</div>
+    <div class="day-item"><strong>午餐：</strong>乌布脏鸭餐（Bebek Bengil，巴厘岛特色）</div>
+    <div class="day-item"><strong>下午：</strong>德格拉朗梯田（拍照绝美，不费体力）、圣猴森林（孩子喜欢）</div>
+    <div class="day-item"><strong>傍晚：</strong>回酒店休息</div>
+    <div class="day-meal">🍽 晚餐：酒店或周边中餐厅</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">4</span><span class="day-title">海神庙 + 自由日</span><span class="day-tag">寺庙 · 休闲</span></div>
+    <div class="day-city">📍 海神庙 → 自由活动</div>
+    <div class="day-item"><strong>上午：</strong>海神庙（Tanah Lot，巴厘岛标志建筑，建在海上的寺庙）</div>
+    <div class="day-item"><strong>午餐：</strong>海神庙附近餐厅</div>
+    <div class="day-item"><strong>下午：</strong>自由活动——推荐巴厘岛SPA（老人体验）、酒店泳池、或库塔逛街</div>
+    <div class="day-meal">🍽 晚餐：自理探索</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">5</span><span class="day-title">巴厘岛野生动物园</span><span class="day-tag">亲子 · 动物</span></div>
+    <div class="day-city">📍 野生动物园 → 水明漾</div>
+    <div class="day-item"><strong>上午：</strong>Bali Safari Park（坐游览车看动物，小孩超爱，老人不累）</div>
+    <div class="day-item"><strong>午餐：</strong>动物园内餐厅</div>
+    <div class="day-item"><strong>下午：</strong>回酒店午休</div>
+    <div class="day-item"><strong>傍晚：</strong>水明漾（Seminyak）逛街，精品店和咖啡馆</div>
+    <div class="day-meal">🍽 晚餐：水明漾海鲜餐厅</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">6</span><span class="day-title">努沙杜瓦休闲</span><span class="day-tag">海滩 · 购物</span></div>
+    <div class="day-city">📍 努沙杜瓦</div>
+    <div class="day-item"><strong>上午：</strong>努沙杜瓦海滩（Nusa Dua）——水清沙细，适合老人孩子玩水</div>
+    <div class="day-item"><strong>午餐：</strong>海滩俱乐部午餐</div>
+    <div class="day-item"><strong>下午：</strong>Bali Collection购物村买伴手礼</div>
+    <div class="day-item"><strong>傍晚：</strong>酒店花园晚餐，最后的海岛之夜</div>
+    <div class="day-meal">🍽 晚餐：酒店自助餐</div>
+  </div>
+
+  <div class="day-card">
+    <div class="day-header"><span class="day-num">7</span><span class="day-title">返程</span><span class="day-tag">回家</span></div>
+    <div class="day-city">📍 巴厘岛 → 上海</div>
+    <div class="day-item">退房，根据航班时间前往巴厘岛机场，返回国内</div>
+    <div class="day-meal">🍽 飞机餐</div>
+  </div>
+
+  <hr>
+  <div class="section-title">实用信息</div>
+
+  <div class="note-box"><strong>✈️ 航班：</strong>上海直飞巴厘岛约6h（推荐鹰航/东航）。</div>
+  <div class="note-box"><strong>🌡️ 天气：</strong>7-8月是巴厘岛旱季，25-30°C，凉爽舒适，是最佳旅游季节！比泰国凉快。</div>
+  <div class="note-box"><strong>🚗 交通：</strong>推荐包车（约200-300元/天），非常便宜，司机兼导游。</div>
+  <div class="note-box"><strong>🍜 饮食：</strong>印尼菜口味较清淡，炒饭（Nasi Goreng）、炒面（Mie Goreng）、烤猪排（Iga Babi）、脏鸭餐，中餐厅也多。</div>
+  <div class="note-box"><strong>📋 签证：</strong>印尼对中国公民落地签（约35美元），也可以提前办电子签证。</div>
+  <div class="note-box"><strong>💰 预算参考（人均）：</strong><br>机票约2500-4000元 · 住宿7晚约2000-4000元 · 餐饮约1200-2000元 · 交通门票约600-1500元<br><span style="color:#0d4f4f;font-weight:600;">合计预估：6000–11000 元/人</span></div>
+
+  <hr>
+  <p style="text-align:center; color:#999; font-size:13px;">本文案为初步推荐，具体行程可根据各家庭需求灵活调整。</p>
+</div>
+</body>
+</html>
