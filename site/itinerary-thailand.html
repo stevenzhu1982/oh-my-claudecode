@@ -3,36 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>泰国清迈 · 推荐行程</title>
+<title>泰国 · 推荐行程</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
-    background: #f0f2f5; color: #333; padding: 20px 16px 60px; line-height: 1.8;
+    background: #f0f4f8; color: #2d3748; padding: 0 0 60px; line-height: 1.8;
   }
   .container { max-width: 680px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 32px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  h1 { font-size: 22px; text-align: center; color: #d35400; margin-bottom: 6px; font-weight: 700; line-height: 1.4; }
+  h1 { font-size: 22px; text-align: center; color: #c0392b; margin-bottom: 6px; font-weight: 700; line-height: 1.4; }
   .subtitle { text-align: center; color: #999; font-size: 14px; margin-bottom: 28px; }
-  .section-title { font-size: 18px; color: #d35400; font-weight: 700; margin-top: 28px; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid #e67e22; }
+  .section-title { font-size: 18px; color: #c0392b; font-weight: 700; margin-top: 28px; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid #e74c3c; }
   p { font-size: 15px; margin-bottom: 10px; }
-  .highlight { background: #fff3e0; border-radius: 8px; padding: 14px 16px; margin: 16px 0; font-size: 14px; color: #8a5a1a; border-left: 4px solid #e67e22; }
+  .highlight { background: #fde8e8; border-radius: 8px; padding: 14px 16px; margin: 16px 0; font-size: 14px; color: #5a1a1a; border-left: 4px solid #e74c3c; }
   .day-card { background: #fafbfc; border: 1px solid #e8e8e8; border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
   .day-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .day-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e67e22; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; flex-shrink: 0; }
-  .day-title { font-size: 16px; font-weight: 700; color: #d35400; }
-  .day-tag { display: inline-block; font-size: 11px; background: #e8f8e8; color: #27ae60; padding: 1px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; font-weight: 600; }
+  .day-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #e74c3c; color: #fff; font-size: 14px; font-weight: 700; border-radius: 50%; flex-shrink: 0; }
+  .day-title { font-size: 16px; font-weight: 700; color: #c0392b; }
+  .day-tag { display: inline-block; font-size: 11px; background: #fde8e8; color: #c0392b; padding: 1px 8px; border-radius: 10px; margin-left: auto; white-space: nowrap; font-weight: 600; }
   .day-city { font-size: 12px; color: #999; margin-bottom: 6px; }
   .day-item { font-size: 14px; padding: 3px 0; padding-left: 20px; position: relative; }
   .day-item::before { content: ""; position: absolute; left: 4px; top: 11px; width: 6px; height: 6px; background: #bbb; border-radius: 50%; }
   .day-item strong { color: #333; }
   .day-meal { font-size: 13px; color: #888; padding-left: 20px; margin-top: 4px; }
-  .note-box { background: #fff8e6; border: 1px solid #f0db7a; border-radius: 8px; padding: 14px 16px; margin: 16px 0; font-size: 14px; color: #8a6d1f; }
-  table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 14px; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; }
-  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #eee; }
-  th { background: #fff3e0; color: #d35400; font-weight: 600; }
-  tr:last-child td { border-bottom: none; }
-  hr { border: none; height: 1px; background: #e0e0e0; margin: 28px 0; }
-  .tag-green { color: #27ae60; font-weight: 600; }
+  .note-box { background: #fde8e8; border: 1px solid #f5a0a0; border-radius: 8px; padding: 14px 16px; margin: 16px 0; font-size: 14px; color: #5a1a1a; }
   @media (max-width: 480px) {
     body { padding: 10px 8px 40px; }
     .container { padding: 20px 16px; }
@@ -40,9 +34,51 @@
     p, .day-item, .highlight, .note-box { font-size: 14px; }
     .day-card { padding: 12px 14px; }
   }
+  .hero-bar {
+    background: linear-gradient(135deg, #8B0000 0%, #c0392b 40%, #e67e22 100%);
+    padding: 36px 20px 32px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bar::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.12;
+  }
+  .hero-bar h2 {
+    position: relative;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+  }
+  .hero-bar .sub {
+    position: relative;
+    font-size: 13px;
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+  .hero-bar .wave {
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 24px;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23f0f4f8'/%3E%3C/svg%3E") center/cover no-repeat;
+  }
 </style>
 </head>
 <body>
+<div class="hero-bar">
+  <h2>🇹🇭 泰国</h2>
+  <div class="sub">清迈慢生活 · 曼谷经典 · 8天7晚</div>
+  <div class="wave"></div>
+</div>
 <div class="container">
   <h1>🇹🇭 泰国 · 暑假家庭游<br>推荐行程方案</h1>
   <div class="subtitle">清迈慢生活 + 曼谷经典 · 8天7晚</div>
@@ -134,7 +170,7 @@
   <div class="note-box"><strong>🚗 交通：</strong>清迈推荐包车或Grab（东南亚滴滴），非常便宜；曼谷推荐地铁BTS / Grab。</div>
   <div class="note-box"><strong>🍜 饮食：</strong>泰国菜口味丰富，有不辣的菜（芒果糯米饭、泰式炒河粉、烤鸡、海南鸡饭等），也有中餐厅，不用担心吃不惯。</div>
   <div class="note-box"><strong>📋 签证：</strong>泰国对中国公民落地签（约2000泰铢），也可以提前办电子签证更方便。</div>
-  <div class="note-box"><strong>💰 预算参考（人均）：</strong><br>机票约2000-3500元 · 住宿7晚约1500-3000元 · 餐饮约1000-1800元 · 交通门票约500-1200元<br><span class="tag-green">合计预估：5000–9500 元/人</span></div>
+  <div class="note-box"><strong>💰 预算参考（人均）：</strong><br>机票约2000-3500元 · 住宿7晚约1500-3000元 · 餐饮约1000-1800元 · 交通门票约500-1200元<br><span style="color:#c0392b;font-weight:600;">合计预估：5000–9500 元/人</span></div>
   <hr>
   <p style="text-align:center; color:#999; font-size:13px;">本文案为初步推荐，具体行程可根据各家庭需求灵活调整。</p>
 </div>
