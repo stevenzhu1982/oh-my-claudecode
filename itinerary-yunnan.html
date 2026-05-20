@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026暑假 · 云南之旅</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f0f4f8;
+    color: #2d3748;
+    padding: 0 0 60px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+  .hero-bar {
+    background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 40%, #a78bfa 100%);
+    padding: 40px 20px 36px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bar::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80') center/cover no-repeat;
+    opacity: 0.1;
+  }
+  .hero-bar h1 { position: relative; font-size: clamp(20px,4vw,26px); font-weight: 800; letter-spacing: 2px; text-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+  .hero-bar .sub { position: relative; font-size: 14px; opacity: 0.8; margin-top: 6px; letter-spacing: 4px; }
+  .hero-bar .wave { position: absolute; bottom: -2px; left: 0; right: 0; height: 30px; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23f0f4f8'/%3E%3C/svg%3E") center/cover no-repeat; }
+  .container { max-width: 720px; margin: 24px auto; background: #fff; border-radius: 16px; padding: 32px 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+  h2 { font-size: 18px; color: #7c3aed; font-weight: 700; margin-top: 28px; margin-bottom: 12px; padding-left: 14px; border-left: 4px solid #7c3aed; }
+  p { font-size: 15px; margin-bottom: 8px; color: #4a5568; }
+  .scroll-wrap { overflow-x: auto; margin: 12px 0 16px; border-radius: 10px; border: 1px solid #e2e8f0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 500px; }
+  th, td { padding: 10px 12px; text-align: center; border-bottom: 1px solid #edf2f7; vertical-align: top; line-height: 1.5; }
+  th { background: #ebf8ff; color: #1a365d; font-weight: 600; }
+  td { color: #4a5568; }
+  td:first-child { text-align: left; font-weight: 600; color: #2d3748; white-space: nowrap; }
+  .procon-wrap { display: flex; gap: 16px; margin: 16px 0; }
+  .procon-col { flex: 1; border-radius: 12px; padding: 18px 20px; }
+  .procon-col h4 { font-size: 15px; margin-bottom: 10px; font-weight: 700; text-align: center; }
+  .procon-col ul { list-style: none; padding: 0; margin: 0; }
+  .procon-col ul li { font-size: 14px; padding: 5px 0 5px 22px; position: relative; line-height: 1.6; }
+  .procon-pros { background: #f0faf0; border: 1px solid #b8e6b8; }
+  .procon-pros h4 { color: #1a7a1a; }
+  .procon-pros ul li::before { content: "✅"; position: absolute; left: 2px; top: 7px; }
+  .procon-cons { background: #fef0f0; border: 1px solid #f5b8b8; }
+  .procon-cons h4 { color: #b91c1c; }
+  .procon-cons ul li::before { content: "⚠️"; position: absolute; left: 2px; top: 7px; }
+  .back-link { text-align: center; margin-top: 24px; }
+  .back-link a { display: inline-block; padding: 10px 24px; background: linear-gradient(135deg,#5b21b6,#7c3aed); color: #fff; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px; }
+  @media (max-width: 600px) {
+    .container { padding: 16px 14px; margin: 16px auto; }
+    .hero-bar { padding: 28px 16px 24px; }
+    h2 { font-size: 16px; }
+    p { font-size: 14px; }
+    table { font-size: 12px; min-width: 400px; }
+    th, td { padding: 8px 10px; }
+    .procon-wrap { flex-direction: column; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 14px 12px; }
+    h2 { font-size: 15px; }
+    p { font-size: 13px; }
+    table { min-width: 340px; font-size: 11px; }
+    th, td { padding: 6px 8px; }
+    .scroll-wrap { margin: 10px -12px; border-radius: 0; border-left: none; border-right: none; }
+    .back-link a { display: block; padding: 14px 24px; min-height: 44px; font-size: 15px; }
+    .procon-col { padding: 14px 16px; }
+    .procon-col ul li { font-size: 13px; }
+  }
+  @media (max-width: 380px) {
+    .hero-bar h1 { font-size: 16px; }
+    .container { padding: 12px 8px; }
+    h2 { font-size: 14px; }
+    table { min-width: 280px; font-size: 10px; }
+    th, td { padding: 4px 6px; }
+    .scroll-wrap { margin: 8px -8px; border-radius: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="hero-bar">
+  <h1>🇨🇳 云南 · 风花雪月之旅</h1>
+  <div class="sub">大理古城 · 洱海骑行 · 丽江慢生活 · 8天7晚</div>
+  <div class="wave"></div>
+</div>
+<div class="container">
+  <h2>📋 行程概览</h2>
+  <p>云南是国内性价比最高的避暑胜地之一。7月气温18-26°C，虽有阵雨但多是"过路雨"，雨后空气清新。</p>
+<p>大理古城+洱海+丽江古城，节奏可慢可快，老人小孩都能找到乐趣。中文无障碍，省心省力。</p>
+<p>人均预算仅5k-9k，是所有方案中最便宜的，适合想要轻松出行又不想出国的家庭。</p>
+
+  <h2>📅 推荐行程</h2>
+  <div class="scroll-wrap">
+  <table>
+    <tr><th style="width:15%;">天数</th><th style="width:35%;">行程安排</th><th style="width:50%;">亮点</th></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 1</td><td>上海→大理</td><td style="text-align:left;">直飞大理约3.5h，入住古城附近，晚上逛古城</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 2</td><td>大理古城+苍山</td><td style="text-align:left;">逛古城、崇圣寺三塔，坐缆车上苍山俯瞰洱海</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 3</td><td>洱海环湖</td><td style="text-align:left;">包车环洱海：喜洲古镇（扎染体验）、双廊古镇、小普陀</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 4</td><td>沙溪古镇</td><td style="text-align:left;">茶马古道古镇，比丽江清静，骑马体验（老人小孩都合适）</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 5</td><td>大理→丽江</td><td style="text-align:left;">高铁约2h到丽江，入住丽江古城，下午逛古城</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 6</td><td>玉龙雪山远观</td><td style="text-align:left;">不去高海拔，推荐在"白沙古镇"远观雪山全景，或去拉市海骑马</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 7</td><td>束河古镇+黑龙潭</td><td style="text-align:left;">束河古镇悠闲漫步、黑龙潭公园看雪山倒影</td></tr>
+    <tr><td style="text-align:center;font-weight:700;">Day 8</td><td>丽江→上海</td><td style="text-align:left;">上午自由活动，下午航班返回上海</td></tr>
+  </table>
+  </div>
+
+  <h2>💰 预算估算</h2>
+  <p style="font-size:14px;color:#888;margin-bottom:8px;">暑期旺季参考价（不打折），按人均计算</p>
+  <div class="scroll-wrap">
+  <table>
+    <tr><th style="width:40%;">项目</th><th style="width:60%;">费用/人（元）</th></tr>
+    <tr><td>国际机票</td><td>2,500-4,000（上海直飞大理/丽江约3.5h）</td></tr>
+    <tr><td>住宿（7晚）</td><td>1,500-2,500（200-350/晚，性价比高）</td></tr>
+    <tr><td>餐饮</td><td>700-1,200（米线、野生菌、烤乳扇等）</td></tr>
+    <tr><td>交通（当地）</td><td>500-800（包车+高铁+打车）</td></tr>
+    <tr><td>门票活动</td><td>400-600（苍山缆车+古镇维护费）</td></tr>
+    <tr><td>签证</td><td>0（国内无需签证）</td></tr>
+    <tr><td><strong>合计/人</strong></td><td><strong>5,500-9,000</strong></td></tr>
+  </table>
+  </div>
+
+  <h2>⚖️ 优缺点分析</h2>
+  <div class="procon-wrap">
+    <div class="procon-col procon-pros">
+      <h4>✅ 优点</h4>
+      <ul><li>气候凉爽18-26°C，避暑胜地</li>
+<li>国内最省心，语言无障碍</li>
+<li>性价比之王，预算最低</li>
+<li>大理+丽江选择多样</li>
+<li>无需签证，说走就走</li>
+<li>医疗方便，国内医保可用</li></ul>
+    </div>
+    <div class="procon-col procon-cons">
+      <h4>⚠️ 注意事项</h4>
+      <ul><li>7月阵雨季，需要带伞</li>
+<li>玉龙雪山海拔高，老人需注意</li>
+<li>旺季人流量较大</li>
+<li>个别景区需步行较多</li></ul>
+    </div>
+  </div>
+
+  <div class="back-link">
+    <a href="proposal.html">📋 查看全部7个方案对比</a>
+  </div>
+</div>
+</body>
+</html>
