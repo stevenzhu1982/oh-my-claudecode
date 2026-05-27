@@ -205,6 +205,20 @@ body {
   transition: all 0.2s;
 }
 .hotel-card:hover { border-color: var(--accent); }
+.hotel-img-wrap {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #f0ebe5;
+}
+.hotel-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .hotel-name { font-size: 16px; font-weight: 700; color: #2d1b69; }
 .hotel-name .star { color: #f59e0b; font-size: 14px; }
 .hotel-addr { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
@@ -229,6 +243,8 @@ body {
   margin-top: 6px; font-size: 12px; color: #38a169; font-weight: 600;
 }
 .hotel-free { display: inline-block; padding: 1px 8px; border-radius: 6px; background: #d4edda; color: #0e5e1e; font-size: 11px; font-weight: 700; margin-left: 4px; }
+.hotel-booking-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: #2d1b69; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: #ede9fe; transition: all 0.2s; }
+.hotel-booking-link:hover { background: #6c5ce7; color: #fff; }
 
 /* ===== Budget Table ===== */
 .budget-wrap { overflow-x: auto; border-radius: 12px; border: 2px solid var(--border); }
@@ -333,6 +349,7 @@ body {
   .hotel-detail { grid-template-columns: 1fr; }
   .packing-grid { grid-template-columns: 1fr; }
   .budget-table { min-width: 400px; font-size: 12px; }
+  .hotel-img-wrap { height: 140px; }
   .comment-card { padding: 16px 14px; }
   .msg-text { padding-left: 0; margin-top: 6px; }
   .msg-form input, .msg-form textarea { font-size: 16px; }
@@ -432,8 +449,8 @@ body {
         <div class="day-num">5</div>
         <div class="day-info">
           <span class="date">8/8 周六</span>
-          <div class="title">🚌 转战槟城</div>
-          <div class="desc">退房，巴士/包车前往槟城（约4h），乔治市漫游</div>
+          <div class="title">🚌 转战槟城 · 途经怡保</div>
+          <div class="desc">退房，包车北上，途经怡保（霹雳州）游览+午餐，傍晚抵达槟城</div>
         </div>
       </div>
       <div class="day-row pg">
@@ -483,14 +500,18 @@ body {
   <div class="card">
     <div class="card-title">🏨 已预订酒店（吉隆坡 · 全部可免费取消）</div>
     <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">
-      <strong>入住：</strong>8月4日 → <strong>退房：</strong>8月8日（4晚）· 全部通过 Agoda 预订 · 主卡 XXXX-7549
+      <strong>入住：</strong>8月4日 → <strong>退房：</strong>8月8日（4晚）· 全部可免费取消<br>
+      Concorde & Hilton 通过 Agoda 预订 · Days Hotel 通过 Booking.com 预订
     </p>
 
     <div class="hotel-grid">
 
       <!-- Hotel 1 -->
       <div class="hotel-card">
-        <div class="hotel-name">🏨 Concorde Hotel Kuala Lumpur <span class="star">★★★★</span></div>
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/0201c1200087625mq90F4_R_600_360_R5_Q70.jpg" alt="Concorde Hotel Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏨 吉隆坡凯煌酒店（Concorde Hotel KL）<span class="star">★★★★</span></div>
         <div class="hotel-addr">Jalan Sultan Ismail, 50250 吉隆坡城中城 · ☎ +60321442200</div>
         <div class="hotel-tags">
           <span class="hotel-tag hotel-tag-green">免费WiFi</span>
@@ -505,15 +526,19 @@ body {
           <div class="hotel-detail-item"><strong>Booking ID：</strong>1731415555</div>
         </div>
         <div class="hotel-price">
-          <div><span class="amount">MYR 10,850.92</span><br><span class="per">约 CNY 17,360（全8间4晚总价）· 7月30日扣款</span></div>
+          <div><span class="amount">CNY 17,360</span><br><span class="per">全8间4晚总价 · 7月30日扣款</span></div>
           <span class="hotel-free">免费取消</span>
         </div>
         <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月1日前可免费取消</div>
+        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/993095.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
       </div>
 
       <!-- Hotel 2 -->
       <div class="hotel-card">
-        <div class="hotel-name">🏨 Hilton Garden Inn Kuala Lumpur <span class="star">★★★</span></div>
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/1mc1r12000sg9hx7x59AD_R_600_360_R5_Q70.jpg" alt="Hilton Garden Inn Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏨 吉隆坡东姑阿都拉曼希尔顿花园酒店南店（Hilton Garden Inn KL）<span class="star">★★★</span></div>
         <div class="hotel-addr">No. 452 Jalan Tuanku Abdul Rahman, 50100 秋杰/太子世界贸易中心</div>
         <div class="hotel-tags">
           <span class="hotel-tag hotel-tag-green">免费WiFi</span>
@@ -527,31 +552,38 @@ body {
           <div class="hotel-detail-item"><strong>Booking ID：</strong>1731474738</div>
         </div>
         <div class="hotel-price">
-          <div><span class="amount">MYR 9,973.12</span><br><span class="per">约 CNY 15,960（全8间4晚总价）· 8月2日扣款</span></div>
+          <div><span class="amount">CNY 15,960</span><br><span class="per">全8间4晚总价 · 8月2日扣款</span></div>
           <span class="hotel-free">免费取消</span>
         </div>
         <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月4日前可免费取消</div>
+        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/19679850.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
       </div>
 
       <!-- Hotel 3 -->
       <div class="hotel-card">
-        <div class="hotel-name">🏨 Days Hotel by Wyndham Kuala Lumpur（陈秀莲地铁站店） <span class="star">★★★</span></div>
-        <div class="hotel-addr">吉隆坡 · 陈秀莲地铁站附近（Chan Sow Lin MRT）</div>
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/1mc5n12000dwif9xgCC2D_R_600_360_R5_Q70.jpg" alt="Days Hotel by Wyndham Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏨 吉隆坡温德姆戴斯酒店（陈秀莲地铁站店）（Days Hotel & Suites by Wyndham KL） <span class="star">★★★</span></div>
+        <div class="hotel-addr">Kompleks Metro Pudu, Jalan Metro Pudu, 55200 吉隆坡 · ☎ +60 3-9232 7888</div>
         <div class="hotel-tags">
           <span class="hotel-tag hotel-tag-green">免费WiFi</span>
+          <span class="hotel-tag hotel-tag-blue">含早餐</span>
           <span class="hotel-tag hotel-tag-purple">近地铁站</span>
+          <span class="hotel-tag hotel-tag-yellow">Booking.com</span>
         </div>
         <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>待补充</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>待补充</div>
-          <div class="hotel-detail-item"><strong>备注：</strong>确认信为扫描件，详情待补充</div>
-          <div class="hotel-detail-item"><strong>预定编号：</strong>6.pdf</div>
+          <div class="hotel-detail-item"><strong>房型：</strong>超豪华双床套房（禁烟）× 8间</div>
+          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
+          <div class="hotel-detail-item"><strong>订单号：</strong>6735522593</div>
+          <div class="hotel-detail-item"><strong>PIN：</strong>5257（勿泄露）</div>
         </div>
         <div class="hotel-price">
-          <div><span class="amount">待补充</span><br><span class="per">详情请查看确认信</span></div>
+          <div><span class="amount">CNY 12,660</span><br><span class="per">全8间4晚含税总价 · 自动扣款</span></div>
           <span class="hotel-free">免费取消</span>
         </div>
-        <div class="hotel-cancel">✅ 可免费取消（具体政策请查看确认信）</div>
+        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月2日 23:59前免费 · 之后取消收 MYR 232.01/间</div>
+        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/23971407.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
       </div>
 
     </div>
@@ -562,15 +594,15 @@ body {
     <div class="card-title">💰 预算参考</div>
     <div class="budget-wrap">
       <table class="budget-table">
-        <tr><th>项目</th><th>吉隆坡段</th><th>槟城段</th><th>备注</th></tr>
-        <tr><td>国际机票</td><td colspan="2">待出票</td><td>MH389 + MH386（已查到航班）</td></tr>
-        <tr><td>住宿</td><td>4晚约1,400-2,500/人</td><td>5晚约2,000-3,500/人</td><td>已预订3家可选（免费取消）</td></tr>
-        <tr><td>餐饮</td><td>300-450/人</td><td>500-750/人</td><td>吉隆坡100-150/天；槟城100-150/天</td></tr>
-        <tr><td>门票活动</td><td>400-600/人</td><td>350-500/人</td><td>黑风洞/马六甲/升旗山/极乐寺等</td></tr>
-        <tr><td>当地交通</td><td>250-400/人</td><td>250-450/人</td><td>包车/Grab/槟城内交通</td></tr>
-        <tr><td>吉隆坡↔槟城</td><td colspan="2">200-400/人</td><td>巴士或包车（单程约4h）</td></tr>
-        <tr><td>签证</td><td>0</td><td>0</td><td>全程免签</td></tr>
-        <tr class="total-row"><td>合计/人</td><td colspan="2">以实际出票价为准</td><td><strong>综合人均约 8k-12k</strong></td></tr>
+        <tr><th>项目</th><th>人均费用</th><th>备注</th></tr>
+        <tr><td>✈️ 机票</td><td>3,000</td><td>MH389（浦东→吉隆坡）+ MH386（吉隆坡→浦东）</td></tr>
+        <tr><td>🚐 全程包车&导游</td><td>1,868</td><td>吉隆坡包车 + 马六甲一日 + 转战槟城途经怡保</td></tr>
+        <tr><td>🏨 吉隆坡酒店（5天4晚）</td><td>1,218</td><td>Concorde / Hilton Garden Inn / Days Hotel（已预订·免费取消）</td></tr>
+        <tr><td>🏨 槟城酒店（6天5晚）</td><td>1,561</td><td>待预订</td></tr>
+        <tr><td>🍜 餐费</td><td>1,300</td><td>10天全程（吉隆坡+槟城）</td></tr>
+        <tr><td>🎫 游玩费用（门票等）</td><td>800</td><td>黑风洞·马六甲·升旗山·极乐寺·娘惹博物馆等</td></tr>
+        <tr><td>🛡️ 保险</td><td>400</td><td>旅游意外险</td></tr>
+        <tr class="total-row"><td><strong>合计/人</strong></td><td><strong>约 10,147</strong></td><td>不含个人购物及其他消费</td></tr>
       </table>
     </div>
   </div>
