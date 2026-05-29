@@ -367,6 +367,51 @@ body {
 }
 .share-btn:hover { background: #4a30a0; }
 .share-btn:active { transform: scale(0.98); }
+
+/* Photo Gallery */
+.photo-gallery {
+  padding: 0 18px 14px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.photo-gallery::-webkit-scrollbar { height: 4px; }
+.photo-gallery::-webkit-scrollbar-thumb { background: #ddd; border-radius: 2px; }
+.photo-item {
+  flex: 0 0 auto;
+  width: calc(33.33% - 6px);
+  min-width: 140px;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+.photo-item img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  display: block;
+}
+.photo-item .photo-label {
+  font-size: 10px;
+  color: var(--text-light);
+  text-align: center;
+  padding: 3px;
+  background: #fafafa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 500px) {
+  .photo-item { width: calc(50% - 4px); min-width: 130px; }
+  .photo-item img { height: 100px; }
+}
+@media (max-width: 360px) {
+  .photo-item { width: calc(50% - 4px); min-width: 110px; }
+  .photo-item img { height: 85px; }
+}
 </style>
 </head>
 <body>
@@ -461,6 +506,40 @@ body {
       <span class="room-tag room-tag-blue">免费取消</span>
       <span class="room-tag room-tag-yellow">CNY 17,360</span>
     </div>
+    <div class="photo-gallery">
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0221f12000asaemfpFD51_R_600_360_R5_Q70.jpg" alt="Concorde外观" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 酒店外观</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/02028120008763igjF3D6_R_600_360_R5_Q70.jpg" alt="Concorde夜景" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🌃 酒店夜景</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0236r224x96xdvz1a4784_R_600_360_R5_Q70.jpg" alt="Concorde双床房" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🛏️ 高级双床间</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0234t224x97pgkc4g20EB_R_600_360_R5_Q70.jpg" alt="Concorde双床房2" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🛏️ 双床间另一角</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0204g120008762142EEDB_R_600_360_R5_Q70.jpg" alt="Concorde浴室" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🚿 浴室</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0205a1200094gxewf9E5A_R_600_360_R5_Q70.jpg" alt="Concorde泳池" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏊 泳池</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0233q12000rklnld7872F_R_600_360_R5_Q70.jpg" alt="Concorde大堂" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 大堂</div>
+      </div>
+      <div class="photo-item photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/1mc7212000p0wuj5d0E08_R_600_360_R5_Q70.jpg" alt="Concorde餐厅" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🍳 餐厅</div>
+      </div>
+    </div>
     <div class="comp-table">
       <div class="comp-row"><span class="comp-label">📍 位置</span><span class="comp-value"><span class="good">金三角核心区</span> · 步行至双子塔10分钟 · Bukit Nanas单轨160m</span></div>
       <div class="comp-row"><span class="comp-label">🛏️ 房型</span><span class="comp-value">高级双床间 · 24㎡ · 两张单人床 · 有浴缸</span></div>
@@ -504,6 +583,40 @@ body {
       <span class="room-tag room-tag-yellow">CNY 15,960</span>
       <span class="room-tag room-tag-red" style="background:#fce4ec;color:#880e4f;">🏆 面积最大</span>
     </div>
+    <div class="photo-gallery">
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/200e0s000000ibxzfB90C_R_600_360_R5_Q70.jpg" alt="希尔顿外观" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 酒店外观</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0226612000alxvz0w750A_R_600_360_R5_Q70.jpg" alt="希尔顿外观2" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 外观夜景</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0236712000rctef3c9EC9_R_600_360_R5_Q70.jpg" alt="希尔顿双床房" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🛏️ 豪华双床房</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0235z224x958layxh071C_R_600_360_R5_Q70.jpg" alt="希尔顿双床房2" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🛏️ 双床房另一角</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0235b12000qobk5k4BCAC_R_600_360_R5_Q70.jpg" alt="希尔顿塔景" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🌆 吉隆坡塔景观</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0230112000n8qug09009D_R_600_360_R5_Q70.jpg" alt="希尔顿屋顶泳池" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏊 25楼屋顶泳池</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0231312000lo4u9l463A7_R_600_360_R5_Q70.jpg" alt="希尔顿大堂" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 大堂</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0231812000rw9pfce343D_R_600_360_R5_Q70.jpg" alt="希尔顿餐厅" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🍳 餐厅</div>
+      </div>
+    </div>
     <div class="comp-table">
       <div class="comp-row"><span class="comp-label">📍 位置</span><span class="comp-value">秋杰区(TAR路) · SOGO商场旁 · Chow Kit单轨500m · <span class="bad">周边环境较乱</span></span></div>
       <div class="comp-row"><span class="comp-label">🛏️ 房型</span><span class="comp-value"><span class="good">豪华双床房 · 39㎡</span> · 吉隆坡塔景观 · 两张单人床 · 无浴缸</span></div>
@@ -546,6 +659,40 @@ body {
       <span class="room-tag room-tag-blue">免费取消</span>
       <span class="room-tag room-tag-yellow">CNY 12,660</span>
       <span class="room-tag room-tag-red" style="background:#fce4ec;color:#880e4f;">💰 价格最低</span>
+    </div>
+    <div class="photo-gallery">
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/1mc1w12000c5bgyqqD146_R_600_360_R5_Q70.jpg" alt="戴斯外观" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 酒店外观</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0202e120008nru9mhA23A_R_600_360_R5_Q70.jpg" alt="戴斯外观2" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 外观另一角</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0234n2224wpm8ugi8D00E_R_600_360_R5_Q70.jpg" alt="戴斯双床套房" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🛏️ 超豪华双床套房</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0236v12000rjt2y5315B6_R_600_360_R5_Q70.jpg" alt="戴斯套房客厅" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🛏️ 套房客厅区</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0230y12000rw5z5utB303_R_600_360_R5_Q70.jpg" alt="戴斯浴室" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🚿 浴室</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0234q224x98ymjbf92659_R_600_360_R5_Q70.jpg" alt="戴斯大堂" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏛️ 大堂</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/0231h224x98mgs2flA69F_R_600_360_R5_Q70.jpg" alt="戴斯餐厅" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🍳 餐厅</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://dimg04.c-ctrip.com/images/1mc0h12000cghqq4o8ECD_R_600_360_R5_Q70.jpg" alt="戴斯健身房" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <div class="photo-label">🏋️ 健身房</div>
+      </div>
     </div>
     <div class="comp-table">
       <div class="comp-row"><span class="comp-label">📍 位置</span><span class="comp-value">陈秀莲(Cheras) · <span class="good">地铁站步行即到</span> · <span class="bad">距市中心较远</span></span></div>
