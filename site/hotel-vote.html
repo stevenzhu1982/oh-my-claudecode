@@ -343,6 +343,7 @@ body {
 <div class="header">
   <h1>🏨 吉隆坡酒店对比 &amp; 投票</h1>
   <p>20人 · 8间双床房 · 8/4→8/8（4晚）· 含早餐 · 全部可免费取消</p>
+  <div style="margin-top:10px;font-size:12px;opacity:0.6;cursor:pointer;" onclick="if(confirm('确定清空所有投票结果？'))resetVotes()">⚙️ 管理投票</div>
 </div>
 
 <div class="container">
@@ -653,12 +654,12 @@ body {
 <div id="toast" class="toast"></div>
 
 <script>
-/* ===== 无记名投票 - 实时汇总（D1后端） ===== */
-const API_URL = '/api/votes';
-const VOTER_KEY = 'hvote_voter_id';
+/* ===== 无记名投票 - 通过Comments API存储 ===== */
+const VOTE_API = '/api/comments';
+const VOTER_KEY = 'hvote_voter_id3';
 let voterId = localStorage.getItem(VOTER_KEY);
 if (!voterId) {
-  voterId = 'v_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+  voterId = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   localStorage.setItem(VOTER_KEY, voterId);
 }
 let myVote = '';
@@ -670,21 +671,37 @@ function getHN(k) { return { concorde: '凯煌', hilton: '希尔顿', days: '戴
 
 async function loadVotes() {
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(VOTE_API);
     const data = await res.json();
     if (data.success) {
-      voteData = data.counts;
+      const counts = { concorde: 0, hilton: 0, days: 0 };
+      const seen = new Set(); // dedup by voter_id
+      myVote = '';
+      // comments are sorted newest first, so first occurrence = latest vote
+      for (const c of data.comments) {
+        if (c.name && c.name.startsWith('vote_')) {
+          if (seen.has(c.content)) continue; // already counted this voter
+          seen.add(c.content);
+          const h = c.name.replace('vote_', '');
+          if (counts[h] !== undefined) counts[h]++;
+          if (c.content === voterId) myVote = h;
+        }
+      }
+      voteData = counts;
       updateUI();
     }
-  } catch(e) {}
+  } catch(e) {
+    console.warn('load votes error:', e);
+  }
 }
 
-async function vote(hotel, btn) {
+async function vote(hotel) {
+  if (myVote) { showToast('你已投过票，每台设备仅限一票'); return; }
   try {
-    const res = await fetch(API_URL, {
+    const res = await fetch(VOTE_API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ voter_id: voterId, hotel: hotel })
+      body: JSON.stringify({ name: 'vote_' + hotel, content: voterId })
     });
     const data = await res.json();
     if (data.success) {
@@ -692,10 +709,11 @@ async function vote(hotel, btn) {
       await loadVotes();
       showToast('✅ 已投给 ' + getHN(hotel));
     } else {
-      showToast('❌ 投票失败，请重试');
+      showToast('❌ ' + (data.error || '投票失败'));
     }
   } catch(e) {
     showToast('❌ 网络错误');
+    console.warn('vote error:', e);
   }
 }
 
@@ -750,6 +768,27 @@ function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Admin: clear all votes
+async function resetVotes() {
+  try {
+    const res = await fetch('/api/comments?purgevotes=1');
+    const data = await res.json();
+    if (data.success) {
+      myVote = '';
+      localStorage.removeItem(VOTER_KEY);
+      voterId = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      localStorage.setItem(VOTER_KEY, voterId);
+      await loadVotes();
+      showToast('✅ 投票结果已清空');
+    } else {
+      showToast('❌ 清空失败: ' + (data.error || ''));
+    }
+  } catch(e) {
+    showToast('❌ 清空失败');
+    console.warn('reset error:', e);
+  }
 }
 
 // Load on page load & auto-refresh every 10s
