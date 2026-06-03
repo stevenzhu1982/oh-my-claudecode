@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026暑假 · 行李清单</title>
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card-bg: #fffcf5;
+  --text-primary: #5a3e2b;
+  --text-secondary: #8b7355;
+  --accent: #e8934a;
+  --accent-light: #fef0e0;
+  --border: #e8d5b5;
+  --shadow: rgba(180, 140, 100, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #2d1b69 0%, #6c5ce7 30%, #e84393 60%, #2b6cb0 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.08;
+  animation: heroZoom 25s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,27,105,0.88) 0%, rgba(108,92,231,0.78) 50%, rgba(43,108,176,0.92) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-emoji {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.hero p {
+  font-size: clamp(15px, 2.5vw, 19px);
+  color: rgba(255,255,255,0.8);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.hero-wave {
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23fdf8f0'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+
+/* ===== Section ===== */
+.section { margin-bottom: 28px; }
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.section-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+  margin-bottom: 24px;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--border);
+}
+
+/* ===== Back Link ===== */
+.back-link { display:inline-flex; align-items:center; gap:6px; color:#6c5ce7; text-decoration:none; font-weight:600; font-size:14px; margin-bottom:16px; }
+.back-link:hover { text-decoration:underline; }
+
+/* ===== Packing Grid ===== */
+.packing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.packing-col { background: var(--accent-light); border-radius: 14px; padding: 14px; }
+.packing-col h4 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
+.packing-item { display: block; font-size: 12px; color: #4a5568; padding: 3px 0; cursor: pointer; }
+.packing-item input { margin-right: 6px; }
+
+/* ===== Packing Card (do not bring etc) ===== */
+.packing-card { background:var(--card-bg); border:2px solid var(--border); border-radius:20px; padding:24px 20px; box-shadow:0 4px 16px var(--shadow); margin-bottom:16px; }
+.packing-card h3 { font-size:16px; font-weight:700; color:var(--text-primary); margin-bottom:12px; }
+
+/* ===== Progress ===== */
+.progress-section { background:var(--card-bg); border:2px solid var(--border); border-radius:20px; padding:24px 20px; box-shadow:0 4px 16px var(--shadow); margin-bottom:16px; text-align:center; }
+.progress-label { font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:8px; }
+.progress-track { background:var(--border); border-radius:10px; height:20px; overflow:hidden; }
+.progress-bar { background:linear-gradient(90deg,#6c5ce7,#e84393); height:100%; width:0%; border-radius:10px; transition:width 0.5s; }
+.progress-text { font-size:13px; color:var(--text-secondary); margin-top:6px; }
+
+/* ===== Do Not Bring ===== */
+.dont-bring-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.dont-bring-item { font-size: 13px; color: #e53e3e; padding: 4px 0; }
+
+/* ===== Footer ===== */
+.footer { text-align: center; padding: 32px 16px; color: var(--text-secondary); font-size: 13px; }
+.footer::before {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: var(--border);
+  margin: 0 auto 16px;
+}
+
+/* ===== Buttons ===== */
+.btn-reset { background:var(--accent-light); border:none; padding:10px 24px; border-radius:10px; font-size:14px; font-weight:600; color:var(--text-primary); cursor:pointer; margin-bottom:16px; font-family:inherit; }
+.btn-reset:hover { background:var(--border); }
+.btn-print { background:linear-gradient(135deg,#2d1b69,#6c5ce7); border:none; padding:10px 24px; border-radius:10px; font-size:14px; font-weight:600; color:#fff; cursor:pointer; margin-bottom:16px; font-family:inherit; margin-left:8px; }
+.btn-print:hover { opacity:0.9; }
+
+/* ===== Print ===== */
+@media print { .back-link, .hero, .footer, .btn-reset, .btn-print { display:none !important; } }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--text-primary); color: #fffcf5; padding: 12px 24px; border-radius: 10px;
+  font-size: 14px; z-index: 1000; opacity: 0;
+  transition: all 0.3s; pointer-events: none;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .hero { min-height: 30vh; }
+  .hero-emoji { font-size: 48px; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .dont-bring-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 25vh; }
+  .hero-emoji { font-size: 40px; }
+  .hero h1 { font-size: clamp(20px, 5vw, 22px); }
+  .hero p { font-size: 14px; }
+  .container { padding: 0 12px; }
+  .packing-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-emoji">🧳</span>
+    <h1>行李清单</h1>
+    <p>出发前对照勾选 · 分类打包 · 不再遗漏</p>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<div class="container">
+
+  <!-- ===== Back Link ===== -->
+  <div style="padding-top:20px;">
+    <a class="back-link" href="index.html">&larr; 返回主页</a>
+  </div>
+
+  <!-- ===== Progress Bar ===== -->
+  <div class="progress-section">
+    <div class="progress-label">📊 打包进度</div>
+    <div class="progress-track">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+    <div class="progress-text">已准备 <span id="progressCount">0</span>/<span id="totalCount">0</span> 项</div>
+  </div>
+
+  <!-- ===== Toolbar ===== -->
+  <div style="text-align:center;">
+    <button class="btn-reset" onclick="resetAll()">🔄 重置所有勾选</button>
+    <button class="btn-print" onclick="window.print()">🖨️ 打印清单</button>
+  </div>
+
+  <!-- ===== Packing Grid ===== -->
+  <div class="packing-grid">
+
+    <!-- Column 1: 衣物类 -->
+    <div class="packing-col">
+      <h4>👕 衣物类</h4>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_01"> T恤/短袖（各4-5件）</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_02"> 薄长裤/裙子</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_03"> 薄外套（飞机+商场冷气）</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_04"> 泳衣（酒店泳池）</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_05"> 防晒衣/遮阳帽</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_06"> 运动鞋+拖鞋</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_07"> 速干毛巾</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_08"> 睡衣</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_09"> 沙滩鞋/溯溪鞋</label>
+      <label class="packing-item"><input type="checkbox" data-key="cloth_10"> 遮阳帽+太阳镜</label>
+    </div>
+
+    <!-- Column 2: 日用 -->
+    <div class="packing-col">
+      <h4>🧴 日用</h4>
+      <label class="packing-item"><input type="checkbox" data-key="daily_01"> 高倍防晒霜（SPF50+）</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_02"> 防蚊液/防蚊贴</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_03"> 万能转换插头（英标）</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_04"> 充电宝（不超过20000mAh）</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_05"> 雨伞/折叠伞</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_06"> 牙膏牙刷（部分酒店不提供）</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_07"> 湿纸巾/纸巾</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_08"> 密封袋（装湿泳衣/电子设备防水）</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_09"> 折叠背包/购物袋</label>
+      <label class="packing-item"><input type="checkbox" data-key="daily_10"> 水杯/保温杯</label>
+    </div>
+
+    <!-- Column 3: 证件 -->
+    <div class="packing-col">
+      <h4>📄 证件</h4>
+      <label class="packing-item"><input type="checkbox" data-key="doc_01"> 护照（有效期6个月以上）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_02"> MDAC电子入境卡（打印件）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_03"> 机票行程单（打印件）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_04"> 酒店预订确认单（打印件）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_05"> 旅游保险单（电子版+打印件）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_06"> 身份证（国内段备用）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_07"> 驾驶证+翻译件（如需租车）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_08"> 2寸白底照片2张（备用）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_09"> 重要证件电子扫描件（手机备份）</label>
+      <label class="packing-item"><input type="checkbox" data-key="doc_10"> 紧急联系人卡片</label>
+    </div>
+
+    <!-- Column 4: 药品 -->
+    <div class="packing-col">
+      <h4>💊 药品</h4>
+      <label class="packing-item"><input type="checkbox" data-key="med_01"> 肠胃药/止泻药</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_02"> 感冒药/退烧药</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_03"> 创可贴/消毒棉片</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_04"> 老人常用药（带足量+英文说明）</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_05"> 口罩/消毒湿巾</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_06"> 晕车药</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_07"> 过敏药</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_08"> 眼药水</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_09"> 风油精/清凉油</label>
+      <label class="packing-item"><input type="checkbox" data-key="med_10"> 体温计</label>
+    </div>
+
+  </div>
+
+  <!-- ===== Do NOT Bring ===== -->
+  <div class="packing-card">
+    <h3>❌ 不要带 · 马来西亚入境限制</h3>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;">以下物品依据马来西亚海关规定，请勿携带入境，以免被没收、罚款或遣返。</p>
+    <div class="dont-bring-grid">
+      <div class="dont-bring-item">❌ 猪肉制品（马来西亚禁止）</div>
+      <div class="dont-bring-item">❌ 含麻黄碱的感冒药（如新康泰克、白加黑）</div>
+      <div class="dont-bring-item">❌ 含吗啡的止痛药</div>
+      <div class="dont-bring-item">❌ 含多潘立酮的胃药（如吗丁啉）</div>
+      <div class="dont-bring-item">❌ 烟酒超额（电子烟完全禁止）</div>
+      <div class="dont-bring-item">❌ 超过RM 10,000现金未申报</div>
+      <div class="dont-bring-item">❌ 色情/盗版物品</div>
+      <div class="dont-bring-item">❌ 无人机（需特殊许可）</div>
+    </div>
+    <div style="margin-top:10px;font-size:12px;color:var(--text-secondary);">
+      <a href="customs.html" style="color:#6c5ce7;text-decoration:none;font-weight:600;">📋 查看完整入境指南 →</a>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    <p>2026暑假 · 马来西亚亲子游 · 行李清单</p>
+    <p style="margin-top:8px;"><a href="index.html" style="color:#6c5ce7;text-decoration:none;">&larr; 返回主页</a></p>
+  </div>
+
+</div>
+
+<!-- ===== Toast ===== -->
+<div id="toast" class="toast"></div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'packing_checklist_2026';
+
+  // Load saved state
+  function loadState() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
+  }
+
+  // Save state
+  function saveState(state) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // localStorage full or unavailable
+    }
+  }
+
+  // Get all checkboxes
+  function getCheckboxes() {
+    return document.querySelectorAll('.packing-item input[type="checkbox"]');
+  }
+
+  // Update progress display
+  function updateProgress() {
+    const checkboxes = getCheckboxes();
+    const total = checkboxes.length;
+    let checked = 0;
+    checkboxes.forEach(function(cb) {
+      if (cb.checked) checked++;
+    });
+    const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = checked;
+    document.getElementById('totalCount').textContent = total;
+  }
+
+  // Apply saved state to checkboxes
+  function applyState(state) {
+    const checkboxes = getCheckboxes();
+    checkboxes.forEach(function(cb) {
+      const key = cb.getAttribute('data-key');
+      if (key && state[key] === true) {
+        cb.checked = true;
+      }
+    });
+    updateProgress();
+  }
+
+  // Handle checkbox change
+  function onCheckboxChange(e) {
+    const cb = e.target;
+    const key = cb.getAttribute('data-key');
+    if (!key) return;
+    const state = loadState();
+    state[key] = cb.checked;
+    saveState(state);
+    updateProgress();
+  }
+
+  // Reset all
+  window.resetAll = function() {
+    if (!confirm('确定要重置所有勾选吗？')) return;
+    const state = {};
+    saveState(state);
+    const checkboxes = getCheckboxes();
+    checkboxes.forEach(function(cb) {
+      cb.checked = false;
+    });
+    updateProgress();
+    showToast('已重置所有勾选');
+  };
+
+  // Show toast
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show';
+    setTimeout(function() {
+      t.className = 'toast';
+    }, 2000);
+  }
+  window.showToast = showToast;
+
+  // Initialize
+  function init() {
+    const state = loadState();
+    applyState(state);
+    const checkboxes = getCheckboxes();
+    checkboxes.forEach(function(cb) {
+      cb.addEventListener('change', onCheckboxChange);
+    });
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

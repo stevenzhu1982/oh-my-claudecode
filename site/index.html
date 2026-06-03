@@ -28,7 +28,7 @@ body {
 /* ===== Hero ===== */
 .hero {
   position: relative;
-  min-height: 75vh;
+  min-height: 68vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,7 +118,7 @@ body {
   border-radius: 20px;
   padding: 24px 20px;
   box-shadow: 0 4px 16px var(--shadow);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 .card-title {
   font-size: 18px;
@@ -129,33 +129,60 @@ body {
   border-bottom: 2px dashed var(--border);
 }
 
-/* ===== Highlight Banner ===== */
-.highlight {
-  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
-  border-radius: 20px;
-  padding: 28px 24px;
-  text-align: center;
-  color: #fff;
-  margin-bottom: 24px;
-}
-.highlight .emoji { font-size: 40px; display: block; margin-bottom: 10px; }
-.highlight h3 { font-size: 22px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
-.highlight p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
-
-/* ===== Info Grid ===== */
-.info-grid {
+/* ===== Navigation Grid ===== */
+.nav-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.nav-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.nav-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.nav-card .icon { font-size: 32px; flex-shrink: 0; }
+.nav-card .info { flex: 1; }
+.nav-card .info .title { font-weight: 700; font-size: 15px; }
+.nav-card .info .desc { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+.nav-card .arrow { font-size: 18px; opacity: 0.6; transition: transform 0.2s; }
+.nav-card:hover .arrow { transform: translateX(4px); opacity: 1; }
+.nav-purple { background: linear-gradient(135deg, #2d1b69, #6c5ce7); }
+.nav-pink { background: linear-gradient(135deg, #a1236b, #e84393); }
+.nav-blue { background: linear-gradient(135deg, #1a365d, #4299e1); }
+.nav-orange { background: linear-gradient(135deg, #9c4221, #ed8936); }
+.nav-teal { background: linear-gradient(135deg, #234e52, #38b2ac); }
+.nav-dark { background: linear-gradient(135deg, #1a202c, #4a5568); }
+.nav-green { background: linear-gradient(135deg, #22543d, #48bb78); }
+.nav-red { background: linear-gradient(135deg, #742a2a, #fc8181); }
+
+/* ===== Quick Info Strip ===== */
+.info-strip {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  text-align: center;
-}
-.info-item {
+  padding: 14px 16px;
   background: var(--accent-light);
-  border-radius: 10px;
-  padding: 12px 10px;
+  border-radius: 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  color: var(--text-primary);
 }
-.info-item .label { font-size: 11px; color: var(--text-secondary); letter-spacing: 1px; margin-bottom: 2px; }
-.info-item .value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.info-strip:hover { background: #fce4c8; }
+.info-strip .strip-icon { font-size: 24px; flex-shrink: 0; }
+.info-strip .strip-content { flex: 1; }
+.info-strip .strip-title { font-weight: 600; font-size: 14px; }
+.info-strip .strip-desc { font-size: 12px; color: var(--text-secondary); }
+.info-strip .strip-action { font-size: 13px; color: #6c5ce7; font-weight: 600; white-space: nowrap; }
 
 /* ===== Flight Card ===== */
 .flight-card {
@@ -174,7 +201,7 @@ body {
 /* ===== Day List (compact) ===== */
 .day-list { }
 .day-row {
-  display: flex; align-items: flex-start; gap: 12px; padding: 8px 0;
+  display: flex; align-items: flex-start; gap: 12px; padding: 7px 0;
   border-bottom: 1px solid #f0ebe5;
 }
 .day-row:last-child { border-bottom: none; }
@@ -188,6 +215,7 @@ body {
 }
 .day-row.kl .day-num { background: linear-gradient(135deg, #2d1b69, #6c5ce7); }
 .day-row.pg .day-num { background: linear-gradient(135deg, #e84393, #fd79a8); }
+.day-row.ml .day-num { background: linear-gradient(135deg, #e74c3c, #f39c12); }
 .day-row.flight .day-num { background: linear-gradient(135deg, #f39c12, #e74c3c); }
 .day-row.depart .day-num { background: linear-gradient(135deg, #636e72, #b2bec3); }
 .day-info { flex: 1; }
@@ -195,82 +223,21 @@ body {
 .day-info .title { font-size: 13px; font-weight: 600; color: #2d3748; }
 .day-info .desc { font-size: 12px; color: #4a5568; margin-top: 1px; line-height: 1.4; }
 
-/* ===== Hotel Card ===== */
-.hotel-grid { display: flex; flex-direction: column; gap: 16px; }
-.hotel-card {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  padding: 18px;
-  transition: all 0.2s;
+/* ===== Hotel Summary ===== */
+.hotel-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
-.hotel-card:hover { border-color: var(--accent); }
-.hotel-img-wrap {
-  width: 100%;
-  height: 180px;
+.hotel-summary-item {
+  background: var(--accent-light);
   border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  background: #f0ebe5;
+  padding: 12px;
+  text-align: center;
 }
-.hotel-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.hotel-name { font-size: 16px; font-weight: 700; color: #2d1b69; }
-.hotel-name .star { color: #f59e0b; font-size: 14px; }
-.hotel-addr { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-.hotel-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
-.hotel-tag {
-  font-size: 11px; padding: 2px 10px; border-radius: 8px; font-weight: 600;
-}
-.hotel-tag-green { background: #d4edda; color: #0e5e1e; }
-.hotel-tag-blue { background: #dbeafe; color: #1e40af; }
-.hotel-tag-yellow { background: #fef3c7; color: #92400e; }
-.hotel-tag-purple { background: #ede9fe; color: #5b21b6; }
-.hotel-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
-.hotel-detail-item { font-size: 12px; color: #4a5568; }
-.hotel-detail-item strong { color: var(--text-primary); }
-.hotel-price {
-  margin-top: 10px; padding: 10px 14px; background: var(--accent-light); border-radius: 10px;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.hotel-price .amount { font-size: 18px; font-weight: 800; color: #e53e3e; }
-.hotel-price .per { font-size: 11px; color: var(--text-secondary); }
-.hotel-cancel {
-  margin-top: 6px; font-size: 12px; color: #38a169; font-weight: 600;
-}
-.hotel-free { display: inline-block; padding: 1px 8px; border-radius: 6px; background: #d4edda; color: #0e5e1e; font-size: 11px; font-weight: 700; margin-left: 4px; }
-.hotel-booking-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: #2d1b69; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: #ede9fe; transition: all 0.2s; }
-.hotel-booking-link:hover { background: #6c5ce7; color: #fff; }
-
-/* ===== Budget Table ===== */
-.budget-wrap { overflow-x: auto; border-radius: 12px; border: 2px solid var(--border); }
-.budget-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 500px; }
-.budget-table th { padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); background: #f7fafc; color: #2d3748; font-weight: 700; }
-.budget-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); color: #4a5568; }
-.budget-table tr:last-child td { border-bottom: none; }
-.budget-table .total-row td { background: #fffaf0; font-weight: 700; color: var(--text-primary); }
-
-/* ===== Packing ===== */
-.packing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.packing-col { background: var(--accent-light); border-radius: 14px; padding: 14px; }
-.packing-col h4 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; }
-.packing-item { display: block; font-size: 12px; color: #4a5568; padding: 3px 0; cursor: pointer; }
-.packing-item input { margin-right: 6px; }
-
-/* ===== Tips ===== */
-.tip-box {
-  background: var(--card-bg);
-  border: 2px solid var(--border);
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-bottom: 12px;
-}
-.tip-box h4 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-.tip-box p { font-size: 13px; color: #4a5568; line-height: 1.7; }
+.hotel-summary-item .h-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.hotel-summary-item .h-price { font-size: 15px; font-weight: 800; color: #e53e3e; }
+.hotel-summary-item .h-city { font-size: 11px; color: var(--text-secondary); }
 
 /* ===== Comment ===== */
 .comment-card {
@@ -335,39 +302,33 @@ body {
 
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
-  .hero { min-height: 70vh; }
+  .hero { min-height: 60vh; }
   .hero-emoji { font-size: 48px; }
-  .packing-grid { grid-template-columns: 1fr 1fr; }
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hotel-summary { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 480px) {
-  .hero { min-height: 65vh; }
+  .hero { min-height: 55vh; }
   .hero-emoji { font-size: 40px; }
   .hero h1 { font-size: clamp(20px, 5vw, 22px); }
   .hero p { font-size: 14px; }
   .section-header h2 { font-size: 18px; }
-  .info-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .hotel-detail { grid-template-columns: 1fr; }
-  .packing-grid { grid-template-columns: 1fr; }
-  .budget-table { min-width: 400px; font-size: 12px; }
-  .hotel-img-wrap { height: 140px; }
+  .container { padding: 0 12px; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .hotel-summary { grid-template-columns: 1fr; }
   .comment-card { padding: 16px 14px; }
   .msg-text { padding-left: 0; margin-top: 6px; }
   .msg-form input, .msg-form textarea { font-size: 16px; }
   .msg-form .btn-submit { width: 100%; text-align: center; padding: 12px 32px; font-size: 15px; }
-  .highlight { padding: 20px 16px; }
-  .container { padding: 0 12px; }
 }
 @media (max-width: 380px) {
-  .hero { min-height: 60vh; }
+  .hero { min-height: 50vh; }
   .hero-emoji { font-size: 32px; }
   .hero h1 { font-size: 18px; }
-  .info-grid { grid-template-columns: 1fr; }
-  .budget-table { min-width: 280px; font-size: 11px; }
 }
 </style>
 </head>
 <body>
-
 <!-- ===== Hero ===== -->
 <section class="hero">
   <div class="hero-overlay"></div>
@@ -381,7 +342,78 @@ body {
 
 <div class="container">
 
-  <!-- ===== 航班信息 ===== -->
+  <!-- ===== 全站导航 ===== -->
+  <div class="card">
+    <div class="card-title">🗂️ 网站分类导航</div>
+    <div class="nav-grid">
+      <a href="transport.html" class="nav-card nav-blue">
+        <span class="icon">✈️</span>
+        <div class="info">
+          <div class="title">交通出行</div>
+          <div class="desc">航班信息 · 机票文件</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="itinerary.html" class="nav-card nav-purple">
+        <span class="icon">📅</span>
+        <div class="info">
+          <div class="title">行程规划</div>
+          <div class="desc">10天9晚完整安排</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="hotels.html" class="nav-card nav-pink">
+        <span class="icon">🏨</span>
+        <div class="info">
+          <div class="title">酒店住宿</div>
+          <div class="desc">吉隆坡 · 槟城 · 对比投票</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="budget.html" class="nav-card nav-orange">
+        <span class="icon">💰</span>
+        <div class="info">
+          <div class="title">费用明细</div>
+          <div class="desc">全程预算 · 各家分摊</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="tips.html" class="nav-card nav-teal">
+        <span class="icon">💡</span>
+        <div class="info">
+          <div class="title">实用贴士</div>
+          <div class="desc">签证 · 货币 · 气候 · 通讯</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="customs.html" class="nav-card nav-dark">
+        <span class="icon">🛂</span>
+        <div class="info">
+          <div class="title">入境指南</div>
+          <div class="desc">违禁品 · 药品 · 海关规定</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="packing.html" class="nav-card nav-green">
+        <span class="icon">🧳</span>
+        <div class="info">
+          <div class="title">行李清单</div>
+          <div class="desc">打包检查 · 禁止携带</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href="contract.html" class="nav-card nav-red">
+        <span class="icon">📋</span>
+        <div class="info">
+          <div class="title">合同文件</div>
+          <div class="desc">旅行社 · 资质 · 取消政策</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== 航班概览 ===== -->
   <div class="card">
     <div class="card-title">✈️ 已订航班</div>
     <div class="flight-card">
@@ -396,365 +428,167 @@ body {
         <span class="time">19:35 → 01:10+1</span>
       </div>
     </div>
-    <div style="margin-top:10px;font-size:12px;color:var(--text-secondary);">
-      <strong>去程：</strong>8月4日（周二）· 马来西亚航空 · 空客A330-300 · 飞行约5h35m<br>
-      <strong>回程：</strong>8月13日（周四）· 马来西亚航空 · 空客A330-300 · 飞行约5h35m
-    </div>
+    <a href="transport.html" class="info-strip" style="margin-top:12px;margin-bottom:0;">
+      <span class="strip-icon">📄</span>
+      <div class="strip-content">
+        <div class="strip-title">查看机票文件</div>
+        <div class="strip-desc">每家每份 · 中文/中英双语/英文 · PDF下载</div>
+      </div>
+      <span class="strip-action">查看全部 →</span>
+    </a>
   </div>
 
-  <!-- ===== 行程概览 ===== -->
+  <!-- ===== 行程速览 ===== -->
   <div class="card">
-    <div class="card-title">📅 10天9晚详细行程</div>
-    <div class="info-grid" style="margin-bottom:12px;">
-      <div class="info-item"><div class="label">时间</div><div class="value">8月4日-13日</div></div>
-      <div class="info-item"><div class="label">天数</div><div class="value">10天9晚</div></div>
-      <div class="info-item"><div class="label">城市</div><div class="value">吉隆坡·马六甲·槟城</div></div>
-      <div class="info-item"><div class="label">成员</div><div class="value">多家庭·16人</div></div>
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>📅 10天9晚 · 行程速览</span>
+      <a href="itinerary.html" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">📖 查看详细 →</a>
     </div>
 
     <div class="day-list">
-      <!-- Day 1 -->
       <div class="day-row flight">
         <div class="day-num">1</div>
         <div class="day-info">
           <span class="date">8/4 周二</span>
           <div class="title">✈️ 上海 → 吉隆坡</div>
-          <div class="desc"><strong>航班：</strong>MH389 浦东T2 15:25 → 吉隆坡T1 21:00</div>
-          <div class="desc"><strong>抵达后：</strong>接机送往酒店入住（Concorde Hotel KL）</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：吉隆坡凯煌酒店</div>
+          <div class="desc">MH389 浦东→吉隆坡 · 专车接机</div>
         </div>
       </div>
-      <!-- Day 2 -->
       <div class="day-row kl">
         <div class="day-num">2</div>
         <div class="day-info">
           <span class="date">8/5 周三</span>
-          <div class="title">🏙️ 吉隆坡市区一日</div>
-          <div class="desc"><strong>上午：</strong>登双子塔（吉隆坡石油双塔）俯瞰全城</div>
-          <div class="desc"><strong>下午：</strong>吉隆坡塔 → 坡中园公园 → 柏威年广场等商圈</div>
-          <div class="desc"><strong>晚上：</strong>阿罗街逛吃（烤鸡翅、沙爹串、炒粿条），远观双子塔夜景</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：吉隆坡凯煌酒店</div>
+          <div class="title">🏙️ 吉隆坡市区包车一日</div>
         </div>
       </div>
-      <!-- Day 3 -->
-      <div class="day-row kl">
+      <div class="day-row ml">
         <div class="day-num">3</div>
         <div class="day-info">
           <span class="date">8/6 周四</span>
-          <div class="title">🏛️ 马六甲包车一日游</div>
-          <div class="desc"><strong>路线：</strong>圣保罗教堂 → 荷兰红屋 → 荷兰广场 → 马六甲壁画 → 海峡清真寺 → 马六甲海峡</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：吉隆坡凯煌酒店</div>
+          <div class="title">🏛️ 马六甲包车一日</div>
         </div>
       </div>
-      <!-- Day 4 -->
       <div class="day-row kl">
         <div class="day-num">4</div>
         <div class="day-info">
           <span class="date">8/7 周五</span>
-          <div class="title">🛍️ 吉隆坡文化一日</div>
-          <div class="desc"><strong>上午：</strong>独立广场 → 苏丹阿都沙末大厦 → 国家清真寺（免费借长袍入场）</div>
-          <div class="desc"><strong>下午：</strong>中央艺术坊 → 茨厂街唐人街逛手信</div>
-          <div class="desc"><strong>傍晚：</strong>旧国家皇宫外观打卡</div>
-          <div class="desc"><strong>晚上：</strong>茨厂街夜市闲逛</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：吉隆坡凯煌酒店</div>
+          <div class="title">⛰️ 云顶高原一日</div>
         </div>
       </div>
-      <!-- Day 5 -->
       <div class="day-row flight">
         <div class="day-num">5</div>
         <div class="day-info">
           <span class="date">8/8 周六</span>
-          <div class="title">🚌 转战槟城 · 途经怡保</div>
-          <div class="desc"><strong>退房，包车北上，途经霹雳州怡保</strong></div>
-          <div class="desc"><strong>怡保打卡：</strong>二奶巷 → 三奶巷壁画街 → 纯白怡保火车站 → 糖水街浅逛</div>
-          <div class="desc"><strong>傍晚：</strong>抵达槟城，入住丹绒点公寓</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：丹绒点公寓（槟城）</div>
+          <div class="title">🚌 吉隆坡→怡保→槟城</div>
         </div>
       </div>
-      <!-- Day 6 -->
       <div class="day-row pg">
         <div class="day-num">6</div>
         <div class="day-info">
           <span class="date">8/9 周日</span>
-          <div class="title">🎨 槟城文化一日</div>
-          <div class="desc"><strong>上午：</strong>壁画街（铁艺漫画打卡）→ 姓氏桥</div>
-          <div class="desc"><strong>下午：</strong>侨生娘惹博物馆</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：丹绒点公寓（槟城）</div>
+          <div class="title">🎨 乔治市文化包车一日</div>
         </div>
       </div>
-      <!-- Day 7 -->
       <div class="day-row pg">
         <div class="day-num">7</div>
         <div class="day-info">
           <span class="date">8/10 周一</span>
-          <div class="title">🚠 升旗山 · 极乐寺</div>
-          <div class="desc"><strong>上午：</strong>乘缆车上升旗山，俯瞰槟城全景</div>
-          <div class="desc"><strong>下午：</strong>参观东南亚最大的极乐寺</div>
-          <div class="desc"><strong>晚上：</strong>榴莲夜市实现榴莲自由 🍈</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：丹绒点公寓（槟城）</div>
+          <div class="title">🚠 升旗山 + 极乐寺</div>
         </div>
       </div>
-      <!-- Day 8 -->
       <div class="day-row pg">
         <div class="day-num">8</div>
         <div class="day-info">
           <span class="date">8/11 周二</span>
-          <div class="title">🏛️ 槟城古迹日</div>
-          <div class="desc"><strong>上午：</strong>蓝屋（张弼士故居）参观</div>
-          <div class="desc"><strong>下午：</strong>槟城博物馆</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：丹绒点公寓（槟城）</div>
+          <div class="title">🌴 浮罗山背田园一日</div>
         </div>
       </div>
-      <!-- Day 9 -->
       <div class="day-row pg">
         <div class="day-num">9</div>
         <div class="day-info">
           <span class="date">8/12 周三</span>
-          <div class="title">🏖️ 海滩放松日</div>
-          <div class="desc"><strong>上午：</strong>巴都丁宜（Batu Ferringhi）海滩放松，享受阳光海风</div>
-          <div class="desc"><strong>下午：</strong>槟城蝴蝶公园（Entopia）</div>
-          <div class="desc" style="color:var(--text-secondary);margin-top:4px;">🏨 住：丹绒点公寓（槟城）</div>
+          <div class="title">🏖️ 自由日 · 海滩·美食·购物</div>
         </div>
       </div>
-      <!-- Day 10 -->
       <div class="day-row depart">
         <div class="day-num">10</div>
         <div class="day-info">
           <span class="date">8/13 周四</span>
-          <div class="title">🛫 吉隆坡 → 上海</div>
-          <div class="desc"><strong>白天：</strong>退房，自由活动/伴手礼采购</div>
-          <div class="desc"><strong>下午：</strong>巴士返回吉隆坡</div>
-          <div class="desc"><strong>航班：</strong>MH386 吉隆坡T1 19:35 → 浦东T2 01:10+1</div>
+          <div class="title">🛫 槟城→吉隆坡→上海</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== 酒店预订 ===== -->
+  <!-- ===== 酒店概览 ===== -->
   <div class="card">
-    <div class="card-title">🏨 已预订酒店（吉隆坡 + 槟城）</div>
-
-    <h3 style="font-size:15px;font-weight:700;color:#2d1b69;margin-bottom:10px;">📍 吉隆坡（8/4入住 → 8/8退房 · 4晚）</h3>
-    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">
-      Concorde & Hilton 通过 Agoda 预订 · Days Hotel 通过 Booking.com 预订 · 全部可免费取消
-    </p>
-    <p style="font-size:13px;margin-bottom:14px;">
-      <a href="hotel-vote.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">📊 三家酒店详细对比 &amp; 大家来投票 →</a>
-    </p>
-
-    <div class="hotel-grid">
-
-      <!-- Hotel 1 - KL -->
-      <div class="hotel-card">
-        <div class="hotel-img-wrap">
-          <img src="https://dimg04.c-ctrip.com/images/0201c1200087625mq90F4_R_600_360_R5_Q70.jpg" alt="Concorde Hotel Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hotel-name">🏨 吉隆坡凯煌酒店（Concorde Hotel KL）<span class="star">★★★★</span></div>
-        <div class="hotel-addr">Jalan Sultan Ismail, 50250 吉隆坡城中城 · ☎ +60321442200</div>
-        <div class="hotel-tags">
-          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
-          <span class="hotel-tag hotel-tag-blue">双人早餐</span>
-          <span class="hotel-tag hotel-tag-blue">健身中心</span>
-          <span class="hotel-tag hotel-tag-blue">停车服务</span>
-        </div>
-        <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>Superior Twin × 8间</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
-          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房</div>
-          <div class="hotel-detail-item"><strong>Booking ID：</strong>1731415555</div>
-        </div>
-        <div class="hotel-price">
-          <div><span class="amount">CNY 17,360</span><br><span class="per">全8间4晚总价 · 7月30日扣款</span></div>
-          <span class="hotel-free">免费取消</span>
-        </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月1日前可免费取消</div>
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/993095.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
-      </div>
-
-      <!-- Hotel 2 - KL -->
-      <div class="hotel-card">
-        <div class="hotel-img-wrap">
-          <img src="https://dimg04.c-ctrip.com/images/1mc1r12000sg9hx7x59AD_R_600_360_R5_Q70.jpg" alt="Hilton Garden Inn Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hotel-name">🏨 吉隆坡东姑阿都拉曼希尔顿花园酒店南店（Hilton Garden Inn KL）<span class="star">★★★</span></div>
-        <div class="hotel-addr">No. 452 Jalan Tuanku Abdul Rahman, 50100 秋杰/太子世界贸易中心</div>
-        <div class="hotel-tags">
-          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
-          <span class="hotel-tag hotel-tag-blue">早餐</span>
-          <span class="hotel-tag hotel-tag-yellow">KL Tower View</span>
-        </div>
-        <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>Twin Deluxe（吉隆坡塔景观）× 8间</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
-          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房</div>
-          <div class="hotel-detail-item"><strong>Booking ID：</strong>1731474738</div>
-        </div>
-        <div class="hotel-price">
-          <div><span class="amount">CNY 15,960</span><br><span class="per">全8间4晚总价 · 8月2日扣款</span></div>
-          <span class="hotel-free">免费取消</span>
-        </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月4日前可免费取消</div>
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/19679850.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
-      </div>
-
-      <!-- Hotel 3 - KL -->
-      <div class="hotel-card">
-        <div class="hotel-img-wrap">
-          <img src="https://dimg04.c-ctrip.com/images/1mc5n12000dwif9xgCC2D_R_600_360_R5_Q70.jpg" alt="Days Hotel by Wyndham Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hotel-name">🏨 吉隆坡温德姆戴斯酒店（陈秀莲地铁站店）（Days Hotel & Suites by Wyndham KL） <span class="star">★★★</span></div>
-        <div class="hotel-addr">Kompleks Metro Pudu, Jalan Metro Pudu, 55200 吉隆坡 · ☎ +60 3-9232 7888</div>
-        <div class="hotel-tags">
-          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
-          <span class="hotel-tag hotel-tag-blue">含早餐</span>
-          <span class="hotel-tag hotel-tag-purple">近地铁站</span>
-          <span class="hotel-tag hotel-tag-yellow">Booking.com</span>
-        </div>
-        <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>超豪华双床套房（禁烟）× 8间</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
-          <div class="hotel-detail-item"><strong>订单号：</strong>6735522593</div>
-          <div class="hotel-detail-item"><strong>PIN：</strong>5257（勿泄露）</div>
-        </div>
-        <div class="hotel-price">
-          <div><span class="amount">CNY 12,660</span><br><span class="per">全8间4晚含税总价 · 自动扣款</span></div>
-          <span class="hotel-free">免费取消</span>
-        </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月2日 23:59前免费 · 之后取消收 MYR 232.01/间</div>
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/23971407.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
-      </div>
-
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>🏨 酒店住宿概览</span>
+      <a href="hotels.html" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:linear-gradient(135deg,#e84393,#fd79a8);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">🏨 查看详情 →</a>
     </div>
-
-    <!-- ===== 槟城酒店 ===== -->
-    <h3 style="font-size:15px;font-weight:700;color:#e84393;margin-top:24px;margin-bottom:10px;">📍 槟城（8/8入住 → 8/13退房 · 5晚）</h3>
-
-    <div class="hotel-grid">
-      <div class="hotel-card">
-        <div class="hotel-img-wrap">
-          <img src="https://dimg04.c-ctrip.com/images/02325224x93gzn8zf83E9_R_600_360_R5_Q70.jpg" alt="Tanjung Point Residences" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hotel-name">🏡 丹绒点公寓（Tanjung Point Residences）<span class="star">★★★★</span></div>
-        <div class="hotel-addr">508, Jln Tanjung Tokong, Tanjung Bungah, 10470 槟城 · ☎ +60-4-6091331</div>
-        <div class="hotel-tags">
-          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
-          <span class="hotel-tag hotel-tag-blue">海景公寓</span>
-          <span class="hotel-tag hotel-tag-purple">无边泳池</span>
-          <span class="hotel-tag hotel-tag-blue">厨房设施</span>
-        </div>
-        <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>三卧公寓（3室3卫）× <strong>4间</strong></div>
-          <div class="hotel-detail-item"><strong>可住：</strong>最多6人/间 · 无早餐</div>
-          <div class="hotel-detail-item"><strong>到店付：</strong>MYR 40（文化遗产费）</div>
-          <div class="hotel-detail-item"><strong>订单号：</strong>1128148236718373</div>
-        </div>
-        <div class="hotel-price">
-          <div><span class="amount">CNY 12,448.40</span><br><span class="per">4间5晚总价 · 已支付</span></div>
-          <span class="hotel-free">免费取消</span>
-        </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年7月25日 23:59前免费 · 之后取消收 CNY 2,628.24</div>
-
-        <!-- Video -->
-        <div style="margin-top:12px;border-radius:12px;overflow:hidden;background:#000;">
-          <video controls preload="metadata" style="width:100%;display:block;max-height:200px;">
-            <source src="penang-apartment.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">🎥 酒店房间实拍视频</div>
-
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/24011126.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
+    <div class="hotel-summary">
+      <div class="hotel-summary-item">
+        <div class="h-city">📍 吉隆坡（4晚）</div>
+        <div class="h-name">凯煌酒店 Concorde Hotel</div>
+        <div class="h-price">MYR 11,121</div>
+      </div>
+      <div class="hotel-summary-item">
+        <div class="h-city">📍 吉隆坡（4晚备选）</div>
+        <div class="h-name">希尔顿花园酒店 / 温德姆戴斯</div>
+        <div class="h-price">CNY 15,960 / 12,660</div>
+      </div>
+      <div class="hotel-summary-item">
+        <div class="h-city">📍 槟城（5晚）</div>
+        <div class="h-name">丹绒点公寓 Tanjung Point</div>
+        <div class="h-price">CNY 12,448</div>
+      </div>
+      <div class="hotel-summary-item" style="display:flex;flex-direction:column;justify-content:center;">
+        <a href="hotel-vote.html" style="display:inline-block;padding:8px 16px;background:linear-gradient(135deg,#e84393,#fd79a8);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">📊 对比投票</a>
       </div>
     </div>
   </div>
 
-  <!-- ===== 预算参考 ===== -->
-  <div class="card">
-    <div class="card-title">💰 预算参考</div>
-    <div class="budget-wrap">
-      <table class="budget-table">
-        <tr><th>项目</th><th>人均费用</th><th>备注</th></tr>
-        <tr><td>✈️ 机票</td><td>3,000</td><td>MH389（浦东→吉隆坡）+ MH386（吉隆坡→浦东）</td></tr>
-        <tr><td>🚐 全程包车&导游</td><td>1,868</td><td>吉隆坡包车 + 马六甲一日 + 转战槟城途经怡保</td></tr>
-        <tr><td>🏨 吉隆坡酒店（5天4晚）</td><td>1,218</td><td>Concorde / Hilton Garden Inn / Days Hotel（已预订·免费取消）</td></tr>
-        <tr><td>🏨 槟城酒店（6天5晚）</td><td>778</td><td>丹绒点公寓三卧公寓×4间（已预订·免费取消）</td></tr>
-        <tr><td>🍜 餐费</td><td>1,300</td><td>10天全程（吉隆坡+槟城）</td></tr>
-        <tr><td>🎫 游玩费用（门票等）</td><td>800</td><td>黑风洞·马六甲·升旗山·极乐寺·娘惹博物馆等</td></tr>
-        <tr><td>🛡️ 保险</td><td>400</td><td>旅游意外险</td></tr>
-        <tr class="total-row"><td><strong>合计/人</strong></td><td><strong>约 9,364</strong></td><td>不含个人购物及其他消费</td></tr>
-      </table>
+  <!-- ===== 费用概览 ===== -->
+  <a href="budget.html" class="card" style="display:block;text-decoration:none;color:var(--text-primary);transition:all 0.2s;">
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>💰 费用预算</span>
+      <span style="font-size:13px;color:#6c5ce7;font-weight:600;">查看明细 →</span>
     </div>
-  </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <div style="text-align:center;padding:10px 20px;background:var(--accent-light);border-radius:12px;">
+        <div style="font-size:11px;color:var(--text-secondary);">人均预算</div>
+        <div style="font-size:22px;font-weight:800;color:#e53e3e;">9,355 元</div>
+      </div>
+      <div style="text-align:center;padding:10px 20px;background:var(--accent-light);border-radius:12px;">
+        <div style="font-size:11px;color:var(--text-secondary);">全团19人</div>
+        <div style="font-size:22px;font-weight:800;color:#2d1b69;">~215K 元</div>
+      </div>
+      <div style="text-align:center;padding:10px 20px;background:var(--accent-light);border-radius:12px;">
+        <div style="font-size:11px;color:var(--text-secondary);">合同费用</div>
+        <div style="font-size:22px;font-weight:800;color:#e53e3e;">37,496 元</div>
+      </div>
+    </div>
+  </a>
 
-  <!-- ===== 实用贴士 ===== -->
-  <div class="card">
-    <div class="card-title">💡 实用贴士</div>
-    <div class="tip-box">
-      <h4>📌 签证与入境</h4>
-      <p>马来西亚对中国公民免签30天，出发前3天在线填写MDAC电子入境卡即可。</p>
+  <!-- ===== 合同概览 ===== -->
+  <a href="contract.html" class="card" style="display:block;text-decoration:none;color:var(--text-primary);transition:all 0.2s;">
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>📋 旅行社合同</span>
+      <span style="font-size:13px;color:#6c5ce7;font-weight:600;">查看详情 →</span>
     </div>
-    <div class="tip-box">
-      <h4>💰 货币与消费</h4>
-      <p>马来西亚使用令吉（MYR），1 MYR ≈ 1.6 CNY。吉隆坡消费约上海0.7倍，槟城美食一餐15-30元。</p>
+    <div style="background:linear-gradient(135deg,#2d1b69,#6c5ce7);border-radius:12px;padding:14px;color:#fff;margin-bottom:10px;">
+      <div style="font-size:14px;font-weight:600;">寰宇纵横国际旅行社（山东）有限公司青岛分公司</div>
+      <div style="font-size:12px;opacity:0.8;">许可证：L-SD-CJ00157 · 电子合同：ECSD260601L1H7MS</div>
     </div>
-    <div class="tip-box">
-      <h4>🌤️ 气候与穿着</h4>
-      <p>7-8月旱季（25-33°C），吉隆坡室内空调充足。雨季偶有阵雨，带一把雨伞。</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px;">
+      <span style="background:var(--accent-light);padding:4px 12px;border-radius:8px;">✅ 2026年6月1日签署</span>
+      <span style="background:var(--accent-light);padding:4px 12px;border-radius:8px;">👥 朱兴业（全团19人）</span>
+      <span style="background:var(--accent-light);padding:4px 12px;border-radius:8px;">💰 总价 37,496 元</span>
+      <span style="background:var(--accent-light);padding:4px 12px;border-radius:8px;">🚐 31座包车10天</span>
     </div>
-    <div class="tip-box">
-      <h4>📱 通讯</h4>
-      <p>提前淘宝买马来西亚旅游SIM卡（约30-50元），或开通国际漫游。</p>
-    </div>
-    <div class="tip-box">
-      <h4>🔌 电源</h4>
-      <p>英标三脚插头（品字形），电压220-240V。建议带2-3个万能转换插头。</p>
-    </div>
-    <div class="tip-box">
-      <h4>👨‍👩‍👧‍👦 家庭出行</h4>
-      <p><strong>老人：</strong>景点平坦不累，打车方便。<strong>小孩：</strong>黑风洞看猴子、双子塔夜景、升旗山缆车——孩子会超开心！</p>
-    </div>
-  </div>
+  </a>
 
-  <!-- ===== 行李清单 ===== -->
-  <div class="card">
-    <div class="card-title">🎒 行李清单</div>
-    <div class="packing-grid">
-      <div class="packing-col">
-        <h4>👕 衣物类</h4>
-        <label class="packing-item"><input type="checkbox"> T恤/短袖（各4-5件）</label>
-        <label class="packing-item"><input type="checkbox"> 薄长裤/裙子</label>
-        <label class="packing-item"><input type="checkbox"> 薄外套（飞机+商场冷气）</label>
-        <label class="packing-item"><input type="checkbox"> 泳衣（酒店泳池）</label>
-        <label class="packing-item"><input type="checkbox"> 防晒衣/遮阳帽</label>
-        <label class="packing-item"><input type="checkbox"> 运动鞋+拖鞋</label>
-      </div>
-      <div class="packing-col">
-        <h4>🧴 日用</h4>
-        <label class="packing-item"><input type="checkbox"> 高倍防晒霜</label>
-        <label class="packing-item"><input type="checkbox"> 防蚊液/防蚊贴</label>
-        <label class="packing-item"><input type="checkbox"> 万能转换插头（英标）</label>
-        <label class="packing-item"><input type="checkbox"> 充电宝</label>
-        <label class="packing-item"><input type="checkbox"> 雨伞</label>
-      </div>
-      <div class="packing-col">
-        <h4>📄 证件</h4>
-        <label class="packing-item"><input type="checkbox"> 护照（有效期6个月以上）</label>
-        <label class="packing-item"><input type="checkbox"> MDAC电子入境卡</label>
-        <label class="packing-item"><input type="checkbox"> 机票行程单</label>
-        <label class="packing-item"><input type="checkbox"> 酒店预订确认单</label>
-        <label class="packing-item"><input type="checkbox"> 旅游保险单</label>
-      </div>
-      <div class="packing-col">
-        <h4>💊 药品</h4>
-        <label class="packing-item"><input type="checkbox"> 肠胃药/止泻药</label>
-        <label class="packing-item"><input type="checkbox"> 感冒药/退烧药</label>
-        <label class="packing-item"><input type="checkbox"> 创可贴</label>
-        <label class="packing-item"><input type="checkbox"> 老人常用药（带足量）</label>
-        <label class="packing-item"><input type="checkbox"> 口罩/湿纸巾</label>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== Comment ===== -->
+  <!-- ===== 留言板 ===== -->
   <div class="section" id="sec-comment">
     <div class="comment-card">
       <h3>💬 大家来说说</h3>

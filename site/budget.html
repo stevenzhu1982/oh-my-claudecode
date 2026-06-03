@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026暑假 · 费用明细</title>
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card-bg: #fffcf5;
+  --text-primary: #5a3e2b;
+  --text-secondary: #8b7355;
+  --accent: #e8934a;
+  --accent-light: #fef0e0;
+  --border: #e8d5b5;
+  --shadow: rgba(180, 140, 100, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #2d1b69 0%, #6c5ce7 30%, #e84393 60%, #2b6cb0 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.1;
+  animation: heroZoom 25s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,27,105,0.88) 0%, rgba(108,92,231,0.78) 50%, rgba(43,108,176,0.92) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-emoji {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.hero p {
+  font-size: clamp(15px, 2.5vw, 19px);
+  color: rgba(255,255,255,0.8);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.hero-wave {
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23fdf8f0'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+  margin-bottom: 24px;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--border);
+}
+
+/* ===== Section ===== */
+.section { margin-bottom: 28px; }
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.section-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ===== Highlight Banner ===== */
+.highlight {
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.highlight .emoji { font-size: 40px; display: block; margin-bottom: 10px; }
+.highlight h3 { font-size: 22px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
+.highlight p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
+
+/* ===== Back Link ===== */
+.back-link { display:inline-flex; align-items:center; gap:6px; color:#6c5ce7; text-decoration:none; font-weight:600; font-size:14px; margin-bottom:16px; }
+.back-link:hover { text-decoration:underline; }
+
+/* ===== Summary Cards ===== */
+.summary-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.summary-card { background:var(--card-bg); border:2px solid var(--border); border-radius:16px; padding:16px; text-align:center; }
+.summary-card .num { font-size:24px; font-weight:800; color:#2d1b69; }
+.summary-card .label { font-size:12px; color:var(--text-secondary); margin-top:2px; }
+
+/* ===== Per-Person Rows ===== */
+.per-person-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); font-size:14px; }
+.per-person-row:last-child { border-bottom:none; }
+.person-name { color:var(--text-primary); font-weight:600; }
+.person-amount { color:#e53e3e; font-weight:700; }
+
+/* ===== Budget Table ===== */
+.budget-wrap { overflow-x: auto; border-radius: 12px; border: 2px solid var(--border); }
+.budget-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 500px; }
+.budget-table th { padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); background: #f7fafc; color: #2d3748; font-weight: 700; }
+.budget-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); color: #4a5568; }
+.budget-table tr:last-child td { border-bottom: none; }
+.budget-table .total-row td { background: #fffaf0; font-weight: 700; color: var(--text-primary); }
+
+/* ===== Footer ===== */
+.footer { text-align: center; padding: 32px 16px; color: var(--text-secondary); font-size: 13px; }
+.footer::before {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: var(--border);
+  margin: 0 auto 16px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .hero { min-height: 70vh; }
+  .hero-emoji { font-size: 48px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 65vh; }
+  .hero-emoji { font-size: 40px; }
+  .hero h1 { font-size: clamp(20px, 5vw, 22px); }
+  .hero p { font-size: 14px; }
+  .summary-cards { grid-template-columns:1fr; }
+  .budget-table { min-width: 400px; font-size: 12px; }
+  .highlight { padding: 20px 16px; }
+  .container { padding: 0 12px; }
+}
+@media (max-width: 380px) {
+  .hero { min-height: 60vh; }
+  .hero-emoji { font-size: 32px; }
+  .hero h1 { font-size: 18px; }
+  .budget-table { min-width: 280px; font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-emoji">💰</span>
+    <h1>费用明细</h1>
+    <p>全程10天9晚 · 马来西亚亲子游预算</p>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<div class="container">
+
+  <!-- ===== Back Link ===== -->
+  <a href="index.html" class="back-link">← 返回主页</a>
+
+  <!-- ===== Summary Cards ===== -->
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="num">9,355 元</div>
+      <div class="label">人均预算</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">177,745 元</div>
+      <div class="label">全团19人合计</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">37,496 元</div>
+      <div class="label">合同费用（包车+导服）</div>
+    </div>
+    <div class="summary-card">
+      <div class="num">~215,241 元</div>
+      <div class="label">总预算</div>
+    </div>
+  </div>
+
+  <!-- ===== Budget Table ===== -->
+  <div class="card">
+    <div class="card-title">💰 费用明细（人均）</div>
+    <div class="budget-wrap">
+      <table class="budget-table">
+        <tr><th>项目</th><th>人均费用</th><th>备注</th></tr>
+        <tr><td>✈️ 机票</td><td>3,000</td><td>MH389（浦东→吉隆坡）+ MH386（吉隆坡→浦东）</td></tr>
+        <tr><td>🚐 全程包车&导游</td><td>1,868</td><td>全程10天包车 · 市区/马六甲/云顶/怡保/槟城</td></tr>
+        <tr><td>🏨 吉隆坡酒店（5天4晚）</td><td>1,209</td><td>凯煌酒店 Concorde Hotel KL（降价后Agoda重新预订 · 免费取消）</td></tr>
+        <tr><td>🏨 槟城酒店（6天5晚）</td><td>778</td><td>丹绒点公寓三卧公寓×4间（已预订·免费取消）</td></tr>
+        <tr><td>🍜 餐费</td><td>1,300</td><td>10天全程（吉隆坡+槟城）</td></tr>
+        <tr><td>🎫 游玩费用（门票等）</td><td>800</td><td>黑风洞·马六甲·升旗山·极乐寺·娘惹博物馆等</td></tr>
+        <tr><td>🛡️ 保险</td><td>400</td><td>旅游意外险</td></tr>
+        <tr class="total-row"><td><strong>合计/人</strong></td><td><strong>约 9,355</strong></td><td>不含个人购物及其他消费</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== Contract Fee Breakdown ===== -->
+  <div class="card">
+    <div class="card-title">📋 合同费用明细</div>
+    <div style="background:linear-gradient(135deg,#2d1b69,#6c5ce7);border-radius:12px;padding:16px;color:#fff;margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">寰宇纵横国际旅行社（山东）有限公司青岛分公司</div>
+      <div style="font-size:11px;opacity:0.8;">许可证：L-SD-CJ00157（出境旅游业务资质）</div>
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">🚐 包车费（全程31座车，10天）</td><td style="text-align:right;font-weight:600;">17,600 MYR × 1.74 = 30,624 元</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">👩‍💼 导服费（8天）</td><td style="text-align:right;font-weight:600;">350 MYR × 1.74 × 8 = 4,872 元</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">📋 服务费</td><td style="text-align:right;font-weight:600;">2,000 元</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">🎎 赠送境外旅游意外险</td><td style="text-align:right;font-weight:600;color:#38a169;">19份 · 免费</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 0;">📄 代办出入境卡填写</td><td style="text-align:right;font-weight:600;color:#38a169;">19份 · 免费</td></tr>
+      <tr style="background:var(--accent-light);"><td style="padding:10px 0;font-weight:700;">💰 合同总价</td><td style="text-align:right;font-weight:800;font-size:18px;color:#e53e3e;">37,496 元</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== Per-Person Cost Breakdown ===== -->
+  <div class="card">
+    <div class="card-title">👨‍👩‍👧‍👦 各家庭费用估算</div>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">包车费按18人分摊（司机不算），导服费同样按18人分摊。合同费用（37,496元）由18人分担，每人约2,083元。</p>
+    <div class="per-person-row">
+      <span class="person-name">第一组 · 朱兴业家（5人）</span>
+      <span class="person-amount">46,775 + 10,416 ≈ 57,191 元</span>
+    </div>
+    <div class="per-person-row">
+      <span class="person-name">第二组 · 李园如家（4人）</span>
+      <span class="person-amount">37,420 + 8,332 ≈ 45,752 元</span>
+    </div>
+    <div class="per-person-row">
+      <span class="person-name">第三组 · 王建忠家（5人）</span>
+      <span class="person-amount">46,775 + 10,416 ≈ 57,191 元</span>
+    </div>
+    <div class="per-person-row">
+      <span class="person-name">第四组 · 张耀兴家（5人）</span>
+      <span class="person-amount">46,775 + 10,416 ≈ 57,191 元</span>
+    </div>
+  </div>
+
+  <!-- ===== Note ===== -->
+  <div class="card" style="background:#fef3c7;border-color:#fde68a;">
+    <p style="font-size:13px;color:#92400e;line-height:1.7;">
+      📌 <strong>以上为估算费用</strong>，不含个人购物及其他消费。合同费用中机票、酒店由各家庭自行承担。
+    </p>
+  </div>
+
+</div>
+
+<div class="footer">✈️ 2026暑假 · 马来西亚亲子游 · 费用明细</div>
+
+</body>
+</html>

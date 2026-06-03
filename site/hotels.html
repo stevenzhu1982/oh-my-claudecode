@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026暑假 · 酒店住宿</title>
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card-bg: #fffcf5;
+  --text-primary: #5a3e2b;
+  --text-secondary: #8b7355;
+  --accent: #e8934a;
+  --accent-light: #fef0e0;
+  --border: #e8d5b5;
+  --shadow: rgba(180, 140, 100, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 780px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #2d1b69 0%, #6c5ce7 30%, #e84393 60%, #2b6cb0 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.1;
+  animation: heroZoom 25s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,27,105,0.88) 0%, rgba(108,92,231,0.78) 50%, rgba(43,108,176,0.92) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-emoji {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.hero p {
+  font-size: clamp(15px, 2.5vw, 19px);
+  color: rgba(255,255,255,0.8);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.hero-wave {
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23fdf8f0'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+
+/* ===== Section ===== */
+.section { margin-bottom: 28px; }
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.section-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ===== Card ===== */
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+  margin-bottom: 24px;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--border);
+}
+
+/* ===== Hotel Card ===== */
+.hotel-grid { display: flex; flex-direction: column; gap: 16px; }
+.hotel-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  transition: all 0.2s;
+}
+.hotel-card:hover { border-color: var(--accent); }
+.hotel-img-wrap {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #f0ebe5;
+}
+.hotel-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.hotel-name { font-size: 16px; font-weight: 700; color: #2d1b69; }
+.hotel-name .star { color: #f59e0b; font-size: 14px; }
+.hotel-addr { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.hotel-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 8px 0; }
+.hotel-tag {
+  font-size: 11px; padding: 2px 10px; border-radius: 8px; font-weight: 600;
+}
+.hotel-tag-green { background: #d4edda; color: #0e5e1e; }
+.hotel-tag-blue { background: #dbeafe; color: #1e40af; }
+.hotel-tag-yellow { background: #fef3c7; color: #92400e; }
+.hotel-tag-purple { background: #ede9fe; color: #5b21b6; }
+.hotel-detail { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.hotel-detail-item { font-size: 12px; color: #4a5568; }
+.hotel-detail-item strong { color: var(--text-primary); }
+.hotel-price {
+  margin-top: 10px; padding: 10px 14px; background: var(--accent-light); border-radius: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.hotel-price .amount { font-size: 18px; font-weight: 800; color: #e53e3e; }
+.hotel-price .per { font-size: 11px; color: var(--text-secondary); }
+.hotel-cancel {
+  margin-top: 6px; font-size: 12px; color: #38a169; font-weight: 600;
+}
+.hotel-free { display: inline-block; padding: 1px 8px; border-radius: 6px; background: #d4edda; color: #0e5e1e; font-size: 11px; font-weight: 700; margin-left: 4px; }
+.hotel-booking-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 600; color: #2d1b69; text-decoration: none; padding: 6px 14px; border-radius: 8px; background: #ede9fe; transition: all 0.2s; }
+.hotel-booking-link:hover { background: #6c5ce7; color: #fff; }
+
+/* ===== Back Link ===== */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #6c5ce7;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.back-link:hover { text-decoration: underline; }
+
+/* ===== Highlight Banner ===== */
+.highlight {
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 24px;
+}
+.highlight .emoji { font-size: 40px; display: block; margin-bottom: 10px; }
+.highlight h3 { font-size: 22px; font-weight: 800; letter-spacing: 2px; margin-bottom: 6px; }
+.highlight p { font-size: 14px; opacity: 0.85; line-height: 1.7; }
+
+/* ===== Footer ===== */
+.footer { text-align: center; padding: 32px 16px; color: var(--text-secondary); font-size: 13px; }
+.footer::before {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: var(--border);
+  margin: 0 auto 16px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .hero { min-height: 70vh; }
+  .hero-emoji { font-size: 48px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 65vh; }
+  .hero-emoji { font-size: 40px; }
+  .hero h1 { font-size: clamp(20px, 5vw, 22px); }
+  .hero p { font-size: 14px; }
+  .section-header h2 { font-size: 18px; }
+  .hotel-detail { grid-template-columns: 1fr; }
+  .hotel-img-wrap { height: 140px; }
+  .container { padding: 0 12px; }
+}
+@media (max-width: 380px) {
+  .hero { min-height: 60vh; }
+  .hero-emoji { font-size: 32px; }
+  .hero h1 { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-emoji">🏨</span>
+    <h1>酒店住宿</h1>
+    <p>吉隆坡 · 槟城 · 已预订酒店详情</p>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<div class="container">
+
+  <!-- ===== Back Link ===== -->
+  <div style="padding-top: 24px;">
+    <a href="index.html" class="back-link">← 返回主页</a>
+  </div>
+
+  <!-- ===== Note ===== -->
+  <div style="padding: 14px 18px; background: var(--accent-light); border-radius: 12px; margin-bottom: 24px; font-size: 13px; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+    <span>最终确定入住酒店后，其他选项将移除。</span>
+    <a href="hotel-vote.html" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">→ 查看对比投票</a>
+  </div>
+
+  <!-- ===== 酒店预订 ===== -->
+  <div class="card">
+    <div class="card-title">🏨 已预订酒店（吉隆坡 + 槟城）</div>
+
+    <h3 style="font-size:15px;font-weight:700;color:#2d1b69;margin-bottom:10px;">📍 吉隆坡（8/4入住 → 8/8退房 · 4晚）</h3>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">
+      Concorde & Hilton 通过 Agoda 预订 · Days Hotel 通过 Booking.com 预订 · 全部可免费取消
+    </p>
+    <p style="font-size:13px;margin-bottom:14px;">
+      <a href="hotel-vote.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">📊 三家酒店详细对比 &amp; 大家来投票 →</a>
+    </p>
+
+    <div class="hotel-grid">
+
+      <!-- Hotel 1 - KL -->
+      <div class="hotel-card">
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/0201c1200087625mq90F4_R_600_360_R5_Q70.jpg" alt="Concorde Hotel Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏨 吉隆坡凯煌酒店（Concorde Hotel KL）<span class="star">★★★★</span></div>
+        <div class="hotel-addr">Jalan Sultan Ismail, 50250 吉隆坡城中城 · ☎ +60321442200</div>
+        <div class="hotel-tags">
+          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
+          <span class="hotel-tag hotel-tag-blue">双人早餐</span>
+          <span class="hotel-tag hotel-tag-blue">健身中心</span>
+          <span class="hotel-tag hotel-tag-blue">停车服务</span>
+        </div>
+        <div class="hotel-detail">
+          <div class="hotel-detail-item"><strong>房型：</strong>Deluxe Twin（优惠-5%）× 8间</div>
+          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
+          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房·安静房</div>
+          <div class="hotel-detail-item"><strong>Booking ID：</strong>1733461759</div>
+        </div>
+        <div class="hotel-price">
+          <div><span class="amount">MYR 11,121.20</span><br><span class="per">约CNY 19,351 · 全8间4晚总价（降价后重新预订）</span></div>
+          <span class="hotel-free">免费取消</span>
+        </div>
+        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月1日前可免费取消 · Agoda预订</div>
+        <a class="hotel-booking-link" href="https://www.agoda.com/concorde-hotel-kuala-lumpur/hotel/kuala-lumpur-my.html" target="_blank" rel="noopener">🔗 在Agoda查看详情 →</a>
+      </div>
+
+      <!-- Hotel 2 - KL -->
+      <div class="hotel-card">
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/1mc1r12000sg9hx7x59AD_R_600_360_R5_Q70.jpg" alt="Hilton Garden Inn Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏨 吉隆坡东姑阿都拉曼希尔顿花园酒店南店（Hilton Garden Inn KL）<span class="star">★★★</span></div>
+        <div class="hotel-addr">No. 452 Jalan Tuanku Abdul Rahman, 50100 秋杰/太子世界贸易中心</div>
+        <div class="hotel-tags">
+          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
+          <span class="hotel-tag hotel-tag-blue">早餐</span>
+          <span class="hotel-tag hotel-tag-yellow">KL Tower View</span>
+        </div>
+        <div class="hotel-detail">
+          <div class="hotel-detail-item"><strong>房型：</strong>Twin Deluxe（吉隆坡塔景观）× 8间</div>
+          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
+          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房</div>
+          <div class="hotel-detail-item"><strong>Booking ID：</strong>1731474738</div>
+        </div>
+        <div class="hotel-price">
+          <div><span class="amount">CNY 15,960</span><br><span class="per">全8间4晚总价 · 8月2日扣款</span></div>
+          <span class="hotel-free">免费取消</span>
+        </div>
+        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月4日前可免费取消</div>
+        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/19679850.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
+      </div>
+
+      <!-- Hotel 3 - KL -->
+      <div class="hotel-card">
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/1mc5n12000dwif9xgCC2D_R_600_360_R5_Q70.jpg" alt="Days Hotel by Wyndham Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏨 吉隆坡温德姆戴斯酒店（陈秀莲地铁站店）（Days Hotel & Suites by Wyndham KL） <span class="star">★★★</span></div>
+        <div class="hotel-addr">Kompleks Metro Pudu, Jalan Metro Pudu, 55200 吉隆坡 · ☎ +60 3-9232 7888</div>
+        <div class="hotel-tags">
+          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
+          <span class="hotel-tag hotel-tag-blue">含早餐</span>
+          <span class="hotel-tag hotel-tag-purple">近地铁站</span>
+          <span class="hotel-tag hotel-tag-yellow">Booking.com</span>
+        </div>
+        <div class="hotel-detail">
+          <div class="hotel-detail-item"><strong>房型：</strong>超豪华双床套房（禁烟）× 8间</div>
+          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
+          <div class="hotel-detail-item"><strong>订单号：</strong>6735522593</div>
+          <div class="hotel-detail-item"><strong>PIN：</strong>5257（勿泄露）</div>
+        </div>
+        <div class="hotel-price">
+          <div><span class="amount">CNY 12,660</span><br><span class="per">全8间4晚含税总价 · 自动扣款</span></div>
+          <span class="hotel-free">免费取消</span>
+        </div>
+        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月2日 23:59前免费 · 之后取消收 MYR 232.01/间</div>
+        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/23971407.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
+      </div>
+
+    </div>
+
+    <!-- ===== 槟城酒店 ===== -->
+    <h3 style="font-size:15px;font-weight:700;color:#e84393;margin-top:24px;margin-bottom:10px;">📍 槟城（8/8入住 → 8/13退房 · 5晚）</h3>
+
+    <div class="hotel-grid">
+      <div class="hotel-card">
+        <div class="hotel-img-wrap">
+          <img src="https://dimg04.c-ctrip.com/images/02325224x93gzn8zf83E9_R_600_360_R5_Q70.jpg" alt="Tanjung Point Residences" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="hotel-name">🏡 丹绒点公寓（Tanjung Point Residences）<span class="star">★★★★</span></div>
+        <div class="hotel-addr">508, Jln Tanjung Tokong, Tanjung Bungah, 10470 槟城 · ☎ +60-4-6091331</div>
+        <div class="hotel-tags">
+          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
+          <span class="hotel-tag hotel-tag-blue">海景公寓</span>
+          <span class="hotel-tag hotel-tag-purple">无边泳池</span>
+          <span class="hotel-tag hotel-tag-blue">厨房设施</span>
+        </div>
+        <div class="hotel-detail">
+          <div class="hotel-detail-item"><strong>房型：</strong>三卧公寓（3室3卫）× <strong>4间</strong></div>
+          <div class="hotel-detail-item"><strong>可住：</strong>最多6人/间 · 无早餐</div>
+          <div class="hotel-detail-item"><strong>到店付：</strong>MYR 40（文化遗产费）</div>
+          <div class="hotel-detail-item"><strong>订单号：</strong>1128148236718373</div>
+        </div>
+        <div class="hotel-price">
+          <div><span class="amount">CNY 12,448.40</span><br><span class="per">4间5晚总价 · 已支付</span></div>
+          <span class="hotel-free">免费取消</span>
+        </div>
+        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年7月25日 23:59前免费 · 之后取消收 CNY 2,628.24</div>
+
+        <!-- Video -->
+        <div style="margin-top:12px;border-radius:12px;overflow:hidden;background:#000;">
+          <video controls preload="metadata" style="width:100%;display:block;max-height:200px;">
+            <source src="penang-apartment.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">🎥 酒店房间实拍视频</div>
+
+        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/24011126.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">🏨 2026暑假 · 马来西亚亲子游 · 酒店住宿</div>
+
+</body>
+</html>
