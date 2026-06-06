@@ -264,6 +264,104 @@ summary {
   .info-strip:hover { background: var(--accent-light); }
 }
 
+/* ===== Hotel Lightbox ===== */
+.hotel-lightbox-overlay {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.93);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.hotel-lightbox-overlay.active { display: flex; }
+.hotel-lightbox-overlay img {
+  max-width: 94vw;
+  max-height: 88vh;
+  display: block;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+.hotel-lightbox-close {
+  position: fixed;
+  top: 16px; right: 20px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 300;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+  z-index: 100000;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.2s;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.hotel-lightbox-close:hover { opacity: 1; }
+.hotel-lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 42px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.2s, background 0.2s;
+  backdrop-filter: blur(4px);
+  z-index: 100000;
+}
+.hotel-lightbox-nav:hover { opacity: 1; background: rgba(255,255,255,0.2); }
+.hotel-lightbox-prev { left: 16px; }
+.hotel-lightbox-next { right: 16px; }
+.hotel-lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 100000;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  pointer-events: none;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+.hotel-lightbox-label {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  z-index: 100000;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  pointer-events: none;
+  max-width: 80vw;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 600px) {
+  .hotel-lightbox-nav { font-size: 28px; width: 44px; height: 44px; padding: 10px; }
+  .hotel-lightbox-prev { left: 6px; }
+  .hotel-lightbox-next { right: 6px; }
+  .hotel-lightbox-close { font-size: 34px; top: 8px; right: 12px; }
+  .hotel-lightbox-counter { font-size: 13px; bottom: 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -722,7 +820,7 @@ summary {
     </div>
 
     <div style="text-align:center;margin-bottom:14px;">
-      <a href="1.jpg" target="_blank">
+      <a href="1.jpg" class="lightbox-link">
         <img src="1.jpg" alt="马来西亚2026禁烟规定" style="max-width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
       </a>
       <p style="font-size:12px;color:#999;margin-top:6px;">👆 点击放大查看</p>
@@ -978,6 +1076,107 @@ summary {
   btn.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+})();
+</script>
+
+<div id="hotel-lightbox" class="hotel-lightbox-overlay">
+  <span class="hotel-lightbox-close">&times;</span>
+  <span class="hotel-lightbox-label" id="hotel-lightbox-label"></span>
+  <button class="hotel-lightbox-nav hotel-lightbox-prev">&#8249;</button>
+  <button class="hotel-lightbox-nav hotel-lightbox-next">&#8250;</button>
+  <img id="hotel-lightbox-img" src="" alt="查看图片">
+  <span class="hotel-lightbox-counter" id="hotel-lightbox-counter"></span>
+</div>
+
+<script>
+(function() {
+  var lb = document.getElementById('hotel-lightbox');
+  if (!lb) return;
+  var img = document.getElementById('hotel-lightbox-img');
+  var counter = document.getElementById('hotel-lightbox-counter');
+  var label = document.getElementById('hotel-lightbox-label');
+  var images = [];
+  var currentIndex = 0;
+
+  function open(index) {
+    if (!images.length || index < 0 || index >= images.length) return;
+    currentIndex = index;
+    var link = images[currentIndex];
+    img.src = link.getAttribute('href');
+    counter.textContent = (currentIndex + 1) + ' / ' + images.length;
+    var href = link.getAttribute('href');
+    var name = href.split('/').pop().replace(/\.jpg$/, '').replace(/-/g, ' ');
+    label.textContent = name;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function collect() {
+    images = [];
+    document.querySelectorAll('a.lightbox-link[href*=".jpg"]').forEach(function(el) {
+      if (images.indexOf(el) === -1) images.push(el);
+    });
+    var navs = lb.querySelectorAll('.hotel-lightbox-nav');
+    navs.forEach(function(n) { n.style.display = images.length > 1 ? '' : 'none'; });
+  }
+
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a.lightbox-link');
+    if (link) {
+      e.preventDefault();
+      collect();
+      var idx = images.indexOf(link);
+      if (idx !== -1) open(idx);
+    }
+  });
+
+  var prevBtn = lb.querySelector('.hotel-lightbox-prev');
+  var nextBtn = lb.querySelector('.hotel-lightbox-next');
+  if (prevBtn) prevBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex - 1 + images.length) % images.length);
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex + 1) % images.length);
+  });
+
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb || e.target === img) close();
+  });
+
+  var closeBtn = lb.querySelector('.hotel-lightbox-close');
+  if (closeBtn) closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    close();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
+    if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
+  });
+
+  var touchStartX = 0, touchEndX = 0;
+  lb.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && nextBtn) nextBtn.click();
+      else if (prevBtn) prevBtn.click();
+    }
+  }, { passive: true });
+
+  collect();
 })();
 </script>
 
