@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>出行注意事项 · 2026暑假马来西亚亲子游</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f5f3f8;
+  color: #2d3436;
+  line-height: 1.7;
+}
+.container { max-width: 800px; margin: 0 auto; padding: 0 16px; }
+
+.header {
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7, #e84393);
+  color: #fff;
+  text-align: center;
+  padding: 36px 16px 28px;
+}
+.header h1 { font-size: 26px; font-weight: 800; letter-spacing: 1px; }
+.header .sub { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+
+.back-link {
+  display: inline-block;
+  margin: 16px 0 8px;
+  color: #6c5ce7;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+.back-link:hover { text-decoration: underline; }
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  border: 1px solid #e8e4f0;
+}
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d1b69;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed #e8e4f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alert {
+  background: linear-gradient(135deg, #fff5f5, #fff0f0);
+  border-left: 4px solid #e53e3e;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.alert .title { font-weight: 700; color: #c53030; font-size: 14px; }
+.alert p { font-size: 13px; color: #742a2a; margin-top: 4px; line-height: 1.6; }
+
+.info-box {
+  background: #f0edfe;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.info-box .title { font-weight: 700; color: #5b21b6; font-size: 14px; }
+.info-box p { font-size: 13px; color: #4a3a8a; margin-top: 3px; line-height: 1.6; }
+
+.warn-box {
+  background: #fef9ee;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-left: 3px solid #f39c12;
+}
+.warn-box .title { font-weight: 700; color: #92400e; font-size: 14px; }
+.warn-box p { font-size: 13px; color: #6b4c1a; margin-top: 3px; line-height: 1.6; }
+
+.good-box {
+  background: #e8faf4;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.good-box .title { font-weight: 700; color: #0e5e1e; font-size: 14px; }
+.good-box p { font-size: 13px; color: #1a5e2a; margin-top: 3px; line-height: 1.6; }
+
+.section-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.label-red { background: #fce4ec; color: #880e4f; }
+.label-amber { background: #fef3c7; color: #92400e; }
+.label-green { background: #d4edda; color: #0e5e1e; }
+.label-blue { background: #dbeafe; color: #1e40af; }
+.label-purple { background: #ede9fe; color: #5b21b6; }
+
+ul, ol { padding-left: 20px; }
+li { font-size: 14px; color: #4a5568; margin-bottom: 6px; line-height: 1.6; }
+li strong { color: #2d3748; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+@media (max-width: 600px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .header h1 { font-size: 20px; }
+  .card { padding: 16px; }
+}
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 出行注意事项</h1>
+  <div class="sub">2026暑假马来西亚亲子游 · 吉隆坡+马六甲+槟城 · 全员必读</div>
+</div>
+
+<div class="container">
+  <a class="back-link" href="index.html">← 返回主页</a>
+
+  <!-- ===== 文档下载 ===== -->
+  <div style="margin-bottom:16px;padding:12px 16px;background:linear-gradient(135deg,#ede9fe,#f0edfe);border-radius:12px;display:flex;align-items:center;gap:10px;">
+    <span style="font-size:24px;">📄</span>
+    <div style="flex:1;">
+      <div style="font-weight:700;color:#2d1b69;font-size:14px;">出行注意事项完整文档</div>
+      <div style="font-size:12px;color:#6b7280;">可打印/转发 · 包含全部注意事项、美食清单、打包清单等</div>
+    </div>
+    <a href="trip-notes-2026.docx" download style="background:#6c5ce7;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;white-space:nowrap;">📥 下载文档</a>
+  </div>
+
+  <!-- ===== 1. 最重要的事：炎热天气 ===== -->
+  <div class="card">
+    <div class="card-title">🌡️ 第一条：8月的马来西亚，真的非常非常热</div>
+    <div class="alert">
+      <div class="title">⚠️ 请做好充分的心理和身体准备</div>
+      <p>8月是马来西亚最热的月份之一，日间气温 28-35°C，体感温度因湿度高可达 <strong>38-42°C</strong>。你从空调房出门的那一刻，就像被热毛巾糊了一脸。这不是夸张，是每个去过的人的真实感受。</p>
+    </div>
+    <div class="grid-2">
+      <div class="warn-box">
+        <div class="title">🌞 白天户外（10:00-16:00）</div>
+        <p>暴晒指数极高，紫外线强烈。建议这个时间段安排室内活动（商场、博物馆、餐厅）。如果必须在户外，一定做好防晒措施。</p>
+      </div>
+      <div class="info-box">
+        <div class="title">🌧️ 午后阵雨</div>
+        <p>几乎每天下午会有短暂暴雨（20-60分钟），雨后反而凉爽一些。随身带伞！遇雨躲一躲就好，不用取消行程。</p>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="title">🌡️ 室内外温差极大</div>
+      <p>马来西亚空调开得非常足——商场、巴士、出租车内冷气像不要钱一样，室内可能只有18-20°C。从35°C外面走进商场，温差超过15°C，老人小孩容易感冒。<strong>一定要随身带一件薄外套！</strong></p>
+    </div>
+  </div>
+
+  <!-- ===== 2. 本次行程整体评价 ===== -->
+  <div class="card">
+    <div class="card-title">📊 行程总评：优点 vs 缺点</div>
+
+    <span class="section-label label-green">👍 优点</span>
+    <ul>
+      <li><strong>时间充裕不赶路：</strong>10天9晚，吉隆坡4晚+槟城5晚，节奏舒适，不用天天换酒店</li>
+      <li><strong>吉隆坡进槟城出不走回头路：</strong>虽然回程需经吉隆坡飞，但包车从KL到Penang中途停怡保，路线设计合理</li>
+      <li><strong>兼顾城市/文化/海滩：</strong>双子塔+马六甲历史+槟城壁画+升旗山+海滩，类型丰富</li>
+      <li><strong>机票/酒店全部已预订：</strong>马航航班已出票，KL三家酒店、槟城公寓+度假村全部已预订锁定</li>
+      <li><strong>全部可免费取消：</strong>酒店基本都有免费取消政策，灵活性高</li>
+      <li><strong>包车+导游：</strong>19人团包车出行，免去现场叫车的麻烦和沟通成本</li>
+      <li><strong>亲子友好：</strong>黑风洞看猴子、升旗山缆车、蝴蝶公园、海滩，孩子会很喜欢</li>
+      <li><strong>槟城美食天堂：</strong>各种小吃、榴莲、海鲜，吃货的天堂</li>
+    </ul>
+
+    <span class="section-label label-red" style="margin-top:14px;">👎 缺点 & 风险</span>
+    <ul>
+      <li><strong>天气炎热：</strong>上面说了，8月又热又湿，白天户外活动需谨慎</li>
+      <li><strong>Day 5转战槟城途经怡保会很累：</strong>退房→包车北上→怡保停留→再开车到槟城，全程约5-6小时车程+游玩，带着行李和老人小孩会比较疲惫</li>
+      <li><strong>19人团很难统一步调：</strong>有人想逛久一点，有人想回酒店休息，有人想吃这个有人想吃那个——这是大团出行最大的挑战。详见下方👇<strong>「多家庭出行」</strong>章节</li>
+      <li><strong>马六甲一日游行程紧凑：</strong>KL到马六甲单程1.5-2小时，当天往返，实际在景点时间有限</li>
+      <li><strong>槟城住宿两边分：</strong>丹绒点公寓（4套）和海湾度假村（8间），两家距离约3km，活动集合需协调</li>
+      <li><strong>公寓无早餐：</strong>Tanjung Point Residences不含早餐，需自行解决或去附近吃</li>
+    </ul>
+  </div>
+
+  <!-- ===== 3. 每日行程逐日提醒 ===== -->
+  <div class="card">
+    <div class="card-title">🗓️ 每日逐日提醒</div>
+
+    <div class="info-box">
+      <div class="title">📅 Day 1 — 8/4（周二）飞抵吉隆坡</div>
+      <p>15:25上海起飞，21:00到KL。注意：<strong>马航A330</strong>座位3-3-3布局，选座尽量靠过道。飞机餐只有一顿正餐+点心，自带些零食。</p>
+      <p style="margin-top:4px;">抵达后过海关+取行李约30-45分钟。马来西亚<strong>免签30天</strong>，但需提前3天在线填写 <strong>MDAC电子入境卡</strong>。打印酒店预订单和回程机票备用。</p>
+      <p style="margin-top:4px;font-weight:600;color:#e53e3e;">到酒店预计22:30-23:00，第一天就是睡觉，别安排任何活动。</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="title">📅 Day 2 — 8/5（周三）吉隆坡市区</div>
+      <p>第一天正式游玩，以市区内活动为主。上午登地标建筑俯瞰全城（建议提前网上订票），中午商场避暑，傍晚逛美食街吃晚饭。</p>
+      <p>注意：美食街环境拥挤嘈杂、地板油滑，老人走路要小心。点菜先问价格。</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="title">📅 Day 3 — 8/6（周四）马六甲包车一日游</div>
+      <p><strong>全程最晒的一天！</strong>马六甲景点基本都在户外，几乎没有遮阳。这是整趟中曝晒最严重的一天，<strong>帽子+防晒霜+水+小风扇务必带齐</strong>。</p>
+      <p>KL到马六甲单程约1.5-2h。马六甲鸡粒饭是标志性美食，一定要尝尝。</p>
+      <p style="font-weight:600;color:#e53e3e;">注意进宗教场所可能需要换长袍（门口免费提供），女士尽量穿长裤或带围巾。</p>
+    </div>
+
+    <div class="info-box">
+      <div class="title">📅 Day 4 — 8/7（周五）吉隆坡文化一日</div>
+      <p>以人文景点+逛街为主，走路偏多但景点集中。可以买手信（记得砍价，对半砍起）。</p>
+      <p>路边仿冒品多，质量一般，注意辨别。</p>
+    </div>
+
+    <div class="alert">
+      <div class="title">⚠️ 特别提醒 Day 5 — 8/8（周六）转战槟城</div>
+      <p><strong>这是全程最辛苦的一天！</strong></p>
+      <ul>
+        <li>早上退房（4晚行李全部收拾好）</li>
+        <li>包车北上约2.5h到怡保，下车走走逛逛吃午饭</li>
+        <li>怡保再开车到槟城约2h</li>
+        <li>到槟城后分两边入住：丹绒点公寓 / 海湾度假村</li>
+        <li><strong>总耗时约7-8小时，一天都在路上+游玩</strong></li>
+      </ul>
+      <p>建议：提前一天晚上收拾好大部分行李。怡保停留不用安排太多，走走吃个饭就好。到槟城后可能较晚，建议当晚简单吃点就休息。</p>
+    </div>
+
+    <div class="info-box">
+      <div class="title">📅 Day 6-8 — 槟城三天游玩</div>
+      <p><strong>Day 6（8/9）：</strong>槟城老城文化徒步，很多壁画拍照要排队，做好心理准备。娘惹博物馆非常推荐，值得慢慢看。</p>
+      <p><strong>Day 7（8/10）：</strong>上午坐缆车登山顶看全景，建议<strong>一早去（8:30开门）</strong>，人少凉快。下午参观地标寺庙。<strong>晚上榴莲夜市——槟城榴莲世界顶级，详见下方🍈美食分析！</strong></p>
+      <p><strong>Day 8（8/11）：</strong>上午参观历史建筑（需预约固定时段），下午小博物馆1-2小时逛完。</p>
+    </div>
+
+    <div class="good-box">
+      <div class="title">📅 Day 9 — 8/12（周三）海滩放松日</div>
+      <p>槟城最著名的海滩，可以玩水上项目（摩托艇、香蕉船）。注意海滩没有遮阳设施，带伞或租遮阳篷。下午推荐去一个室内景点，中午避暑很合适。</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="title">📅 Day 10 — 8/13（周四）返程</div>
+      <p>退房后大巴回吉隆坡（约4-5h车程），约14:00-15:00到KL。航班19:35起飞，预留时间退税+逛免税店。</p>
+      <p style="font-weight:600;color:#e53e3e;">航班到浦东是凌晨1:10，提前安排国内段交通。当天注意查收航司邮件可在线值机选座。</p>
+    </div>
+  </div>
+
+  <!-- ===== 4. 槟城住宿 ===== -->
+  <div class="card">
+    <div class="card-title">🏡 槟城住宿：丹绒点公寓</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <div class="info-box" style="margin-bottom:0;">
+        <div class="title">🏡 丹绒点公寓（Tanjung Point Residences）</div>
+        <p><strong>三卧公寓 × 4套</strong> · 每套3室3卫带厨房 · 最多6人</p>
+        <p style="margin-top:4px;">位置在丹绒武雅（Tanjung Bungah），介于乔治市和Batu Ferringhi之间。有海景阳台和泳池。适合家庭自炊聚会。</p>
+        <p style="margin-top:4px;"><strong>注意：</strong>不含早餐 · 到店付MYR 40文化遗产费/套 · 7月25日前免费取消 · <strong style="color:#e53e3e;">Trip.com预订（省CNY 1,483）</strong></p>
+      </div>
+      <div class="info-box" style="margin-bottom:0;">
+        <div class="title">🏖️ 海湾度假村（Bayview Beach Resort）</div>
+        <p><strong>高级双床房 × 8间</strong> · 标准酒店客房 · 2人/间</p>
+        <p style="margin-top:4px;">位于Batu Ferringhi海滩旁，步行到海边3分钟。附近有夜市和大排档。有泳池、餐厅等度假村设施。</p>
+        <p style="margin-top:4px;"><strong>注意：</strong>Agoda预订 · 入住前1天可免费取消 · No-Show全额扣款</p>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="title">📌 槟城住宿说明</div>
+      <p>本次槟城5晚预订了<strong>两种住宿</strong>：丹绒点公寓（家庭公寓式）和海湾度假村（海滩度假型）。</p>
+      <p>最终每家分到哪边、怎么分配，出发前在群里确认。两边距离约3km，Grab打车5分钟即到，白天活动不受影响。</p>
+    </div>
+  </div>
+
+  <!-- ===== 5. 实用资讯 ===== -->
+  <div class="card">
+    <div class="card-title">💰 钱 & 通讯 & 交通</div>
+
+    <div class="grid-2">
+      <div class="info-box">
+        <div class="title">💰 货币</div>
+        <p>1 MYR ≈ 1.74 CNY（按目前的汇率）。建议：<br>
+        • 国内换少量马币（约200-300RM/人）用于小摊打车<br>
+        • 带银联卡在马来西亚ATM取现（Maybank、CIMB都支持，手续费约12元/笔）<br>
+        • 支付宝/微信在大商场、便利店可用，覆盖率约60%<br>
+        • 备一张Visa/MasterCard信用卡</p>
+      </div>
+      <div class="info-box">
+        <div class="title">📱 通讯</div>
+        <p>推荐出发前在淘宝买马来西亚旅游SIM卡（30-50元），7天/10天无限流量。Hotlink、Celcom信号较好。也可以开通国际漫游（中国移动约25元/天）。</p>
+      </div>
+      <div class="info-box">
+        <div class="title">🚕 市内交通</div>
+        <p>吉隆坡：Grab打车（类似滴滴），价格便宜，从机场到KL约65-85RM。19人团建议直接用包车，省心省钱。<br>
+        槟城：Grab也很方便，短途约6-10RM。<br>
+        地铁：KL有MRT/LRT，但8月炎热天气下走一段路到地铁站就很痛苦了。</p>
+      </div>
+      <div class="info-box">
+        <div class="title">🔌 电源</div>
+        <p>英标三脚扁插头（品字形），电压220-240V。必带2-3个万能转换插头，否则手机相机充不了电。建议带一个排插方便多人同时充电。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 6. 美食分析 ===== -->
+  <div class="card">
+    <div class="card-title">🍜 美食必吃清单 · 不踩雷指南</div>
+    <p style="font-size:13px;color:#636e72;margin-bottom:12px;">马来西亚是东南亚美食大熔炉，马来/中华/印度三大风味融合，槟城更是被《Lonely Planet》评为全球最佳美食城市之一。以下是按城市分类的必吃清单：</p>
+
+    <div class="info-box">
+      <div class="title">📍 吉隆坡 · 阿罗街（Jalan Alor）</div>
+      <p>整条街全是露天大排档，<strong>步行从凯煌过去5分钟</strong>，是晚上吃饭的首选。</p>
+      <ul>
+        <li><strong>烤鸡翅</strong>（黄亚华）— 阿罗街招牌，炭火烧烤，皮脆肉嫩</li>
+        <li><strong>沙爹串（Satay）</strong>— 猪肉/鸡肉串配花生酱，必吃</li>
+        <li><strong>炒粿条（Char Kway Teow）</strong>— 马来西亚国民炒面，锅气十足</li>
+        <li><strong>魔鬼鱼（Ikan Bakar）</strong>— 蕉叶烤鱼配参巴辣椒酱</li>
+        <li><strong>烧鱼/烤海鲜</strong>— 新鲜又便宜</li>
+        <li><strong>椰子水/甘蔗汁</strong>— 解暑必备，每餐来一杯</li>
+      </ul>
+      <p style="margin-top:6px;font-weight:600;color:#e53e3e;">⚠️ 注意：阿罗街价格略高于普通大排档（旅游区），点菜先问价。地板油滑，注意脚下。</p>
+    </div>
+
+    <div class="info-box">
+      <div class="title">📍 吉隆坡 · 茨厂街（唐人街）</div>
+      <ul>
+        <li><strong>丽丰茶冰室牛肉面</strong>— 老字号，牛肉汤面配牛丸</li>
+        <li><strong>罗汉果凉茶</strong>— 清热解暑，2-3RM一杯</li>
+        <li><strong>猪肠粉/酿豆腐</strong>— 滑嫩好吃</li>
+        <li><strong>豆浆油条</strong>— 中国式早餐水准在线</li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <div class="title">📍 吉隆坡 · 其他推荐</div>
+      <ul>
+        <li><strong>新峰肉骨茶</strong>— 马来西亚必吃！药膳排骨汤配油条，汤可以免费加</li>
+        <li><strong>关夫人餐厅（Madam Kwan's）</strong>— 椰浆饭（Nasi Lemak）非常正宗，环境好适合第一次来大马的人</li>
+        <li><strong>Old Town White Coffee</strong>— 白咖啡+烤面包+半熟蛋，国民早餐</li>
+      </ul>
+    </div>
+
+    <div class="good-box" style="border-left: 4px solid #e84393;">
+      <div class="title">📍 马六甲 · 必吃（Day 3）</div>
+      <ul>
+        <li><strong>中华茶室鸡粒饭（Chicken Rice Ball）</strong>— 马六甲标志性美食！米饭捏成乒乓球大小的球，配白切鸡。和记鸡粒饭也不错</li>
+        <li><strong>娘惹叻沙（Nyonya Laksa）</strong>— 椰香咖喱米粉汤，酸辣浓郁</li>
+        <li><strong>榴莲煎蕊（Durian Cendol）</strong>— 榴莲+椰奶+冰沙+绿色粉条，甜而不腻</li>
+      </ul>
+    </div>
+
+    <div class="good-box" style="border-left: 4px solid #e84393;">
+      <div class="title">📍 槟城 · 美食天堂（重点！！）</div>
+      <p style="font-weight:600;color:#e53e3e;margin-bottom:6px;">槟城是全世界公认的美食之都，同一道菜在这里就是比其他地方好吃。以下是必吃TOP 10：</p>
+      <ul>
+        <li><strong>🥇 炒粿条（Char Kway Teow）</strong>— 槟城炒粿条是全马最好的！推荐"三条路888"或"愉园"</li>
+        <li><strong>🥇 亚参叻沙（Assam Laksa）</strong>— 酸辣鱼汤米粉，槟城独有，外地吃不到这个味。推荐"极乐寺亚参叻沙"或"Penang Road Famous Laksa"</li>
+        <li><strong>🥇 蚝煎（Oyster Omelette）</strong>— 炭火煎的才够香，配辣椒酱吃</li>
+        <li><strong>🥇 咖喱面</strong>— 浓郁椰浆咖喱汤底，配血蚶、豆腐卜、虾</li>
+        <li><strong>🥇 虾面（Hokkien Mee）</strong>— 虾壳熬出的浓郁汤底，鲜甜无比</li>
+        <li><strong>椰浆饭（Nasi Lemak）</strong>— 马来国民早餐，伴椰浆蒸饭+辣酱+小鱼干</li>
+        <li><strong>炒粿角</strong>— 萝卜糕切丁煎香，配鸡蛋芽菜</li>
+        <li><strong>红豆冰（Ais Kacang）</strong>— 解暑神器，刨冰+红豆+仙草+椰奶</li>
+        <li><strong>卤肉/五香</strong>— 槟城特有五香肉卷，炸得酥脆</li>
+        <li><strong>白咖啡</strong>— 怡保白咖啡发源，找个老咖啡店坐坐</li>
+      </ul>
+    </div>
+
+    <!-- ===== 榴莲专区 ===== -->
+    <div class="alert" style="background:linear-gradient(135deg,#fffbf0,#fef3c7);border-left-color:#d69e2e;">
+      <div class="title" style="color:#92400e;">🍈 重点：槟城榴莲——全球性价比之王</div>
+      <p style="color:#744210;"><strong>槟城的榴莲，是全世界最好也最具性价比的。</strong>没有之一。</p>
+      <p style="color:#744210;margin-top:6px;"><strong>为什么？</strong>马来西亚榴莲是<strong>树熟掉落</strong>的，不像泰国榴莲是采摘后催熟。树熟的榴莲风味更浓郁、口感更绵密、甜度更高、苦味回甘——和你在国内吃到的泰国金枕头完全是两种水果。</p>
+      <p style="color:#744210;margin-top:6px;">槟城浮罗山背（Balik Pulau）是顶级榴莲产区，猫山王、黑刺、红虾、D24、葫芦等品种应有尽有。<strong>在槟城吃一个顶级猫山王只要30-60RM（约50-100元人民币），同品质在国内要300-500元。</strong></p>
+
+      <div style="margin-top:10px;padding:12px;background:rgba(255,255,255,0.5);border-radius:10px;">
+        <p style="font-weight:700;color:#744210;font-size:14px;">🍈 榴莲品种速查表</p>
+        <table style="width:100%;font-size:12px;border-collapse:collapse;margin-top:6px;color:#744210;">
+          <tr style="border-bottom:1px solid #ecc94b;"><th style="text-align:left;padding:4px;">品种</th><th style="text-align:left;padding:4px;">特点</th><th style="text-align:left;padding:4px;">槟城价格（参考）</th></tr>
+          <tr style="border-bottom:1px solid #fef0c7;"><td style="padding:4px;"><strong>猫山王</strong></td><td style="padding:4px;">王者，苦甜浓郁，果肉金黄，口感像奶油</td><td style="padding:4px;">35-60RM/个</td></tr>
+          <tr style="border-bottom:1px solid #fef0c7;"><td style="padding:4px;"><strong>黑刺</strong></td><td style="padding:4px;">顶级品种，产量极少，比猫山王更烈</td><td style="padding:4px;">60-90RM/个</td></tr>
+          <tr style="border-bottom:1px solid #fef0c7;"><td style="padding:4px;"><strong>红虾</strong></td><td style="padding:4px;">果肉橙红，偏甜微苦，入门友好</td><td style="padding:4px;">25-40RM/个</td></tr>
+          <tr style="border-bottom:1px solid #fef0c7;"><td style="padding:4px;"><strong>D24（苏丹王）</strong></td><td style="padding:4px;">经典品种，甜而不腻</td><td style="padding:4px;">15-25RM/个</td></tr>
+          <tr><td style="padding:4px;"><strong>葫芦</strong></td><td style="padding:4px;">甜味突出，微苦，口感粘稠</td><td style="padding:4px;">20-35RM/个</td></tr>
+        </table>
+      </div>
+
+      <p style="color:#744210;margin-top:10px;"><strong>📌 去哪吃榴莲？</strong></p>
+      <ul style="color:#744210;">
+        <li><strong>榴莲夜市（Durian Festival）</strong>— 槟城每年6-8月路边到处都是榴莲档，Day 7（8/10）晚上正好安排！现场开壳现吃</li>
+        <li><strong>浮罗山背（Balik Pulau）</strong>— 榴莲爱好者的朝圣地，时间允许可以包车去产地吃，便宜到哭</li>
+        <li><strong>七条路榴莲档</strong>— 槟城市区最著名的榴莲档之一</li>
+      </ul>
+      <p style="color:#744210;margin-top:8px;font-weight:600;">⚠️ 贴士：榴莲"热气"（上火），吃的时候配山竹一起吃（山竹降火，马来西亚人都是榴莲+山竹搭配）。吃榴莲后不要喝酒。榴莲不能带进酒店室内，需在外面吃完再回房。</p>
+    </div>
+
+    <div class="warn-box" style="margin-top:12px;">
+      <div class="title">🍽️ 饮食安全（补充）</div>
+      <p>马来西亚街头小吃虽好，但也要注意：</p>
+      <ul>
+        <li>第一天先吃正规餐厅，让肠胃适应一下</li>
+        <li>随身带肠胃药（保济丸、黄连素、藿香正气液）</li>
+        <li>只喝瓶装水，不要喝自来水</li>
+        <li>槟城美食大排档推荐去"三条路""七条路""新关仔角"等有名的集中夜市，卫生相对有保障</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 7. 健康与安全 ===== -->
+  <div class="card">
+    <div class="card-title">🩺 健康 & 安全</div>
+
+<div class="warn-box">
+      <div class="title">🦟 蚊虫 & 疾病</div>
+      <p>马来西亚有登革热，虽然概率不高但注意总没错。建议：</p>
+      <ul>
+        <li>外出涂防蚊液（含避蚊胺DEET成分的有效）</li>
+        <li>晚上穿浅色长袖长裤</li>
+        <li>酒店房间注意关好纱窗</li>
+        <li>自备蚊虫叮咬后的止痒药膏</li>
+      </ul>
+    </div>
+
+  <!-- ===== 8. 各年龄人群注意事项 ===== -->
+  <div class="card">
+    <div class="card-title">👶👴 各年龄人群注意事项</div>
+    <p style="font-size:13px;color:#636e72;margin-bottom:12px;">本次出行有上有老下有小，不同年龄段的体能、耐受力、需求差异很大。以下按人群分类提醒：</p>
+
+    <!-- 老年人 -->
+    <div class="alert" style="border-left-color:#e17055;">
+      <div class="title" style="color:#c0392b;">👴 老年人（65岁以上）· 重点关注</div>
+      <p style="color:#742a2a;">8月马来西亚的高温高湿对老年人是最大的考验，以下事项务必注意：</p>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">🌡️ 防暑是第一位</p>
+      <ul style="color:#742a2a;">
+        <li>随身携带<strong>小风扇+冰感毛巾+充足饮用水</strong>，每30分钟提醒喝一次水</li>
+        <li>一旦感觉头晕、胸闷、恶心——<strong>立即停止活动，到阴凉通风处休息</strong>，不要硬撑</li>
+        <li>上午10:00-16:00尽量减少户外活动，这个时间段安排室内项目（商场、博物馆、餐厅）</li>
+        <li>建议每人备一盒<strong>藿香正气水/十滴水</strong>，有中暑前兆时立即服用</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">🚶 体力管理</p>
+      <ul style="color:#742a2a;">
+        <li>每天的步行量控制在<strong>5,000-8,000步以内</strong>，超过这个量老人第二天会很累</li>
+        <li>景点之间尽量打车/坐车，不要为了省钱让老人走远路</li>
+        <li>队伍行进中<strong>安排年轻人走在老人旁边</strong>，方便随时搀扶</li>
+        <li>每个景点安排<strong>固定休息时间</strong>，找有座位的地方坐10分钟再走</li>
+        <li>Day 5转战槟城那天对老人最辛苦（7-8小时车上+路上），提前跟老人说做好心理准备</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">💊 健康管理</p>
+      <ul style="color:#742a2a;">
+        <li><strong>慢性病药物（降压、降糖、心脏等）带足全程用量+3天余量</strong>，放在随身行李中（别托运！）</li>
+        <li>带一份<strong>中文病历摘要+药物清单</strong>（写清楚药名、剂量、用法），万一需要就医时给医生看</li>
+        <li>出发前<strong>咨询医生</strong>是否适合长途飞行和高温旅行</li>
+        <li>买旅游保险时确认<strong>覆盖老年人既往病史和医疗运送</strong></li>
+        <li>记下马来西亚的急救电话<strong>999</strong>，以及酒店附近医院地址</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">🍽️ 饮食</p>
+      <ul style="color:#742a2a;">
+        <li>老年人肠胃更敏感，建议<strong>前两天先吃正规餐厅</strong>，适应了再尝试街头小吃</li>
+        <li>避免太辣、太生冷、太油腻的食物</li>
+        <li>随身带保温杯装热水（马来西亚餐厅一般不提供热水）</li>
+        <li>榴莲虽然好吃但非常上火，老人浅尝即可，搭配山竹吃</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">👟 其他</p>
+      <ul style="color:#742a2a;">
+        <li><strong>穿防滑、透气、舒适的运动鞋</strong>，不要穿新鞋（容易磨脚）</li>
+        <li>带一根<strong>折叠登山杖或拐杖</strong>（如果需要的话），马六甲和槟城有些路面不平</li>
+        <li>马来西亚室内空调极冷（18-20°C），薄外套<strong>随时穿脱</strong>，预防感冒</li>
+        <li><strong>建议给老人配备手机或电话手表</strong>，存好家人和导游的联系方式，万一走散能联系</li>
+        <li>上厕所：马来西亚很多公共厕所收费（0.5-1RM），备些零钱。老人建议看到厕所就去一下，不要等急了再找</li>
+      </ul>
+    </div>
+
+    <!-- 小孩 -->
+    <div class="warn-box" style="border-left-color:#e84393;margin-top:16px;">
+      <div class="title" style="color:#c0392b;">👶 小孩（12岁以下）· 重点关注</div>
+      <p>对孩子来说，这次旅行是一次大开眼界的机会，但高温+长途+饮食变化对他们同样是不小的挑战：</p>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">🌡️ 防暑防晒</p>
+      <ul>
+        <li>孩子的皮肤比成人更娇嫩，<strong>SPF50+儿童专用防晒霜必带</strong>，每隔2小时补涂一次</li>
+        <li>儿童防晒帽+太阳镜+防晒衣——在户外尽量穿长袖防晒衣</li>
+        <li>孩子出汗多，容易脱水。<strong>每小时提醒喝水</strong>，带一个孩子喜欢的水壶会更有动力</li>
+        <li>孩子中暑的表现：脸红但不流汗、精神萎靡、烦躁哭闹。发现这些症状立即进空调房</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">👀 安全看护</p>
+      <ul>
+        <li><strong>人群密集的地方一定牵好孩子的手</strong>（阿罗街、茨厂街、槟城壁画街等）</li>
+        <li>建议给每个孩子配<strong>电话手表或儿童手机</strong>，存好家长电话</li>
+        <li>每天出门前跟孩子约定：<strong>如果不小心走散了，站在原地不要动</strong>，等大人来找，不要跟陌生人走</li>
+        <li>给孩子口袋里放一张<strong>联系卡</strong>（写上家长电话+酒店名称），中英文对照</li>
+        <li>酒店泳池必须有<strong>大人全程陪同</strong>，不要让孩子单独下水</li>
+        <li>海边玩水时注意<strong>离岸流</strong>，只在安全区域游泳</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">🍽️ 饮食</p>
+      <ul>
+        <li>孩子肠胃更敏感，<strong>第一天不要急着吃街头小吃</strong>，先从酒店早餐和正规餐厅开始</li>
+        <li>带一些孩子习惯的<strong>零食（饼干、小面包、糖果）</strong>，防止饿着又找不到合适食物</li>
+        <li>马来西亚很多食物带辣，点餐时确认"no spicy"（不辣）</li>
+        <li>只喝瓶装水或自带的饮用水，不要喝餐厅的冰水/加冰饮料</li>
+        <li>带儿童专用<strong>肠胃药、退烧药、过敏药</strong>——马来西亚药店不一定有儿童剂型</li>
+        <li>榴莲孩子可能喜欢也可能不喜欢，第一次买少一点试试看</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">😴 作息与情绪</p>
+      <ul>
+        <li>孩子在炎热天气下容易疲劳和烦躁，<strong>中午安排回酒店午休/游泳</strong>，不要让孩子全天在外奔走</li>
+        <li>每天的行程不要太满，<strong>留出给孩子自由玩耍的时间</strong></li>
+        <li>孩子之间相处10天难免发生矛盾，<strong>只要不动手，让他们自己解决</strong>，大人别过度干预</li>
+        <li>长途车上给孩子准备<strong>动画片、绘本、小玩具</strong>（Day 5转战槟城坐车很久）</li>
+        <li>飞机起飞降落时给孩子喝水/吃糖/用安抚奶嘴，缓解耳压不适</li>
+      </ul>
+
+      <p style="font-weight:700;color:#c0392b;margin-top:8px;">🎒 孩子专属行李清单</p>
+      <ul>
+        <li>儿童防晒霜+防晒帽+太阳镜</li>
+        <li>泳衣+游泳圈/浮臂（酒店泳池用）</li>
+        <li>常用药：退烧药（美林/泰诺林）、肠胃药、蚊虫叮咬药</li>
+        <li>儿童水壶（每小时提醒喝水）</li>
+        <li>小零食+安抚玩具+平板电脑（长途车用）</li>
+        <li>电话手表/儿童手机（存好家长号码）</li>
+        <li>联系卡（中英文，写家长电话+酒店）</li>
+        <li>一套长袖衣裤+运动鞋（防蚊虫+进清真寺穿）</li>
+        <li>湿巾+纸巾+一次性围兜（吃饭用）</li>
+        <li>孩子喜欢的睡前读物/安抚物（换了陌生环境睡觉可能不安稳）</li>
+      </ul>
+    </div>
+
+    <!-- 青壮年 -->
+    <div class="info-box" style="margin-top:16px;">
+      <div class="title">💪 青壮年 · 你们的角色很重要</div>
+      <p>18-50岁这个年龄段是这次旅行的<strong>主力军</strong>，既要照顾好老人小孩，也要自己玩得开心。提醒几件事：</p>
+      <ul>
+        <li><strong>当好"翻译官"：</strong>马来西亚英语普及率高，点菜、问路、打车基本靠你们。手机下载好翻译App辅助</li>
+        <li><strong>当好"搬运工"：</strong>老人的行李、采购的东西、孩子的推车——壮劳力要有觉悟</li>
+        <li><strong>当好"协调员"：</strong>老人小孩各有需求，你们是中间那层，多担待、少抱怨</li>
+        <li><strong>自己也要注意：</strong>别光顾着照顾别人把自己搞中暑了。该喝水喝水，该休息休息</li>
+        <li><strong>晚上想出去逛可以：</strong>吉隆坡（如果住凯煌）周边晚上很热闹，但建议<strong>结伴出行，别单独行动</strong></li>
+        <li><strong>榴莲放开吃：</strong>你们是吃榴莲的主力，猫山王黑刺都尝尝，国内吃不到这个品质和价格</li>
+      </ul>
+    </div>
+
+    <div class="good-box" style="margin-top:12px;">
+      <div class="title">👨‍👩‍👧‍👦 家庭分工建议</div>
+      <p>每个家庭内部建议提前明确分工：<strong>谁管老人、谁管孩子、谁管钱、谁管行李</strong>。不要把所有事情都压在一个人身上。旅途中互相搭把手，这次旅行才会轻松愉快。</p>
+    </div>
+  </div>
+
+    <div class="warn-box">
+      <div class="title">🚨 个人安全</div>
+      <ul>
+        <li>吉隆坡整体治安尚可，但在<strong>秋杰区（希尔顿所在区域）</strong>和茨厂街注意手机钱包别外露</li>
+        <li>晚上尽量结伴出行，不要单独走偏僻小巷</li>
+        <li>Grab打车时核对车牌，正规车辆副驾后窗会贴Grab标志</li>
+        <li>护照等贵重物品放在酒店保险箱，随身带复印件即可</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 马来西亚禁烟新规 ===== -->
+  <div class="card">
+    <div class="card-title">🚭 马来西亚禁烟规定 2026</div>
+    <div class="warn-box" style="border-left-color:#e53e3e;">
+      <div class="title">⚠️ 重要提醒：马来西亚2026年最新禁烟令</div>
+      <p>马来西亚从2026年起严格执行禁烟规定，违规罚款极高！不管是否吸烟，都建议看一下这张官方警示海报——<strong>同行人中如果有吸烟的，务必仔细看，避免被罚！</strong></p>
+    </div>
+
+    <div style="text-align:center;margin-bottom:14px;">
+      <a href="1.jpg" target="_blank">
+        <img src="1.jpg" alt="马来西亚2026禁烟规定" style="max-width:100%;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+      </a>
+      <p style="font-size:12px;color:#999;margin-top:6px;">👆 点击放大查看</p>
+    </div>
+
+    <div class="info-box">
+      <div class="title">📋 主要罚款标准速览</div>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;">
+        <tr style="background:#e8e4f0;">
+          <th style="padding:6px 8px;text-align:left;border:1px solid #ddd;">违规行为</th>
+          <th style="padding:6px 8px;text-align:right;border:1px solid #ddd;">罚款金额</th>
+          <th style="padding:6px 8px;text-align:left;border:1px solid #ddd;">补充处罚</th>
+        </tr>
+        <tr>
+          <td style="padding:6px 8px;border:1px solid #ddd;">在餐馆抽烟</td>
+          <td style="padding:6px 8px;text-align:right;border:1px solid #ddd;color:#e53e3e;font-weight:700;">RM 3,000</td>
+          <td style="padding:6px 8px;border:1px solid #ddd;">无法缴罚→监禁3个月</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 8px;border:1px solid #ddd;">购物中心门口抽烟</td>
+          <td style="padding:6px 8px;text-align:right;border:1px solid #ddd;color:#e53e3e;font-weight:700;">RM 1,000</td>
+          <td style="padding:6px 8px;border:1px solid #ddd;">逾期不缴→直接上庭</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 8px;border:1px solid #ddd;">在机场抽烟</td>
+          <td style="padding:6px 8px;text-align:right;border:1px solid #ddd;color:#e53e3e;font-weight:700;">RM 350-360</td>
+          <td style="padding:6px 8px;border:1px solid #ddd;">或监禁3周</td>
+        </tr>
+        <tr>
+          <td style="padding:6px 8px;border:1px solid #ddd;">在法庭范围内抽烟</td>
+          <td style="padding:6px 8px;text-align:right;border:1px solid #ddd;color:#e53e3e;font-weight:700;">RM 400</td>
+          <td style="padding:6px 8px;border:1px solid #ddd;">或监禁3周</td>
+        </tr>
+        <tr style="background:#fff5f5;">
+          <td style="padding:6px 8px;border:1px solid #ddd;font-weight:700;">店家没阻止顾客抽烟</td>
+          <td style="padding:6px 8px;text-align:right;border:1px solid #ddd;color:#e53e3e;font-weight:700;">RM 1,000</td>
+          <td style="padding:6px 8px;border:1px solid #ddd;">逾期不缴→直接上庭</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <div class="title">🚭 全面禁烟场所</div>
+      <ul>
+        <li>机场 & 政府场所</li>
+        <li>公园 / 国家公园</li>
+        <li>有冷气的商店（商场内）</li>
+        <li>电梯 / 公共厕所</li>
+      </ul>
+    </div>
+
+    <div class="alert">
+      <div class="title">💰 最高罚款 RM 130,000</div>
+      <p>马来西亚2026年严格执行禁烟规定，最高可罚13万马币（约合人民币20万）。<strong>吸烟的同行人务必注意：</strong>不确定能不能抽烟的地方，先问清楚了再抽，不要存侥幸心理！</p>
+    </div>
+  </div>
+
+  <!-- ===== 9. 行李打包清单 ===== -->
+  <div class="card">
+    <div class="card-title">🎒 行李打包 · 重点提醒</div>
+    <div class="grid-2">
+      <div class="info-box">
+        <div class="title">☀️ 必带</div>
+        <ul>
+          <li>高倍防晒霜（SPF50+）</li>
+          <li>遮阳帽/太阳镜</li>
+          <li>防晒衣（轻薄透气）</li>
+          <li>薄外套（商场/飞机用）</li>
+          <li>泳衣/泳裤</li>
+          <li>防蚊液/防蚊贴</li>
+          <li>雨伞（每天必带）</li>
+          <li>万能转换插头（英标）</li>
+          <li>充电宝（2万毫安以内可登机）</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <div class="title">💊 药品</div>
+        <ul>
+          <li>肠胃药（最重要！）</li>
+          <li>藿香正气水（防中暑）</li>
+          <li>创可贴/碘伏</li>
+          <li>感冒药/退烧药</li>
+          <li>晕车药（去槟城山路弯多）</li>
+          <li>老人慢性病药（带足量+处方）</li>
+          <li>抗过敏药</li>
+          <li>止痒药膏</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <div class="title">📄 证件</div>
+        <ul>
+          <li>护照（有效期>6个月）</li>
+          <li>打印的MDAC回执</li>
+          <li>机票行程单（打印）</li>
+          <li>酒店预订单（打印）</li>
+          <li>旅游保险单</li>
+          <li>身份证（国内段备查）</li>
+          <li>驾照+翻译件（如打算租车）</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <div class="title">👕 衣物建议</div>
+        <ul>
+          <li>T恤/短袖×5-6件（每天换）</li>
+          <li>薄长裤×2（防蚊+进清真寺）</li>
+          <li>连衣裙/短裤随意</li>
+          <li>运动鞋（走路多）</li>
+          <li>拖鞋/凉鞋</li>
+          <li>小披肩/围巾（进清真寺用）</li>
+          <li>正式服装无需（全程休闲即可）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 10. 多家庭出行 ===== -->
+  <div class="card">
+    <div class="card-title">👥 多家庭出行 · 打好预防针</div>
+
+    <div class="alert">
+      <div class="title">⚠️ 坦诚说：多家庭一起旅行，本身就很难</div>
+      <p>这是19个人、多个家庭、10天9晚的长途旅行。说得好听叫"大家庭出游"，说得现实——这是<strong>一次对所有人耐心、包容、配合度的极限考验</strong>。不是吓唬谁，而是提前说清楚，大家都有心理准备，反而能避免很多不必要的摩擦。</p>
+    </div>
+
+    <div class="warn-box" style="border-left-color:#e53e3e;">
+      <div class="title">🔥 矛盾一：作息时间不同</div>
+      <ul>
+        <li><strong>有人早起有人晚起：</strong>有人6点半就起来吃早点了，有人睡到9点才起床。等齐人出门可能已经10点多了——大太阳最晒的时候。</li>
+        <li><strong>午休 vs 继续逛：</strong>8月这么热，有人中午必须回酒店休息/游泳，有人觉得出来玩就是抓紧时间。谁让步？</li>
+        <li><strong>晚上活动分歧：</strong>有人想逛夜市到12点，有人8点就想回酒店休息了。大团队不可能满足所有人。</li>
+      </ul>
+      <p style="margin-top:6px;font-weight:600;color:#c53030;">建议：每天在群里明确约定"集合出发时间"和"自由活动时间"。不想继续逛的随时可以自己回酒店（Grab打车很方便），不用硬撑。</p>
+    </div>
+
+    <div class="warn-box" style="border-left-color:#e53e3e;">
+      <div class="title">🔥 矛盾二：吃饭是个大问题</div>
+      <ul>
+        <li><strong>有人吃辣有人不吃：</strong>马来/印度菜很多是辣的，老人小孩不一定受得了。点菜需要照顾所有人的口味。</li>
+        <li><strong>有人想吃好的，有人想省着吃：</strong>消费观念不同，有人一顿花100RM不心疼，有人觉得30RM就够了。一起吃饭时怎么点菜？</li>
+        <li><strong>排队 vs 随便吃：</strong>有人愿意为了一家网红店排队1小时，有人觉得浪费时间随便吃吃就好。</li>
+        <li><strong>19个人找座位：</strong>大部分餐厅没有能坐19个人的大桌，可能要分两三桌坐。分桌了，聊天互动就少了。</li>
+      </ul>
+      <p style="margin-top:6px;font-weight:600;color:#c53030;">建议：不要每顿都19个人一起吃。可以某些顿分组吃饭（按口味自由组合），晚上再聚一起。这样灵活很多。</p>
+    </div>
+
+    <div class="warn-box" style="border-left-color:#e53e3e;">
+      <div class="title">🔥 矛盾三：钱怎么算</div>
+      <ul>
+        <li><strong>AA制容易扯皮：</strong>一起吃饭、一起买东西、一起打车——谁先付后谁给谁转？转少了不好意思说，转多了心里不舒服。</li>
+        <li><strong>共享物资难分摊：</strong>买了一箱矿泉水、一包零食放车上——有人喝得多有人喝得少，怎么算？</li>
+        <li><strong>门票/活动有人想去有人不想：</strong>比如蝴蝶公园门票，有人觉得贵不想进，有人觉得来都来了必须进。要不要等？</li>
+      </ul>
+      <p style="margin-top:6px;font-weight:600;color:#c53030;">建议：推荐用<strong>群收款/群记账</strong>（微信/支付宝都有这个功能），公共支出统一记账，回程再一起算。建议选一个"财务大臣"专门负责记账，其他人省心。</p>
+    </div>
+
+    <div class="warn-box" style="border-left-color:#e53e3e;">
+      <div class="title">🔥 矛盾四：带孩子的摩擦</div>
+      <ul>
+        <li><strong>每个家庭管孩子的方式不同：</strong>有的比较严格，有的比较宽松。别对别人家的孩子指手画脚。</li>
+        <li><strong>孩子之间吵架：</strong>小朋友在一起10天，难免有矛盾。只要不动手，让他们自己解决，大人别掺和。</li>
+        <li><strong>孩子在公共场合吵闹：</strong>餐厅里、车上、酒店里——提前跟自家孩子说好规则，公共场合不要大吵大闹影响别人。</li>
+      </ul>
+    </div>
+
+    <div class="warn-box" style="border-left-color:#e53e3e;">
+      <div class="title">🔥 矛盾五：行程疲劳 & 情绪管理</div>
+      <ul>
+        <li><strong>天热容易脾气暴躁：</strong>热+累+排队+等人——这是矛盾高发的组合。感觉自己要发火时，深呼吸，去旁边买杯冷饮冷静一下。</li>
+        <li><strong>拍照等待：</strong>有人拍一张就走，有人要在同一个地方拍半小时。热门景点人多的时候，约定每人/每家拍5-10分钟就换人。</li>
+        <li><strong>老人体力跟不上：</strong>年轻人走一天没问题，老人可能半天就累了。行程中要安排休息点，别让老人硬撑。</li>
+      </ul>
+    </div>
+
+    <div class="info-box" style="background:#e8faf4;border-left:4px solid #38a169;">
+      <div class="title">💡 解决方案 · 让旅行更愉快的小约定</div>
+      <ol>
+        <li><strong>选一个"团长"：</strong>负责每天的出发时间、集合地点、整体协调。其他人听团长的，有意见私下说，别在大家面前争论。</li>
+        <li><strong>选一个"财务"：</strong>管公共账目，每2-3天在群里公布一次支出，保持透明。</li>
+        <li><strong>每天在群里发次日行程：</strong>几点集合、去哪、吃什么、几点自由活动——让每个人都知道安排。</li>
+        <li><strong>允许"离队自由"：</strong>不想去某个景点、想提早回酒店、想自己去吃别的——说出来就行，不用不好意思。大部队继续走，各玩各的，晚上再汇合。</li>
+        <li><strong>共享相册：</strong>建一个共享相册（Google相册/百度网盘/iCloud共享），大家把自己拍的照片都丢进去，回程后一起回忆。</li>
+        <li><strong>每2-3天安排一次"自由时间"：</strong>比如某个下午不安排集体活动，各家庭自由安排，去逛街、回酒店休息、带小孩游泳都可以。给彼此一点空间。</li>
+        <li><strong>共享物资统一买：</strong>大瓶矿泉水、湿巾、纸巾、零食等统一采购，费用记入公共账目。</li>
+        <li><strong>有问题当面说：</strong>如果有不满，当面说出来解决，不要在群里阴阳怪气，也别憋在心里最后爆发。大家都是亲戚朋友，没什么不能说的。</li>
+        <li><strong>记住：这是度假，不是完成任务！</strong>少去一个景点不会死，多花一点钱不会穷。保持好心情比什么都重要。</li>
+      </ol>
+    </div>
+
+    <div class="good-box">
+      <div class="title">🎯 心态最重要的一句话</div>
+      <p><strong>"第一次也是唯一一次这么多家人一起出国旅行。十年后回想起来，不会记得哪道菜好不好吃、哪个景点有没有去，只会记得——我们一起笑过、累过、热过、吃过。"</strong></p>
+      <p style="margin-top:6px;">多包容、少计较，这趟旅行一定会成为每个家庭最珍贵的回忆。</p>
+    </div>
+
+    <div class="info-box">
+      <div class="title">📞 紧急联系方式</div>
+      <ul>
+        <li>马来西亚报警/急救电话：<strong>999</strong></li>
+        <li>中国驻马来西亚大使馆：<strong>+60-3-2164 5301</strong>（吉隆坡）</li>
+        <li>中国驻槟城总领事馆：<strong>+60-4-262 5268</strong></li>
+        <li>旅游保险紧急救援热线（出发前查好）</li>
+        <li>包车司机/导游电话</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 11. 最终检查 ===== -->
+  <div class="card">
+    <div class="card-title">✅ 出发前一周检查清单</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 填写MDAC电子入境卡（出发前3天内）</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 手机开通国际漫游/购买当地SIM卡</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 换少量马币现金（200-300RM/人）</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 确认旅游保险已购买</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 打印机票行程单+酒店预订单</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 检查护照有效期是否>6个月</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 下载好Grab、Google Maps、翻译App</label>
+      <label style="font-size:13px;color:#4a5568;display:flex;align-items:center;gap:6px;padding:6px 10px;background:#f7fafc;border-radius:8px;"><input type="checkbox"> 准备一个常用药包（肠胃药+防暑药+防蚊）</label>
+    </div>
+  </div>
+
+  <!-- ===== 12. 总结 ===== -->
+  <div class="card" style="background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border:none;">
+    <div class="card-title" style="color:#fff;border-bottom-color:rgba(255,255,255,0.2);">🎯 最后说几句</div>
+    <p style="font-size:14px;opacity:0.9;line-height:1.8;">
+      这趟旅程是很多人第一次去马来西亚。8月的马来西亚虽然热，但这也是它的魅力所在——热带的气息、浓厚的人情味、多元的文化、让人上瘾的美食。
+    </p>
+    <p style="font-size:14px;opacity:0.9;line-height:1.8;margin-top:10px;">
+      <strong>记住三点：</strong><br>
+      1️⃣ 热是天意，但开心是选择——做好防晒和补水，热就进商场吹冷气<br>
+      2️⃣ 集体出行多包容——有人迟到别生气，有人掉队等一下</strong><br>
+      3️⃣ 安全第一——吃干净的东西、注意防蚊、看管好孩子和老人</strong>
+    </p>
+    <p style="font-size:14px;opacity:0.9;line-height:1.8;margin-top:10px;">
+      祝大家2026暑假马来西亚之旅，玩得开心，吃得痛快，留下一段美好的大家庭回忆！🇲🇾🎉
+    </p>
+  </div>
+
+  <a class="back-link" href="index.html" style="display:block;text-align:center;margin:20px 0 30px;">← 返回主页</a>
+
+</div>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
