@@ -236,6 +236,253 @@ body {
   .hero-emoji { font-size: 32px; }
   .hero h1 { font-size: 18px; }
 }
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
+
+/* ===== Hotel Lightbox ===== */
+.hotel-lightbox-overlay {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.93);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.hotel-lightbox-overlay.active { display: flex; }
+.hotel-lightbox-overlay img {
+  max-width: 94vw;
+  max-height: 88vh;
+  display: block;
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+}
+.hotel-lightbox-close {
+  position: fixed;
+  top: 16px; right: 20px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 300;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.7;
+  z-index: 100000;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.2s;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.hotel-lightbox-close:hover { opacity: 1; }
+.hotel-lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 42px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.2s, background 0.2s;
+  backdrop-filter: blur(4px);
+  z-index: 100000;
+}
+.hotel-lightbox-nav:hover { opacity: 1; background: rgba(255,255,255,0.2); }
+.hotel-lightbox-prev { left: 16px; }
+.hotel-lightbox-next { right: 16px; }
+.hotel-lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 15px;
+  font-weight: 500;
+  z-index: 100000;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  pointer-events: none;
+  background: rgba(0,0,0,0.4);
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+.hotel-lightbox-label {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  z-index: 100000;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+  pointer-events: none;
+  max-width: 80vw;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 600px) {
+  .hotel-lightbox-nav { font-size: 28px; width: 44px; height: 44px; padding: 10px; }
+  .hotel-lightbox-prev { left: 6px; }
+  .hotel-lightbox-next { right: 6px; }
+  .hotel-lightbox-close { font-size: 34px; top: 8px; right: 12px; }
+  .hotel-lightbox-counter { font-size: 13px; bottom: 16px; }
+}
+
 </style>
 </head>
 <body>
@@ -270,10 +517,7 @@ body {
 
     <h3 style="font-size:15px;font-weight:700;color:#2d1b69;margin-bottom:10px;">📍 吉隆坡（8/4入住 → 8/8退房 · 4晚）</h3>
     <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">
-      Concorde & Hilton 通过 Agoda 预订 · Days Hotel 通过 Booking.com 预订 · 全部可免费取消
-    </p>
-    <p style="font-size:13px;margin-bottom:14px;">
-      <a href="hotel-vote.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">📊 三家酒店详细对比 &amp; 大家来投票 →</a>
+      ✅ Concorde Hotel（凯煌酒店）已通过Agoda确认预订 · 全部已扣款
     </p>
 
     <div class="hotel-grid">
@@ -293,8 +537,8 @@ body {
         </div>
         <div class="hotel-detail">
           <div class="hotel-detail-item"><strong>房型：</strong>Deluxe Twin（优惠-5%）× 8间</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
-          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房·安静房</div>
+          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人 · 3儿童</div>
+          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房·安静房·深夜入住</div>
           <div class="hotel-detail-item"><strong>Booking ID：</strong>1733461759</div>
         </div>
         <div class="hotel-price">
@@ -302,63 +546,21 @@ body {
           <span class="hotel-free">免费取消</span>
         </div>
         <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月1日前可免费取消 · Agoda预订</div>
+
+        <!-- PDF confirmations + images -->
+        <div style="margin-top:10px;padding:8px 12px;background:#f0f9ff;border-radius:10px;font-size:12px;line-height:2;">
+          <div style="font-weight:700;color:#1e40af;margin-bottom:4px;">📋 Agoda 确认文件</div>
+          <a href="hotel-pdfs/concorde-confirmation.pdf" target="_blank" style="color:#2563eb;text-decoration:none;">📄 预订确认单（中文）</a>
+          <a href="hotel-images/concorde-confirmation.jpg" class="lightbox-link" title="查看图片">🖼️ 图</a><br>
+          <a href="hotel-pdfs/concorde-tax.pdf" target="_blank" style="color:#2563eb;text-decoration:none;">🏷️ 马来西亚旅游税发票</a>
+          <a href="hotel-images/concorde-tax.jpg" class="lightbox-link" title="查看图片">🖼️ 图</a><br>
+          <span style="color:#6b7280;font-size:11px;">💳 支付方式：MasterCard（尾号7549）· 已扣款</span>
+        </div>
+
         <a class="hotel-booking-link" href="https://www.agoda.com/concorde-hotel-kuala-lumpur/hotel/kuala-lumpur-my.html" target="_blank" rel="noopener">🔗 在Agoda查看详情 →</a>
       </div>
 
-      <!-- Hotel 2 - KL -->
-      <div class="hotel-card">
-        <div class="hotel-img-wrap">
-          <img src="https://dimg04.c-ctrip.com/images/1mc1r12000sg9hx7x59AD_R_600_360_R5_Q70.jpg" alt="Hilton Garden Inn Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hotel-name">🏨 吉隆坡东姑阿都拉曼希尔顿花园酒店南店（Hilton Garden Inn KL）<span class="star">★★★</span></div>
-        <div class="hotel-addr">No. 452 Jalan Tuanku Abdul Rahman, 50100 秋杰/太子世界贸易中心</div>
-        <div class="hotel-tags">
-          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
-          <span class="hotel-tag hotel-tag-blue">早餐</span>
-          <span class="hotel-tag hotel-tag-yellow">KL Tower View</span>
-        </div>
-        <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>Twin Deluxe（吉隆坡塔景观）× 8间</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
-          <div class="hotel-detail-item"><strong>备注：</strong>禁烟·高楼层·联通房</div>
-          <div class="hotel-detail-item"><strong>Booking ID：</strong>1731474738</div>
-        </div>
-        <div class="hotel-price">
-          <div><span class="amount">CNY 15,960</span><br><span class="per">全8间4晚总价 · 8月2日扣款</span></div>
-          <span class="hotel-free">免费取消</span>
-        </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月4日前可免费取消</div>
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/19679850.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
-      </div>
-
-      <!-- Hotel 3 - KL -->
-      <div class="hotel-card">
-        <div class="hotel-img-wrap">
-          <img src="https://dimg04.c-ctrip.com/images/1mc5n12000dwif9xgCC2D_R_600_360_R5_Q70.jpg" alt="Days Hotel by Wyndham Kuala Lumpur" loading="lazy" onerror="this.style.display='none'">
-        </div>
-        <div class="hotel-name">🏨 吉隆坡温德姆戴斯酒店（陈秀莲地铁站店）（Days Hotel & Suites by Wyndham KL） <span class="star">★★★</span></div>
-        <div class="hotel-addr">Kompleks Metro Pudu, Jalan Metro Pudu, 55200 吉隆坡 · ☎ +60 3-9232 7888</div>
-        <div class="hotel-tags">
-          <span class="hotel-tag hotel-tag-green">免费WiFi</span>
-          <span class="hotel-tag hotel-tag-blue">含早餐</span>
-          <span class="hotel-tag hotel-tag-purple">近地铁站</span>
-          <span class="hotel-tag hotel-tag-yellow">Booking.com</span>
-        </div>
-        <div class="hotel-detail">
-          <div class="hotel-detail-item"><strong>房型：</strong>超豪华双床套房（禁烟）× 8间</div>
-          <div class="hotel-detail-item"><strong>入住人数：</strong>16成人</div>
-          <div class="hotel-detail-item"><strong>订单号：</strong>6735522593</div>
-          <div class="hotel-detail-item"><strong>PIN：</strong>5257（勿泄露）</div>
-        </div>
-        <div class="hotel-price">
-          <div><span class="amount">CNY 12,660</span><br><span class="per">全8间4晚含税总价 · 自动扣款</span></div>
-          <span class="hotel-free">免费取消</span>
-        </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年8月2日 23:59前免费 · 之后取消收 MYR 232.01/间</div>
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/23971407.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
-      </div>
-
-    </div>
+      
 
     <!-- ===== 槟城酒店 ===== -->
     <h3 style="font-size:15px;font-weight:700;color:#e84393;margin-top:24px;margin-bottom:10px;">📍 槟城（8/8入住 → 8/13退房 · 5晚）</h3>
@@ -380,13 +582,33 @@ body {
           <div class="hotel-detail-item"><strong>房型：</strong>三卧公寓（3室3卫）× <strong>4间</strong></div>
           <div class="hotel-detail-item"><strong>可住：</strong>最多6人/间 · 无早餐</div>
           <div class="hotel-detail-item"><strong>到店付：</strong>MYR 40（文化遗产费）</div>
-          <div class="hotel-detail-item"><strong>订单号：</strong>1128148236718373</div>
+          <div class="hotel-detail-item"><strong>订单号：</strong>1688898584455765</div>
+          <div class="hotel-detail-item"><strong>确认号：</strong>1688898584460856</div>
+          <div class="hotel-detail-item"><strong>PIN：</strong>3389（勿泄露）</div>
         </div>
         <div class="hotel-price">
-          <div><span class="amount">CNY 12,448.40</span><br><span class="per">4间5晚总价 · 已支付</span></div>
+          <div>
+            <span class="amount">CNY 10,965</span><span style="font-size:11px;color:#e53e3e;font-weight:700;margin-left:6px;background:#fff5f5;padding:1px 6px;border-radius:4px;">省了 CNY 1,483</span>
+            <br><span class="per">4间5晚总价 · 已支付（微信支付）<br><span style="color:#e53e3e;">⬆ 已从旧订单重新预订，trip.com更优惠</span></span>
+          </div>
           <span class="hotel-free">免费取消</span>
         </div>
-        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年7月25日 23:59前免费 · 之后取消收 CNY 2,628.24</div>
+        <div class="hotel-cancel">✅ <strong>免费取消：</strong>2026年7月25日 23:59前免费 · 之后取消收 CNY 2,264.44</div>
+
+        <!-- PDF confirmations + images -->
+        <div style="margin-top:10px;padding:8px 12px;background:#f0f9ff;border-radius:10px;font-size:12px;line-height:2;">
+          <div style="font-weight:700;color:#1e40af;margin-bottom:4px;">📋 Trip.com 确认文件</div>
+          <a href="hotel-pdfs/tanjung-checkin-voucher.pdf" target="_blank" style="color:#2563eb;text-decoration:none;">📄 入住凭证（Check-in Voucher）</a>
+          <a href="hotel-images/tanjung-checkin-voucher-p1.jpg" class="lightbox-link" title="查看图片">🖼️ 图</a>
+          <a href="hotel-images/tanjung-checkin-voucher-p2.jpg" class="lightbox-link" title="查看图片" style="color:#6c5ce7;text-decoration:none;font-size:11px;">第2页</a><br>
+          <a href="hotel-pdfs/tanjung-visa-voucher.pdf" target="_blank" style="color:#2563eb;text-decoration:none;">📄 英文确认信（入境备用）</a>
+          <a href="hotel-images/tanjung-visa-voucher.jpg" class="lightbox-link" title="查看图片">🖼️ 图</a><br>
+          <a href="hotel-pdfs/tanjung-e-receipt.pdf" target="_blank" style="color:#2563eb;text-decoration:none;">🧾 电子收据（E-receipt）</a>
+          <a href="hotel-images/tanjung-e-receipt.jpg" class="lightbox-link" title="查看图片">🖼️ 图</a>
+          &nbsp;·&nbsp;
+          <a href="hotel-pdfs/tanjung-tax-invoice.pdf" target="_blank" style="color:#2563eb;text-decoration:none;">🏷️ 旅游税发票</a>
+          <a href="hotel-images/tanjung-tax-invoice.jpg" class="lightbox-link" title="查看图片">🖼️ 图</a>
+        </div>
 
         <!-- Video -->
         <div style="margin-top:12px;border-radius:12px;overflow:hidden;background:#000;">
@@ -396,7 +618,7 @@ body {
         </div>
         <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;">🎥 酒店房间实拍视频</div>
 
-        <a class="hotel-booking-link" href="https://hotels.ctrip.com/hotels/24011126.html" target="_blank" rel="noopener">🔗 在携程查看详情 →</a>
+        <a class="hotel-booking-link" href="https://www.trip.com/hotels/penang-hotel-detail-7954734/tanjung-point-residences/" target="_blank" rel="noopener">🔗 在Trip.com查看详情 →</a>
       </div>
     </div>
   </div>
@@ -404,6 +626,134 @@ body {
 </div>
 
 <div class="footer">🏨 2026暑假 · 马来西亚亲子游 · 酒店住宿</div>
+
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+
+<div id="hotel-lightbox" class="hotel-lightbox-overlay">
+  <span class="hotel-lightbox-close">&times;</span>
+  <span class="hotel-lightbox-label" id="hotel-lightbox-label"></span>
+  <button class="hotel-lightbox-nav hotel-lightbox-prev">&#8249;</button>
+  <button class="hotel-lightbox-nav hotel-lightbox-next">&#8250;</button>
+  <img id="hotel-lightbox-img" src="" alt="酒店确认文件">
+  <span class="hotel-lightbox-counter" id="hotel-lightbox-counter"></span>
+</div>
+
+<script>
+(function() {
+  var lb = document.getElementById('hotel-lightbox');
+  if (!lb) return;
+  var img = document.getElementById('hotel-lightbox-img');
+  var counter = document.getElementById('hotel-lightbox-counter');
+  var label = document.getElementById('hotel-lightbox-label');
+  var images = [];
+  var currentIndex = 0;
+
+  function open(index) {
+    if (!images.length || index < 0 || index >= images.length) return;
+    currentIndex = index;
+    var link = images[currentIndex];
+    img.src = link.getAttribute('href');
+    counter.textContent = (currentIndex + 1) + ' / ' + images.length;
+    /* extract filename for label */
+    var href = link.getAttribute('href');
+    var name = href.split('/').pop().replace(/\.jpg$/, '').replace(/-/g, ' ');
+    label.textContent = name;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function collect() {
+    images = [];
+    document.querySelectorAll('a.lightbox-link[href*="hotel-images/"]').forEach(function(el) {
+      if (images.indexOf(el) === -1) images.push(el);
+    });
+    var navs = lb.querySelectorAll('.hotel-lightbox-nav');
+    navs.forEach(function(n) { n.style.display = images.length > 1 ? '' : 'none'; });
+  }
+
+  /* Click handler on lightbox links */
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    /* Check if clicked element or its parent is a lightbox-link */
+    var link = target.closest('a.lightbox-link');
+    if (link && link.getAttribute('href').indexOf('hotel-images/') !== -1) {
+      e.preventDefault();
+      collect();
+      var idx = images.indexOf(link);
+      if (idx !== -1) open(idx);
+    }
+  });
+
+  /* Nav buttons */
+  var prevBtn = lb.querySelector('.hotel-lightbox-prev');
+  var nextBtn = lb.querySelector('.hotel-lightbox-next');
+  if (prevBtn) prevBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex - 1 + images.length) % images.length);
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex + 1) % images.length);
+  });
+
+  /* Close on overlay click (not on image) */
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb || e.target === img) close();
+  });
+
+  /* Close button */
+  var closeBtn = lb.querySelector('.hotel-lightbox-close');
+  if (closeBtn) closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    close();
+  });
+
+  /* Keyboard */
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') { close(); return; }
+    if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
+    if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
+  });
+
+  /* Touch swipe */
+  var touchStartX = 0, touchEndX = 0;
+  lb.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && nextBtn) nextBtn.click();
+      else if (prevBtn) prevBtn.click();
+    }
+  }, { passive: true });
+
+  collect();
+})();
+</script>
 
 </body>
 </html>

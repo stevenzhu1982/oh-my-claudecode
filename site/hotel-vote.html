@@ -14,6 +14,10 @@
   --text: #2d3436;
   --text-light: #636e72;
   --border: #e0e0e0;
+  --text-primary: #2d3436;
+  --text-secondary: #636e72;
+  --accent-light: #f0edfe;
+  --accent: #6c5ce7;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -324,6 +328,23 @@ body {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
 
+/* Map section */
+.map-section {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+.map-title {
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  color: #2d1b69;
+  margin-bottom: 2px;
+}
+
 @media (max-width: 480px) {
   .quick-compare { gap: 5px; }
   .qc-card { padding: 10px 4px; }
@@ -336,13 +357,191 @@ body {
   .bottom-nav { gap: 2px; }
   .nav-btn { padding: 6px 10px; font-size: 11px; }
 }
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+/* ===== 🚀 Mobile Optimization ===== */
+input, textarea, select, button { font-size: 16px !important; }
+html { scroll-behavior: smooth; }
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+summary { padding: 12px 14px; border-radius: 12px; cursor: pointer; }
+summary::-webkit-details-marker { display: none; }
+summary { list-style: none; user-select: none; -webkit-user-select: none; }
+.nav-card:active { transform: scale(0.97); }
+@media (hover: none) and (pointer: coarse) {
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+}
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>🏨 吉隆坡酒店对比 &amp; 投票</h1>
-  <p>20人 · 8间双床房 · 8/4→8/8（4晚）· 含早餐 · 全部可免费取消</p>
+  <p>19人 · 8间双床房 · 8/4→8/8（4晚）· 含早餐 · 全部可免费取消</p>
+  <div style="margin-top:8px;padding:8px 12px;background:rgba(255,255,255,0.2);border-radius:10px;font-size:13px;">
+    ✅ <strong>已选定：凯煌酒店 Concorde Hotel</strong> — MYR 11,121.20（全8间4晚）· Agoda已确认已扣款
+  </div>
   <div style="margin-top:10px;font-size:12px;opacity:0.6;cursor:pointer;" onclick="if(confirm('确定清空所有投票结果？'))resetVotes()">⚙️ 管理投票</div>
 </div>
 
@@ -352,7 +551,7 @@ body {
   <div class="quick-compare">
     <div class="qc-card qc-concorde">
       <div class="qc-icon">🏨</div>
-      <div class="qc-value">24㎡</div>
+      <div class="qc-value">33㎡</div>
       <div class="qc-label">房间面积</div>
       <div class="qc-hotel" style="color:var(--concorde);">凯煌酒店</div>
     </div>
@@ -406,21 +605,136 @@ body {
     </div>
     <div class="qc-card qc-concorde">
       <div class="qc-icon">💰</div>
-      <div class="qc-value" style="color:#e53e3e;">CNY 17,360</div>
-      <div class="qc-label">8间4晚总价</div>
+      <div class="qc-value" style="color:#e53e3e;">CNY 19,351</div>
+      <div class="qc-label">8间4晚总价（降价重订）</div>
       <div class="qc-hotel" style="color:var(--concorde);">凯煌酒店</div>
     </div>
     <div class="qc-card qc-hilton" style="border-color:#00b894;">
       <div class="qc-icon">💰</div>
-      <div class="qc-value" style="color:#e53e3e;">CNY 15,960</div>
+      <div class="qc-value" style="color:#e53e3e;">CNY 17,357</div>
       <div class="qc-label">8间4晚总价</div>
       <div class="qc-hotel" style="color:var(--hilton);">希尔顿花园</div>
     </div>
     <div class="qc-card qc-days" style="border-color:#f39c12;">
       <div class="qc-icon">💰</div>
-      <div class="qc-value" style="color:#e53e3e;">CNY 12,660</div>
+      <div class="qc-value" style="color:#e53e3e;">CNY 13,764</div>
       <div class="qc-label">8间4晚总价</div>
       <div class="qc-hotel" style="color:var(--days);">温德姆戴斯</div>
+    </div>
+  </div>
+
+  <!-- ===== Location Map ===== -->
+  <div class="map-section">
+    <h3 class="map-title">📍 位置与距离对比</h3>
+    <p style="font-size:13px;color:var(--text-light);text-align:center;margin-bottom:10px;">三家酒店到双子塔/吉隆坡塔的步行距离一目了然</p>
+
+    <!-- Distance comparison cards -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
+      <!-- Concorde -->
+      <div style="display:flex;align-items:center;gap:10px;background:#f0edfe;border-radius:12px;padding:10px 14px;">
+        <span style="background:#6c5ce7;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:6px;">凯煌</span>
+        <span style="flex:1;font-size:12px;color:#444;">金三角核心 · 豪华房33㎡</span>
+        <div style="text-align:right;font-size:11px;">
+          <div><span style="font-weight:800;color:#6c5ce7;">🚶 1.5km</span> <span style="color:#999;">→双子塔</span></div>
+          <div><span style="font-weight:800;color:#6c5ce7;">🚶 1km</span> <span style="color:#999;">→吉隆坡塔</span></div>
+        </div>
+      </div>
+      <!-- Hilton -->
+      <div style="display:flex;align-items:center;gap:10px;background:#e8faf4;border-radius:12px;padding:10px 14px;">
+        <span style="background:#00b894;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:6px;">希尔顿</span>
+        <span style="flex:1;font-size:12px;color:#444;">秋杰区（人员较杂） · SOGO商场旁</span>
+        <div style="text-align:right;font-size:11px;">
+          <div><span style="font-weight:800;color:#00b894;">🚶 2km</span> <span style="color:#999;">→吉隆坡塔</span></div>
+          <div><span style="font-weight:800;color:#00b894;">🚶 1.5km</span> <span style="color:#999;">→凯煌（商业区）</span></div>
+        </div>
+      </div>
+      <!-- Days -->
+      <div style="display:flex;align-items:center;gap:10px;background:#fef9ee;border-radius:12px;padding:10px 14px;">
+        <span style="background:#f39c12;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:6px;">戴斯</span>
+        <span style="flex:1;font-size:12px;color:#444;">陈秀莲 · 地铁站步行5分钟</span>
+        <div style="text-align:right;font-size:11px;">
+          <div><span style="font-weight:800;color:#f39c12;">🚇 4km</span> <span style="color:#999;">→双子塔</span></div>
+          <div><span style="font-weight:800;color:#f39c12;">🚇 3.5km</span> <span style="color:#999;">→凯煌（商业区）</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini SVG map - simplified -->
+    <svg viewBox="0 0 420 200" style="width:100%;max-width:420px;display:block;margin:0 auto;font-family:system-ui,-apple-system,sans-serif;">
+      <defs>
+        <filter id="sd" x="-2" y="-2" width="8" height="8"><feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.18"/></filter>
+      </defs>
+      <rect width="420" height="200" rx="12" fill="#faf9ff"/>
+      <rect width="420" height="200" rx="12" fill="none" stroke="#edeaff" stroke-width="1"/>
+
+      <!-- Top band: Landmarks -->
+      <rect x="10" y="8" width="400" height="36" rx="8" fill="#f0ebff"/>
+      <text x="60" y="14" fill="#2d1b69" font-size="9" font-weight="700">🎯 地标</text>
+
+      <!-- KLCC -->
+      <g filter="url(#sd)">
+        <rect x="220" y="14" width="90" height="24" rx="12" fill="#6c5ce7"/>
+        <text x="265" y="31" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">🏛️ 双子塔 KLCC</text>
+      </g>
+      <!-- KL Tower -->
+      <g filter="url(#sd)">
+        <rect x="120" y="14" width="85" height="24" rx="12" fill="#e17055"/>
+        <text x="162" y="31" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">🗼 吉隆坡塔</text>
+      </g>
+
+      <!-- Middle area: Concorde & Hilton -->
+      <!-- Concorde -->
+      <g filter="url(#sd)">
+        <rect x="135" y="64" width="80" height="30" rx="15" fill="#6c5ce7"/>
+        <text x="175" y="84" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">🏨 凯煌</text>
+      </g>
+
+      <!-- Hilton -->
+      <g filter="url(#sd)">
+        <rect x="49" y="64" width="76" height="30" rx="15" fill="#00b894"/>
+        <text x="87" y="84" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">🏨 希尔顿</text>
+      </g>
+
+      <!-- Distance lines -->
+      <!-- Concorde → KLCC: 1.5km -->
+      <line x1="195" y1="58" x2="265" y2="42" stroke="#6c5ce7" stroke-width="2" stroke-dasharray="5,4" opacity="0.5"/>
+      <rect x="205" y="40" width="46" height="18" rx="9" fill="#6c5ce7" opacity="0.9"/>
+      <text x="228" y="53" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">1.5km</text>
+
+      <!-- Concorde → KL Tower: 1km -->
+      <line x1="155" y1="58" x2="162" y2="42" stroke="#6c5ce7" stroke-width="2" stroke-dasharray="5,4" opacity="0.5"/>
+      <rect x="124" y="40" width="46" height="18" rx="9" fill="#6c5ce7" opacity="0.9"/>
+      <text x="147" y="53" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">1km</text>
+
+      <!-- Hilton → Concorde: 1.5km -->
+      <line x1="125" y1="74" x2="135" y2="74" stroke="#00b894" stroke-width="2" stroke-dasharray="5,4" opacity="0.5"/>
+
+      <!-- Bottom: Days -->
+      <g filter="url(#sd)">
+        <rect x="305" y="150" width="90" height="30" rx="15" fill="#f39c12"/>
+        <text x="350" y="170" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">🏨 温德姆戴斯</text>
+      </g>
+
+      <!-- Days → KLCC: 4km -->
+      <line x1="345" y1="146" x2="310" y2="42" stroke="#f39c12" stroke-width="2" stroke-dasharray="4,5" opacity="0.5"/>
+      <rect x="298" y="80" width="46" height="18" rx="9" fill="#f39c12" opacity="0.9"/>
+      <text x="321" y="93" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">4km</text>
+
+      <!-- Days → Concorde: 3.5km -->
+      <line x1="305" y1="150" x2="195" y2="90" stroke="#f39c12" stroke-width="2" stroke-dasharray="4,5" opacity="0.5"/>
+      <rect x="227" y="115" width="46" height="18" rx="9" fill="#f39c12" opacity="0.9"/>
+      <text x="250" y="128" text-anchor="middle" fill="#fff" font-size="9" font-weight="700">3.5km</text>
+
+      <!-- Legend -->
+      <line x1="30" y1="188" x2="58" y2="188" stroke="#6c5ce7" stroke-width="2" stroke-dasharray="5,4" opacity="0.5"/>
+      <text x="64" y="192" fill="#999" font-size="9">步行</text>
+      <line x1="112" y1="188" x2="140" y2="188" stroke="#f39c12" stroke-width="2" stroke-dasharray="4,5" opacity="0.5"/>
+      <text x="146" y="192" fill="#999" font-size="9">需乘车/地铁</text>
+    </svg>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px;">
+      <span style="font-size:11px;color:#6c5ce7;background:#f0edfe;padding:3px 10px;border-radius:6px;">📍 凯煌 · 金三角核心 · 已升级豪华房33㎡</span>
+      <span style="font-size:11px;color:#00b894;background:#e8faf4;padding:3px 10px;border-radius:6px;">📍 希尔顿 · 秋杰区（人员较杂）</span>
+      <span style="font-size:11px;color:#f39c12;background:#fef9ee;padding:3px 10px;border-radius:6px;">📍 戴斯 · 陈秀莲</span>
     </div>
   </div>
 
@@ -432,43 +746,45 @@ body {
         <h3>吉隆坡凯煌酒店 <span class="star-big">★★★★</span></h3>
         <div class="nm-en">Concorde Hotel Kuala Lumpur</div>
       </div>
-      <div class="price-big">CNY 17,360</div>
+      <div class="price-big">CNY 19,351</div>
+      <div style="font-size:10px;color:#e53e3e;text-align:right;margin-top:-4px;">MYR 11,121.20 ≈ CNY 19,351 · 已降价重订（汇率 1.74）</div>
     </div>
     <div class="room-tags">
-      <span class="room-tag rt-purple">🛏️ 高级双床间 · 24㎡</span>
+      <span class="room-tag rt-purple">🛏️ 豪华双床房 · 33㎡</span>
       <span class="room-tag rt-green">✅ 含早餐</span>
-      <span class="room-tag rt-blue">✅ 免费取消</span>
+      <span class="room-tag rt-blue">✅ 8/1前免费取消</span>
       <span class="room-tag rt-yellow">🏊 有泳池+儿童池</span>
       <span class="room-tag rt-red">🛁 有浴缸</span>
+      <span class="room-tag rt-purple">🎉 升级豪华房</span>
     </div>
 
     <!-- Photos -->
     <div class="photo-gallery">
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0221f12000asaemfpFD51_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 外观</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02028120008763igjF3D6_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🌃 夜景</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0236r224x96xdvz1a4784_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🛏️ 高级双床间</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0234t224x97pgkc4g20EB_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🛏️ 双床间另一角</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0204g120008762142EEDB_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🚿 浴室（有浴缸）</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0205a1200094gxewf9E5A_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏊 室外泳池+儿童池</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0233q12000rklnld7872F_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 大堂</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/1mc7212000p0wuj5d0E08_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🍳 餐厅自助早餐</div></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0221f12000asaemfpFD51_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02028120008763igjF3D6_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0236r224x96xdvz1a4784_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0234t224x97pgkc4g20EB_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0204g120008762142EEDB_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0205a1200094gxewf9E5A_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0233q12000rklnld7872F_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/1mc7212000p0wuj5d0E08_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     </div>
 
     <!-- Detail -->
     <div class="detail-table">
       <div class="dt-row"><span class="dt-label">📍 位置</span><span class="dt-value"><span class="good">金三角核心区</span> · 步行至双子塔10分钟 · Bukit Nanas单轨160m · 武吉免登/阿罗街周边</span></div>
-      <div class="dt-row"><span class="dt-label">🛏️ 房型</span><span class="dt-value">高级双床间 <strong>24㎡</strong> · 两张单人床 · 有浴缸 · 部分房间可看塔</span></div>
+      <div class="dt-row"><span class="dt-label">🛏️ 房型</span><span class="dt-value">豪华双床房 <strong>33㎡</strong> · 两张单人床 · 有浴缸 · 楼层6-15F · 节日优惠-5%</span></div>
       <div class="dt-row"><span class="dt-label">🏊 泳池</span><span class="dt-value"><span class="good">大型绿洲室外泳池 + 独立儿童池</span> · 深度至2.4m · 池畔可用早餐</span></div>
       <div class="dt-row"><span class="dt-label">🍳 早餐</span><span class="dt-value">自助餐 · 品种丰富（马来/中式/西式/印度） · 评价"早餐一流" · 6:30–10:30</span></div>
       <div class="dt-row"><span class="dt-label">👨‍💼 服务</span><span class="dt-value"><span class="good">有中文前台</span> · 员工友善 · 可安排保母/托儿 · 机场接送可预约</span></div>
-      <div class="dt-row"><span class="dt-label">🆕 新旧</span><span class="dt-value"><span class="bad">设施偏旧</span> · "有年代感" · 部分房间2017翻新 · 空调噪音、偶有霉味</span></div>
+      <div class="dt-row"><span class="dt-label">🆕 新旧</span><span class="dt-value"><span class="bad">设施偏旧</span> · "有年代感" · 部分房间2017翻新 · 豪华房33㎡空间充裕</span></div>
       <div class="dt-row"><span class="dt-label">🏙️ 周边</span><span class="dt-value"><span class="good">夜间可自由逛街</span> · 阿罗街美食街步行5分 · Pavilion商场10分</span></div>
       <div class="dt-row"><span class="dt-label">⭐ 评分</span><span class="dt-value">Trip.com 8.8 · Booking 8.5 · FunTime 8.5（超31,000条评价）</span></div>
     </div>
 
     <div class="pc-wrap">
-      <div class="pc-item pc-pro">✅ <strong>核心优势：</strong>地理位置绝佳 · 有儿童泳池 · 有浴缸 · 早餐丰富 · 中文服务 · 夜间可自由逛街出行</div>
-      <div class="pc-item pc-con">❌ <strong>主要劣势：</strong>房间偏小（24㎡） · 设施老旧 · 空调噪音大 · WiFi弱 · 早餐高峰需排队</div>
+      <div class="pc-item pc-pro">✅ <strong>核心优势：</strong>地理位置绝佳 · 豪华房33㎡空间升级 · 有儿童泳池 · 有浴缸 · 早餐丰富 · 中文服务 · 夜间可自由逛街出行</div>
+      <div class="pc-item pc-con">❌ <strong>主要劣势：</strong>设施老旧 · 空调噪音 · WiFi弱 · 早餐高峰需排队 · 豪华房已升级至33㎡</div>
     </div>
 
     <div class="scr-row">
@@ -494,7 +810,7 @@ body {
         <h3>希尔顿花园酒店南店 <span class="star-big">★★★</span></h3>
         <div class="nm-en">Hilton Garden Inn KL Jalan TAR South</div>
       </div>
-      <div class="price-big">CNY 15,960</div>
+      <div class="price-big">CNY 17,357</div>
     </div>
     <div class="room-tags">
       <span class="room-tag rt-purple">🛏️ 豪华双床房塔景 · <strong>39㎡</strong></span>
@@ -505,30 +821,30 @@ body {
     </div>
 
     <div class="photo-gallery">
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/200e0s000000ibxzfB90C_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 外观</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0226612000alxvz0w750A_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🌃 外观夜景</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0236712000rctef3c9EC9_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🛏️ 豪华双床房</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0235z224x958layxh071C_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🛏️ 房间另一角</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0235b12000qobk5k4BCAC_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🌆 吉隆坡塔景观</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0230112000n8qug09009D_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏊 25楼屋顶泳池</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0231312000lo4u9l463A7_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 大堂</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0231812000rw9pfce343D_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🍳 Garden Grille餐厅</div></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0220f12000alxw29r7F01_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0226612000alxvz0w750A_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0221l12000alxvzr7E94D_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0220m12000alxvtz4155D_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0230d12000s1o4tc24EA3_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0230112000n8qug09009D_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0230112000imf3eg85E44_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0222x12000alxw0poB664_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     </div>
 
     <div class="detail-table">
-      <div class="dt-row"><span class="dt-label">📍 位置</span><span class="dt-value">秋杰区(TAR路) · SOGO商场旁 · Chow Kit单轨390m · <span class="bad">周边环境较乱</span></span></div>
+      <div class="dt-row"><span class="dt-label">📍 位置</span><span class="dt-value">秋杰区(TAR路) · SOGO商场旁 · Chow Kit单轨390m · <span class="mid">周边环境人员较杂</span></span></div>
       <div class="dt-row"><span class="dt-label">🛏️ 房型</span><span class="dt-value"><span class="good">豪华双床房 <strong>39㎡</strong></span> · 吉隆坡塔景观 · 两张单人床 · 无浴缸（仅淋浴）</span></div>
       <div class="dt-row"><span class="dt-label">🏊 泳池</span><span class="dt-value"><span class="good">25楼屋顶无边际泳池</span> · 可赏双子塔/吉隆坡塔全景 · 旁边有Sky Bar</span></div>
       <div class="dt-row"><span class="dt-label">🍳 早餐</span><span class="dt-value">自助餐 · 希尔顿标准 · 有椰浆饭/印度煎饼 · 儿童5岁及以下免费 · 6:30–10:30</span></div>
       <div class="dt-row"><span class="dt-label">👨‍💼 服务</span><span class="dt-value">中英双语前台 · 服务评价不错 · 但电梯需等 · <span class="bad">南楼住客不能用北楼健身房</span></span></div>
       <div class="dt-row"><span class="dt-label">🆕 新旧</span><span class="dt-value"><span class="good">2022年新开业，设施极新</span> · 现代设计 · 卫生好 · 隔音一般（可听到隔壁洗澡）</span></div>
-      <div class="dt-row"><span class="dt-label">🏙️ 周边</span><span class="dt-value">SOGO商场 · 本地市场 · <span class="bad">晚上需打车到门口</span> · 不建议步行乱逛</span></div>
+      <div class="dt-row"><span class="dt-label">🏙️ 周边</span><span class="dt-value">SOGO商场 · 本地市场 · 人员较杂 · <span class="mid">晚上建议打车回酒店</span></span></div>
       <div class="dt-row"><span class="dt-label">⭐ 评分</span><span class="dt-value">Trip.com 8.4（1,609评） · Kayak 8.1 · 清洁8.7 · 位置8.4 · 服务8.4</span></div>
     </div>
 
     <div class="pc-wrap">
       <div class="pc-item pc-pro">✅ <strong>核心优势：</strong>39㎡超大空间（三家中最大） · 2022年新开业设施极新 · 屋顶泳池赏塔景 · 性价比高</div>
-      <div class="pc-item pc-con">❌ <strong>主要劣势：</strong>秋杰区治安一般 · 夜晚不能自由逛街 · 无浴缸 · 隔音一般 · 周边环境较杂乱</div>
+      <div class="pc-item pc-con">❌ <strong>主要劣势：</strong>周边人员环境较杂 · 夜间不太适合闲逛 · 无浴缸 · 隔音一般 · 离双子塔景区约1.5km</div>
     </div>
 
     <div class="scr-row">
@@ -554,7 +870,7 @@ body {
         <h3>温德姆戴斯酒店 <span class="star-big">★★★</span></h3>
         <div class="nm-en">Days Hotel & Suites by Wyndham KL (Chan Sow Lin)</div>
       </div>
-      <div class="price-big">CNY 12,660</div>
+      <div class="price-big">CNY 13,764</div>
     </div>
     <div class="room-tags">
       <span class="room-tag rt-purple">🛏️ 超豪华双床套房 · 28㎡</span>
@@ -565,14 +881,14 @@ body {
     </div>
 
     <div class="photo-gallery">
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/1mc1w12000c5bgyqqD146_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 外观</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0202e120008nru9mhA23A_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 外观另一角</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0234n2224wpm8ugi8D00E_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🛏️ 超豪华双床套房</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0236v12000rjt2y5315B6_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🛋️ 套房客厅区</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0230y12000rw5z5utB303_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🚿 浴室</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0234q224x98ymjbf92659_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏛️ 大堂</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0231h224x98mgs2flA69F_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🍳 餐厅</div></div>
-      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/1mc0h12000cghqq4o8ECD_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="ph-label">🏋️ 健身房</div></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02002120008nrvndoEE6C_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0202e120008nru9mhA23A_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02018120008nrue8n6722_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02053120008nruenw1E8F_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02047120008nrvcusC6E0_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/02057120008oc9ml34505_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0200q120008nrv6b34E3D_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
+      <div class="photo-item"><img src="https://dimg04.c-ctrip.com/images/0205n120008nrup1i514E_R_600_360_R5_Q70.jpg" alt="" loading="lazy" onerror="this.parentElement.style.display='none'"></div>
     </div>
 
     <div class="detail-table">
@@ -611,7 +927,7 @@ body {
     <h3>⚖️ 总结：按你的需求选</h3>
     <p>
       <strong>🏨 选凯煌 →</strong> 要市中心位置、自由逛街、有儿童泳池+浴缸 → 但需接受设施旧、房间小<br>
-      <strong>🏨 选希尔顿 →</strong> 要超大空间、新设施、屋顶泳池塔景 → 但需接受晚上不能出门散步<br>
+      <strong>🏨 选希尔顿 →</strong> 要超大空间、新设施、屋顶泳池塔景 → 但周边人员较杂、夜间出行需注意<br>
       <strong>🏨 选戴斯 →</strong> 要省钱、纯睡觉早出晚归、地铁出行 → 但需接受没泳池、没景观
     </p>
   </div>
@@ -794,6 +1110,29 @@ async function resetVotes() {
 // Load on page load & auto-refresh every 10s
 loadVotes();
 setInterval(loadVotes, 10000);
+</script>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+<script>
+(function(){var btn=document.getElementById('backToTop');if(!btn)return;
+window.addEventListener('scroll',function(){if(window.scrollY>400)btn.classList.add('show');else btn.classList.remove('show')});
+btn.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})})})();
 </script>
 </body>
 </html>
