@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详细行程 · 2026暑假马来西亚亲子游</title>
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card-bg: #fffcf5;
+  --text-primary: #5a3e2b;
+  --text-secondary: #8b7355;
+  --accent: #e8934a;
+  --accent-light: #fef0e0;
+  --border: #e8d5b5;
+  --shadow: rgba(180, 140, 100, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+.container { max-width: 820px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #2d1b69 0%, #6c5ce7 30%, #e84393 60%, #2b6cb0 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.1;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,27,105,0.88) 0%, rgba(108,92,231,0.78) 50%, rgba(43,108,176,0.92) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+}
+.hero-content h1 {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.hero-content p {
+  font-size: clamp(14px, 2vw, 17px);
+  color: rgba(255,255,255,0.85);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.hero-wave {
+  position: absolute; bottom: -2px; left: 0; right: 0; height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23fdf8f0'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+.hero .back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.hero .back-link:hover { color: #fff; }
+
+/* ===== Day Navigation ===== */
+.day-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 28px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 18px;
+  position: sticky;
+  top: 8px;
+  z-index: 10;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 12px var(--shadow);
+}
+.day-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s;
+}
+.day-nav a:hover { transform: scale(1.15); }
+.day-nav a.nav-kl { background: linear-gradient(135deg, #2d1b69, #6c5ce7); }
+.day-nav a.nav-ml { background: linear-gradient(135deg, #e84393, #fd79a8); }
+.day-nav a.nav-pg { background: linear-gradient(135deg, #f39c12, #e74c3c); }
+.day-nav a.nav-flight { background: linear-gradient(135deg, #6c5ce7, #a78bfa); }
+.day-nav a.nav-depart { background: linear-gradient(135deg, #636e72, #b2bec3); }
+
+/* ===== Day Card ===== */
+.day-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px var(--shadow);
+  scroll-margin-top: 80px;
+  position: relative;
+}
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 20px 20px 0 0;
+}
+.day-card.kl::before { background: linear-gradient(90deg, #2d1b69, #6c5ce7); }
+.day-card.ml::before { background: linear-gradient(90deg, #e84393, #fd79a8); }
+.day-card.pg::before { background: linear-gradient(90deg, #f39c12, #e74c3c); }
+.day-card.flight::before { background: linear-gradient(90deg, #6c5ce7, #a78bfa); }
+.day-card.depart::before { background: linear-gradient(90deg, #636e72, #b2bec3); }
+
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.day-number {
+  width: 44px; height: 44px; min-width: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800; color: #fff;
+}
+.day-card.kl .day-number { background: linear-gradient(135deg, #2d1b69, #6c5ce7); }
+.day-card.ml .day-number { background: linear-gradient(135deg, #e84393, #fd79a8); }
+.day-card.pg .day-number { background: linear-gradient(135deg, #f39c12, #e74c3c); }
+.day-card.flight .day-number { background: linear-gradient(135deg, #6c5ce7, #a78bfa); }
+.day-card.depart .day-number { background: linear-gradient(135deg, #636e72, #b2bec3); }
+
+.day-title-area { flex: 1; }
+.day-title-area .date { font-size: 13px; color: var(--text-secondary); }
+.day-title-area h2 { font-size: 18px; font-weight: 700; color: var(--text-primary); }
+.day-title-area .weather { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+.day-hotel {
+  display: inline-block;
+  font-size: 12px;
+  background: var(--accent-light);
+  padding: 3px 12px;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Timeline */
+.timeline { position: relative; padding-left: 20px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px; top: 4px; bottom: 4px;
+  width: 2px;
+  background: var(--border);
+}
+.time-item {
+  position: relative;
+  padding: 0 0 14px 18px;
+}
+.time-item::before {
+  content: '';
+  position: absolute;
+  left: -15px; top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: var(--card-bg);
+}
+.time-item.meal::before { border-color: #38a169; }
+.time-item.activity::before { border-color: #6c5ce7; }
+.time-item.transport::before { border-color: #e84393; }
+.time-item .time-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 2px;
+}
+.time-item .time-desc {
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.6;
+}
+.time-item .time-desc strong { color: var(--text-primary); }
+.time-item .time-desc .tag {
+  display: inline-block;
+  font-size: 11px;
+  padding: 1px 8px;
+  border-radius: 6px;
+  margin: 0 4px 4px 0;
+  font-weight: 600;
+}
+.tag-food { background: #fef3c7; color: #92400e; }
+.tag-sight { background: #ede9fe; color: #5b21b6; }
+.tag-tip { background: #dbeafe; color: #1e40af; }
+.tag-warn { background: #fee2e2; color: #991b1b; }
+
+.tip-box {
+  margin-top: 12px;
+  padding: 12px 14px;
+  background: #f0f7ff;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #4a5568;
+  line-height: 1.7;
+}
+.tip-box .tip-title {
+  font-weight: 700;
+  color: #2b6cb0;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ===== Summary bar ===== */
+.summary-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  justify-content: space-around;
+  text-align: center;
+}
+.summary-item {}
+.summary-item .num { font-size: 24px; font-weight: 800; }
+.summary-item .label { font-size: 12px; opacity: 0.8; }
+
+/* ===== Section ===== */
+.section-header {
+  text-align: center;
+  margin: 32px 0 20px;
+}
+.section-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+.section-header p { font-size: 14px; color: var(--text-secondary); }
+
+/* ===== Food Card ===== */
+.food-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.food-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+}
+.food-card h4 { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.food-card p { font-size: 12px; color: #4a5568; margin-top: 4px; }
+.food-card .price { font-size: 12px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .day-card { padding: 18px 16px; }
+  .food-grid { grid-template-columns: 1fr; }
+  .summary-bar { flex-wrap: wrap; }
+  .day-header { gap: 10px; }
+  .day-number { width: 36px; height: 36px; min-width: 36px; font-size: 15px; }
+  .day-title-area h2 { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 30vh; }
+  .day-nav { padding: 10px 12px; gap: 4px; }
+  .day-nav a { width: 30px; height: 30px; font-size: 11px; }
+}
+
+/* ===== Photo ===== */
+.spot-photo {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 12px 0 14px;
+  background: #f0ebe5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.spot-photo img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  max-height: 280px;
+}
+.photo-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0 14px;
+}
+.photo-row .spot-photo { margin: 0; }
+.photo-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 12px 0 14px;
+}
+.photo-row-3 .spot-photo { margin: 0; }
+.photo-row-3 .spot-photo img { max-height: 180px; }
+
+@media (max-width: 600px) {
+  .photo-row { grid-template-columns: 1fr; }
+  .photo-row-3 { grid-template-columns: 1fr; }
+}
+
+/* ===== Print ===== */
+@media print {
+  .day-nav { display: none; }
+  .day-card { break-inside: avoid; }
+}
+
+/* ===== Map & Info ===== */
+.info-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.info-badge.green { background: #d4edda; color: #0e5e1e; }
+.info-badge.blue { background: #dbeafe; color: #1e40af; }
+.info-badge.yellow { background: #fef3c7; color: #92400e; }
+.info-badge.purple { background: #ede9fe; color: #5b21b6; }
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
+
+/* ===== Lightbox ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.active { display: flex; }
+.lightbox-content {
+  position: relative;
+  max-width: 92vw;
+  max-height: 92vh;
+}
+.lightbox-content img {
+  max-width: 92vw;
+  max-height: 90vh;
+  display: block;
+  border-radius: 6px;
+  cursor: default;
+}
+.lightbox-close {
+  position: fixed;
+  top: 18px; right: 24px;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 300;
+  cursor: pointer;
+  z-index: 10000;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: none;
+  font-size: 38px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 10000;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s, background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.lightbox-nav:hover { opacity: 1; background: rgba(255,255,255,0.25); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+.lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-family: -apple-system, sans-serif;
+  z-index: 10000;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .lightbox-nav { font-size: 28px; padding: 10px 14px; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-close { font-size: 34px; top: 10px; right: 14px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <a class="back-link" href="index.html">&larr; 返回主页</a>
+    <h1>📅 10天9晚 · 详细行程</h1>
+    <p>吉隆坡 · 马六甲 · 槟城&ensp;|&ensp;2026年8月4日—8月13日</p>
+    <p style="margin-top:8px;font-size:13px;opacity:0.7;">本行程综合旅行社合同约定、鲸骆旅行推荐方案及全网精选攻略整理</p>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<div class="container">
+
+  <!-- ===== Summary Bar ===== -->
+  <div class="summary-bar">
+    <div class="summary-item"><div class="num">10</div><div class="label">天数</div></div>
+    <div class="summary-item"><div class="num">3</div><div class="label">城市</div></div>
+    <div class="summary-item"><div class="num">19</div><div class="label">人数</div></div>
+    <div class="summary-item"><div class="num">31座</div><div class="label">包车</div></div>
+    <div class="summary-item"><div class="num">9晚</div><div class="label">住宿</div></div>
+  </div>
+
+  <!-- ===== Day Navigation ===== -->
+  <nav class="day-nav">
+    <a href="#day1" class="nav-flight" title="Day 1 上海→吉隆坡">1</a>
+    <a href="#day2" class="nav-kl" title="Day 2 吉隆坡市区">2</a>
+    <a href="#day3" class="nav-ml" title="Day 3 马六甲">3</a>
+    <a href="#day4" class="nav-kl" title="Day 4 云顶高原">4</a>
+    <a href="#day5" class="nav-flight" title="Day 5 转战槟城">5</a>
+    <a href="#day6" class="nav-pg" title="Day 6 乔治市文化">6</a>
+    <a href="#day7" class="nav-pg" title="Day 7 升旗山">7</a>
+    <a href="#day8" class="nav-pg" title="Day 8 浮罗山背">8</a>
+    <a href="#day9" class="nav-pg" title="Day 9 海滩自由">9</a>
+    <a href="#day10" class="nav-depart" title="Day 10 返程">10</a>
+  </nav>
+
+  <!-- ===== Day 1 ===== -->
+  <div class="day-card flight" id="day1">
+    <div class="day-header">
+      <div class="day-number">1</div>
+      <div class="day-title-area">
+        <div class="date">8月4日（周二）</div>
+        <h2>✈️ 上海 → 吉隆坡 · 抵达之夜</h2>
+        <div class="weather">🌤 吉隆坡 25~33°C · 偶有阵雨</div>
+        <span class="day-hotel">🏨 吉隆坡凯煌酒店 Concorde Hotel KL</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/klcc_final.jpg" alt="吉隆坡双子塔" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/airplane_wing.jpg" alt="马航空客A330" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/night_city.jpg" alt="吉隆坡城市夜景" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/boarding_pass.jpg" alt="吉隆坡机场值机" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/hotel_room.jpg" alt="凯煌酒店客房" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item transport">
+        <span class="time-label">12:00-13:30</span>
+        <div class="time-desc">
+          <strong>出发前往浦东机场</strong><br>
+          建议各家庭自行安排出发时间，提前2小时抵达机场T2航站楼
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">15:25 → 21:00</span>
+        <div class="time-desc">
+          <strong>✈️ MH389 浦东T2 → 吉隆坡T1</strong><br>
+          马来西亚航空 · 空客A330-300 · 飞行约5h35m<br>
+          机上提供晚餐和饮品
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">21:00-22:00</span>
+        <div class="time-desc">
+          <strong>🛬 抵达吉隆坡 · 入境手续</strong><br>
+          <span class="tag tag-tip">🛂 免签入境</span>
+          马来西亚对中国公民免签30天 · 需提前3天在线填写<a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" style="color:#6c5ce7;">MDAC电子入境卡</a>并打印携带<br>
+          提取行李后在一楼出口集合
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">22:00-22:40</span>
+        <div class="time-desc">
+          <strong>🚙 专车接机 → 酒店</strong><br>
+          旅行社安排31座专车+中文导游接机，送往吉隆坡凯煌酒店<br>
+          车程约40分钟
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">22:40-23:30</span>
+        <div class="time-desc">
+          <strong>🏨 办理入住 · 休息</strong><br>
+          Concorde Hotel KL · Jalan Sultan Ismail<br>
+          <span class="tag tag-tip">💡 酒店附近有7-11便利店，可买水和小吃</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 行前备忘</span>
+      ✈️ 建议提前选座（靠走道方便照顾家人）· 📱 抵达后换马来西亚电话卡或开通国际漫游 · 💵 机场可ATM取令吉（Maybank汇率最佳）· 🧥 飞机上冷气较足，带一件薄外套
+    </div>
+  </div>
+
+  <!-- ===== Day 2 ===== -->
+  <div class="day-card kl" id="day2">
+    <div class="day-header">
+      <div class="day-number">2</div>
+      <div class="day-title-area">
+        <div class="date">8月5日（周三）</div>
+        <h2>🏙️ 吉隆坡市区包车一日游</h2>
+        <div class="weather">🌤 晴间多云 26~34°C</div>
+        <span class="day-hotel">🏨 吉隆坡凯煌酒店 Concorde Hotel KL</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/batu_final.jpg" alt="黑风洞彩虹阶梯" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/merdeka_final.jpg" alt="独立广场" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/istana_negara.jpg" alt="新国家皇宫" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/central_market.jpg" alt="中央艺术坊" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/bukit_bintang.jpg" alt="武吉免登商圈" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">07:30-08:30</span>
+        <div class="time-desc">
+          <strong>🍳 酒店早餐</strong><br>
+          酒店提供自助早餐，品种丰富
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:00-10:30</span>
+        <div class="time-desc">
+          <strong>🏛️ 新国家皇宫（Istana Negara）</strong><br>
+          <span class="tag tag-sight">🎫 外观免费</span>
+          马来西亚最高元首的官方官邸，金色圆顶的伊斯兰风格建筑，可在正门与骑兵卫兵合影
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:30-11:00</span>
+        <div class="time-desc">
+          <strong>🛣️ 联邦大道（Federal Highway）</strong><br>
+          吉隆坡最美公路，沿途可拍城市天际线照片
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">11:00-12:30</span>
+        <div class="time-desc">
+          <strong>🕉️ 黑风洞（Batu Caves）</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          印度教圣地，272级彩虹阶梯，巨大的穆卢干神像金碧辉煌<br>
+          <span class="tag tag-warn">⚠️ 注意猴子会抢食物和眼镜！不要手提塑料袋</span>
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:30-14:00</span>
+        <div class="time-desc">
+          <strong>🍜 午餐：地道美食体验</strong><br>
+          <span class="tag tag-food">推荐</span>
+          <strong>肉骨茶（Bak Kut Teh）</strong> — 吉隆坡必吃，药材炖排骨，汤浓味香<br>
+          <strong>椰浆饭（Nasi Lemak）</strong> — 马来西亚"国菜"，椰奶蒸饭配辣酱、小鱼干<br>
+          导游会推荐当地人气餐厅
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">14:00-15:00</span>
+        <div class="time-desc">
+          <strong>🎨 中央艺术坊（Central Market）</strong><br>
+          手信购物好去处，各种马来西亚手工艺品、蜡染布、锡器、冰箱贴等<br>
+          <span class="tag tag-tip">💡 记得砍价，一般从标价5折开始</span>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">15:00-15:45</span>
+        <div class="time-desc">
+          <strong>🇲🇾 独立广场（Merdeka Square）+ 苏丹阿都沙末大厦</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          1957年马来西亚独立宣言所在地，对面是摩尔式风格的宏伟建筑
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">16:00-17:00</span>
+        <div class="time-desc">
+          <strong>🛍️ 武吉免登（Bukit Bintang）/ 柏威年广场</strong><br>
+          吉隆坡最繁华商圈，超火的麦当劳路口拍照打卡<br>
+          柏威年广场内有大量品牌店、美食广场
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">17:00-17:30</span>
+        <div class="time-desc">
+          <strong>🗼 双子塔（KLCC）打卡</strong><br>
+          吉隆坡地标，高452米，在塔前广场拍照最佳<br>
+          也可进入Suria KLCC商场逛
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">18:00-20:00</span>
+        <div class="time-desc">
+          <strong>🌙 阿罗街（Jalan Alor）夜市晚餐</strong><br>
+          <span class="tag tag-food">必吃</span>
+          吉隆坡最有名的美食街！推荐：<br>
+          · 烤魔鬼鱼（Ikan Bakar）🔥<br>
+          · 沙爹串（Satay）— 花生酱烤鸡肉串<br>
+          · 炒粿条（Char Kway Teow）<br>
+          · 魔鬼鱼烧🔥  · 椰子冰沙 🥥<br>
+          · 尤其推荐：黄亚华烤鸡翅（Wong Ah Wah）— 阿罗街标志性美食！
+        </div>
+      </div>
+      <div class="time-item">
+        <span class="time-label">20:30</span>
+        <div class="time-desc">
+          <strong>🚙 返回酒店休息</strong><br>
+          结束充实的一天～
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🚐 今日为包车一日游（不超过10小时）· 🌞 吉隆坡炎热，备足水、防晒霜、帽子 · 🏪 便利店随时可买饮料 · 👟 穿舒适鞋子，步行较多
+    </div>
+  </div>
+
+  <!-- ===== Day 3 ===== -->
+  <div class="day-card ml" id="day3">
+    <div class="day-header">
+      <div class="day-number">3</div>
+      <div class="day-title-area">
+        <div class="date">8月6日（周四）</div>
+        <h2>🏛️ 马六甲南洋风情包车一日游</h2>
+        <div class="weather">🌤 晴 26~33°C</div>
+        <span class="day-hotel">🏨 吉隆坡凯煌酒店 Concorde Hotel KL</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/putra_final.jpg" alt="粉红清真寺" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/malacca_final.jpg" alt="马六甲荷兰红屋" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/strait_mosque_final.jpg" alt="马六甲海峡清真寺" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/jonker_street.jpg" alt="鸡场街" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/st_pauls.jpg" alt="圣保罗教堂" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">07:00-07:30</span>
+        <div class="time-desc"><strong>🍳 酒店早餐</strong></div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">09:00-09:40</span>
+        <div class="time-desc">
+          <strong>🚙 酒店出发，前往布城（Putrajaya）</strong><br>
+          车程约40分钟
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">09:40-10:15</span>
+        <div class="time-desc">
+          <strong>💒 粉红清真寺（Putra Mosque）+ 首相府</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          马来西亚最大的清真寺，通体玫瑰粉色，水上建筑如梦如幻<br>
+          女性需穿长袍（入口免费提供），男士穿长裤<br>
+          湖边有绝佳拍照点📸
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">10:30-12:00</span>
+        <div class="time-desc">
+          <strong>🚙 前往马六甲（Melaka）</strong><br>
+          车程约1.5小时，可在车上小憩
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">12:00-12:30</span>
+        <div class="time-desc">
+          <strong>🏛️ 荷兰红屋（Stadthuys）+ 荷兰广场</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          建于1650年的荷兰殖民建筑，是东南亚最古老的荷兰建筑<br>
+          红色外墙极其上镜，广场中央的维多利亚女王喷泉是标志
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:30-14:00</span>
+        <div class="time-desc">
+          <strong>🍚 鸡场街（Jonker Street）午餐</strong><br>
+          <span class="tag tag-food">必吃</span>
+          · <strong>鸡粒饭（Chicken Rice Ball）</strong> — 马六甲特有！米饭搓成圆形，配白切鸡<br>
+          · 推荐：中华茶室（和记）或 古城鸡粒饭<br>
+          · 甜点：Nadeje千层蛋糕 — 马六甲最美味的千层蛋糕 🍰<br>
+          鸡场街是马六甲最著名的文化街，午餐后可闲逛
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">14:00-14:30</span>
+        <div class="time-desc">
+          <strong>⛪ 圣地亚哥古城门 + 圣保罗教堂</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          葡萄牙殖民时期留下的古城门和教堂废墟，可俯瞰马六甲海峡
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">15:00-16:00</span>
+        <div class="time-desc">
+          <strong>🕌 马六甲海峡清真寺（Malacca Straits Mosque）</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          建在海上的清真寺，涨潮时如悬浮水面<br>
+          黄昏时分的夕阳是绝美拍摄时间📸
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">16:00-16:30</span>
+        <div class="time-desc">
+          <strong>🌊 马六甲海峡地标打卡</strong><br>
+          在马六甲海峡标志点合影留念
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">17:00-19:00</span>
+        <div class="time-desc">
+          <strong>🚙 返回吉隆坡</strong><br>
+          车程约2小时
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">19:00-20:30</span>
+        <div class="time-desc">
+          <strong>🍽️ 晚餐（自由安排）</strong><br>
+          返回酒店附近用餐，或前往<span class="tag tag-food">推荐</span>
+          <strong>十号胡同（Lot 10 Hutong）</strong>— 吉隆坡美食中心，集合多种地道小吃
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🚐 今日包车全程约10小时 · 👗 粉红清真寺需穿着得体（入口免费提供长袍）· 🌞 马六甲比吉隆坡更热，注意防暑 · 💧 车上备足饮用水
+    </div>
+  </div>
+
+  <!-- ===== Day 4 ===== -->
+  <div class="day-card kl" id="day4">
+    <div class="day-header">
+      <div class="day-number">4</div>
+      <div class="day-title-area">
+        <div class="date">8月7日（周五）</div>
+        <h2>⛰️ 云顶高原一日游（Genting Highlands）</h2>
+        <div class="weather">🌤 云顶 18~25°C（比市区凉爽）</div>
+        <span class="day-hotel">🏨 吉隆坡凯煌酒店 Concorde Hotel KL</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/genting_final.jpg" alt="云顶高原" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/amusement_park.jpg" alt="云顶天城世界主题乐园" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/mountain_view.jpg" alt="云顶山景" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">07:30-08:00</span>
+        <div class="time-desc"><strong>🍳 酒店早餐 · 准备出发</strong></div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">08:30-10:00</span>
+        <div class="time-desc">
+          <strong>🚙 吉隆坡 → 云顶高原</strong><br>
+          车程约1.5小时，盘山公路蜿蜒而上
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:00-10:30</span>
+        <div class="time-desc">
+          <strong>🚡 云顶缆车（Awana Skyway）</strong><br>
+          东南亚最快最长的缆车，全长3.38公里，俯瞰热带雨林<br>
+          天气好时能看到云海☁️<br>
+          <span class="tag tag-tip">🎫 包车导游会协助购票</span>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:30-12:30</span>
+        <div class="time-desc">
+          <strong>🎡 云顶天城世界主题乐园（Skytropolis Indoor Theme Park）</strong><br>
+          室内主题乐园，有过山车、旋转木马等适合各年龄段的游乐设施<br>
+          也可在云顶第一世界广场逛街、逛名牌折扣店
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:30-13:30</span>
+        <div class="time-desc">
+          <strong>🍜 午餐：云顶美食</strong><br>
+          第一世界广场内有众多餐厅，中式、马来式、西式任选
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">13:30-14:30</span>
+        <div class="time-desc">
+          <strong>🙏 清水岩庙（Chin Swee Caves Temple）</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          位于半山的壮观佛寺，有巨大的观音像和九层宝塔<br>
+          风景优美，可俯瞰山下的云海
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">14:30-16:00</span>
+        <div class="time-desc">
+          <strong>🛍️ 云顶Premium Outlets购物</strong><br>
+          各大品牌的折扣店，可顺便为家人朋友挑礼物
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">16:00-17:30</span>
+        <div class="time-desc">
+          <strong>🚙 返回吉隆坡</strong><br>
+          下山回市区
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">18:00-19:00</span>
+        <div class="time-desc">
+          <strong>🏛️ 国家清真寺（National Mosque）</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          如时间充裕，可顺路参观（距酒店车程10分钟）<br>
+          独特的星形屋顶，可容纳15000人祈祷<br>
+          非穆斯林在开放时间可进入，需穿长袍（门口免费提供）
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">19:00-20:30</span>
+        <div class="time-desc">
+          <strong>🍽️ 晚餐：茨厂街（Petaling Street / Chinatown）</strong><br>
+          <span class="tag tag-food">推荐</span>
+          · <strong>丽丰茶冰室</strong> — 牛肉面、冰咖啡<br>
+          · <strong>金莲记</strong> — 福建面（槟城虾面风格）<br>
+          · 饭后逛逛茨厂街夜市，买些小纪念品
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🧥 云顶高原气温比市区低10°C左右，记得带一件薄外套 · 🎡 室内主题乐园适合小朋友 · 🛍️ 云顶Premium Outlets常有不错折扣 · ⚠️ 赌场区域未成年人不得进入
+    </div>
+  </div>
+
+  <!-- ===== Day 5 ===== -->
+  <div class="day-card flight" id="day5">
+    <div class="day-header">
+      <div class="day-number">5</div>
+      <div class="day-title-area">
+        <div class="date">8月8日（周六）</div>
+        <h2>🚌 转战槟城 · 途经怡保美食之旅</h2>
+        <div class="weather">🌤 怡保 25~33°C · 槟城 26~32°C</div>
+        <span class="day-hotel">🏨 丹绒点公寓 Tanjung Point Residences（槟城）</span>
+      </div>
+    </div>
+
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/ipoh_final.jpg" alt="怡保二奶巷" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/ipoh_old_town.jpg" alt="怡保火车站" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/scenic_drive.jpg" alt="西海岸沿途风光" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/street_food.jpg" alt="怡保美食" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">07:00-08:00</span>
+        <div class="time-desc"><strong>🍳 酒店早餐 · 退房</strong><br>整理行李，办理退房手续</div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">08:00-11:00</span>
+        <div class="time-desc">
+          <strong>🚙 包车北上：吉隆坡 → 怡保（Ipoh）</strong><br>
+          全程约3小时 · 途经南北大道高速公路<br>
+          沿途可欣赏马来西亚半岛的棕榈园和热带风光🌴
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">11:00-13:00</span>
+        <div class="time-desc">
+          <strong>🏘️ 怡保旧城区打卡</strong><br>
+          霹雳州首府，以白咖啡和壁画闻名<br>
+          · <strong>二奶巷（Concubine Lane）</strong> — 最热闹的打卡老街，文艺小店林立<br>
+          · <strong>三奶巷壁画街</strong> — 铁线漫画和壁画，适合拍照<br>
+          · <strong>怡保火车站</strong> — 纯白色殖民建筑，被称为"怡保的泰姬陵"🏛️<br>
+          · <span class="tag tag-food">必喝</span> 到怡保一定要喝一杯<strong>白咖啡</strong>！推荐南香白咖啡
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">13:00-14:00</span>
+        <div class="time-desc">
+          <strong>🍜 怡保午餐</strong><br>
+          <span class="tag tag-food">必吃</span>
+          · <strong>怡保河粉（沙河粉）</strong> — 比广东的还滑嫩！推荐老黄芽菜鸡河粉<br>
+          · <strong>芽菜鸡</strong> — 怡保特色，白切鸡配豆芽<br>
+          · <strong>盐焗鸡</strong> — 用粗盐焗制，香嫩入味
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">14:00-17:00</span>
+        <div class="time-desc">
+          <strong>🚙 怡保 → 槟城（Penang）</strong><br>
+          车程约3小时<br>
+          沿西海岸北上，经过霹雳州和槟城跨海大桥🌉
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">17:00-18:00</span>
+        <div class="time-desc">
+          <strong>🏨 抵达槟城 · 办理入住</strong><br>
+          丹绒点公寓（Tanjung Point Residences）<br>
+          海景三卧公寓，无边泳池，傍晚可以在公寓看海上日落🌅
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">18:30-21:00</span>
+        <div class="time-desc">
+          <strong>🌙 槟城美食初体验</strong><br>
+          <span class="tag tag-food">必吃</span>
+          前往<strong>新关仔角（Gurney Drive）夜市</strong>— 槟城最有名的小吃集中地<br>
+          · 炒粿条（Char Kway Teow）— 槟城招牌！🦐<br>
+          · 亚叁叻沙（Asam Laksa）— 酸辣鱼汤米粉<br>
+          · 煎蕊（Cendol）— 椰奶绿豆冰甜品🍧<br>
+          · 蚝煎（Oyster Omelette）— 鲜美酥脆
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🧳 今日是转场日，请提前一天打包好行李 · ☕ 怡保白咖啡一定要买一些带回家！ · 🌉 槟城跨海大桥全长13.5公里，是亚洲最长跨海大桥之一<br>
+      🏠 丹绒点公寓有厨房，可去超市买些水果饮料存放
+    </div>
+  </div>
+
+  <!-- ===== Day 6 ===== -->
+  <div class="day-card pg" id="day6">
+    <div class="day-header">
+      <div class="day-number">6</div>
+      <div class="day-title-area">
+        <div class="date">8月9日（周日）</div>
+        <h2>🎨 乔治市文化包车一日游</h2>
+        <span style="display:inline-block;font-size:11px;background:#fef3c7;color:#92400e;padding:2px 10px;border-radius:6px;margin-top:2px;">🔄 不走回头路·顺时针环线</span>
+        <div class="weather">🌤 晴 26~33°C</div>
+        <span class="day-hotel">🏨 丹绒点公寓 Tanjung Point Residences</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/penang_st_final.jpg" alt="槟城乔治市壁画" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/blue_mansion_final.jpg" alt="蓝屋" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/clan_jetty_final.jpg" alt="姓氏桥" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/peranakan_mansion.jpg" alt="侨生博物馆·娘惹文化" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/penang_char_kway_teow.jpg" alt="槟城炒粿条美食" loading="lazy"></div>
+    </div>
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/kopii_1.jpg" alt="槟城3日游攻略·本地人带路" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/kopii_2.jpg" alt="槟城美食地图" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/kopii_3.jpg" alt="乔治市景点攻略" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">08:00-09:00</span>
+        <div class="time-desc">
+          <strong>🍳 早餐</strong><br>
+          公寓内自理或外出享用槟城特色早餐<br>
+          <span class="tag tag-food">推荐</span>
+          <strong>多春茶室（Toh Soon Cafe）</strong>— 碳烤面包+半熟蛋+海南咖啡
+        </div>
+      </div>
+
+      <!-- ===== 上午：西区 → 南区（开始顺时针环线） ===== -->
+      <div class="time-item activity">
+        <span class="time-label">09:00-09:15</span>
+        <div class="time-desc">
+          <strong>🚙 酒店出发 · 开启不走回头路环线</strong><br>
+          <span style="font-size:12px;color:#6c5ce7;">🔄 今日路线为顺时针环线：西→南→东→北，不折返</span>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">09:30-10:15</span>
+        <div class="time-desc">
+          <strong>💙 张弼士故居（蓝屋 / Cheong Fatt Tze Mansion）</strong><br>
+          <span class="tag tag-sight">🎫 需预约参观 RM25</span>
+          全槟城最有名的建筑！靛蓝色的中式庭院，张裕葡萄酒创始人故居<br>
+          每天仅开放3个时段（11:00/14:00/15:30），选最早的场次<br>
+          <strong>建议让导游提前预约11:00场次</strong>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:30-11:15</span>
+        <div class="time-desc">
+          <strong>🏺 侨生博物馆 / 娘惹博物馆（Pinang Peranakan Mansion）</strong><br>
+          <span class="tag tag-sight">🎫 门票约RM20</span>
+          展示峇峇娘惹文化的精美博物馆，华丽的金银器皿、家具和服饰<br>
+          绿松石色的建筑本身就是风景，距蓝屋步行5分钟
+        </div>
+      </div>
+
+      <!-- ===== 中午：东区（教堂+钟楼）→ 午餐 ===== -->
+      <div class="time-item activity">
+        <span class="time-label">11:30-12:00</span>
+        <div class="time-desc">
+          <strong>⛪ 圣乔治教堂（St. George's Church）→ 旧关仔角钟楼</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          东南亚最古老的英国圣公会教堂（1818年建）<br>
+          沿海边走到旧关仔角钟楼，维多利亚式地标建筑，纯白殖民风拍照点📸
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:00-13:30</span>
+        <div class="time-desc">
+          <strong>🍜 午餐：乔治市美食探索</strong><br>
+          <span class="tag tag-food">推荐</span>
+          · <strong>汕头街（Lebuh Kimberley）</strong> — 炒粿条、四果汤、鸭粥粿汁<br>
+          · <strong>伍秀泽海南鸡饭</strong> — 老字号，仅收现金<br>
+          · 或 <strong>Red Garden美食中心</strong> — 品种丰富
+        </div>
+      </div>
+
+      <!-- ===== 下午：中央区 → 北区（壁画→小印度→爱情巷→姓氏桥日落） ===== -->
+      <div class="time-item activity">
+        <span class="time-label">13:30-14:30</span>
+        <div class="time-desc">
+          <strong>🎨 乔治市壁画街（Armenian Street Street Art）</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          槟城标志性打卡点！立陶宛艺术家Ernest Zacharevic的壁画散落在老街各处<br>
+          经典作品：<strong>"姐弟共骑"、"骑自行车的小孩"、"追风少年"、"功夫女孩"</strong><br>
+          可租自行车边骑边找壁画🚲 巷弄里还有铁艺装置画
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">14:45-15:15</span>
+        <div class="time-desc">
+          <strong>💕 爱情巷（Love Lane）</strong><br>
+          文艺小街，有咖啡馆、小酒吧，适合散步拍照<br>
+          白天文青风，晚上变酒吧街
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">15:15-15:30</span>
+        <div class="time-desc">
+          <strong>🕌 小印度（Little India）</strong><br>
+          充满印度风情的街区，香料味弥漫，彩色建筑超好拍<br>
+          可顺路逛逛印度杂货铺
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">15:45-16:15</span>
+        <div class="time-desc">
+          <strong>🏛️ 龙山堂邱公司（Khoo Kongsi）</strong><br>
+          <span class="tag tag-sight">🎫 门票约RM15</span>
+          槟城最华丽的华人宗祠，精美雕刻和彩绘<br>
+          了解华人下南洋的宗族文化
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">16:30-18:30</span>
+        <div class="time-desc">
+          <strong>🌉 姓周桥（Chew Jetty）看海上日落 🌅</strong><br>
+          <span class="tag tag-sight">🎫 免费</span>
+          百年华人水上村落，《初恋红豆冰》取景地<br>
+          木栈道延伸入海，两侧是高脚木屋<br>
+          <strong>⏰ 建议16:30-17:30到达，正好赶上日落</strong><br>
+          夕阳洒在海面上的金光，配上剪影拍照绝美📸<br>
+          附近"海墘大树下海鲜饭店"可吃晚餐
+        </div>
+      </div>
+
+      <div class="time-item meal">
+        <span class="time-label">18:30-20:00</span>
+        <div class="time-desc">
+          <strong>🌙 汕头街（Kimberley Street）夜市晚餐</strong><br>
+          <span class="tag tag-food">必吃</span>
+          · 卤鸭粿条 · 炒粿角 · 四果汤（清凉甜品）<br>
+          · 蚝煎 · 沙爹串 · 煎蕊 Cendol 🍧<br>
+          或去<strong>牛干冬街（Chulia Street）</strong>夜市，更热闹
+        </div>
+      </div>
+      <div class="time-item">
+        <span class="time-label">20:00</span>
+        <div class="time-desc"><strong>🚙 送返酒店，结束充实的一天</strong></div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🔵 蓝屋参观需预约，让导游提前订 · 🎨 壁画街建议<strong>租自行车</strong>逛，边走边拍效率最高 · 🌉 姓周桥<strong>17:00左右到达</strong>看日落最佳 · 👟 全程步行约6小时，穿舒适的鞋子<br>
+      🆓 槟城有<span style="color:#6c5ce7;font-weight:600;">CAT免费空调巴士</span>（环形19站，6:00-23:40，约20分钟一班），可到乔治市各主要景点<br>
+      ☕ <strong>槟城Kopitiam文化</strong>：坐在骑楼街边喝一杯海南白咖啡（Kopii），配碳烤面包+半熟蛋，是槟城慢生活的精髓。推荐多春茶室、广泰来茶室
+    </div>
+    <div style="border-radius:10px;overflow:hidden;margin-bottom:12px;"><img src="photos/night_market_stall.jpg" alt="槟城夜市摊位" style="width:100%;max-height:200px;object-fit:cover;" loading="lazy"></div>
+    </div>
+    <div style="background:linear-gradient(135deg,#e8faf4,#f0fdf7);border-radius:12px;padding:14px;margin:16px 0;font-size:13px;color:#4a5568;line-height:1.8;">
+      <span style="font-weight:700;color:#1a5e2a;">🗺️ 乔治市3日速览（小红书Kopii Wong攻略精华）</span><br>
+      <strong>Day 1</strong>：乔治市壁画街 + 侨生博物馆 + 姓氏桥 → 汕头街夜市<br>
+      <strong>Day 2</strong>：升旗山缆车🚡（建议买<strong>Fast Lane快速票</strong>）→ 极乐寺 → 峇都丁宜海滩日落<br>
+      <strong>Day 3</strong>：娘惹博物馆补遗 / 自由探索 → 买伴手礼 → 返程<br>
+      <span style="color:#991b1b;">💡 升旗山旺季排队时间长，Fast Lane快速通道票能省1-2小时！</span>
+    </div>
+  </div>
+
+  <!-- ===== Day 7 ===== -->
+  <div class="day-card pg" id="day7">
+    <div class="day-header">
+      <div class="day-number">7</div>
+      <div class="day-title-area">
+        <div class="date">8月10日（周一）</div>
+        <h2>🚠 升旗山 + 极乐寺 · 槟城经典一日</h2>
+        <div class="weather">🌤 晴 26~33°C</div>
+        <span class="day-hotel">🏨 丹绒点公寓 Tanjung Point Residences</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/penang_hill_final.jpg" alt="升旗山" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/kek_lok_si_final.jpg" alt="极乐寺" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/durian_final.jpg" alt="猫山王榴莲" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/penang_temple.jpg" alt="槟城华人寺庙" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/penang_food_stall.jpg" alt="槟城美食摊" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/kopii_4.jpg" alt="升旗山槟城攻略" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/kopii_5.jpg" alt="槟城美食推荐" loading="lazy"></div>
+    </div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">08:00-09:00</span>
+        <div class="time-desc"><strong>🍳 早餐</strong><br>公寓自理或外出用餐</div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">09:00-09:30</span>
+        <div class="time-desc">
+          <strong>🚙 出发前往升旗山</strong><br>
+          车程约20分钟
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">09:30-11:00</span>
+        <div class="time-desc">
+          <strong>🚡 升旗山（Penang Hill）缆车体验</strong><br>
+          <span class="tag tag-sight">🎫 缆车约RM30/人</span>
+          乘坐"宫崎骏小火车"式的缆车登上海拔833米的山顶<br>
+          俯瞰槟城全景、跨海大桥和远处的安达曼海🏞️<br>
+          山顶有观景台、咖啡厅、猫头鹰博物馆<br>
+          <span class="tag tag-tip">💡 早上人少，缆车不用排队</span>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">11:00-12:15</span>
+        <div class="time-desc">
+          <strong>🙏 极乐寺（Kek Lok Si Temple）</strong><br>
+          <span class="tag tag-sight">🎫 免费 · 登塔需另购票</span>
+          东南亚最大最壮观的佛教寺庙！<br>
+          · 七层万佛宝塔，融合中/泰/缅建筑风格<br>
+          · 巨大的观音圣像（30.2米高）<br>
+          · 满山的红灯笼和佛像，非常震撼<br>
+          · 可乘缆车登上观音像平台（RM6）
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:15-13:30</span>
+        <div class="time-desc">
+          <strong>🍜 午餐</strong><br>
+          <span class="tag tag-food">推荐</span>
+          <strong>亚依淡巴刹（Air Itam Market）</strong> — 极乐寺脚下，必吃槟城叻沙（Asam Laksa）！<br>
+          还有红豆冰、椰浆饭等
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">14:00-15:30</span>
+        <div class="time-desc">
+          <strong>🏺 侨生博物馆（或上午未去的景点补充）</strong><br>
+          如昨日时间不够，可继续游览<br>
+          或选择参观<strong>槟城博物馆</strong>了解当地历史
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">16:00-17:00</span>
+        <div class="time-desc">
+          <strong>🌿 蝴蝶公园（Entopia）</strong><br>
+          <span class="tag tag-sight">🎫 门票约RM35</span>
+          亚洲最大蝴蝶园，数千只蝴蝶自由飞舞，小朋友会超级喜欢🦋<br>
+          还有爬虫馆，可以看到各种小动物
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">18:00-20:00</span>
+        <div class="time-desc">
+          <strong>🍈 晚餐 + 榴莲季饕餮盛宴</strong><br>
+          8月正是马来西亚榴莲季！<br>
+          <span class="tag tag-food">必吃</span>
+          · <strong>猫山王（Musang King）榴莲</strong> — 世界顶级榴莲品种<br>
+          · <strong>黑刺（Black Thorn）榴莲</strong> — 更高端的品种<br>
+          推荐：<strong>榴莲夜市 / 路边榴莲档</strong> — 现开现吃，价格比国内便宜一半以上！<br>
+          导游会推荐当地人去的榴莲档
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🚠 升旗山缆车建议早上去，人少且凉爽 · 🙏 极乐寺内穿着需得体（遮盖肩膀膝盖）· 🍈 8月榴莲季不吃太可惜！猫山王在当地约RM35-50/kg（国内卖¥200+）<br>
+      ⚠️ 榴莲不能带入酒店和出租车（气味大），在档口现吃最过瘾
+    </div>
+  </div>
+
+  <!-- ===== Day 8 ===== -->
+  <div class="day-card pg" id="day8">
+    <div class="day-header">
+      <div class="day-number">8</div>
+      <div class="day-title-area">
+        <div class="date">8月11日（周二）</div>
+        <h2>🌴 浮罗山背田园一日游（Balik Pulau）</h2>
+        <div class="weather">🌤 晴 26~33°C</div>
+        <span class="day-hotel">🏨 丹绒点公寓 Tanjung Point Residences</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/balik_pulau_final.jpg" alt="浮罗山背田园" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/paddy_field.jpg" alt="浮罗山背稻田风光" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/tropical_garden.jpg" alt="热带水果园" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">08:00-09:00</span>
+        <div class="time-desc"><strong>🍳 早餐 · 准备出发</strong></div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">09:00-09:30</span>
+        <div class="time-desc">
+          <strong>🚙 酒店出发，前往浮罗山背</strong><br>
+          穿过槟城岛中央的山脉，沿途热带雨林风光🌴
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:00-10:30</span>
+        <div class="time-desc">
+          <strong>🚙 抵达浮罗山背 · 选择果园体验（二选一）</strong>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">10:30-12:00</span>
+        <div class="time-desc">
+          <strong>🍉 选项A：热带水果园（Tropical Fruit Farm）</strong><br>
+          <span class="tag tag-sight">🎫 门票约RM30</span>
+          教育性导览，可品尝各种热带水果——火龙果、山竹、红毛丹、菠萝蜜等<br>
+          可俯瞰山海美景，适合亲子教育<br>
+          <br>
+          <strong>🍈 选项B：榴莲果园（Durian Orchard）</strong><br>
+          8月正值榴莲季高峰！<br>
+          在榴莲园里现摘现开，吃最新鲜的猫山王和黑刺<br>
+          ⚠️ 必须提前预约
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:15-13:30</span>
+        <div class="time-desc">
+          <strong>🍜 当地特色午餐</strong><br>
+          <span class="tag tag-food">推荐</span>
+          · 叻沙（Laksa）<br>
+          · 炒河粉 + 答拉煎炸鸡（马来式炸鸡）<br>
+          浮罗山背以乡村美食闻名
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">13:30-14:30</span>
+        <div class="time-desc">
+          <strong>🐑 莎能牧羊场（Saanen Goat Farm）</strong><br>
+          适合亲子互动喂羊🐏、拍照，品尝新鲜羊奶<br>
+          孩子们会超喜欢！
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">14:30-15:15</span>
+        <div class="time-desc">
+          <strong>🐴 马场打卡</strong><br>
+          近距离接触马匹，享受静谧的乡村氛围<br>
+          非常适合拍摄"南洋风情"生活照📸
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">15:15-16:30</span>
+        <div class="time-desc">
+          <strong>🚲 稻田探险（二选一）</strong><br>
+          <strong>选项A：单车骑行（Cycling）</strong> 🚲<br>
+          在稻田中骑行，体验悠闲慢生活，适合全家<br>
+          <br>
+          <strong>选项B：全地形越野车（ATV）</strong> 🏎️<br>
+          追求活力与刺激，在田野中飞驰（需一定体力）
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">16:30-18:00</span>
+        <div class="time-desc">
+          <strong>🦐 傍晚海鲜晚餐 + 日落观赏</strong><br>
+          浮罗山背以海鲜闻名！在河口渔村享用新鲜海产<br>
+          或感受地道渔村风情
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">18:00-18:30</span>
+        <div class="time-desc"><strong>🚙 返回公寓</strong></div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🌴 浮罗山背是槟城的"后花园"，保留着纯朴的乡村风貌 · 👟 穿适合户外活动的鞋 · 🦟 田园蚊虫较多，带防蚊液 · 🍈 榴莲果园最好提前让导游预约 · 🐑 莎能牧羊场很适合小朋友
+    </div>
+  </div>
+
+  <!-- ===== Day 9 ===== -->
+  <div class="day-card pg" id="day9">
+    <div class="day-header">
+      <div class="day-number">9</div>
+      <div class="day-title-area">
+        <div class="date">8月12日（周三）</div>
+        <h2>🏖️ 自由日 · 海滩 + 美食 + 购物</h2>
+        <div class="weather">🌤 晴 26~33°C</div>
+        <span class="day-hotel">🏨 丹绒点公寓 Tanjung Point Residences</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/batu_ferringhi_final.jpg" alt="巴都丁宜海滩" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/penang_park.jpg" alt="槟城国家公园" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/ocean_sunset.jpg" alt="槟城海上日落" loading="lazy"></div>
+    </div>
+    <div class="photo-row">
+      <div class="spot-photo"><img src="photos/beach_chairs.jpg" alt="沙滩休闲" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/pier_sunset.jpg" alt="码头晚霞" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item">
+        <span class="time-label">自由安排</span>
+        <div class="time-desc">
+          <strong>今天是完全自由的一天！没有包车安排，按自己的节奏享受槟城 🎯</strong>
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">🌅 上午方案A</span>
+        <div class="time-desc">
+          <strong>🏖️ 巴都丁宜海滩（Batu Ferringhi Beach）</strong><br>
+          槟城最著名的海滩，白沙细腻，海水清澈<br>
+          可玩水上项目：香蕉船、滑翔伞、摩托艇<br>
+          海滩边有很多餐厅和酒吧
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">🌿 上午方案B</span>
+        <div class="time-desc">
+          <strong>🌴 热带香料园（Tropical Spice Garden）</strong><br>
+          占地8英亩的香料植物园，了解各种热带香料<br>
+          或前往<strong>槟城国家公园（Penang National Park）</strong>徒步<br>
+          去猴子海滩（Monkey Beach）和Meromictic湖
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">🍜 午餐自由探索</span>
+        <div class="time-desc">
+          <span class="tag tag-food">推荐</span>
+          · <strong>汕头街（Lebuh Kimberley）</strong> — 中午去人少，炒粿条、四果汤、鸭粥粿汁<br>
+          · <strong>德成饭店（Tek Sen Restaurant）</strong> — 道地中式家常菜，排队名店<br>
+          · <strong>Noodle Talk</strong> — 创新型面食
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">🛍️ 下午：伴手礼采购</span>
+        <div class="time-desc">
+          · <strong>槟城白咖啡</strong> — 旧街场（Old Town）或怡保白咖啡<br>
+          · <strong>豆蔻</strong> — 槟城特产，可买豆蔻油、豆蔻膏<br>
+          · <strong>榴莲制品</strong> — 榴莲糕、榴莲巧克力<br>
+          · <strong>峇迪蜡染布</strong> — 马来西亚传统服饰/布料<br>
+          · <strong>光大广场（Komtar）</strong> — 槟城最大购物中心
+        </div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">🎯 备选活动</span>
+        <div class="time-desc">
+          · <strong>逃生探险主题乐园（ESCAPE Penang）</strong> — 水上乐园+高空绳索，适合大孩子和成人<br>
+          · <strong>槟城3D幻觉博物馆</strong> — 有趣拍照打卡<br>
+          · 回公寓泳池畅游🏊 · 在Tanjung Bungah海边散步
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">🌙 告别晚餐</span>
+        <div class="time-desc">
+          <span class="tag tag-food">推荐</span>
+          · <strong>红园（Red Garden）</strong> — 美食夜市，品种丰富<br>
+          · <strong>Gurney Drive新关仔角</strong> — 再去一次！把没吃过的都尝一遍<br>
+          · <strong>娘惹菜</strong> — 如Ivy's Kitchen或Auntie Gaik Lean's（米其林必比登推荐）
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 今日贴士</span>
+      🛍️ 买伴手礼注意行李重量（每人托运行李额度）· 🍈 榴莲制品可以带上飞机（新鲜榴莲不行）· 💵 建议今天把剩余令吉花完或用掉<br>
+      🏖️ 注意海滩安全，在指定区域游泳 · 📱 Grab打车很方便，不用包车
+    </div>
+  </div>
+
+  <!-- ===== Day 10 ===== -->
+  <div class="day-card depart" id="day10">
+    <div class="day-header">
+      <div class="day-number">10</div>
+      <div class="day-title-area">
+        <div class="date">8月13日（周四）</div>
+        <h2>🛫 返程 · 槟城 → 吉隆坡 → 上海</h2>
+        <div class="weather">🌤 晴 26~33°C</div>
+        <span class="day-hotel">抵达上海浦东T2 · 预计凌晨01:10+1</span>
+      </div>
+    </div>
+
+    <div class="photo-row-3">
+      <div class="spot-photo"><img src="photos/scenic_drive.jpg" alt="槟城->吉隆坡沿途风光" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/penang_bridge.jpg" alt="槟城跨海大桥" loading="lazy"></div>
+      <div class="spot-photo"><img src="photos/family_travel.jpg" alt="大家庭旅行" loading="lazy"></div>
+    </div>
+
+    <div class="timeline">
+      <div class="time-item meal">
+        <span class="time-label">08:00-09:00</span>
+        <div class="time-desc"><strong>🍳 早餐 · 退房</strong><br>收拾行李，办理退房手续（建议提前一晚打包好）</div>
+      </div>
+      <div class="time-item activity">
+        <span class="time-label">09:00-12:00</span>
+        <div class="time-desc">
+          <strong>🆓 最后半日自由活动</strong><br>
+          可选择：<br>
+          · 在公寓无边泳池最后畅游🏊<br>
+          · 去乔治市把未打卡的壁画补上📸<br>
+          · 买最后的伴手礼🛍️<br>
+          · 找一家咖啡馆享受南洋慢时光☕
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">12:00-13:00</span>
+        <div class="time-desc">
+          <strong>🍜 最后的午餐</strong><br>
+          <span class="tag tag-food">推荐</span>
+          再去吃一次最爱的槟城美食吧！
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">13:00-18:00</span>
+        <div class="time-desc">
+          <strong>🚌 槟城 → 吉隆坡国际机场（包车）</strong><br>
+          全程约5小时（含途中休息）<br>
+          31座包车从槟城直接送往吉隆坡T1国际机场<br>
+          车上午休或看电影🎬<br>
+          <span class="tag tag-warn">⚠️ 路程较长，建议自备零食和水</span>
+        </div>
+      </div>
+      <div class="time-item meal">
+        <span class="time-label">18:00-19:00</span>
+        <div class="time-desc">
+          <strong>🍽️ 机场晚餐 · 办理登机</strong><br>
+          吉隆坡T1机场有众多餐厅和免税店<br>
+          可买免税烟酒、巧克力、白咖啡等带回国
+        </div>
+      </div>
+      <div class="time-item transport">
+        <span class="time-label">19:35 → 01:10+1</span>
+        <div class="time-desc">
+          <strong>✈️ MH386 吉隆坡T1 → 浦东T2</strong><br>
+          马来西亚航空 · 空客A330-300 · 飞行约5h35m<br>
+          机上提供晚餐和早餐
+        </div>
+      </div>
+      <div class="time-item">
+        <span class="time-label">01:10（8月14日凌晨）</span>
+        <div class="time-desc">
+          <strong>🛬 抵达上海浦东T2</strong><br>
+          提取行李 · 各自回家 🏠<br>
+          美好的马来西亚之旅圆满结束！🎉
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <span class="tip-title">📌 返程备忘</span>
+      🧳 提前一晚打包行李，留一套第二天穿的衣服在外 · 🛂 回国入境中国免税限额5000元 · 🛍️ 吉隆坡机场免税店有巧克力、咖啡、烟酒等<br>
+      🚗 建议提前约好国内接机或家人来接 · 📱 在飞机上可以通知家人到达时间
+    </div>
+  </div>
+
+  <!-- ===== 美食概览 ===== -->
+  <div class="section-header"><h2>🍽️ 美食地圖</h2><p>这些一定不要错过！</p></div>
+
+  <div class="food-grid">
+    <div class="food-card">
+      <h4>🥘 肉骨茶（Bak Kut Teh）</h4>
+      <p>吉隆坡 · 药材炖排骨，汤浓味香</p>
+      <div class="price">人均约 RM15-25</div>
+    </div>
+    <div class="food-card">
+      <h4>🍜 槟城炒粿条（Char Kway Teow）</h4>
+      <p>槟城 · 黑酱油炒粿条配鲜虾</p>
+      <div class="price">人均约 RM8-12</div>
+    </div>
+    <div class="food-card">
+      <h4>🍈 猫山王榴莲</h4>
+      <p>槟城 · 8月正当季！金枕头的天花板</p>
+      <div class="price">RM35-50/kg</div>
+    </div>
+    <div class="food-card">
+      <h4>🥟 怡保河粉+芽菜鸡</h4>
+      <p>怡保 · 滑嫩河粉配白切鸡豆芽</p>
+      <div class="price">人均约 RM10-15</div>
+    </div>
+    <div class="food-card">
+      <h4>🍚 马六甲鸡粒饭</h4>
+      <p>马六甲 · 米饭搓成圆球配白切鸡</p>
+      <div class="price">人均约 RM10-15</div>
+    </div>
+    <div class="food-card">
+      <h4>🍧 煎蕊（Cendol）</h4>
+      <p>槟城 · 椰奶绿豆冰甜品</p>
+      <div class="price">RM4-6/碗</div>
+    </div>
+    <div class="food-card">
+      <h4>🍗 黄亚华烤鸡翅</h4>
+      <p>吉隆坡阿罗街 · 炭火烤鸡翅</p>
+      <div class="price">RM3-4/只</div>
+    </div>
+    <div class="food-card">
+      <h4>☕ 怡保白咖啡</h4>
+      <p>怡保 · 马来西亚最有名的咖啡</p>
+      <div class="price">RM5-8/杯</div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="footer" style="text-align:center;padding:32px 16px;color:var(--text-secondary);font-size:13px;">
+  <div style="width:40px;height:2px;background:var(--border);margin:0 auto 16px;"></div>
+  ✈️ 2026暑假 · 马来西亚亲子游 · 吉隆坡+马六甲+槟城<br>
+  <a href="index.html" style="color:#6c5ce7;text-decoration:none;">&larr; 返回主页</a>
+</div>
+
+<script>
+/* Smooth scroll for nav links */
+document.querySelectorAll('.day-nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <button class="lightbox-nav lightbox-prev">&#8249;</button>
+  <button class="lightbox-nav lightbox-next">&#8250;</button>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="点击放大">
+  </div>
+  <span class="lightbox-counter" id="lightbox-counter"></span>
+</div>
+
+<script>
+/* Lightbox - click photo to enlarge */
+(function() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'lightbox';
+    lb.className = 'lightbox';
+    lb.innerHTML = '<span class="lightbox-close">&times;</span>' +
+      '<button class="lightbox-nav lightbox-prev">&#8249;</button>' +
+      '<button class="lightbox-nav lightbox-next">&#8250;</button>' +
+      '<div class="lightbox-content"><img id="lightbox-img" src="" alt=""></div>' +
+      '<span class="lightbox-counter" id="lightbox-counter"></span>';
+    document.body.appendChild(lb);
+  }
+
+  var img = document.getElementById('lightbox-img');
+  var counter = document.getElementById('lightbox-counter');
+  var images = [];
+  var currentIndex = 0;
+
+  function open(i) {
+    if (!images.length || i < 0 || i >= images.length) return;
+    currentIndex = i;
+    img.src = images[currentIndex].src || images[currentIndex];
+    img.alt = images[currentIndex].alt || '';
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (counter && images.length > 1) {
+      counter.textContent = (currentIndex + 1) + ' / ' + images.length;
+    } else if (counter) {
+      counter.textContent = '';
+    }
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* Collect all travel photos */
+  function collectImages() {
+    images = [];
+    document.querySelectorAll('.spot-photo img, img[src*="photos/"]').forEach(function(el) {
+      if (el.closest('.lightbox')) return; /* skip lightbox itself */
+      if (el.closest('#lightbox')) return;
+      if (images.indexOf(el) === -1) images.push(el);
+      el.style.cursor = 'pointer';
+    });
+    /* show/hide nav buttons */
+    var navs = lb.querySelectorAll('.lightbox-nav');
+    navs.forEach(function(n) { n.style.display = images.length > 1 ? '' : 'none'; });
+  }
+
+  /* Delegated click on all images */
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    if (target.tagName !== 'IMG') return;
+    if (target.closest('.lightbox')) return;
+    if (target.closest('#lightbox')) return;
+    if (!target.src || !target.src.includes('photos/')) return;
+
+    collectImages();
+    var idx = images.indexOf(target);
+    if (idx !== -1) open(idx);
+  });
+
+  /* Nav buttons */
+  var prevBtn = lb.querySelector('.lightbox-prev');
+  var nextBtn = lb.querySelector('.lightbox-next');
+  if (prevBtn) prevBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex - 1 + images.length) % images.length);
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex + 1) % images.length);
+  });
+
+  /* Close on overlay click */
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb || e.target.tagName === 'IMG') close();
+  });
+
+  /* Close button */
+  var closeBtn = lb.querySelector('.lightbox-close');
+  if (closeBtn) closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    close();
+  });
+
+  /* Keyboard */
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
+    if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
+  });
+
+  /* Touch swipe */
+  var touchStartX = 0, touchEndX = 0;
+  lb.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && nextBtn) nextBtn.click();
+      else if (prevBtn) prevBtn.click();
+    }
+  }, { passive: true });
+
+  /* Initial collect */
+  collectImages();
+
+  /* Re-collect on dynamic content changes */
+  var observer = new MutationObserver(function() { collectImages(); });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+</body>
+</html>
