@@ -326,6 +326,154 @@ body {
   .hero-emoji { font-size: 32px; }
   .hero h1 { font-size: 18px; }
 }
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
 </style>
 </head>
 <body>
@@ -386,6 +534,14 @@ body {
         </div>
         <span class="arrow">→</span>
       </a>
+      <a href="notes.html" class="nav-card nav-purple">
+        <span class="icon">⚠️</span>
+        <div class="info">
+          <div class="title">注意事项</div>
+          <div class="desc">天气 · 人群 · 多家庭 · 禁烟</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
       <a href="customs.html" class="nav-card nav-dark">
         <span class="icon">🛂</span>
         <div class="info">
@@ -402,6 +558,14 @@ body {
         </div>
         <span class="arrow">→</span>
       </a>
+      <a href="members.html" class="nav-card nav-dark">
+        <span class="icon">👥</span>
+        <div class="info">
+          <div class="title">出行名单</div>
+          <div class="desc">全团19人 · 护照信息 · 联系方式</div>
+        </div>
+        <span class="arrow">→</span>
+      </a>
       <a href="contract.html" class="nav-card nav-red">
         <span class="icon">📋</span>
         <div class="info">
@@ -415,17 +579,32 @@ body {
 
   <!-- ===== 航班概览 ===== -->
   <div class="card">
-    <div class="card-title">✈️ 已订航班</div>
-    <div class="flight-card">
-      <div class="flight-item">
-        <span class="airline">MH389</span>
-        <span class="route">浦东T2 → 吉隆坡T1</span>
-        <span class="time">15:25 → 21:00</span>
+    <div class="card-title">✈️ 已订航班 <span style="font-size:12px;font-weight:400;color:#e53e3e;">📌 重点标注</span></div>
+    <div class="flight-card" style="padding:20px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px 16px;background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;border-radius:12px;">
+        <span style="font-size:20px;">🛫</span>
+        <div>
+          <div style="font-weight:800;font-size:16px;letter-spacing:1px;">8月4日（周二）· 去程</div>
+          <div style="font-size:12px;opacity:0.85;">马来西亚航空 · 空客A330-300</div>
+        </div>
       </div>
-      <div class="flight-item" style="border-bottom:none;">
-        <span class="airline">MH386</span>
-        <span class="route">吉隆坡T1 → 浦东T2</span>
-        <span class="time">19:35 → 01:10+1</span>
+      <div class="flight-item" style="padding:10px 0;">
+        <span class="airline" style="font-size:18px;min-width:80px;">MH389</span>
+        <span class="route" style="font-size:15px;">上海浦东T2 → 吉隆坡T1</span>
+        <span class="time" style="font-size:16px;">15:25 → 21:00</span>
+      </div>
+      <div style="margin:16px 0;border-top:2px dashed #e2e8f0;"></div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding:10px 16px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border-radius:12px;">
+        <span style="font-size:20px;">🛬</span>
+        <div>
+          <div style="font-weight:800;font-size:16px;letter-spacing:1px;">8月13日（周四）· 回程</div>
+          <div style="font-size:12px;opacity:0.85;">马来西亚航空 · 空客A330-300</div>
+        </div>
+      </div>
+      <div class="flight-item" style="padding:10px 0;border-bottom:none;">
+        <span class="airline" style="font-size:18px;min-width:80px;">MH386</span>
+        <span class="route" style="font-size:15px;">吉隆坡T1 → 上海浦东T2</span>
+        <span class="time" style="font-size:16px;">19:35 → 01:10+1</span>
       </div>
     </div>
     <a href="transport.html" class="info-strip" style="margin-top:12px;margin-bottom:0;">
@@ -531,6 +710,7 @@ body {
         <div class="h-city">📍 吉隆坡（4晚）</div>
         <div class="h-name">凯煌酒店 Concorde Hotel</div>
         <div class="h-price">MYR 11,121</div>
+        <div class="h-price" style="font-size:12px;color:#8b7355;">≈ CNY 19,351</div>
       </div>
       <div class="hotel-summary-item">
         <div class="h-city">📍 吉隆坡（4晚备选）</div>
@@ -539,8 +719,8 @@ body {
       </div>
       <div class="hotel-summary-item">
         <div class="h-city">📍 槟城（5晚）</div>
-        <div class="h-name">丹绒点公寓 Tanjung Point</div>
-        <div class="h-price">CNY 12,448</div>
+        <div class="h-name">丹绒点公寓 Tanjung Point <span style="font-size:11px;color:#e53e3e;font-weight:600;">Trip.com</span></div>
+        <div class="h-price">CNY 10,965</div>
       </div>
       <div class="hotel-summary-item" style="display:flex;flex-direction:column;justify-content:center;">
         <a href="hotel-vote.html" style="display:inline-block;padding:8px 16px;background:linear-gradient(135deg,#e84393,#fd79a8);color:#fff;border-radius:10px;text-decoration:none;font-weight:600;font-size:13px;">📊 对比投票</a>
@@ -588,7 +768,327 @@ body {
     </div>
   </a>
 
-  <!-- ===== 留言板 ===== -->
+  
+    <!-- ===== 出行前待办清单 ===== -->
+  <div class="card">
+    <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+      <span>✅ 出行前待办清单</span>
+      <span style="font-size:12px;font-weight:400;color:#e53e3e;">距出发还有 <strong style="font-size:16px;">60天</strong></span>
+    </div>
+    <style>
+    .cl-item {
+      display:flex;align-items:flex-start;gap:10px;
+      padding:10px 12px;margin-bottom:6px;
+      border-radius:10px;
+      transition:all 0.2s;
+    }
+    .cl-item:hover { background:#f8f4ee; }
+    .cl-check {
+      width:20px;height:20px;min-width:20px;
+      border:2px solid #d4c5a0;border-radius:5px;
+      margin-top:2px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      font-size:12px;color:#fff;transition:all 0.2s;
+    }
+    .cl-check.done { background:#48bb78;border-color:#48bb78; }
+    .cl-content { flex:1; }
+    .cl-title { font-size:14px;font-weight:600;color:var(--text-primary); }
+    .cl-desc { font-size:12px;color:var(--text-secondary);line-height:1.5;margin-top:1px; }
+    .cl-tag {
+      display:inline-block;padding:1px 8px;border-radius:4px;
+      font-size:10px;font-weight:600;margin-left:6px;
+    }
+    .tag-green { background:#e6ffe6;color:#0e5e1e; }
+    .tag-urgent { background:#fee2e2;color:#991b1b; }
+    .tag-blue { background:#e6f0ff;color:#1e40af; }
+    </style>
+
+    <div>
+      <!-- 证件 & 文件 -->
+      <div style="font-size:13px;font-weight:700;color:#2d1b69;padding:6px 12px;margin:4px 0;">📄 证件 & 文件</div>
+      <div class="cl-item">
+        <div class="cl-check done">✓</div>
+        <div class="cl-content">
+          <div class="cl-title">🛂 护照有效期检查 <span class="cl-tag tag-green">已办好</span></div>
+          <div class="cl-desc">全部19人护照已收集完毕，有效期均在6个月以上 ✓</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">📋 MDAC入境卡填写 <span class="cl-tag tag-urgent">出发前3天（8/1）</span></div>
+          <div class="cl-desc">马来西亚电子入境卡，官方完全免费！出发前3天在线填写，提交后保存PDF打印备用。<br>
+          <a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" style="color:#6c5ce7;">https://imigresen-online.imi.gov.my/mdac/main</a><br>
+          <span style="color:#991b1b;">⚠ 不要通过Google付费广告进入，认准官方网址！</span></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🎫 打印出行手册 <span class="cl-tag tag-urgent">建议每人一份</span></div>
+          <div class="cl-desc">打印完整出行资料包，包括：<br>
+          ① 机票电子行程单（MH389 + MH386）② 酒店确认信（中英文）<br>
+          ③ 旅行社合同 ④ 10天行程表 ⑤ 紧急联系方式卡<br>
+          <a href="itinerary.html" style="color:#6c5ce7;">查看行程 →</a> · <a href="contract.html" style="color:#6c5ce7;">查看合同 →</a></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🏨 酒店确认信打印（中英文） <span class="cl-tag tag-blue">入住备用</span></div>
+          <div class="cl-desc">打印凯煌酒店和丹绒点公寓的英文确认信（马来西亚入境可能抽查住宿证明）<br>
+          凯煌 Concorde Hotel（吉隆坡4晚 8/4-8/8）· 丹绒点公寓（槟城5晚 8/8-8/13）</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🗑️ 取消多余酒店预订 <span class="cl-tag tag-urgent">记得取消！</span></div>
+          <div class="cl-desc">之前对比的备选酒店记得取消预订，避免被扣款：<br>
+          ① 希尔顿花园酒店（吉隆坡备选）② 温德姆戴斯酒店（吉隆坡备选）<br>
+          <span style="color:#991b1b;">⚠ 注意查看各平台免费取消截止日期！</span></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check done">✓</div>
+        <div class="cl-content">
+          <div class="cl-title">📋 旅行社合同确认 <span class="cl-tag tag-green">已签署</span></div>
+          <div class="cl-desc">寰宇纵横旅行社 · 电子合同 ECSD260601L1H7MS · 总价 37,496 元 · 31座包车10天<br>
+          经办人：惠南风 18884558256 ✓</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">✈️ 在线选座 & 值机 <span class="cl-tag tag-urgent">出发前48小时</span></div>
+          <div class="cl-desc">马来西亚航空 MH389/MH386，出发前48小时可网上值机选座<br>
+          建议提前选靠过道/靠窗，家庭尽量安排在一起</div>
+        </div>
+      </div>
+
+      <!-- 资金 & 通讯 -->
+      <div style="font-size:13px;font-weight:700;color:#2d1b69;padding:6px 12px;margin:12px 4px 4px;">💰 资金 & 通讯</div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">💱 兑换马币 <span class="cl-tag tag-urgent">提前换好</span></div>
+          <div class="cl-desc">建议在国内换少量马币（约RM500-1000/人）用于落地后打车/吃饭<br>
+          吉隆坡机场汇率较差，市区换汇更划算。也可带人民币现金到当地换。</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">📱 购买马来西亚电话流量卡 <span class="cl-tag tag-urgent">提前淘宝买好</span></div>
+          <div class="cl-desc">推荐提前在淘宝买好马来西亚电话卡或eSIM（Celcom/Hotlink信号最好）<br>
+          10天套餐约30-50元，含流量+通话，到马来西亚插卡即用<br>
+          <span style="color:#1e40af;">推荐方案：主手机eSIM（保留原号）+ 备用机插本地卡</span></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">📡 开通国际漫游 <span class="cl-tag tag-blue">建议开通备用</span></div>
+          <div class="cl-desc">出发前致电运营商开通国际漫游（接收短信验证码），关闭数据漫游防跑流量<br>
+          移动/联通/电信客服均可开通</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">💳 信用卡 / 银联卡</div>
+          <div class="cl-desc">Visa/Mastercard通用，银联在马来西亚ATM可取现<br>
+          提前通知银行出境时间，防止被锁卡。建议带2张不同银行备用</div>
+        </div>
+      </div>
+
+      <!-- App & 行前准备 -->
+      <div style="font-size:13px;font-weight:700;color:#2d1b69;padding:6px 12px;margin:12px 4px 4px;">📱 App & 行前准备</div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🚖 安装Grab打车App <span class="cl-tag tag-blue">东南亚必备</span></div>
+          <div class="cl-desc">Grab是东南亚版滴滴，打车/叫外卖/扫码支付都能用<br>
+          提前在手机安装注册好，支持绑定信用卡或现金支付</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🗺️ 下载马来西亚离线地图</div>
+          <div class="cl-desc">Google Maps提前下载吉隆坡、槟城、马六甲离线地图<br>
+          万一没有网络也能导航，标记好所有酒店和景点位置</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🎬 下载离线影视/娱乐</div>
+          <div class="cl-desc">MH389飞行约5.5小时，MH386约6小时<br>
+          提前下载好电影、电视剧、小朋友的动画片，飞机上消遣</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">📏 确认行李重量限额</div>
+          <div class="cl-desc">MH389/MH386 每人托运行李额度？手提行李额度？<br>
+          提前称重确认，避免超重罚款（超重费比行李额贵很多）</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🌐 了解马来西亚风俗禁忌</div>
+          <div class="cl-desc">① 清真寺需穿长裤/包头巾（极乐寺、国家清真寺）<br>
+          ② 进室内/寺庙脱鞋 ③ 递东西尽量用右手 ④ 马来人面前别吃猪肉<br>
+          <a href="tips.html" style="color:#6c5ce7;">查看实用贴士 →</a></div>
+        </div>
+      </div>
+
+      <!-- 行李 & 物品 -->
+      <div style="font-size:13px;font-weight:700;color:#2d1b69;padding:6px 12px;margin:12px 4px 4px;">🧳 行李 & 物品</div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🧴 防晒 + 驱蚊 <span class="cl-tag tag-blue">马来西亚必备</span></div>
+          <div class="cl-desc">马来西亚全年夏天，防晒霜SPF50+、驱蚊液一定要带<br>
+          <a href="packing.html" style="color:#6c5ce7;">查看完整行李清单 →</a></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🔌 转换插头 <span class="cl-tag tag-urgent">英标三孔</span></div>
+          <div class="cl-desc">马来西亚使用英标三孔插座（品字形），必带转换插头！多用排插更实用<br>
+          建议每家带1-2个转换头 + 1个多用排插</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">💊 常用药品 <span class="cl-tag tag-blue">注意成分</span></div>
+          <div class="cl-desc">感冒药、肠胃药、创可贴、晕车药。<br>
+          ⚠️ 含麻黄碱（新康泰克、白加黑）、含可待因的止咳水被马来西亚列为禁药，不要带！<br>
+          <a href="customs.html" style="color:#6c5ce7;">查看入境药品限制 →</a></div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🏊 泳衣 / 浮潜装备</div>
+          <div class="cl-desc">酒店有泳池的话记得带泳衣，槟城海边也可以游泳<br>
+          有浮潜计划的自带呼吸管咬嘴（卫生）</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">☔ 雨伞 / 雨衣</div>
+          <div class="cl-desc">8月是雨季，几乎每天下午一场阵雨，随身带伞</div>
+        </div>
+      </div>
+
+      <!-- 行前安排 & 出发当天 -->
+      <div style="font-size:13px;font-weight:700;color:#2d1b69;padding:6px 12px;margin:12px 4px 4px;">🏠 行前安排 & 出发当天</div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🗄️ 证件复印/扫描备份</div>
+          <div class="cl-desc">护照首页、MDAC确认页、机票行程单、酒店确认单、合同 — 手机存一份电子版 + 家里留一份纸质</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🛡️ 购买旅行保险</div>
+          <div class="cl-desc">含医疗、行李丢失、航班延误的旅行保险（每人几十元）<br>
+          留意合同是否已包含保险，未包含的话建议自行购买</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">🚐 接机确认（8月4日）</div>
+          <div class="cl-desc">MH389 21:00到吉隆坡，专车接机已包含在合同内<br>
+          出发前一天联系旅行社惠南风确认司机联系方式</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">✅ 出发当天 checklist</div>
+          <div class="cl-desc">□ 关好门窗水电煤气 □ 清空冰箱易坏食物 □ 垃圾带走<br>
+          □ 带好护照/机票/钱包/手机 □ 提前3小时到浦东T2机场</div>
+        </div>
+      </div>
+      <div class="cl-item">
+        <div class="cl-check"></div>
+        <div class="cl-content">
+          <div class="cl-title">📞 紧急联系方式保存</div>
+          <div class="cl-desc">
+            马来西亚报警/急救 <strong>999</strong> · 外交部领保 <strong>+86-10-12308</strong><br>
+            中国驻马大使馆 <strong>+603-21636853</strong> · 旅行社惠南风 <strong>18884558256</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 进度条 -->
+    <div style="margin-top:12px;padding:10px 12px;background:#f0f7ff;border-radius:10px;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#4a5568;margin-bottom:6px;">
+        <span>✅ 已完成 <strong style="color:#48bb78;">2</strong>/26 项</span>
+        <span>点击小方框标记完成 ✓</span>
+      </div>
+      <div style="height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;">
+        <div style="height:100%;width:7.7%;background:linear-gradient(90deg,#48bb78,#38a169);border-radius:3px;transition:width 0.3s;"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ===== Interactive Checklist ===== */
+(function() {
+  var checks = document.querySelectorAll('.cl-check');
+  var doneCount = document.querySelectorAll('.cl-check.done').length;
+  var total = checks.length;
+  var strongEl = document.querySelector('[style*="已完成"] strong');
+  var bar = document.querySelector('[style*="height:100%"]');
+
+  function updateProgress() {
+    doneCount = document.querySelectorAll('.cl-check.done').length;
+    if (strongEl) strongEl.textContent = doneCount;
+    if (bar) bar.style.width = Math.round((doneCount / total) * 100) + '%';
+    try {
+      var ids = [];
+      document.querySelectorAll('.cl-check.done').forEach(function(el) {
+        var item = el.closest('.cl-item');
+        if (item) ids.push(Array.from(item.parentNode.children).indexOf(item));
+      });
+      localStorage.setItem('travel-checklist-done', JSON.stringify(ids));
+    } catch(e) {}
+  }
+
+  checks.forEach(function(el, i) {
+    el.addEventListener('click', function() {
+      this.classList.toggle('done');
+      this.textContent = this.classList.contains('done') ? '✓' : '';
+      updateProgress();
+    });
+    try {
+      var saved = JSON.parse(localStorage.getItem('travel-checklist-done') || '[]');
+      if (saved.indexOf(i) !== -1) {
+        el.classList.add('done');
+        el.textContent = '✓';
+      }
+    } catch(e) {}
+  });
+
+  updateProgress();
+})();
+</script>
+
+<!-- ===== 留言板 ===== -->
   <div class="section" id="sec-comment">
     <div class="comment-card">
       <h3>💬 大家来说说</h3>
@@ -698,6 +1198,23 @@ if (ta) {
     document.getElementById('msg-count').textContent = this.value.length;
   });
 }
+</script>
+
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
 </script>
 
 </body>
