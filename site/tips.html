@@ -443,6 +443,233 @@ body {
   .info-grid { grid-template-columns: 1fr; }
   .budget-table { min-width: 280px; font-size: 11px; }
 }
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
+
+/* ===== Lightbox ===== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.active { display: flex; }
+.lightbox-content {
+  position: relative;
+  max-width: 92vw;
+  max-height: 92vh;
+}
+.lightbox-content img {
+  max-width: 92vw;
+  max-height: 90vh;
+  display: block;
+  border-radius: 6px;
+  cursor: default;
+}
+.lightbox-close {
+  position: fixed;
+  top: 18px; right: 24px;
+  color: #fff;
+  font-size: 42px;
+  font-weight: 300;
+  cursor: pointer;
+  z-index: 10000;
+  line-height: 1;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.lightbox-close:hover { opacity: 1; }
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: none;
+  font-size: 38px;
+  padding: 14px 18px;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 10000;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.2s, background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.lightbox-nav:hover { opacity: 1; background: rgba(255,255,255,0.25); }
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+.lightbox-counter {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  font-family: -apple-system, sans-serif;
+  z-index: 10000;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .lightbox-nav { font-size: 28px; padding: 10px 14px; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+  .lightbox-close { font-size: 34px; top: 10px; right: 14px; }
+}
+
 </style>
 </head>
 <body>
@@ -556,6 +783,21 @@ body {
     </ul>
   </div>
 
+  <!-- ===== f1. 交通规则 ===== -->
+  <div class="tip-section">
+    <span class="section-tag tag-pink">🚗 交通</span>
+    <h3>🚗 交通规则 · 与中国大不同</h3>
+    <ul>
+      <li><strong>马来西亚靠左行驶，方向盘在右侧</strong>，与中国完全相反。过马路时<strong>先看右、再看左</strong>，这一点非常重要！</li>
+      <li>行人过马路务必走<strong>人行横道</strong>，马来西亚车速快，不要随意横穿马路</li>
+      <li>吉隆坡和槟城部分道路狭窄，摩托车多，走路时注意避让</li>
+      <li><strong>打车首选 Grab</strong>（明码标价），不要坐路边拉客的出租车（价格可能翻3-4倍）</li>
+      <li>Grab 省钱技巧：<strong>同一目的地不同时段价差很大</strong>（实测下午3点39马币→4点19马币）；从人多处走开100米再叫车，价格可能砍半</li>
+      <li>Grab 建议用<strong>现金支付</strong>（绑定支付宝会多收3%手续费），提前备好零钱</li>
+      <li>如包车有司机，注意包车超时通常按小时加收费用，提前确认好</li>
+    </ul>
+  </div>
+
   <!-- ===== f. 家庭出行提示 ===== -->
   <div class="tip-section">
     <span class="section-tag tag-green">👨‍👩‍👧‍👦 家庭</span>
@@ -577,19 +819,427 @@ body {
     <ul>
       <li>吉隆坡整体治安良好，但需注意看管<strong>随身物品</strong>（手机、钱包）</li>
       <li>避免深夜<strong>单独在偏僻街区</strong>行走，建议结伴出行</li>
+      <li><strong>饮用水安全：</strong>马来西亚<strong>自来水不能直接饮用</strong>，必须买瓶装水或烧开后喝。酒店一般每天提供2瓶免费瓶装水，不够可去便利店买（很便宜）</li>
       <li><strong>食物卫生：</strong>建议选择热食熟食，避免生冷食物引起肠胃不适</li>
       <li>槟城美食多，建议<strong>少量多次</strong>品尝，避免暴饮暴食导致肠胃问题</li>
       <li>随身带一些<strong>常用药：</strong>肠胃药、止泻药、创可贴、感冒药</li>
-      <li>紧急电话：<strong>999</strong>（警察/救护）</li>
-      <li>中国领事馆保护电话：<strong>+86-10-12308</strong>（外交部全球领事保护热线）</li>
-      <li>中国驻马来西亚大使馆：+603-21636853（吉隆坡）</li>
+      <li>紧急电话：<strong>999</strong>（警察/救护）· 火警：<strong>994</strong></li>
+      <li>外交部全球领事保护热线（24h）：<strong>+86-10-12308</strong> / <strong>+86-10-65612308</strong></li>
+      <li>中国驻马来西亚大使馆：<strong>+60-3-2164 5301</strong>（吉隆坡）</li>
+      <li>旅游保险全球救援热线（24h）：<strong>+86-21-33393745</strong>（境内400-069-0991）</li>
     </ul>
     <div class="tip-highlight">
       <strong>💡 药品注意事项：</strong>含麻黄碱（如白加黑、康泰克）、吗啡（如复方甘草片）等成分的药品严禁携带入境。详见 <a href="customs.html" style="color:#6c5ce7;font-weight:600;">入境指南 · 药品管制 →</a>
     </div>
   </div>
 
-  <!-- ===== Footer ===== -->
+  <!-- ===== h. 文化礼仪禁忌 ===== -->
+  <div class="tip-section">
+    <span class="section-tag tag-yellow">🙏 礼仪</span>
+    <h3>🙏 文化礼仪 · 尊重当地习俗</h3>
+    <p style="margin-bottom:8px;">马来西亚是多元文化国家，伊斯兰教为国教。了解并尊重当地文化<strong>非常重要</strong>，以下禁忌请一定记住：</p>
+
+    <div class="tip-highlight" style="margin-bottom:12px;">
+      <strong>🚫 绝对不要做：</strong>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 用食指指人</div>
+        <div style="font-size:12px;color:#4a5568;">被视为侮辱！用右手拇指（四指握拳）指示方向</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 触摸他人头部</div>
+        <div style="font-size:12px;color:#4a5568;">头部是神圣部位，<strong>包括小孩的头也不能摸</strong></div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 左手递物/握手</div>
+        <div style="font-size:12px;color:#4a5568;">左手被认为不洁，所有交往必须用<strong>右手</strong></div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 公共场合亲密</div>
+        <div style="font-size:12px;color:#4a5568;">拥抱、接吻可能被视为不雅</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 穿纯黄色衣服</div>
+        <div style="font-size:12px;color:#4a5568;">黄色是皇室专用色，普通人应避免</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 跷二郎腿/脚底对人</div>
+        <div style="font-size:12px;color:#4a5568;">坐时勿将脚底朝向他人，极不礼貌</div>
+      </div>
+    </div>
+
+    <div class="tip-highlight" style="margin-bottom:12px;">
+      <strong>🕌 参观清真寺注意事项：</strong>
+    </div>
+    <ul>
+      <li>男女均须<strong>遮盖肩膀和膝盖</strong>，女性需佩戴头巾（部分清真寺免费提供长袍头巾）</li>
+      <li>进入前必须<strong>脱鞋</strong>，禁止喧哗打闹</li>
+      <li><strong>非穆斯林不得进入主祈祷区</strong>，拍照需征得同意，禁止拍摄礼拜中的信徒</li>
+    </ul>
+
+    <div class="tip-highlight" style="margin-bottom:12px;">
+      <strong>💳 支付补充：</strong>
+    </div>
+    <ul>
+      <li><strong>Touch 'n Go eWallet</strong>：马来西亚本地最常用电子钱包，覆盖过路费、停车、便利店、地铁等场景</li>
+      <li><strong>取现推荐：</strong>找 <strong>Maybank（黄色ATM）</strong>，境外卡取现汇率好，手续费低</li>
+      <li><strong>支付宝</strong>在商场、餐厅、便利店覆盖约80-90%，<strong>微信不普遍</strong>，建议主用支付宝</li>
+      <li>路边摊、夜市、小饭店基本只收现金，建议随身备200-500马币现金</li>
+    </ul>
+
+    <div class="tip-highlight">
+      <strong>💡 入乡随俗：</strong>不确定的时候，先观察当地人怎么做再效仿。随身带围巾/披肩应对临时着装要求。
+    </div>
+  </div>
+
+  <!-- ===== i. 省钱避坑·真实体验 ===== -->
+  <div class="tip-section">
+    <span class="section-tag tag-yellow">💰 新</span>
+    <h3>💰 省钱避坑 · 穷游真实体验</h3>
+    <p style="margin-bottom:10px;">综合小红书等多篇实测攻略，马来西亚消费水平约为上海的0.7倍，合理规划能省不少钱！</p>
+
+    <h4 style="font-size:14px;font-weight:700;color:var(--text-primary);margin:10px 0 6px;">🚕 交通省钱</h4>
+    <ul>
+      <li><strong>市内打车用Grab</strong>（明码标价）— 机场到吉隆坡市区约80-90马币，比机场快线还划算（快线双人要110马币还要换乘）</li>
+      <li><strong>跨城市坐豪华大巴</strong> — 几十块人民币，座位可180°躺平，比包车省钱多了</li>
+      <li>❌ <strong>别坐景点门口拉客的出租车</strong> — 价格可能翻4倍，用Grab看价格再决定</li>
+      <li>❌ <strong>别买低价"一日游包车"</strong> — 会被强制带去购物店浪费时间</li>
+    </ul>
+
+    <h4 style="font-size:14px;font-weight:700;color:var(--text-primary);margin:14px 0 6px;">🛍️ 购物避坑</h4>
+    <ul>
+      <li>❌ <strong>别买燕窝、东革阿里</strong> — 大部分假货，而且中国海关禁止携带入境</li>
+      <li>❌ <strong>景点门口别买纪念品</strong> — 中央市场（Central Market）买便宜60%，还能砍价</li>
+      <li>✅ 值得买：槟城白咖啡、豆蔻制品、榴莲糕/榴莲巧克力、峇迪蜡染布</li>
+      <li>✅ 吉隆坡<strong>柏威年广场</strong>大牌比国内便宜，尤其是化妆品和运动品牌</li>
+    </ul>
+
+    <h4 style="font-size:14px;font-weight:700;color:var(--text-primary);margin:14px 0 6px;">⚠️ 这些坑千万别踩</h4>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 公共场所吃口香糖</div>
+        <div style="font-size:12px;color:#4a5568;">马来西亚禁止，高额罚款</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 带榴莲上地铁/进酒店</div>
+        <div style="font-size:12px;color:#4a5568;">气味大，会被拒载或罚款</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 给路边乞讨小孩钱</div>
+        <div style="font-size:12px;color:#4a5568;">会被围住甩不掉，叫警察也没用</div>
+      </div>
+      <div style="background:#fee2e2;border-radius:10px;padding:10px;">
+        <div style="font-weight:700;color:#991b1b;font-size:13px;">❌ 清真寺穿暴露衣服</div>
+        <div style="font-size:12px;color:#4a5568;">会被驱赶，长袍入口免费提供</div>
+      </div>
+    </div>
+
+    <h4 style="font-size:14px;font-weight:700;color:var(--text-primary);margin:14px 0 6px;">💰 费用参考（人均）</h4>
+    <div class="tip-highlight">
+      <strong>小红书真实花费参考：</strong>
+      吉隆坡3天2晚约<strong>999元</strong> · 沙巴4天约<strong>2000-3000元</strong> · 7天三城联游约<strong>3080-5000元</strong>（均不含机票）<br>
+      淡季往返机票约<strong>1300元</strong> vs 旺季约<strong>4800元</strong>（8月属旺季，机票早点买）<br>
+      <strong>我们本次总预算：</strong>人均约<strong>9,355元</strong>（含机票+包车+住宿+餐费+门票+保险），已覆盖主要花费
+    </div>
+  </div>
+
+  
+  <!-- ===== 常见骗局避坑（小红书真实案例） ===== -->
+  <div class="tip-section">
+    <span class="section-tag tag-red" style="background:#fee2e2;color:#991b1b;">🚨 新</span>
+    <h3>🚨 常见骗局避坑 · 真实案例</h3>
+    <p style="margin-bottom:10px;">以下根据小红书等多篇游客真实经历整理，这些骗局每年都有大量游客中招！</p>
+
+    <div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px;">
+      <div class="scam-card">
+        <div class="scam-type" style="background:#fee2e2;color:#991b1b;font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px 8px 0 0;">🔴 骗局一：MDAC入境卡假网站</div>
+        <div style="padding:10px 14px;background:#fff;">
+          <div style="font-size:12px;color:#4a5568;line-height:1.7;">
+            <strong>手法：</strong>Google搜索“马来西亚入境卡”会跳出付费广告假网站，收取39美元（约155令吉）手续费。<br>
+            <strong>真实案例：</strong>台湾艺人谢依霖（Hold住姐）在假网站付了钱，到马来西亚被拒绝入境！<br>
+            <strong style="color:#0e5e1e;">✅ MDAC 官方填写入口完全免费！免费的！免费的！重要事情说三遍！</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="scam-card">
+        <div class="scam-type" style="background:#fee2e2;color:#991b1b;font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px 8px 0 0;">🔴 骗局二：低价旅游配套/邮轮诈骗</div>
+        <div style="padding:10px 14px;background:#fff;">
+          <div style="font-size:12px;color:#4a5568;line-height:1.7;">
+            <strong>手法：</strong>社媒（脸书/微信）上刷到“超低价邮轮/旅游套餐”，远低于市场价。要求把钱汇入个人银行账户。<br>
+            <strong>真实案例：</strong>华裔妇女招揽70名亲友参加“3天2夜普吉岛邮轮”仅839令吉，被骗超19万令吉，被迫卖车还债！<br>
+            <strong style="color:#0e5e1e;">✅ 我们已通过正规旅行社签约，全程有合同保障，不用担心这个！</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="scam-card">
+        <div class="scam-type" style="background:#fef3c7;color:#92400e;font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px 8px 0 0;">🟡 骗局三：云顶/机场“同胞求助”</div>
+        <div style="padding:10px 14px;background:#fff;">
+          <div style="font-size:12px;color:#4a5568;line-height:1.7;">
+            <strong>手法：</strong>有人冒充“输光钱/丢钱包”的中国游客，操相同口音，以同胞身份讨要数百令吉。<br>
+            <strong>频发地点：</strong>云顶高原赌场周边、吉隆坡国际机场<br>
+            <strong style="color:#991b1b;">⚠️ 这些人有组织性，专挑中国人下手，不要给钱！</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="scam-card">
+        <div class="scam-type" style="background:#fef3c7;color:#92400e;font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px 8px 0 0;">🟡 骗局四：包车/导游“转包”纠纷</div>
+        <div style="padding:10px 14px;background:#fff;">
+          <div style="font-size:12px;color:#4a5568;line-height:1.7;">
+            <strong>手法：</strong>签约后旅行社擅自将客人转包给第三方，当地导游拒提供服务甚至辱骂威胁。<br>
+            <strong>真实案例：</strong>广东一家3口花2.4万参加新马团，合同写明不同意拼团仍被转包，导游当众辱骂甚至威胁丢掉行李。<br>
+            <strong style="color:#0e5e1e;">✅ 我们有旅行社正式合同，签约人朱兴业，经办人惠南风（18884558256），有保障！</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="scam-card">
+        <div class="scam-type" style="background:#fef3c7;color:#92400e;font-weight:700;font-size:13px;padding:6px 12px;border-radius:8px 8px 0 0;">🟡 骗局五：景点门票/退款纠纷</div>
+        <div style="padding:10px 14px;background:#fff;">
+          <div style="font-size:12px;color:#4a5568;line-height:1.7;">
+            <strong>手法：</strong>第三方平台买门票，因景区关闭/天气原因无法使用，平台拒绝退款或仅赔偿小额代金券。<br>
+            <strong>真实案例：</strong>游客买槟城升旗山生态公园门票（282元），缆车封闭无法上山，平台开始只肯赔付50元。<br>
+            <strong style="color:#0e5e1e;">✅ 我们门票主要由旅行社统一安排，个人购买的注意看退改政策！</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#f0f7ff;border-radius:12px;padding:12px 14px;margin-top:4px;">
+      <div style="font-weight:700;font-size:13px;color:#1e40af;margin-bottom:6px;">🛡️ 防骗原则</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;color:#4a5568;">
+        <div style="padding:6px 8px;background:#fff;border-radius:6px;">🔹 《MDAC》 官方免费，别付钱</div>
+        <div style="padding:6px 8px;background:#fff;border-radius:6px;">🔹 低于市价的套餐警惕陷阱</div>
+        <div style="padding:6px 8px;background:#fff;border-radius:6px;">🔹 不要汇钱到个人账户</div>
+        <div style="padding:6px 8px;background:#fff;border-radius:6px;">🔹 不帮陌生人带任何东西</div>
+        <div style="padding:6px 8px;background:#fff;border-radius:6px;">🔹 街头同胞求助→指路警察/领馆</div>
+        <div style="padding:6px 8px;background:#fff;border-radius:6px;">🔹 平台买门票看退改政策</div>
+      </div>
+    </div>
+
+    <div class="tip-highlight" style="margin-top:12px;">
+      <strong>📞 紧急联系方式：</strong>
+      马来西亚报警/急救 <strong>999</strong> · 外交部全球领事保护热线 <strong>+86-10-12308</strong><br>
+      中国驻马来西亚大使馆 <strong>+603-21636853</strong>（吉隆坡）· 也可联系旅行社经办人惠南风 <strong>18884558256</strong>
+    </div>
+  </div>
+
+<!-- ===== h. 槟城乔治市·不走回头路环线攻略 ===== -->
+  <div class="tip-section">
+    <span class="section-tag tag-purple">🗺️ 新</span>
+    <h3>🗺️ 槟城乔治市 · 不走回头路环线攻略</h3>
+    <p style="margin-bottom:10px;">根据小红书多篇实测攻略整理，按<strong>顺时针环线</strong>路线，从西→南→东→北，不走回头路，一天逛完精华景点。</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;">
+      <div style="border-radius:10px;overflow:hidden;"><img src="photos/kopii_1.jpg" alt="槟城3日游攻略路线" style="width:100%;height:150px;object-fit:cover;" loading="lazy"></div>
+      <div style="border-radius:10px;overflow:hidden;"><img src="photos/kopii_3.jpg" alt="乔治市景点分布" style="width:100%;height:150px;object-fit:cover;" loading="lazy"></div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,#fef3c7,#fef9e7);border-radius:12px;padding:14px;margin-bottom:12px;">
+      <div style="font-size:15px;font-weight:700;color:#92400e;margin-bottom:6px;">🔄 推荐路线（顺时针环线）</div>
+      <div style="font-size:14px;line-height:2;color:#4a5568;">
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">1</span>
+        蓝屋（张弼士故居，西南） →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">2</span>
+        侨生博物馆 →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">3</span>
+        圣乔治教堂+钟楼 →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">4</span>
+        壁画街（午餐） →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">5</span>
+        爱情巷 →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">6</span>
+        小印度 →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">7</span>
+        邱公司 →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">8</span>
+        姓周桥日落 →
+        <span style="display:inline-block;background:#92400e;color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px;font-weight:700;">9</span>
+        汕头街夜市
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+      <div style="background:#f0f7ff;border-radius:10px;padding:12px;">
+        <div style="font-size:13px;font-weight:700;color:#1e40af;margin-bottom:6px;">🎫 门票参考</div>
+        <div style="font-size:12px;color:#4a5568;line-height:1.8;">
+          · 蓝屋 RM25（需预约）<br>
+          · 侨生博物馆 RM20<br>
+          · 邱公司 RM15<br>
+          · 圣乔治教堂 免费<br>
+          · 姓氏桥 免费<br>
+          · 壁画街 免费
+        </div>
+      </div>
+      <div style="background:#d4edda;border-radius:10px;padding:12px;">
+        <div style="font-size:13px;font-weight:700;color:#0e5e1e;margin-bottom:6px;">🍜 必吃美食</div>
+        <div style="font-size:12px;color:#4a5568;line-height:1.8;">
+          · 🥟 伍秀泽海南鸡饭<br>
+          · 🍜 汕头街炒粿条<br>
+          · 🥣 四果汤（甜品）<br>
+          · 🫓 蚝煎（Oyster Omelette）<br>
+          · 🍧 煎蕊 Cendol
+        </div>
+      </div>
+    </div>
+
+    <h4 style="font-size:14px;font-weight:700;color:var(--text-primary);margin:10px 0 6px;">🚌 CAT 免费巴士（懒人必备）</h4>
+    <ul>
+      <li>槟城政府运营的<strong>免费空调巴士</strong>（Rapid Penang CAT），环形路线共19站</li>
+      <li>运营时间：<strong>6:00-23:40</strong>，约20分钟一班</li>
+      <li>起点/终点：Weld Quay巴士总站（姓周桥旁）</li>
+      <li>沿途停靠：蓝屋 → 圣乔治教堂 → 市政厅/钟楼 → 姓氏桥 → 小印度 → 侨生博物馆 → 壁画街 → 爱情巷 → 汕头街 → 新街</li>
+      <li><strong>完全免费</strong>，不需要任何乘车卡，直接上车即可！</li>
+    </ul>
+
+    <div class="tip-highlight">
+      <strong>💡 实测建议：</strong>
+      包车的话，可以让司机把你们放在蓝屋（起点），然后在姓周桥/汕头街接你们（终点），全程车等人，不用走回头路。<br>
+      如果坐CAT巴士，按顺时针顺序每站下车逛完再上车，同样不走回头路。<br>
+      👟 全程步行约6-8小时，建议穿舒适鞋子 · 🧴 做好防晒 · 💵 路边摊多只收现金
+    </div>
+  </div>
+
+  
+  <!-- ===== j. 美食地圖 ===== -->
+  <div class="tip-section">
+    <span class="section-tag tag-yellow">🍜 新</span>
+    <h3 style="display:flex;align-items:center;gap:8px;">🍽️ 全程美食地图 · 跟着吃就对了</h3>
+    <p style="margin-bottom:10px;">全程精选推荐，按城市和类型分类，含人均参考价格 🔥</p>
+
+    <!-- 吉隆坡 -->
+    <details style="margin-bottom:10px;border-radius:12px;overflow:hidden;border:2px solid var(--border);">
+      <summary style="padding:12px 14px;font-weight:700;font-size:15px;color:#2d1b69;cursor:pointer;background:linear-gradient(135deg,#ede9fe,#f0edfe);">🏙️ 吉隆坡美食 · 阿罗街 · 茨厂街 · 十号胡同</summary>
+      <div style="padding:14px;background:#faf8ff;">
+        <div class="food-city-grid">
+          <div class="food-item"><span class="food-icon">🥘</span><div><div class="food-name">肉骨茶 <span class="food-price">RM15-25</span></div><div class="food-desc">药材炖排骨，汤浓味香</div></div></div>
+          <div class="food-item"><span class="food-icon">🍗</span><div><div class="food-name">黄亚华烤鸡翅 <span class="food-price">RM3-4/只</span></div><div class="food-desc">阿罗街标志！炭火烤鸡翅🔥</div></div></div>
+          <div class="food-item"><span class="food-icon">🔥</span><div><div class="food-name">烤魔鬼鱼 <span class="food-price">RM15-25</span></div><div class="food-desc">阿罗街必点，鲜嫩多汁</div></div></div>
+          <div class="food-item"><span class="food-icon">🍚</span><div><div class="food-name">椰浆饭 <span class="food-price">RM5-10</span></div><div class="food-desc">大马国菜，椰奶蒸饭</div></div></div>
+          <div class="food-item"><span class="food-icon">🍜</span><div><div class="food-name">炒粿条 <span class="food-price">RM8-12</span></div><div class="food-desc">黑酱油炒粿条配鲜虾</div></div></div>
+          <div class="food-item"><span class="food-icon">🥟</span><div><div class="food-name">福建面 <span class="food-price">RM8-12</span></div><div class="food-desc">金莲记招牌虾面</div></div></div>
+          <div class="food-item"><span class="food-icon">🍧</span><div><div class="food-name">煎蕊 Cendol <span class="food-price">RM4-6</span></div><div class="food-desc">椰奶绿豆冰甜品</div></div></div>
+          <div class="food-item"><span class="food-icon">🥥</span><div><div class="food-name">椰子冰沙 <span class="food-price">RM5-8</span></div><div class="food-desc">阿罗街新鲜椰子现打</div></div></div>
+        </div>
+        <div class="food-place-box">
+          <strong>📍 美食聚集地：</strong><br>
+          🔥 <strong>阿罗街（Jalan Alor）</strong> — 吉隆坡最有名美食街！黄亚华烤鸡翅、烧魔鬼鱼、沙爹串<br>
+          🏮 <strong>茨厂街（Petaling Street）</strong> — 丽丰茶冰室牛肉面、金莲记福建面<br>
+          🏪 <strong>十号胡同（Lot 10 Hutong）</strong> — 地道小吃集合，有空调
+        </div>
+      </div>
+    </details>
+
+    <!-- 马六甲 -->
+    <details style="margin-bottom:10px;border-radius:12px;overflow:hidden;border:2px solid var(--border);">
+      <summary style="padding:12px 14px;font-weight:700;font-size:15px;color:#a1236b;cursor:pointer;background:linear-gradient(135deg,#fce4ec,#fdf0f3);">🏛️ 马六甲美食 · 鸡场街 · 娘惹菜</summary>
+      <div style="padding:14px;background:#fffafa;">
+        <div class="food-city-grid">
+          <div class="food-item"><span class="food-icon">🍚</span><div><div class="food-name">鸡粒饭 <span class="food-price">RM10-15</span></div><div class="food-desc">马六甲特有！米饭搓成圆球配白切鸡</div></div></div>
+          <div class="food-item"><span class="food-icon">🍰</span><div><div class="food-name">Nadeje千层蛋糕 <span class="food-price">RM12-18/片</span></div><div class="food-desc">马六甲最美味的千层蛋糕🍰</div></div></div>
+          <div class="food-item"><span class="food-icon">🥟</span><div><div class="food-name">娘惹菜 <span class="food-price">RM15-25</span></div><div class="food-desc">峇峇娘惹传统美食，酸甜微辣</div></div></div>
+          <div class="food-item"><span class="food-icon">🍜</span><div><div class="food-name">娘惹叻沙 <span class="food-price">RM8-12</span></div><div class="food-desc">椰奶叻沙，浓郁南洋风味</div></div></div>
+        </div>
+        <div class="food-place-box">
+          <strong>📍 美食聚集地：</strong><br>
+          🏘️ <strong>鸡场街（Jonker Street）</strong> — 中华茶室（和记）鸡粒饭、古城鸡粒饭<br>
+          🎂 <strong>Nadeje Cake House</strong> — 千层蛋糕专门店
+        </div>
+      </div>
+    </details>
+
+    <!-- 怡保 -->
+    <details style="margin-bottom:10px;border-radius:12px;overflow:hidden;border:2px solid var(--border);">
+      <summary style="padding:12px 14px;font-weight:700;font-size:15px;color:#1a5e2a;cursor:pointer;background:linear-gradient(135deg,#e8faf4,#eefcf7);">☕ 怡保美食（途经）· 白咖啡 · 河粉 · 芽菜鸡</summary>
+      <div style="padding:14px;background:#f0fdf7;">
+        <div class="food-city-grid">
+          <div class="food-item"><span class="food-icon">☕</span><div><div class="food-name">怡保白咖啡 <span class="food-price">RM5-8/杯</span></div><div class="food-desc">大马最有名咖啡！推荐南香白咖啡</div></div></div>
+          <div class="food-item"><span class="food-icon">🥟</span><div><div class="food-name">怡保河粉 <span class="food-price">RM8-12</span></div><div class="food-desc">比广东的还滑嫩！老黄芽菜鸡河粉</div></div></div>
+          <div class="food-item"><span class="food-icon">🐔</span><div><div class="food-name">芽菜鸡 <span class="food-price">RM10-15</span></div><div class="food-desc">怡保特色，白切鸡配爽脆豆芽</div></div></div>
+          <div class="food-item"><span class="food-icon">🍗</span><div><div class="food-name">盐焗鸡 <span class="food-price">RM12-18</span></div><div class="food-desc">粗盐焗制，香嫩入味</div></div></div>
+        </div>
+        <div class="food-place-box">
+          <strong>📍 美食聚集地：</strong><br>
+          🏘️ <strong>怡保旧城区</strong> — 老黄芽菜鸡、南香白咖啡、二奶巷附近小吃林立
+        </div>
+      </div>
+    </details>
+
+    <!-- 槟城 -->
+    <details style="margin-bottom:10px;border-radius:12px;overflow:hidden;border:2px solid var(--border);">
+      <summary style="padding:12px 14px;font-weight:700;font-size:15px;color:#92400e;cursor:pointer;background:linear-gradient(135deg,#fef3c7,#fef9e7);">🌴 槟城美食 · 炒粿条 · 叻沙 · 榴莲 · 汕头街</summary>
+      <div style="padding:14px;background:#fffcf0;">
+        <div class="food-city-grid">
+          <div class="food-item"><span class="food-icon">🍜</span><div><div class="food-name">槟城炒粿条 <span class="food-price">RM8-12</span></div><div class="food-desc">槟城招牌！黑酱油炒粿条🦐</div></div></div>
+          <div class="food-item"><span class="food-icon">🥣</span><div><div class="food-name">亚参叻沙 <span class="food-price">RM8-12</span></div><div class="food-desc">酸辣鱼汤米粉，亚依淡巴刹最正宗</div></div></div>
+          <div class="food-item"><span class="food-icon">🍈</span><div><div class="food-name">猫山王榴莲 <span class="food-price">RM35-50/kg</span></div><div class="food-desc">8月正当季！国内卖¥200+/kg🔥</div></div></div>
+          <div class="food-item"><span class="food-icon">🫓</span><div><div class="food-name">蚝煎 <span class="food-price">RM10-15</span></div><div class="food-desc">鲜美酥脆，汕头街夜市必点</div></div></div>
+          <div class="food-item"><span class="food-icon">🍧</span><div><div class="food-name">煎蕊 <span class="food-price">RM4-6</span></div><div class="food-desc">椰奶绿豆冰，饭后一碗超舒服</div></div></div>
+          <div class="food-item"><span class="food-icon">🍚</span><div><div class="food-name">海南鸡饭 <span class="food-price">RM8-12</span></div><div class="food-desc">伍秀泽海南鸡饭，老字号仅收现金</div></div></div>
+          <div class="food-item"><span class="food-icon">🫘</span><div><div class="food-name">卤鸭粿条 <span class="food-price">RM8-10</span></div><div class="food-desc">汕头街夜市招牌</div></div></div>
+          <div class="food-item"><span class="food-icon">🍝</span><div><div class="food-name">娘惹菜 <span class="food-price">RM15-25</span></div><div class="food-desc">Ivy's Kitchen或Auntie Gaik Lean's（米其林🏆）</div></div></div>
+        </div>
+        <div class="food-place-box">
+          <strong>📍 美食聚集地：</strong><br>
+          🔥 <strong>汕头街（Lebuh Kimberley）</strong> — 炒粿条、四果汤、鸭粥粿汁、卤鸭粿条<br>
+          🔥 <strong>新关仔角（Gurney Drive）夜市</strong> — 槟城最有名小吃集中地<br>
+          🔥 <strong>红园（Red Garden）美食中心</strong> — 品种丰富，本地人也去<br>
+          🏘️ <strong>亚依淡巴刹（Air Itam Market）</strong> — 极乐寺脚下，必吃槟城叻沙<br>
+          🍈 <strong>路边榴莲档</strong> — 现开现吃，比国内便宜一半以上！
+        </div>
+      </div>
+    </details>
+
+    <!-- 榴莲专题 -->
+    <div style="background:linear-gradient(135deg,#fef3c7,#fef9e7);border-radius:12px;padding:14px;margin:12px 0;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="font-size:32px;">🍈</span>
+        <div>
+          <div style="font-weight:700;font-size:15px;color:#92400e;">8月榴莲季 · 不吃太可惜！</div>
+          <div style="font-size:13px;color:#4a5568;margin-top:4px;">
+            马来西亚是榴莲王国，8月正值猫山王和黑刺旺季！<br>
+            当地价格约<strong>RM35-50/kg</strong>（国内卖¥200+/kg），路边档现开现吃最过瘾！<br>
+            <span style="color:#991b1b;">⚠️ 榴莲不能带入酒店和出租车（气味大），在档口吃最方便</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 早餐推荐 -->
+    <div style="background:#f0f7ff;border-radius:12px;padding:14px;margin:12px 0;">
+      <div style="font-weight:700;font-size:14px;color:#1e40af;margin-bottom:6px;">🌅 早餐推荐</div>
+      <div style="font-size:13px;color:#4a5568;line-height:1.8;">
+        🥐 <strong>多春茶室（Toh Soon Cafe）</strong> — 槟城乔治市，碳烤面包+半熟蛋+海南咖啡<br>
+        🏨 酒店自助早餐 — 凯煌酒店和丹绒点公寓附近都有早餐选择
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;">
+      <div style="border-radius:10px;overflow:hidden;"><img src="photos/kopii_2.jpg" alt="槟城美食地图·小红书攻略" style="width:100%;height:140px;object-fit:cover;" loading="lazy"></div>
+      <div style="border-radius:10px;overflow:hidden;"><img src="photos/kopii_5.jpg" alt="槟城地道美食推荐" style="width:100%;height:140px;object-fit:cover;" loading="lazy"></div>
+    </div>
+
+    <style>
+    .food-city-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+    .food-item { display:flex; align-items:flex-start; gap:8px; padding:8px 10px; background:#fff; border-radius:10px; border:1px solid #f0ebe5; }
+    .food-icon { font-size:22px; flex-shrink:0; margin-top:2px; }
+    .food-name { font-size:13px; font-weight:700; color:var(--text-primary); }
+    .food-price { font-size:11px; font-weight:400; color:#e53e3e; }
+    .food-desc { font-size:11px; color:#4a5568; margin-top:1px; line-height:1.4; }
+    .food-place-box { background:#fff; border-radius:10px; padding:10px 12px; font-size:12px; color:#4a5568; line-height:1.7; border:1px solid #f0ebe5; }
+    @media (max-width:480px) { .food-city-grid { grid-template-columns:1fr; } }
+    </style>
+
+    <div class="tip-highlight" style="margin-top:14px;">
+      <strong>💡 人均餐费参考：</strong>
+      早餐约RM5-10 · 午餐约RM8-15 · 晚餐约RM10-20（夜市）<br>
+      全团预算每人约<strong>1,300元</strong>（10天），丰俭由人。
+    </div>
+  </div>
+
+<!-- ===== Footer ===== -->
   <div class="footer">
     💡 2026暑假 · 马来西亚亲子游 · 实用贴士<br>
     <span style="font-size:12px;opacity:0.8;">信息整理于2026年6月 · 如有变动请以官方最新信息为准</span>
@@ -597,5 +1247,154 @@ body {
   </div>
 
 </div>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <button class="lightbox-nav lightbox-prev">&#8249;</button>
+  <button class="lightbox-nav lightbox-next">&#8250;</button>
+  <div class="lightbox-content">
+    <img id="lightbox-img" src="" alt="点击放大">
+  </div>
+  <span class="lightbox-counter" id="lightbox-counter"></span>
+</div>
+
+<script>
+/* Lightbox - click photo to enlarge */
+(function() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'lightbox';
+    lb.className = 'lightbox';
+    lb.innerHTML = '<span class="lightbox-close">&times;</span>' +
+      '<button class="lightbox-nav lightbox-prev">&#8249;</button>' +
+      '<button class="lightbox-nav lightbox-next">&#8250;</button>' +
+      '<div class="lightbox-content"><img id="lightbox-img" src="" alt=""></div>' +
+      '<span class="lightbox-counter" id="lightbox-counter"></span>';
+    document.body.appendChild(lb);
+  }
+
+  var img = document.getElementById('lightbox-img');
+  var counter = document.getElementById('lightbox-counter');
+  var images = [];
+  var currentIndex = 0;
+
+  function open(i) {
+    if (!images.length || i < 0 || i >= images.length) return;
+    currentIndex = i;
+    img.src = images[currentIndex].src || images[currentIndex];
+    img.alt = images[currentIndex].alt || '';
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (counter && images.length > 1) {
+      counter.textContent = (currentIndex + 1) + ' / ' + images.length;
+    } else if (counter) {
+      counter.textContent = '';
+    }
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* Collect all travel photos */
+  function collectImages() {
+    images = [];
+    document.querySelectorAll('.spot-photo img, img[src*="photos/"]').forEach(function(el) {
+      if (el.closest('.lightbox')) return; /* skip lightbox itself */
+      if (el.closest('#lightbox')) return;
+      if (images.indexOf(el) === -1) images.push(el);
+      el.style.cursor = 'pointer';
+    });
+    /* show/hide nav buttons */
+    var navs = lb.querySelectorAll('.lightbox-nav');
+    navs.forEach(function(n) { n.style.display = images.length > 1 ? '' : 'none'; });
+  }
+
+  /* Delegated click on all images */
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    if (target.tagName !== 'IMG') return;
+    if (target.closest('.lightbox')) return;
+    if (target.closest('#lightbox')) return;
+    if (!target.src || !target.src.includes('photos/')) return;
+
+    collectImages();
+    var idx = images.indexOf(target);
+    if (idx !== -1) open(idx);
+  });
+
+  /* Nav buttons */
+  var prevBtn = lb.querySelector('.lightbox-prev');
+  var nextBtn = lb.querySelector('.lightbox-next');
+  if (prevBtn) prevBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex - 1 + images.length) % images.length);
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (images.length) open((currentIndex + 1) % images.length);
+  });
+
+  /* Close on overlay click */
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb || e.target.tagName === 'IMG') close();
+  });
+
+  /* Close button */
+  var closeBtn = lb.querySelector('.lightbox-close');
+  if (closeBtn) closeBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    close();
+  });
+
+  /* Keyboard */
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft' && prevBtn) prevBtn.click();
+    if (e.key === 'ArrowRight' && nextBtn) nextBtn.click();
+  });
+
+  /* Touch swipe */
+  var touchStartX = 0, touchEndX = 0;
+  lb.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  lb.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && nextBtn) nextBtn.click();
+      else if (prevBtn) prevBtn.click();
+    }
+  }, { passive: true });
+
+  /* Initial collect */
+  collectImages();
+
+  /* Re-collect on dynamic content changes */
+  var observer = new MutationObserver(function() { collectImages(); });
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 </body>
 </html>
