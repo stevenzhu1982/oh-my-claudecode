@@ -10,8 +10,15 @@ site/node_modules/
 site/.edgeone/
 site/_worker.bundle
 
-# Claude
-.claude/
+# Claude / OMC — track skills & setup script, ignore local config & state
+.claude/settings*
+.claude/setup/.env.cookies
+.claude/state/
+.claude/memory/
+.claude/notepad.md
+.claude/project-memory.json
+.claude/logs/
+.omc/
 
 # IDE
 *.code-workspace
