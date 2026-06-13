@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026暑假 · 家庭出游计划</title>
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card-bg: #fffcf5;
+  --text-primary: #5a3e2b;
+  --text-secondary: #8b7355;
+  --accent: #e8934a;
+  --accent-light: #fef0e0;
+  --accent-green: #7ab648;
+  --border: #e8d5b5;
+  --shadow: rgba(180, 140, 100, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  flex: 1;
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #fdf4e0 0%, #fce8d0 30%, #fde2c0 60%, #fdf4e0 100%);
+  overflow: hidden;
+}
+/* Polka dot pattern overlay */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(#e8d5b5 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+/* Hand-drawn squiggle lines */
+.hero-squiggle {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.15;
+}
+.hero-squiggle-top {
+  top: 20px; left: 5%; width: 90%;
+  height: 30px;
+}
+.hero-squiggle-bottom {
+  bottom: 80px; left: 10%; width: 80%;
+  height: 20px;
+}
+/* Hand-drawn sun */
+.hero-sun {
+  position: absolute;
+  top: 30px; right: 30px;
+  font-size: 64px;
+  opacity: 0.2;
+  animation: heroSunDrift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+  user-select: none;
+}
+@keyframes heroSunDrift {
+  from { transform: rotate(-10deg) scale(1); }
+  to { transform: rotate(10deg) scale(1.1); }
+}
+/* Warm decorative circles */
+.hero-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #e8d5b5;
+  pointer-events: none;
+  opacity: 0.15;
+}
+.hero-circle-1 {
+  width: 180px; height: 180px;
+  top: -40px; left: -40px;
+}
+.hero-circle-2 {
+  width: 120px; height: 120px;
+  bottom: 40px; right: 20px;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-emoji {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(180,140,100,0.15));
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.hero h1::after {
+  content: '';
+  display: block;
+  width: 60px; height: 3px;
+  background: var(--accent);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+.hero p {
+  font-size: clamp(15px, 2.5vw, 19px);
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.hero-wave {
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23fdf8f0'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 70px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 24px; height: 40px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-indicator::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 4px; height: 8px;
+  background: var(--accent);
+  border-radius: 2px;
+  opacity: 0.6;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.3; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ===== Container ===== */
+.container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== Section ===== */
+.section {
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  padding-bottom: 8px;
+  border-bottom: 2px dashed var(--border);
+  display: inline-block;
+}
+.section-header p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* ===== Tab Filter ===== */
+.tab-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.tab-btn {
+  padding: 8px 20px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tab-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(232,147,74,0.3);
+}
+
+/* ===== Proposal Card ===== */
+.proposal-card {
+  background: linear-gradient(135deg, var(--accent-light), #fdf0e0);
+  border: 2px dashed var(--accent);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.proposal-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow);
+  border-color: var(--text-primary);
+}
+.proposal-card .icon { font-size: 36px; display: block; margin-bottom: 8px; }
+.proposal-card .title { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+.proposal-card .desc { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+.proposal-card .badge-proposal {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 14px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.badge-new {
+  background: var(--accent);
+  color: #fff;
+}
+
+.dest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dest-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fcf7ee;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+.dest-item:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+.dest-item .dest-info {
+  flex: 1;
+  min-width: 0;
+}
+.dest-item .dest-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 2px;
+}
+.dest-item .dest-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.dest-item .dest-arrow {
+  color: #d4c5a0;
+  font-size: 14px;
+}
+.dest-item:hover .dest-arrow {
+  color: var(--accent);
+}
+
+.section-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* ===== Destination Grid ===== */
+.dest-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+.dest-grid.show-2 { grid-template-columns: 1fr 1fr; }
+
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+  margin-bottom: 28px;
+}
+.card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.dest-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  box-shadow: 0 4px 16px var(--shadow);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+.dest-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px var(--shadow);
+  border-color: var(--accent);
+}
+.dest-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
+}
+.dest-card:hover .dest-img {
+  transform: scale(1.05);
+}
+.dest-img-placeholder {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.dest-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dest-img-wrap .dest-img-fallback {
+  position: absolute;
+  font-size: 56px;
+  opacity: 0.5;
+  user-select: none;
+  pointer-events: none;
+}
+.dest-img-wrap .dest-img {
+  position: relative;
+  z-index: 1;
+}
+.dest-overlay {
+  position: absolute;
+  top: 8px; left: 8px;
+  display: flex;
+  gap: 4px;
+}
+.dest-tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+.dest-tag-region {
+  background: rgba(90,62,43,0.55);
+  color: #fff;
+}
+.dest-tag-new {
+  background: var(--accent);
+  color: #fff;
+}
+.dest-body {
+  padding: 14px 16px 16px;
+}
+.dest-body-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.dest-flag { font-size: 20px; }
+.dest-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+}
+.dest-arrow {
+  color: #d4c5a0;
+  font-size: 16px;
+  transition: all 0.2s;
+}
+.dest-card:hover .dest-arrow {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+.dest-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.dest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+.dest-tag-feature {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--accent-light);
+  color: #b8860b;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* ===== Visual Map ===== */
+.vis-map {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #fdf4e4 0%, #f5e6c8 30%, #f0dbb8 60%, #faeed8 100%);
+  overflow: hidden;
+  box-shadow: 0 4px 16px var(--shadow);
+  user-select: none;
+  border: 2px solid var(--border);
+}
+/* Grid lines */
+.vis-map::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(139,115,85,0.06) 0px, rgba(139,115,85,0.06) 1px, transparent 1px, transparent 12.5%),
+    repeating-linear-gradient(90deg, rgba(139,115,85,0.06) 0px, rgba(139,115,85,0.06) 1px, transparent 1px, transparent 10%);
+  pointer-events: none;
+}
+/* Decorative dots (warm texture) */
+.vis-map .ocean-dot {
+  position: absolute;
+  width: 3px; height: 3px;
+  background: rgba(139,115,85,0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+/* Map label top-left */
+.vis-map .map-title {
+  position: absolute;
+  top: 14px; left: 16px;
+  color: rgba(139,115,85,0.35);
+  font-size: 11px;
+  letter-spacing: 2px;
+  pointer-events: none;
+  font-weight: 600;
+}
+/* Destination dot */
+.map-dot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 2;
+}
+.map-dot .dot-ring {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: dotPulse 2s ease-in-out infinite;
+  opacity: 0.3;
+}
+@keyframes dotPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.1; }
+}
+.map-dot .dot-core {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.6);
+  box-shadow: 0 0 12px rgba(139,115,85,0.2);
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+}
+.map-dot:hover .dot-core {
+  transform: translate(-50%, -50%) scale(1.6);
+  box-shadow: 0 0 20px rgba(139,115,85,0.3);
+  z-index: 10;
+}
+.map-dot .dot-label {
+  position: absolute;
+  left: 18px; top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  text-shadow: 0 1px 4px rgba(255,255,255,0.5);
+}
+.map-dot:hover .dot-label {
+  opacity: 1;
+}
+.map-dot .dot-label-flag { margin-right: 2px; }
+
+/* Origin dot (Shanghai) */
+.map-dot-origin .dot-core {
+  width: 10px; height: 10px;
+  background: var(--accent);
+  border-color: rgba(255,255,255,0.6);
+}
+.map-dot-origin .dot-ring {
+  border: 2px dashed var(--accent);
+  animation: none;
+  width: 30px; height: 30px;
+  opacity: 0.5;
+}
+
+/* Connecting lines via SVG */
+.map-lines {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Map legend */
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 0 4px;
+}
+.map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 3px 8px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.map-legend-item:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.map-legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Map tooltip */
+.map-tooltip {
+  position: absolute;
+  background: var(--text-primary);
+  color: #fffcf5;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+.map-tooltip.show { opacity: 1; }
+.map-tooltip a { color: #f5cba0; text-decoration: none; font-weight: 600; }
+
+/* Map click hint */
+.map-hint {
+  position: absolute;
+  bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  color: rgba(139,115,85,0.3);
+  font-size: 11px;
+  pointer-events: none;
+}
+
+/* ===== Info Card ===== */
+.info-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+  text-align: center;
+}
+.info-card .icon { font-size: 32px; margin-bottom: 8px; display: block; }
+.info-card h3 { font-size: 17px; color: var(--text-primary); margin-bottom: 12px; }
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: center;
+}
+.info-item {
+  background: var(--accent-light);
+  border-radius: 10px;
+  padding: 12px 10px;
+}
+.info-item .label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+.info-item .value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+
+/* ===== Comment Section ===== */
+.comment-card {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px var(--shadow);
+}
+.comment-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.msg-form { display: flex; flex-direction: column; gap: 10px; }
+.msg-form input, .msg-form textarea {
+  font-family: inherit; font-size: 14px; padding: 12px 16px;
+  border: 2px solid var(--border); border-radius: 10px; outline: none; resize: none;
+  transition: border-color 0.2s; background: #fcf9f2;
+}
+.msg-form input:focus, .msg-form textarea:focus { border-color: var(--accent); background: #fff; }
+.msg-form textarea { min-height: 80px; }
+.msg-form .btn-submit {
+  align-self: flex-end;
+  background: linear-gradient(135deg, var(--accent), #d4783a);
+  color: #fff; border: none; padding: 10px 32px; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; font-family: inherit;
+}
+.msg-form .btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232,147,74,0.3);
+}
+.msg-form .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.msg-form .msg-tip { font-size: 12px; color: var(--text-secondary); text-align: right; }
+
+.msg-list { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; max-height: 420px; overflow-y: auto; }
+.msg-item { background: #fcf7ee; border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+.msg-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.msg-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #d4783a);
+  color: #fff; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.msg-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.msg-time { font-size: 11px; color: var(--text-secondary); margin-left: auto; }
+.msg-text { font-size: 14px; color: #5a4a3a; line-height: 1.6; padding-left: 40px; word-break: break-all; }
+.msg-empty { text-align: center; color: #d4c5a0; font-size: 14px; padding: 30px 0; }
+.msg-loading { text-align: center; color: var(--text-secondary); font-size: 13px; padding: 20px 0; }
+
+/* ===== Footer ===== */
+.footer { text-align: center; padding: 32px 16px; color: var(--text-secondary); font-size: 13px; }
+.footer::before {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: var(--border);
+  margin: 0 auto 16px;
+  border-radius: 1px;
+}
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+  background: var(--text-primary); color: #fffcf5; padding: 12px 24px; border-radius: 10px;
+  font-size: 14px; z-index: 1000; opacity: 0;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (min-width: 600px) {
+  .dest-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 600px) {
+  .hero { min-height: 75vh; }
+  .hero-emoji { font-size: 44px; }
+  .tab-bar { gap: 6px; flex-wrap: wrap; }
+  .tab-btn { padding: 8px 16px; font-size: 13px; }
+  .dest-img { height: 140px; }
+  .dest-body { padding: 12px 14px 14px; }
+  .vis-map { height: 280px; }
+  .info-grid { grid-template-columns: 1fr 1fr; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .procon-table { min-width: 500px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 65vh; }
+  .hero-emoji { font-size: 36px; }
+  .hero h1 { font-size: clamp(20px, 5vw, 22px); }
+  .hero p { font-size: 14px; }
+  .section-header h2 { font-size: 18px; }
+  .tab-btn { padding: 10px 14px; font-size: 13px; min-height: 44px; }
+  .dest-img-wrap, .dest-img-placeholder, .dest-img { height: 120px; }
+  .dest-body { padding: 10px 12px 12px; }
+  .dest-name { font-size: 14px; }
+  .dest-desc { font-size: 12px; }
+  .info-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .info-item { padding: 10px 8px; }
+  .vis-map { height: 220px; }
+  .comment-card { padding: 16px 14px; }
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; padding: 12px 14px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; padding: 12px 32px; min-height: 44px; font-size: 15px; }
+  .proposal-card { padding: 18px 16px; }
+  .proposal-card .icon { font-size: 28px; }
+  .dest-item { padding: 12px 14px; }
+  .container { padding: 0 12px; }
+  .map-dot .dot-label { display: none; }
+  .procon-table-wrap { margin: 12px -12px; border-radius: 0; border-left: none; border-right: none; }
+}
+@media (max-width: 380px) {
+  .hero { min-height: 60vh; }
+  .hero-emoji { font-size: 30px; }
+  .hero h1 { font-size: 18px; }
+  .tab-btn { padding: 8px 10px; font-size: 12px; }
+  .dest-img-wrap, .dest-img-placeholder, .dest-img { height: 100px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .vis-map { height: 180px; }
+}
+/* ===== Pro/Con Table ===== */
+.procon-table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 12px; border: 2px solid var(--border); }
+.procon-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 580px; }
+.procon-table th { padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.procon-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+.procon-table th:nth-child(1) { background: #f0f4f8; color: #2d3748; font-weight: 700; width: 20%; }
+.procon-table th:nth-child(2) { background: #e6f5e6; color: #1a6b1a; }
+.procon-table th:nth-child(3) { background: #fde8e8; color: #a82828; }
+.procon-table td:nth-child(1) { font-weight: 600; color: #2d3748; background: #f7fafc; }
+.procon-table td:nth-child(2) { background: #fafffa; color: #1e5a1e; }
+.procon-table td:nth-child(3) { background: #fff5f5; color: #7b341e; }
+.procon-table tr:last-child td { border-bottom: none; }
+.procon-tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 10px; font-weight: 700; margin: 1px 2px; letter-spacing: 0.5px; }
+.tag-good { background: #d4edda; color: #0e5e1e; border: 1px solid #b8dfc6; }
+.tag-meh { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+.tag-bad { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.sub-dim { color: #888; font-weight: 400; font-size: 12px; }
+
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <!-- Decorative hand-drawn elements -->
+  <div class="hero-sun">☀️</div>
+  <div class="hero-circle hero-circle-1"></div>
+  <div class="hero-circle hero-circle-2"></div>
+  <svg class="hero-squiggle hero-squiggle-top" viewBox="0 0 1200 30" preserveAspectRatio="none">
+    <path d="M0,15 C100,0 200,30 300,15 C400,0 500,30 600,15 C700,0 800,30 900,15 C1000,0 1100,30 1200,15" fill="none" stroke="#8b7355" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+  <svg class="hero-squiggle hero-squiggle-bottom" viewBox="0 0 1000 20" preserveAspectRatio="none">
+    <path d="M0,10 C80,0 160,20 250,10 C340,0 420,20 510,10 C600,0 680,20 770,10 C860,0 940,20 1000,10" fill="none" stroke="#8b7355" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <div class="hero-content">
+    <span class="hero-emoji">🏖️</span>
+    <h1>2026 暑假 · 家庭出游</h1>
+    <p>几个家庭一起，带上老人和孩子<br>选一个心仪的目的地，出发！</p>
+  </div>
+  <div class="scroll-indicator"></div>
+  <div class="hero-wave"></div>
+</section>
+
+<div class="container">
+
+<!-- 公告栏 -->
+<div class="card" style="border-color: var(--accent); background: #fffaf0;">
+  <div class="card-title" style="color:var(--accent);">📢 各位家人，目的地已确定</div>
+  <div style="font-size:14px;color:var(--text-secondary);line-height:1.9;">
+        <p style="margin-bottom:10px;">
+	      本次暑假家庭出游现聚焦 <strong style="color:#8B6B4D;">8 个方案</strong> 进行最终对比选择 👇（新增：新加坡+吉隆坡+槟城 / 北海道 / 芒市+腾冲 / 巴厘岛 / 清迈）
+	    </p>
+	    <div style="text-align:center;margin:16px 0 8px;">
+	      <a href="proposal.html" style="display:block;padding:20px 28px;background:linear-gradient(135deg,#e74c3c,#f39c12);color:#fff;border-radius:20px;text-decoration:none;font-weight:800;font-size:20px;box-shadow:0 6px 24px rgba(231,76,60,0.4);letter-spacing:2px;animation:pulseGlow 2s ease-in-out infinite;border:2px solid rgba(255,255,255,0.2);">
+	        📋 先看这里：七个方案详细对比 → 点击投票选定
+	      </a>
+	    </div>
+	    <style>
+	      @keyframes pulseGlow {
+	        0%, 100% { box-shadow: 0 6px 24px rgba(231,76,60,0.4); transform: scale(1); }
+	        50% { box-shadow: 0 6px 40px rgba(231,76,60,0.7); transform: scale(1.02); }
+	      }
+	    </style>
+	    <hr style="border:none;border-top:1px dashed var(--border);margin:16px 0 0;">
+	    <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:10px;margin-top:12px;">📖 各方案详细行程</div>
+	    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin:14px 0;">
+	      <a href="itinerary-xinjiang.html" style="display:block;padding:14px;background:linear-gradient(135deg,#A0522D,#CD853F);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇨🇳</div>
+	        <div style="font-weight:700;font-size:13px;">新疆·北疆</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">草原雪山 · 7天</div>
+	      </a>
+	      <a href="itinerary-singapore-kk.html" style="display:block;padding:14px;background:linear-gradient(135deg,#2d1b69,#e84393);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇲🇾</div>
+	        <div style="font-weight:700;font-size:13px;">吉隆坡+槟城</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">三城联游 · 10天</div>
+	      </a>
+	      
+	      <a href="itinerary-hokkaido.html" style="display:block;padding:14px;background:linear-gradient(135deg,#1e3a5f,#60a5fa);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇯🇵</div>
+	        <div style="font-weight:700;font-size:13px;">北海道</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">花海温泉 · 8天</div>
+	      </a>
+	      <a href="itinerary-yunnan.html" style="display:block;padding:14px;background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇨🇳</div>
+	        <div style="font-weight:700;font-size:13px;">芒市+腾冲</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">傣乡温泉 · 6天</div>
+	      </a>
+	      <a href="itinerary-bali.html" style="display:block;padding:14px;background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇮🇩</div>
+	        <div style="font-weight:700;font-size:13px;">巴厘岛</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">神庙海浪 · 8天</div>
+	      </a>
+	      <a href="itinerary-chiangmai.html" style="display:block;padding:14px;background:linear-gradient(135deg,#be123c,#fb7185);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇹🇭</div>
+	        <div style="font-weight:700;font-size:13px;">清迈</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">泰北慢生活 · 7天</div>
+	      </a>
+	      <a href="itinerary-singapore-kl-penang.html" style="display:block;padding:14px;background:linear-gradient(135deg,#e74c3c,#6c5ce7);color:#fff;border-radius:16px;text-decoration:none;text-align:center;">
+	        <div style="font-size:24px;margin-bottom:4px;">🇸🇬</div>
+	        <div style="font-weight:700;font-size:13px;">新加坡+吉隆坡+槟城</div>
+	        <div style="font-size:10px;opacity:0.85;margin-top:2px;">三城联游 · 10天</div>
+	      </a>
+	    </div>
+	    <p style="font-size:13px;color:var(--text-secondary);margin-top:12px;text-align:center;">
+	      💬 查看详细对比后在留言板发表你的意见！
+	    </p></div>
+
+<!-- 出游信息 -->
+  <div class="card info-card">
+    <div class="card-title">🏔️ 2026暑假 · 7个方案最终对比</div>
+    <strong>时间：</strong>2026 年 7 月中下旬 ~ 8 月上旬<br>
+    <strong>成员：</strong>几个家庭，有老人和小孩<br>
+    <strong>风格：</strong>慢节奏、不赶路、舒适为主<br>
+    <strong>当前阶段：</strong>七个方案最终对比 · 请投票选择<br>
+    <div style="margin-top:10px;font-size:13px;color:var(--text-secondary);">
+      现聚焦八个方案：🇨🇳 <strong>新疆北疆</strong> vs 🇲🇾 <strong>吉隆坡+槟城</strong> vs 🇲🇾 <strong>吉隆坡+仙本那</strong> vs 🇯🇵 <strong>北海道</strong> vs 🇨🇳 <strong>芒市+腾冲</strong> vs 🇮🇩 <strong>巴厘岛</strong> vs 🇹🇭 <strong>清迈</strong> vs 🇸🇬🇲🇾 <strong>新加坡+吉隆坡+槟城</strong>，请大家查看详细对比后在留言板投票！
+    </div>
+  </div>
+
+
+  <!-- Comment -->
+  <div class="section" id="sec-comment">
+    <div class="comment-card">
+      <h3>💬 大家来说说</h3>
+      <div class="msg-form">
+        <input type="text" id="msg-name" placeholder="你的称呼" maxlength="20">
+        <textarea id="msg-content" placeholder="说说你的想法…（对行程有什么建议？）" maxlength="500"></textarea>
+        <button class="btn-submit" id="msg-submit" onclick="submitMsg()">发表留言</button>
+        <div class="msg-tip"><span id="msg-count">0</span>/500</div>
+      </div>
+      <div class="msg-list" id="msg-list">
+        <div class="msg-loading">⏳ 加载中…</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="footer">✈️ 家庭出游计划 · 2026 年 暑假</div>
+<div id="toast" class="toast"></div>
+
+<!-- ===== Custom Visual Map ===== -->
+
+<script>
+/* ===== Destination Data ===== */
+const DESTINATIONS = [
+  {
+    id: 'xinjiang', name: '北疆伊犁 · 草原雪山', flag: '🇨🇳',
+    region: 'domestic', desc: '7天6晚 · 避暑胜地 · 草原骑马',
+    features: ['气候凉爽', '风景壮丽', '中文无障碍'],
+    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80',
+    color: '#CD853F',
+    latlng: [43.9, 81.3],
+    page: 'itinerary-xinjiang.html'
+  },
+  {
+    id: 'singapore-kk', name: '吉隆坡+马六甲+槟城 · 三城联游', flag: '🇲🇾',
+    region: 'overseas', desc: '10天9晚 · 都会+古城+美食',
+    features: ['全程免签', '三城体验', '亲子友好'],
+    img: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80',
+    color: '#6c5ce7',
+    latlng: [3.139, 101.6869],
+    page: 'itinerary-singapore-kk.html'
+  },
+  {
+    id: 'hokkaido', name: '北海道 · 花海温泉', flag: '🇯🇵',
+    region: 'overseas', desc: '8天7晚 · 避暑胜地 · 富良野花海',
+    features: ['气候凉爽', '温泉泡汤', '海鲜美食'],
+    img: 'https://images.unsplash.com/photo-1578271887552-5ac3a72752bc?w=600&q=80',
+    color: '#2563eb',
+    latlng: [43.1, 141.3],
+    page: 'itinerary-hokkaido.html'
+  },
+  {
+    id: 'yunnan', name: '芒市+腾冲 · 傣乡温泉', flag: '🇨🇳',
+    region: 'domestic', desc: '6天5晚 · 傣乡风情 · 火山温泉 · 古镇慢生活',
+    features: ['傣族文化', '火山温泉', '古镇慢生活'],
+    img: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80',
+    color: '#0d9488',
+    latlng: [24.45, 98.6],
+    page: 'itinerary-yunnan.html'
+  },
+  {
+    id: 'bali', name: '巴厘岛 · 神庙海浪', flag: '🇮🇩',
+    region: 'overseas', desc: '8天7晚 · 旱季舒适 · 海岛度假',
+    features: ['免签', '7月旱季', 'SPA度假'],
+    img: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80',
+    color: '#e67e22',
+    latlng: [-8.3, 115.2],
+    page: 'itinerary-bali.html'
+  },
+{
+    id: 'singapore-kl-penang', name: '新加坡+吉隆坡+槟城 · 三城联游', flag: '🇸🇬',
+    region: 'overseas', desc: '10天9晚 · 花园城市+都会+美食',
+    features: ['免签/ezlink', '三城联游', '亲子友好'],
+    img: 'https://images.unsplash.com/photo-1569336415962-a4bd9f609cd5?w=600&q=80',
+    color: '#e74c3c',
+    latlng: [1.3521, 103.8198],
+    page: 'itinerary-singapore-kl-penang.html'
+  },
+  {
+        id: 'chiangmai', name: '清迈 · 泰北慢生活', flag: '🇹🇭',
+    region: 'overseas', desc: '7天6晚 · 慢节奏 · 寺庙夜市',
+    features: ['免签', '物价低廉', '亲子友好'],
+    img: 'https://images.unsplash.com/photo-1598935898639-81586f7d2129?w=600&q=80',
+    color: '#e11d48',
+    latlng: [18.8, 98.9],
+    page: 'itinerary-chiangmai.html'
+  }
+];
+
+/* ===== Render Destinations ===== */
+function renderDests(filter) {
+  const grid = document.getElementById('dest-grid');
+  const filtered = filter === 'all' ? DESTINATIONS : DESTINATIONS.filter(d => d.region === filter);
+
+  grid.innerHTML = filtered.map(d => {
+    const features = d.features.map(f => `<span class="dest-tag-feature">${f}</span>`).join('');
+    const regionLabel = d.region === 'domestic' ? '国内' : '国外';
+
+    return `
+      <a href="${d.page}" class="dest-card">
+        <div class="dest-img-wrap" style="background:${d.color}">
+          <span class="dest-img-fallback">${d.flag}</span>
+          <img class="dest-img" src="${d.img}" alt="${d.name}" loading="lazy"
+            onerror="this.style.display='none'">
+        </div>
+        <div class="dest-overlay">
+          <span class="dest-tag dest-tag-region">${regionLabel}</span>
+        </div>
+        <div class="dest-body">
+          <div class="dest-body-header">
+            <span class="dest-flag">${d.flag}</span>
+            <span class="dest-name">${d.name}</span>
+            <span class="dest-arrow">→</span>
+          </div>
+          <div class="dest-desc">${d.desc}</div>
+          <div class="dest-tags">${features}</div>
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+renderDests('all');
+
+/* ===== Custom Visual Map ===== */
+(function initVisMap() {
+  const mapEl = document.getElementById('vis-map');
+  if (!mapEl) return;
+
+  // Map bounds: lat 0-50°N, lng 75-125°E
+  const toPct = (lat, lng) => ({
+    top: 100 - (lat / 50 * 100),     // lat 0=bottom, 50=top
+    left: (lng - 75) / 50 * 100
+  });
+
+  // Origin: Shanghai
+  const origin = toPct(31.2, 121.5);
+
+  // Generate decorative ocean dots
+  for (let i = 0; i < 60; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'ocean-dot';
+    dot.style.left = (Math.random() * 96 + 2) + '%';
+    dot.style.top = (Math.random() * 96 + 2) + '%';
+    dot.style.width = dot.style.height = (Math.random() * 2 + 1) + 'px';
+    mapEl.appendChild(dot);
+  }
+
+  // Draw connecting lines from origin to each destination
+  const svg = document.getElementById('map-lines');
+  const mapRect = mapEl.getBoundingClientRect();
+
+  function addLine(x1, y1, x2, y2, color) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1 + '%');
+    line.setAttribute('y1', y1 + '%');
+    line.setAttribute('x2', x2 + '%');
+    line.setAttribute('y2', y2 + '%');
+    line.setAttribute('stroke', color || 'rgba(255,255,255,0.08)');
+    line.setAttribute('stroke-width', '1');
+    line.setAttribute('stroke-dasharray', '3,4');
+    svg.appendChild(line);
+  }
+
+  DESTINATIONS.forEach((d, idx) => {
+    const pos = toPct(d.latlng[0], d.latlng[1]);
+    addLine(origin.left, origin.top, pos.left, pos.top, d.color + '33');
+
+    // Dot element
+    const dot = document.createElement('div');
+    dot.className = 'map-dot';
+    dot.style.left = pos.left + '%';
+    dot.style.top = pos.top + '%';
+
+    const ring = document.createElement('div');
+    ring.className = 'dot-ring';
+    ring.style.background = d.color;
+    dot.appendChild(ring);
+
+    const core = document.createElement('div');
+    core.className = 'dot-core';
+    core.style.background = d.color;
+    dot.appendChild(core);
+
+    const label = document.createElement('div');
+    label.className = 'dot-label';
+    label.innerHTML = `<span class="dot-label-flag">${d.flag}</span>${d.name}`;
+    dot.appendChild(label);
+
+    // Click → navigate
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = d.page;
+    });
+
+    // Hover tooltip
+    dot.addEventListener('mouseenter', () => {
+      const tt = document.getElementById('map-tooltip');
+      tt.innerHTML = `<strong>${d.flag} ${d.name}</strong> · <a href="${d.page}">查看行程 →</a>`;
+      tt.classList.add('show');
+    });
+    dot.addEventListener('mousemove', (e) => {
+      const tt = document.getElementById('map-tooltip');
+      const r = mapEl.getBoundingClientRect();
+      let x = e.clientX - r.left + 16;
+      let y = e.clientY - r.top - 10;
+      if (x + 200 > r.width) x = e.clientX - r.left - 180;
+      if (y < 0) y = 10;
+      tt.style.left = x + 'px';
+      tt.style.top = y + 'px';
+    });
+    dot.addEventListener('mouseleave', () => {
+      document.getElementById('map-tooltip').classList.remove('show');
+    });
+
+    mapEl.appendChild(dot);
+
+    // Legend item
+    const leg = document.getElementById('map-legend');
+    const item = document.createElement('a');
+    item.className = 'map-legend-item';
+    item.href = d.page;
+    item.innerHTML = `<span class="map-legend-dot" style="background:${d.color}"></span>${d.flag} ${d.name}`;
+    leg.appendChild(item);
+  });
+
+  // Origin dot
+  const originDot = document.createElement('div');
+  originDot.className = 'map-dot map-dot-origin';
+  originDot.style.left = origin.left + '%';
+  originDot.style.top = origin.top + '%';
+  const or = document.createElement('div'); or.className = 'dot-ring'; originDot.appendChild(or);
+  const oc = document.createElement('div'); oc.className = 'dot-core'; originDot.appendChild(oc);
+  const ol = document.createElement('div'); ol.className = 'dot-label';
+  ol.innerHTML = '<span class="dot-label-flag">📍</span>上海（出发地）';
+  originDot.appendChild(ol);
+  mapEl.appendChild(originDot);
+
+  // Redraw lines on resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // SVG lines are in %, so no recalculation needed
+    }, 200);
+  });
+})();
+
+/* ===== Scroll Animations ===== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+/* ===== Comments ===== */
+const API = '/api/comments';
+
+async function loadMsgs(retries) {
+  if (retries === undefined) retries = 0;
+  const list = document.getElementById('msg-list');
+  try {
+    const res = await fetch(API);
+    const data = await res.json();
+    if (!data.success) throw new Error();
+    if (data.comments.length === 0) {
+      list.innerHTML = '<div class="msg-empty">还没有留言，来说两句吧 🎉</div>';
+      return;
+    }
+    list.innerHTML = data.comments.map(m => {
+      const date = (m.created_at || '').slice(0, 16).replace('T', ' ');
+      const initial = (m.name || '?').charAt(0);
+      return '<div class="msg-item">' +
+        '<div class="msg-header">' +
+          '<div class="msg-avatar">' + initial + '</div>' +
+          '<span class="msg-name">' + escHtml(m.name) + '</span>' +
+          '<span class="msg-time">' + date + '</span>' +
+        '</div>' +
+        '<div class="msg-text">' + escHtml(m.content) + '</div>' +
+      '</div>';
+    }).join('');
+  } catch (e) {
+    if (retries < 2) {
+      setTimeout(() => loadMsgs(retries + 1), 2000 * (retries + 1));
+      list.innerHTML = '<div class="msg-loading">⏳ 加载中…（重试 ' + (retries + 1) + '/3）</div>';
+    } else {
+      list.innerHTML = '<div class="msg-empty" style="color:#e53e3e;">留言加载失败（' + e.name + '），请刷新重试</div>';
+    }
+  }
+}
+
+function escHtml(s) {
+  if (!s) return '';
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+async function submitMsg() {
+  const name = document.getElementById('msg-name').value.trim();
+  const content = document.getElementById('msg-content').value.trim();
+  const btn = document.getElementById('msg-submit');
+  if (!name) { showToast('请填写你的称呼'); return; }
+  if (!content) { showToast('请填写留言内容'); return; }
+  btn.disabled = true;
+  btn.textContent = '提交中…';
+  try {
+    const res = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, content })
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('msg-name').value = '';
+      document.getElementById('msg-content').value = '';
+      document.getElementById('msg-count').textContent = '0';
+      showToast('✅ 留言发表成功！');
+      await loadMsgs();
+    } else {
+      showToast('❌ ' + (data.error || '提交失败'));
+    }
+  } catch (e) {
+    showToast('❌ 网络错误，请重试');
+  }
+  btn.disabled = false;
+  btn.textContent = '发表留言';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// DOM is already parsed (script at end of body) — load comments immediately
+loadMsgs();
+const ta = document.getElementById('msg-content');
+if (ta) {
+  ta.addEventListener('input', function() {
+    document.getElementById('msg-count').textContent = this.value.length;
+  });
+}
+</script>
+
+</body>
+</html>
