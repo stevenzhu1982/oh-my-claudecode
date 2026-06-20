@@ -519,9 +519,66 @@ function* executeRequest(request) {
   }
 }
 __name(executeRequest, "executeRequest");
+var PASSWORD = "8888";
+var COOKIE_NAME = "site_pw";
+
+function checkAuth(request) {
+  var url = new URL(request.url);
+  // Skip auth for static assets (images, css, js)
+  if (url.pathname.match(/\.(jpg|jpeg|png|gif|webp|svg|ico|css|js|mp4|webm|pdf|docx)$/i)) return true;
+  // Skip API routes
+  if (url.pathname.startsWith("/api/")) return true;
+  // Skip flight monitor pages
+  if (url.pathname.startsWith("/flight-monitor") || url.pathname.startsWith("/spring-monitor") || url.pathname.startsWith("/thai-monitor")) return true;
+  // Skip public pages
+  if (url.pathname === "/countdown.html" || url.pathname === "/countdown") return true;
+  // Skip thailand itinerary page (public)
+  if (url.pathname.startsWith("/thailand/") || url.pathname === "/thailand") return true;
+
+  // Check query param
+  if (url.searchParams.get("pw") === PASSWORD) return true;
+
+  // Check cookie
+  var cookie = request.headers.get("Cookie") || "";
+  if (cookie.indexOf(COOKIE_NAME + "=" + PASSWORD) >= 0) return true;
+
+  return false;
+}
+
+var LOGIN_PAGE = '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>验证</title><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}.box{background:#fff;border-radius:20px;padding:40px 36px;text-align:center;max-width:380px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3)}h1{font-size:22px;color:#1a1a2e;margin-bottom:6px}p{font-size:14px;color:#666;margin-bottom:24px}.input-wrap{position:relative;margin-bottom:20px}input{width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:12px;font-size:18px;text-align:center;outline:none;box-sizing:border-box;letter-spacing:6px;font-weight:700}input:focus{border-color:#6c5ce7}button{width:100%;padding:14px;background:linear-gradient(135deg,#2d1b69,#6c5ce7);color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer}button:hover{opacity:.9}.error{color:#e53e3e;font-size:13px;margin-top:10px;display:none}</style></head><body><div class="box"><h1>🔐 请输入访问密码</h1><p>2026暑假 · 马来西亚亲子游</p><form method="GET"><div class="input-wrap"><input type="password" name="pw" placeholder="输入密码" autofocus></div><button type="submit">验证</button><div class="error" id="error">密码错误，请重试</div></form></div><script>var err=new URLSearchParams(location.search).get("error");if(err){document.getElementById("error").style.display="block"}</script></body></html>';
+
 var pages_template_worker_default = {
   async fetch(originalRequest, env, workerContext) {
     let request = originalRequest;
+
+    // Password protection
+    if (!checkAuth(request)) {
+      var url = new URL(request.url);
+      var pw = url.searchParams.get("pw");
+      if (pw === PASSWORD) {
+        // Set cookie and redirect to clean URL
+        var cleanUrl = url.origin + url.pathname;
+        return new Response("", {
+          status: 302,
+          headers: {
+            "Location": cleanUrl,
+            "Set-Cookie": COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure"
+          }
+        });
+      }
+      if (pw && pw !== PASSWORD) {
+        return new Response(LOGIN_PAGE.replace('style="display:none"', 'style="display:block"'), {
+          headers: { "Content-Type": "text/html;charset=utf-8" }
+        });
+      }
+      return new Response(LOGIN_PAGE, {
+        headers: { "Content-Type": "text/html;charset=utf-8" }
+      });
+    }
+
+    // Cookie header that refreshes on every response (30 day expiry)
+    var COOKIE_HEADER = COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure";
+
     const handlerIterator = executeRequest(request);
     let data = {};
     let isFailOpen = false;
@@ -560,13 +617,18 @@ var pages_template_worker_default = {
         if (!(response instanceof Response)) {
           throw new Error("Your Pages function should return a Response");
         }
+        response.headers.append("Set-Cookie", COOKIE_HEADER);
         return cloneResponse(response);
       } else if ("ASSETS") {
-        const response = await env["ASSETS"].fetch(request);
-        return cloneResponse(response);
+        var assetResp = await env["ASSETS"].fetch(request);
+        var respWithCookie = new Response(assetResp.body, assetResp);
+        respWithCookie.headers.append("Set-Cookie", COOKIE_HEADER);
+        return respWithCookie;
       } else {
-        const response = await fetch(request);
-        return cloneResponse(response);
+        var fetchResp = await fetch(request);
+        var respWithCookie2 = new Response(fetchResp.body, fetchResp);
+        respWithCookie2.headers.append("Set-Cookie", COOKIE_HEADER);
+        return respWithCookie2;
       }
     }, "next");
     try {
