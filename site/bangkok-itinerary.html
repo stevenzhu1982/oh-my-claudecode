@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2027春节 · 曼谷之旅 · PVG→BKK</title>
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+  background: #fff8f0;
+  color: #2d3748;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1c00 30%, #b85c00 60%, #1a0a00 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.2;
+  animation: heroZoom 25s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,10,0,0.88) 0%, rgba(61,28,0,0.78) 50%, rgba(26,10,0,0.92) 100%);
+}
+.hero-particles {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: rgba(255,215,0,0.5);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+}
+@keyframes particleFloat {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  background: rgba(255,215,0,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,215,0,0.3);
+  border-radius: 20px;
+  color: #ffd700;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+  letter-spacing: 4px;
+}
+.hero h1 span {
+  background: linear-gradient(to right, #ffd700, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+  margin: 8px auto 0;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.hero-stat { text-align: center; }
+.hero-stat .num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffd700;
+  display: block;
+}
+.hero-stat .label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+.hero-wave {
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 70px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,40 C240,70 480,10 720,40 C960,70 1200,10 1440,40 L1440,70 L0,70Z' fill='%23fff8f0'/%3E%3C/svg%3E") center/cover no-repeat;
+}
+.scroll-indicator {
+  position: absolute;
+  bottom: 80px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.4);
+  font-size: 11px;
+  letter-spacing: 2px;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-indicator .mouse {
+  width: 22px; height: 34px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  position: relative;
+}
+.scroll-indicator .mouse::after {
+  content: '';
+  position: absolute;
+  top: 5px; left: 50%;
+  transform: translateX(-50%);
+  width: 3px; height: 8px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 2px;
+  animation: scrollDot 2s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(12px); opacity: 0.2; }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ===== Navigation ===== */
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: all 0.3s;
+}
+.nav-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.nav-inner::-webkit-scrollbar { display: none; }
+.nav-link {
+  flex-shrink: 0;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #718096;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-link:hover { color: #d97706; }
+.nav-link.active { color: #d97706; border-bottom-color: #d97706; }
+
+/* ===== Container ===== */
+.container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+/* ===== Section ===== */
+.section {
+  padding: 48px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+.section-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.section-header .emoji {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 8px;
+}
+.section-header h2 {
+  font-size: clamp(22px, 3.5vw, 28px);
+  font-weight: 800;
+  color: #1a0a00;
+  letter-spacing: 2px;
+}
+.section-header p {
+  font-size: 14px;
+  color: #a0aec0;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}
+
+/* ===== Overview Cards ===== */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+.overview-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 18px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+}
+.overview-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.overview-card .icon { font-size: 28px; margin-bottom: 6px; display: block; }
+.overview-card .num {
+  font-size: 22px;
+  font-weight: 800;
+  color: #d97706;
+}
+.overview-card .desc {
+  font-size: 13px;
+  color: #718096;
+  margin-top: 2px;
+}
+
+/* ===== Flight Info Cards ===== */
+.flight-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 24px;
+}
+.flight-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.3s;
+}
+.flight-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.flight-card .airline {
+  font-size: 14px;
+  font-weight: 700;
+  color: #d97706;
+  margin-bottom: 4px;
+}
+.flight-card .flight-num {
+  font-size: 16px;
+  font-weight: 800;
+  color: #1a0a00;
+}
+.flight-card .time {
+  font-size: 13px;
+  color: #718096;
+  margin: 2px 0;
+}
+.flight-card .price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #059669;
+  margin-top: 4px;
+}
+.flight-card .price .note {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9ca3af;
+}
+.flight-card .tag {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(5,150,105,0.1);
+  color: #059669;
+}
+.flight-card .tag.best {
+  background: rgba(217,119,6,0.1);
+  color: #d97706;
+}
+@media (max-width: 560px) {
+  .flight-cards { grid-template-columns: 1fr; }
+}
+
+/* ===== Airline Comparison ===== */
+.compare-wrap {
+  margin-top: 24px;
+}
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.compare-table th {
+  background: linear-gradient(135deg, #1a0a00, #b85c00);
+  color: #fff;
+  padding: 14px 16px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+}
+.compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0ebe4;
+  text-align: center;
+  color: #4a5568;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table .highlight {
+  background: #fffbeb;
+  font-weight: 700;
+  color: #d97706;
+}
+.compare-table .best-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(217,119,6,0.1);
+  color: #d97706;
+}
+
+/* ===== Countdown ===== */
+.countdown-bar {
+  background: linear-gradient(135deg, #1a0a00, #b85c00);
+  border-radius: 16px;
+  padding: 28px 24px;
+  text-align: center;
+  margin-top: 24px;
+  color: #fff;
+}
+.countdown-bar .label { font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 8px; letter-spacing: 2px; }
+.countdown-grid { display: flex; justify-content: center; gap: 16px; }
+.countdown-item { min-width: 60px; }
+.countdown-item .num {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ffd700;
+  line-height: 1;
+}
+.countdown-item .unit { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+/* ===== Timeline / Itinerary ===== */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, #d97706, #ffd700, #d97706);
+  border-radius: 2px;
+}
+.day-card {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  padding: 0;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.day-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); }
+.day-marker {
+  position: absolute;
+  left: -33px;
+  top: 20px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d97706, #ffd700);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(217,119,6,0.3);
+  z-index: 1;
+}
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  background: linear-gradient(to right, #fffbeb, #fff);
+  border-bottom: 1px solid #f0ebe4;
+}
+.day-header-left { flex: 1; }
+.day-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a0a00;
+}
+.day-sub {
+  font-size: 13px;
+  color: #d97706;
+  font-weight: 600;
+  margin-top: 1px;
+}
+.day-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #fff;
+  white-space: nowrap;
+}
+.day-arrow {
+  font-size: 14px;
+  color: #cbd5e0;
+  transition: transform 0.3s;
+}
+.day-card.open .day-arrow { transform: rotate(180deg); }
+.day-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s ease;
+}
+.day-card.open .day-body {
+  max-height: 3000px;
+}
+.day-body-inner { padding: 18px 22px 22px; }
+.day-location {
+  font-size: 13px;
+  color: #a0aec0;
+  margin-bottom: 10px;
+}
+.day-location::before { content: '📍 '; }
+.day-item {
+  font-size: 14px;
+  padding: 4px 0;
+  padding-left: 20px;
+  position: relative;
+  color: #4a5568;
+}
+.day-item::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  background: #fde68a;
+  border-radius: 50%;
+}
+.day-item strong { color: #2d3748; }
+.day-meal {
+  font-size: 13px;
+  color: #d97706;
+  padding-left: 20px;
+  margin-top: 6px;
+  background: #fffbeb;
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-top: 8px;
+}
+.day-meal::before { content: '🍽 '; }
+.day-tip {
+  font-size: 13px;
+  color: #2d3748;
+  background: #f0f7ff;
+  border-radius: 8px;
+  padding: 8px 14px;
+  margin-top: 8px;
+  padding-left: 14px;
+}
+.day-tip::before { content: '💡 '; }
+.day-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+.day-img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #fde68a;
+}
+@media (max-width: 500px) {
+  .day-images { grid-template-columns: 1fr 1fr; }
+}
+
+/* ===== Budget ===== */
+.budget-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.budget-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.budget-table th {
+  background: linear-gradient(135deg, #1a0a00, #b85c00);
+  color: #fff;
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.budget-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0ebe4;
+  color: #4a5568;
+}
+.budget-table tr:last-child td { border-bottom: none; }
+.budget-table tr.total td {
+  background: #fffbeb;
+  font-weight: 700;
+  color: #d97706;
+  font-size: 15px;
+}
+.budget-table .amount {
+  text-align: right;
+  font-weight: 600;
+  color: #2d3748;
+}
+.budget-table .amount.total-amount { color: #d97706; font-size: 17px; }
+.budget-wide { display: none; }
+@media (min-width: 600px) {
+  .budget-wide { display: table-cell; }
+  .budget-narrow { display: none; }
+}
+
+/* ===== Packing List ===== */
+.packing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.packing-cat {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+.packing-cat h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a0a00;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #fde68a;
+}
+.packing-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 13px;
+  color: #4a5568;
+  cursor: pointer;
+  user-select: none;
+}
+.packing-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d0c8bc;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  position: relative;
+}
+.packing-item input[type="checkbox"]:checked {
+  background: #d97706;
+  border-color: #d97706;
+}
+.packing-item input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.packing-item.checked { color: #cbd5e0; text-decoration: line-through; }
+
+/* ===== Info Cards ===== */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.info-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: all 0.3s;
+}
+.info-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.info-card .icon { font-size: 28px; display: block; margin-bottom: 6px; }
+.info-card h4 { font-size: 15px; font-weight: 700; color: #1a0a00; margin-bottom: 6px; }
+.info-card p { font-size: 13px; color: #718096; line-height: 1.7; }
+.info-card ul { list-style: none; padding: 0; }
+.info-card li {
+  font-size: 13px;
+  color: #4a5568;
+  padding: 3px 0;
+  padding-left: 16px;
+  position: relative;
+}
+.info-card li::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: #d97706;
+  font-weight: 700;
+}
+
+/* ===== Tip Box ===== */
+.tip-box {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  margin-bottom: 14px;
+  border-left: 4px solid #d97706;
+}
+.tip-box h4 { font-size: 15px; font-weight: 700; color: #1a0a00; margin-bottom: 4px; }
+.tip-box p { font-size: 14px; color: #4a5568; }
+.tip-box ul { list-style: none; padding: 0; margin-top: 4px; }
+.tip-box li { font-size: 13px; color: #4a5568; padding: 2px 0; padding-left: 16px; position: relative; }
+.tip-box li::before { content: '•'; position: absolute; left: 2px; color: #d97706; }
+
+/* ===== Gallery ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1;
+}
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-label {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 20px 12px 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+@media (max-width: 500px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+}
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center;
+  padding: 40px 20px 32px;
+  color: #a0aec0;
+  font-size: 13px;
+  border-top: 1px solid #e8e2d8;
+  margin-top: 20px;
+}
+.footer .family-note {
+  font-size: 15px;
+  color: #718096;
+  margin-bottom: 8px;
+}
+.footer a {
+  color: #d97706;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ===== Back to Top ===== */
+.back-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #d97706, #ffd700);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(217,119,6,0.3);
+  transition: all 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  z-index: 99;
+}
+.back-top.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(217,119,6,0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .hero { min-height: 60vh; }
+  .hero h1 { font-size: clamp(24px, 6vw, 32px); }
+  .hero-sub { font-size: 14px; }
+  .hero-stats { gap: 12px; }
+  .hero-stat .num { font-size: 20px; }
+  .hero-stat .label { font-size: 11px; }
+  .scroll-indicator { bottom: 60px; }
+  .nav-link { padding: 14px 12px; font-size: 12px; min-height: 44px; display: flex; align-items: center; }
+  .nav-inner { padding: 0 8px; }
+  .container { padding: 0 14px; }
+  .section { padding: 28px 0; }
+  .section-header { margin-bottom: 24px; }
+  .section-header .emoji { font-size: 28px; }
+  .section-header h2 { font-size: 20px; }
+  .timeline { padding-left: 28px; }
+  .day-marker { left: -22px; width: 20px; height: 20px; font-size: 9px; }
+  .day-header { padding: 14px 16px; }
+  .day-body-inner { padding: 14px 16px 16px; }
+  .day-title { font-size: 14px; }
+  .day-item { font-size: 13px; }
+  .day-meal { font-size: 12px; padding: 6px 12px; }
+  .day-tip { font-size: 12px; padding: 6px 12px; }
+  .back-top { bottom: 16px; right: 16px; width: 44px; height: 44px; font-size: 16px; }
+  .overview-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .overview-card { padding: 16px 12px; }
+  .overview-card .num { font-size: 18px; }
+  .flight-cards { grid-template-columns: 1fr; }
+  .countdown-grid { gap: 10px; }
+  .countdown-item { min-width: 50px; }
+  .countdown-item .num { font-size: 24px; }
+  .tip-box { padding: 16px 16px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 55vh; }
+  .hero h1 { letter-spacing: 2px; }
+  .overview-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .overview-card { padding: 12px 10px; }
+  .overview-card .num { font-size: 16px; }
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 6px 8px; }
+  .compare-table { font-size: 12px; }
+  .compare-table th, .compare-table td { padding: 8px 6px; }
+}
+
+/* ===== Print ===== */
+@media print {
+  .hero { min-height: auto; padding: 40px 20px; }
+  .nav-bar { display: none; }
+  .back-top { display: none; }
+  .day-card { break-inside: avoid; }
+  .section { opacity: 1 !important; transform: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="top">
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✈️ 2027 春节假期 · 2人游</div>
+    <h1>曼谷 · <span>暹罗之旅</span></h1>
+    <p class="hero-sub" id="hero-subtitle">大皇宫 · 水上市场 · 暹罗商圈 · 火车夜市 · 泰式按摩 · 11天10晚</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="num" id="hero-days">11天</span><span class="label">行程天数</span></div>
+      <div class="hero-stat"><span class="num" id="hero-nights">10晚</span><span class="label">住宿</span></div>
+      <div class="hero-stat"><span class="num">28-35°C</span><span class="label">当地气温</span></div>
+      <div class="hero-stat"><span class="num" id="hero-budget">~5k</span><span class="label">预算/人(起)</span></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="mouse"></div>
+    <span>向下滚动</span>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<!-- ===== Nav ===== -->
+<nav class="nav-bar" id="navbar">
+  <div class="nav-inner">
+    <a href="#overview" class="nav-link active">📋 概览</a>
+    <a href="#flights" class="nav-link">✈️ 航班</a>
+    <a href="#itinerary" class="nav-link">🗓️ 行程</a>
+    <a href="#budget" class="nav-link">💰 预算</a>
+    <a href="#packing" class="nav-link">🎒 行李清单</a>
+    <a href="#info" class="nav-link">💡 实用信息</a>
+    <a href="#photos" class="nav-link">📸 风景预览</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ===== Overview ===== -->
+  <section class="section visible" id="overview">
+    <div class="section-header">
+      <span class="emoji">🌴</span>
+      <h2>行程概览</h2>
+      <p>上海 PVG → 曼谷 BKK · 春节度假 · 优选经济省钱方案</p>
+    </div>
+
+    <div class="overview-grid" id="overview-grid">
+      <div class="overview-card">
+        <span class="icon">📅</span>
+        <span class="num">2月11日→2月22日</span>
+        <span class="desc">11天10晚 · 春节假期</span>
+      </div>
+      <div class="overview-card">
+        <span class="icon">✈️</span>
+        <span class="num">春秋航空</span>
+        <span class="desc">优选飞含20KG行李 · 直飞</span>
+      </div>
+      <div class="overview-card">
+        <span class="icon">🌡️</span>
+        <span class="num">28-35°C</span>
+        <span class="desc">曼谷2月 · 凉爽干燥季</span>
+      </div>
+      <div class="overview-card">
+        <span class="icon">💰</span>
+        <span class="num">≈ ¥4,736/人</span>
+        <span class="desc">往返机票 · 含税</span>
+      </div>
+      <div class="overview-card">
+        <span class="icon">🏨</span>
+        <span class="num">10晚住宿</span>
+        <span class="desc">市区精选酒店</span>
+      </div>
+      <div class="overview-card">
+        <span class="icon">👫</span>
+        <span class="num">2人自由行</span>
+        <span class="desc">轻松不赶 · 慢慢玩</span>
+      </div>
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-bar" id="countdown">
+      <div class="label">⏳ 距离出发还有</div>
+      <div class="countdown-grid">
+        <div class="countdown-item"><div class="num" id="cd-days">--</div><div class="unit">天</div></div>
+        <div class="countdown-item"><div class="num" id="cd-hours">--</div><div class="unit">时</div></div>
+        <div class="countdown-item"><div class="num" id="cd-mins">--</div><div class="unit">分</div></div>
+        <div class="countdown-item"><div class="num" id="cd-secs">--</div><div class="unit">秒</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Flights ===== -->
+  <section class="section" id="flights">
+    <div class="section-header">
+      <span class="emoji">✈️</span>
+      <h2>航班选择</h2>
+      <p>精选最优价格方案 · 春秋航空 VS 泰国航空</p>
+    </div>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>方案</th>
+            <th>去程</th>
+            <th>回程</th>
+            <th>价格/人</th>
+            <th>行李</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td><strong>🟢 春秋</strong><br><span style="font-size:11px;color:#9ca3af;font-weight:400;">推荐 · 最优</span></td>
+            <td>2/11 9C7289<br><span style="font-size:12px;color:#9ca3af;">17:00→20:45</span></td>
+            <td>2/22 9C7280<br><span style="font-size:12px;color:#9ca3af;">12:45→18:05</span></td>
+            <td><strong style="font-size:16px;color:#059669;">¥2,368</strong><br><span class="best-badge">最省钱</span></td>
+            <td>优选飞<br>20KG</td>
+          </tr>
+          <tr>
+            <td><strong>🔵 泰航</strong><br><span style="font-size:11px;color:#9ca3af;font-weight:400;">全服务</span></td>
+            <td>2/10 TG663<br><span style="font-size:12px;color:#9ca3af;">15:10→18:45</span></td>
+            <td>2/21 TG662<br><span style="font-size:12px;color:#9ca3af;">09:50→15:10</span></td>
+            <td><strong style="font-size:16px;color:#2563eb;">¥5,260</strong></td>
+            <td>30KG<br>含餐食</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flight-cards">
+      <div class="flight-card">
+        <div class="airline">🟢 春秋航空 · 优选飞</div>
+        <div class="flight-num">9C7289 去程</div>
+        <div class="time">2月11日（周四）17:00 → 20:45</div>
+        <div class="time">🛫 上海浦东 PVG → 曼谷素万那普 BKK</div>
+        <div class="price">¥1,012 <span class="note">/人</span></div>
+        <span class="tag">推荐 · 低价优选</span>
+      </div>
+      <div class="flight-card">
+        <div class="airline">🟢 春秋航空 · 优选飞</div>
+        <div class="flight-num">9C7280 回程</div>
+        <div class="time">2月22日（周一）12:45 → 18:05</div>
+        <div class="time">🛬 曼谷素万那普 BKK → 上海浦东 PVG</div>
+        <div class="price">¥1,356 <span class="note">/人</span></div>
+        <span class="tag">可选20KG行李</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Itinerary ===== -->
+  <section class="section" id="itinerary">
+    <div class="section-header">
+      <span class="emoji">🗓️</span>
+      <h2>详细行程</h2>
+      <p>点击展开每天详情 · 曼谷11天10晚自由行 · 轻松不赶</p>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <!-- rendered by JS -->
+    </div>
+  </section>
+
+  <!-- ===== Budget ===== -->
+  <section class="section" id="budget">
+    <div class="section-header">
+      <span class="emoji">💰</span>
+      <h2>预算参考</h2>
+      <p>以下为预估费用（2人合计），实际以当时价格为准 · 泰铢汇率 ≈ 1 人民币 = 5 泰铢</p>
+    </div>
+
+    <div class="budget-card" id="budget-table">
+      <!-- rendered by JS -->
+    </div>
+  </section>
+
+  <!-- ===== Packing ===== -->
+  <section class="section" id="packing">
+    <div class="section-header">
+      <span class="emoji">🎒</span>
+      <h2>行李清单</h2>
+      <p>点击勾选 · 轻松准备 · 曼谷2月气温28-35°C</p>
+    </div>
+
+    <div class="packing-grid">
+      <div class="packing-cat">
+        <h4>👕 衣物类</h4>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 短袖T恤 × 5-6件（湿热易出汗）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 短裤/短裙 × 3-4条</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 长裤/长裙 × 1-2条（进寺庙用）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 薄外套/防晒衫（商场冷气足）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 泳衣/沙滩裤</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 拖鞋/凉鞋</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 睡衣 + 内衣裤</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 正式一点的衣服（去高级餐厅）</label>
+      </div>
+      <div class="packing-cat">
+        <h4>🧴 防护/洗漱</h4>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 防晒霜（SPF50+，必带！）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 太阳帽 + 墨镜</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 牙刷/牙膏/毛巾</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 洗发水/沐浴露（7-11可买）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 湿纸巾/纸巾</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 驱蚊液（7-11可买，Soffell驱蚊水）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 补水面膜</label>
+      </div>
+      <div class="packing-cat">
+        <h4>💊 药品/健康</h4>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 肠胃药（必备！泰餐可能不适应）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 感冒药 + 退烧药</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 创可贴/碘伏棉签</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 防过敏药</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 晕车/晕船药（出海用）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 个人常备药 + 旅行保险打印件</label>
+      </div>
+      <div class="packing-cat">
+        <h4>📱 数码/文件</h4>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 手机 + 充电器 + 充电宝</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 泰国电话卡/流量卡（淘宝提前买）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 护照（确认有效期>6个月）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 机票/酒店订单打印件</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 2寸白底照片（落地签备用）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 保温杯/水杯</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 防水袋（手机/证件）</label>
+        <label class="packing-item"><input type="checkbox" onchange="packToggle(this)"> 少量现金（泰铢，国内换好）</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Practical Info ===== -->
+  <section class="section" id="info">
+    <div class="section-header">
+      <span class="emoji">💡</span>
+      <h2>实用信息</h2>
+      <p>曼谷出行小贴士 · 玩得更顺心</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="icon">🌡️</span>
+        <h4>天气 & 穿衣</h4>
+        <ul>
+          <li>2月是曼谷"凉爽干燥季"，但仍有28-35°C</li>
+          <li>白天炎热，建议穿短袖短裤、透气材质</li>
+          <li>进寺庙需过膝裤/裙 + 遮肩（大皇宫严格）</li>
+          <li>商场/地铁冷气很足，随身带薄外套</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <span class="icon">🚗</span>
+        <h4>交通方式</h4>
+        <ul>
+          <li><strong>BTS轻轨</strong>：最方便，覆盖主要商圈</li>
+          <li><strong>MRT地铁</strong>：可到火车夜市、唐人街</li>
+          <li><strong>出租车</strong>：打表很便宜，高峰期慎坐</li>
+          <li><strong>Grab/ Bolt</strong>：东南亚滴滴，明码标价</li>
+          <li><strong>突突车</strong>：体验可以，一定先谈好价</li>
+          <li>推荐买BTS一日票或Rabbit Card</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <span class="icon">🍜</span>
+        <h4>美食推荐</h4>
+        <ul>
+          <li><strong>必吃</strong>：泰式炒河粉Pad Thai、冬阴功汤</li>
+          <li><strong>特色</strong>：芒果糯米饭、泰式咖喱蟹</li>
+          <li><strong>小吃</strong>：烤肉串、香蕉煎饼、椰子冰淇淋</li>
+          <li><strong>夜市</strong>：火车夜市Jodd Fairs、唐人街</li>
+          <li><strong>甜品</strong>：ChaTraMue手标奶茶、After You</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <span class="icon">🏨</span>
+        <h4>住宿建议</h4>
+        <ul>
+          <li><strong>素坤逸区</strong>：最方便，BTS/MRT沿线</li>
+          <li><strong>暹罗区</strong>：购物中心集中，适合逛吃</li>
+          <li><strong>考山路</strong>：背包客聚集，热闹但略吵</li>
+          <li><strong>河畔区</strong>：夜景美，高端酒店多</li>
+          <li>建议订可免费取消的，灵活安排</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <span class="icon">💵</span>
+        <h4>货币 & 消费</h4>
+        <ul>
+          <li>泰铢THB ≈ 5 泰铢 = 1 人民币</li>
+          <li>大部分地方可用支付宝/微信</li>
+          <li>夜市/小店需要现金，备一些泰铢</li>
+          <li>建议国内换好泰铢，汇率更优</li>
+          <li>小费习惯：一般20-100泰铢</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <span class="icon">⚠️</span>
+        <h4>注意事项</h4>
+        <ul>
+          <li>泰国对中国护照免签（2024年起）</li>
+          <li>确认护照有效期 > 6个月</li>
+          <li>随身携带护照复印件（原件放酒店保险箱）</li>
+          <li>买旅行保险（涵盖意外+医疗+延误）</li>
+          <li>不要触碰僧侣、不要用脚指人</li>
+          <li>进寺庙脱鞋、着装得体</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Tips ===== -->
+  <section class="section" id="tips">
+    <div class="section-header">
+      <span class="emoji">📝</span>
+      <h2>温馨提示</h2>
+      <p>给第一次去曼谷的你</p>
+    </div>
+
+    <div class="tip-box">
+      <h4>📱 必备App下载</h4>
+      <ul>
+        <li><strong>Grab</strong> — 打车/外卖，东南亚必备</li>
+        <li><strong>Google Maps</strong> — 导航、查公交线路</li>
+        <li><strong>Google Translate</strong> — 可以拍照翻译泰文菜单</li>
+        <li><strong>BKK Rail</strong> — 曼谷地铁轻轨路线图</li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <h4>🛍️ 购物攻略</h4>
+      <ul>
+        <li><strong>暹罗商圈</strong>：Siam Paragon（高端）、Central World（综合）、MBK（平价）</li>
+        <li><strong>ICONSIAM</strong>：河畔超级商场，室内水上市场+美食广场</li>
+        <li><strong>Big C</strong>：买伴手礼最划算！榴莲干、芒果干、小老板海苔</li>
+        <li><strong>乍都乍周末市场</strong>：全球最大周末市场，只有周末开，手工艺品天堂</li>
+        <li><strong>7-11</strong>：遍地都是，买水、零食、日用品超方便</li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <h4>🔌 其他提醒</h4>
+      <ul>
+        <li>电源插头：两孔扁头和中国一样，三孔需要转接头</li>
+        <li>时差：比中国慢1小时（中国12:00 = 泰国11:00）</li>
+        <li>水龙头水不能直饮，买瓶装水</li>
+        <li>泰国是左侧行驶，过马路注意</li>
+        <li>买保险！买保险！买保险！重要的事说三遍</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== Gallery ===== -->
+  <section class="section" id="photos">
+    <div class="section-header">
+      <span class="emoji">📸</span>
+      <h2>风景预览</h2>
+      <p>先睹为快 · 曼谷必去打卡点</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background:linear-gradient(135deg,#dc2626,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:48px;color:rgba(255,255,255,0.6);">🏛️</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#0d9488,#2dd4bf);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,0.6);">🌊</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#e11d48,#fb7185);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,0.6);">🍜</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,0.6);">🛕</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#b45309,#f59e0b);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,0.6);">🛍️</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,#1d4ed8,#60a5fa);display:flex;align-items:center;justify-content:center;font-size:36px;color:rgba(255,255,255,0.6);">🌃</div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:#a0aec0;margin-top:12px;">🖼️ 此处可替换为实拍照片</p>
+  </section>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <p class="family-note">✈️ 2027 年春节 · 上海→曼谷</p>
+  <p>愿这次旅行，成为我们美好的回忆 🌴</p>
+  <p style="margin-top:10px;font-size:11px;">行程策划 · 价格监控 · 持续更新</p>
+  <p style="margin-top:10px;">
+    <a href="/flight-monitor">📊 返回价格监控</a>
+    &nbsp;|&nbsp;
+    <a href="/spring-monitor">🟢 春秋航空价格</a>
+    &nbsp;|&nbsp;
+    <a href="/thai-monitor">🔵 泰国航空价格</a>
+  </p>
+</footer>
+
+<!-- ===== Back to Top ===== -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ===== Particles ===== */
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+    p.style.animationDuration = (15 + Math.random() * 25) + 's';
+    p.style.animationDelay = (Math.random() * 15) + 's';
+    container.appendChild(p);
+  }
+})();
+
+/* ===== Toggle Day Cards ===== */
+function toggleDay(header) {
+  const card = header.closest('.day-card');
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.day-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+/* ===== Scroll Animations ===== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.section').forEach(el => observer.observe(el));
+
+/* ===== Nav Highlight ===== */
+const sections = document.querySelectorAll('.section');
+const navLinks = document.querySelectorAll('.nav-link');
+function updateNav() {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if (top <= window.innerHeight * 0.3) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+}
+window.addEventListener('scroll', updateNav);
+
+/* ===== Back to Top ===== */
+window.addEventListener('scroll', () => {
+  document.getElementById('backTop').classList.toggle('show', window.scrollY > 500);
+});
+
+/* ===== Countdown ===== */
+function updateCountdown() {
+  const target = new Date(2027, 1, 11).getTime(); // Feb 11, 2027
+  const now = new Date().getTime();
+  const diff = Math.max(0, target - now);
+  document.getElementById('cd-days').textContent = Math.floor(diff / (1000*60*60*24));
+  document.getElementById('cd-hours').textContent = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  document.getElementById('cd-mins').textContent = Math.floor((diff % (1000*60*60)) / (1000*60));
+  document.getElementById('cd-secs').textContent = Math.floor((diff % (1000*60)) / 1000);
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ===== Packing Toggle ===== */
+function packToggle(cb) {
+  cb.parentElement.classList.toggle('checked', cb.checked);
+}
+
+/* ===== Smooth Scroll ===== */
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const id = this.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = document.getElementById('navbar').offsetHeight;
+      window.scrollTo({ top: el.offsetTop - offset - 10, behavior: 'smooth' });
+    }
+  });
+});
+
+/* ====================================================
+   ITINERARY DATA — 曼谷11天
+   ==================================================== */
+const DAYS = [
+  { day: 1, title: '上海出发 · 抵达曼谷', sub: 'PVG → BKK · 入住酒店 · 初探暹罗', tag: '出发日',
+    location: '素万那普机场 → 素坤逸区',
+    items: [
+      '<strong>下午：</strong>上海浦东出发，春秋航空 9C7289，17:00→20:45，直飞曼谷素万那普机场',
+      '<strong>晚上：</strong>抵达曼谷，过关、取行李（泰国免签，直接通关）',
+      '<strong>交通：</strong>推荐坐机场快线+轻轨到酒店，或提前约接机（约200-300泰铢/人）',
+      '<strong>入住：</strong>素坤逸区酒店（推荐BTS Phrom Phong站附近，交通便利+商圈）',
+      '<strong>第一件事：</strong>去楼下7-11买水、零食、驱蚊水、电话卡（如果还没买）',
+      '<strong>宵夜：</strong>附近夜市或路边摊，来一碗泰式炒河粉 Pad Thai 开胃！'
+    ],
+    meal: '晚餐：机上简餐 / 宵夜：路边摊 Pad Thai + 椰子水',
+    tip: '机场到市区约40分钟。素万那普机场有免费WiFi。建议提前淘宝买好泰国电话卡（Happy卡或AIS），下飞机即插即用。',
+    emojis: ['✈️','🌙','🍜'] },
+  { day: 2, title: '大皇宫 · 卧佛寺 · 黎明寺', sub: '经典寺庙一日游 · 感受泰国文化', tag: '文化之旅',
+    location: '大皇宫 → 卧佛寺 → 黎明寺 → 唐人街',
+    items: [
+      '<strong>上午：</strong>坐BTS到Saphan Taksin站，转湄南河公交船到<strong>大皇宫</strong>（建议8:30前到，避开旅行团）',
+      '<strong>大皇宫 & 玉佛寺：</strong>曼谷最精华的景点！金碧辉煌的泰式建筑，玉佛寺供奉着泰国国宝玉佛。门票500泰铢，游览约2小时。',
+      '<strong>注意着装：</strong>必须长裤/长裙+遮肩，不能穿拖鞋。如果穿短裤，门口有免费借的裤子。',
+      '<strong>中午：</strong>隔壁<strong>卧佛寺</strong>（Wat Pho）——泰国最大的卧佛，长46米高15米。门票300泰铢。还可以体验正宗的泰式按摩（卧佛寺按摩学校）。',
+      '<strong>下午：</strong>渡河到<strong>黎明寺（郑王庙）</strong>（Wat Arun）——曼谷最美寺庙！白色佛塔镶嵌彩色瓷器，爬上塔顶俯瞰湄南河景。门票100泰铢。',
+      '<strong>傍晚：</strong>去<strong>唐人街</strong>（Yaowarat）逛吃！曼谷最热闹的美食街之一。推荐：烤面包、鱼翅煲、芒果糯米饭。',
+      '<strong>晚上：</strong>搭MRT回酒店休息'
+    ],
+    meal: '午餐：卧佛寺附近泰式餐厅 / 晚餐：唐人街美食街',
+    tip: '建议先逛大皇宫（9点前到），然后卧佛寺，再渡河去黎明寺。这三个景点在河两岸很近。一定带水和扇子/小风扇，非常热！',
+    emojis: ['🏛️','🙏','🛕'] },
+  { day: 3, title: '暹罗商圈 · 购物天堂', sub: 'Siam · Central World · 四面佛 · Big C', tag: '购物日',
+    location: '暹罗Siam区 → Central World → 四面佛 → Big C → Rooftop酒吧',
+    items: [
+      '<strong>上午：</strong>睡到自然醒，慢慢吃个早午餐',
+      '<strong>中午：</strong>坐BTS到<strong>Siam站</strong>，曼谷购物心脏！',
+      '<strong>逛商场：</strong>',
+      '<span style="padding-left:16px;">① <strong>Siam Paragon</strong> — 高端商场，底层有东南亚最大水族馆（Siam Ocean World）</span>',
+      '<span style="padding-left:16px;">② <strong>Siam Center</strong> — 泰国设计师品牌，年轻时尚</span>',
+      '<span style="padding-left:16px;">③ <strong>Central World</strong> — 综合性大商场，什么都有</span>',
+      '<span style="padding-left:16px;">④ <strong>MBK Center</strong> — 平价购物，手机壳、纪念品、A货</span>',
+      '<strong>下午：</strong>去<strong>四面佛</strong>拜拜（Central World对面的Erawan shrine）——曼谷最灵验的神像',
+      '<strong>傍晚：</strong><strong>Big C超级市场</strong>——买伴手礼！零食、榴莲干、小老板海苔、泰式奶茶、调料包',
+      '<strong>晚上：</strong>去<strong>Rooftop Bar</strong>喝一杯（推荐：Red Sky Bar在Central World 55楼，傍晚看日落超美）'
+    ],
+    meal: '午餐：Siam Paragon美食广场 Thai Boat Noodle / 晚餐：Red Sky Bar 简餐或附近餐厅',
+    tip: 'Big C买伴手礼最划算！小老板海苔、芒果干、榴莲干、妈妈泡面、泰式奶茶包。可以最后一天再买，或买了先寄回酒店。四面佛拜拜要顺时针4面都拜。',
+    emojis: ['🛍️','🏬','🌇'] },
+  { day: 4, title: '乍都乍周末市场 · 火车夜市', sub: '全球最大周末市场 · 夜市美食', tag: '逛街扫货',
+    location: '乍都乍周末市场 → Jodd Fairs火车夜市',
+    items: [
+      '<strong>上午：</strong><strong>乍都乍周末市场</strong>（Chatuchak Weekend Market）——全球最大周末市场！只有周六日开。',
+      '<strong>交通：</strong>BTS Mo Chit站或MRT Chatuchak Park站直达',
+      '<strong>逛吃攻略：</strong>',
+      '<span style="padding-left:16px;">🐾 宠物区（Section 13-15）——可爱的小动物</span>',
+      '<span style="padding-left:16px;">👗 服装区（Section 4-6）——泰式服装、饰品</span>',
+      '<span style="padding-left:16px;">🎨 手工艺品（Section 8-11）——家居装饰、香氛</span>',
+      '<span style="padding-left:16px;">🌿 植物区（Section 3-4）——多肉植物、盆栽</span>',
+      '<span style="padding-left:16px;">🍗 美食区（Section 26-27）——椰子冰淇淋、烤海鲜、芒果糯米饭</span>',
+      '<strong>下午：</strong>提不动了回酒店放东西，休息',
+      '<strong>晚上：</strong><strong>Jodd Fairs火车夜市</strong>（MRT Phra Ram 9站）——曼谷最火夜市！极富色彩感，火山排骨、水果西施、各种小吃。拍照超出片！'
+    ],
+    meal: '午餐：乍都乍市场美食区 / 晚餐：Jodd Fairs夜市——火山排骨、烤串、水果沙冰',
+    tip: '乍都乍市场巨大，从上午慢慢逛可以逛到下午3-4点。一定带水，里面很热。注意保管财物。砍价从半价开始！',
+    emojis: ['🛒','🎪','🌮'] },
+  { day: 5, title: '水上市场 · 火车市场', sub: '丹嫩沙多水上市场 · 美功铁路市场', tag: '特色体验',
+    location: '丹嫩沙多水上市场 → 美功铁道市场（包车/半日游）',
+    items: [
+      '<strong>上午：</strong>参加<strong>丹嫩沙多水上市场</strong>半日游（建议包车或订小团，约6:00-7:00出发）',
+      '<strong>水上市场：</strong>坐在小船上游览，两边是卖水果、小吃、手工艺品的船。推荐：船面、椰子饼、烤香蕉。',
+      '<strong>中午：</strong>顺路去<strong>美功铁道市场</strong>——铁轨上的菜市场！火车来临时，摊贩们瞬间收摊，火车走后秒复原。每天有几趟固定时间。',
+      '<strong>下午：</strong>回曼谷，午休',
+      '<strong>傍晚：</strong><strong>ICONSIAM</strong>——河畔超级商场！室内水上市场+美食广场，各种泰国小吃 + 奢侈品牌。坐BTS到Saphan Taksin站有免费接驳船。',
+      '<strong>晚上：</strong>ICONSIAM门口看湄南河夜景，非常浪漫'
+    ],
+    meal: '午餐：美功市场海鲜 / 晚餐：ICONSIAM美食广场——一站式吃遍全泰国',
+    tip: '水上市场建议报半日游团（淘宝/携程约150-200元/人），不用自己操心交通。早起值得！美功火车时刻表提前查好。ICONSIAM的室内水上市场必去，环境好又有特色。',
+    emojis: ['🛶','🚂','🌉'] },
+  { day: 6, title: '曼谷自由探索日', sub: '睡到自然醒 · 泰式按摩 · 随心逛', tag: '放松日',
+    location: '素坤逸区 · 按摩 · 自由安排',
+    items: [
+      '<strong>全天自由安排，推荐选项：</strong>',
+      '<span style="padding-left:16px;">🧘 <strong>泰式按摩</strong>——推荐：Let\'s Relax（连锁，品质稳定），或街边老店（200-300泰铢/小时）</span>',
+      '<span style="padding-left:16px;">🏊 <strong>酒店泳池</strong>——泡半天，游游泳、晒晒太阳</span>',
+      '<span style="padding-left:16px;">☕ <strong>网红咖啡厅</strong>——曼谷有超多超美的咖啡厅，随便搜一家去打卡</span>',
+      '<span style="padding-left:16px;">🛍️ <strong>继续逛街</strong>——可以去<strong>EmQuartier/Emporium</strong>（BTS Phrom Phong站，豪华商场+空中花园）</span>',
+      '<span style="padding-left:16px;">🎮 <strong>体验活动</strong>——学做泰国菜、实弹射击、密室逃脱</span>',
+      '<strong>晚上：</strong>考山路（Khao San Road）——背包客天堂，热闹非凡！酒吧、小吃、马杀鸡、编脏辫。适合晚上去感受气氛。'
+    ],
+    meal: '午餐：推荐尝试泰式船面（Boat Noodle） / 晚餐：考山路美食',
+    tip: '按摩记得给小费（50-100泰铢）。考山路的T恤衫便宜又好看，可以买来做纪念品。晚上回程打车用Grab。',
+    emojis: ['🧘','☕','🎉'] },
+  { day: 7, title: '大城府一日游', sub: '世界文化遗产 · 古都遗址', tag: '历史之旅',
+    location: '大城府 Ayutthaya（距曼谷1.5h车程）',
+    items: [
+      '<strong>全天：</strong><strong>大城府一日游</strong>（Ayutthaya）——泰国古都，世界文化遗产，距曼谷约80公里',
+      '<strong>交通方式：</strong>',
+      '<span style="padding-left:16px;">🚄 火车：华南蓬火车站坐火车，约1.5h，三等座20泰铢，二等座300泰铢。下车租自行车逛。</span>',
+      '<span style="padding-left:16px;">🚐 包车/跟团：更省心，约200-300元/人含接送。</span>',
+      '<strong>必看寺庙：</strong>',
+      '<span style="padding-left:16px;">① <strong>玛哈泰寺</strong>（Wat Mahathat）——树抱佛头！大城标志</span>',
+      '<span style="padding-left:16px;">② <strong>拉差布拉纳寺</strong>（Wat Ratchaburana）——可爬塔顶</span>',
+      '<span style="padding-left:16px;">③ <strong>崖差蒙空寺</strong>（Wat Yai Chai Mongkhon）——大佛塔+卧佛</span>',
+      '<span style="padding-left:16px;">④ <strong>三宝公庙</strong>（Wat Phanan Choeng）——巨型坐佛</span>',
+      '<strong>傍晚：</strong>回曼谷'
+    ],
+    meal: '午餐：大城船面/罗勒叶炒肉饭 / 晚餐：回曼谷后吃泰式火锅（MK或Burger House附近的火锅店）',
+    tip: '大城寺庙很晒，一定要带伞和水！租自行车逛最舒服。火车前往很便宜，但车厢比较旧，要体验感好还是建议包车。穿红色/橙色衣服拍照好看。',
+    emojis: ['🏛️','🚂','🌳'] },
+  { day: 8, title: '美食探索 · 网红打卡', sub: '寻找曼谷最好吃的泰餐', tag: '美食日',
+    location: '曼谷各地美食探索',
+    items: [
+      '<strong>全天主题：吃！</strong>',
+      '<strong>推荐美食路线：</strong>',
+      '<span style="padding-left:16px;">🥇 <strong>Jay Fai</strong>（米其林一星路边摊）——招牌蟹肉蛋卷！但排队超久，建议早去（BTS Sanam Chai站）</span>',
+      '<span style="padding-left:16px;">🥇 <strong>Thong Smith</strong>（SIAM PARAGON内）——顶级泰式船面，汤底浓郁，牛肉软烂</span>',
+      '<span style="padding-left:16px;">🥇 <strong>After You Dessert Cafe</strong>——蜜糖吐司必吃！泰奶口味绝了</span>',
+      '<span style="padding-left:16px;">🥇 <strong>ChaTraMue Cafe</strong>——正宗手标泰式奶茶，买它家茶叶当伴手礼</span>',
+      '<span style="padding-left:16px;">🥇 <strong>Jeh O Chula</strong>——冬阴功海鲜妈妈面！曼谷排队王（晚上才开）</span>',
+      '<strong>下午：</strong>如果还有力气，可以去<strong>王权云顶大厦</strong>（King Power Mahanakhon）——曼谷最高观景台，78层楼顶玻璃栈道，俯瞰整个曼谷。门票约1000泰铢。',
+      '<strong>晚上：</strong>继续探索美食或者去<strong>Thong Lor</strong>（通罗）——曼谷最潮的街区，日式餐厅、鸡尾酒吧林立'
+    ],
+    meal: '按上面路线吃遍曼谷！推荐 Jeh O Chula 的冬阴功海鲜面（凌晨排队也值得）',
+    tip: '吃Jay Fai建议上午11点前到，否则可能要排3小时+。Jeh O Chula晚上9点后去排队稍微短一点。曼谷很多米其林路边摊，便宜又好吃！',
+    emojis: ['🍜','🌟','🍰'] },
+  { day: 9, title: '素坤逸漫步 · 特色体验', sub: 'Ekkamai · Thong Lor · 曼谷潮人区', tag: '探索日',
+    location: '素坤逸区 Ekkamai-Thong Lor',
+    items: [
+      '<strong>上午：</strong>慢慢享受酒店早餐，泳池放松',
+      '<strong>中午：</strong>探索<strong>素坤逸</strong>最潮街区——<strong>Ekkamai & Thong Lor</strong>（BTS这两个站）',
+      '<strong>推荐：</strong>',
+      '<span style="padding-left:16px;">☕ <strong>Factory Coffee</strong>——曼谷排名第一的咖啡厅，必点Supreme奶咖</span>',
+      '<span style="padding-left:16px;">🎨 <strong>River City Bangkok</strong>——河边艺术中心，有画廊和古董店</span>',
+      '<span style="padding-left:16px;">🧘 <strong>Health Land</strong>——正宗泰式按摩，环境好价格合理</span>',
+      '<strong>下午：</strong>去<strong>Asiatique河滨夜市</strong>——比火车夜市更干净整洁，摩天轮+河景，适合傍晚逛+拍照。免费接驳船在Saphan Taksin站。',
+      '<strong>晚上：</strong>曼谷最后一晚，可以去<strong>Sky Bar</strong>（莲花大酒店63楼）——《宿醉》电影取景地，曼谷最经典的高空酒吧。穿着要求：不能穿短裤拖鞋。'
+    ],
+    meal: '午餐：Ekkamai区日式拉面或西餐 / 晚餐：Asiatique河滨夜市海鲜',
+    tip: 'Factory Coffee在BTS Phaya Thai站附近，如果最后一天去机场前顺路去最合适。Sky Bar有着装要求（不能短裤拖鞋），男士最好穿长裤+有领衬衫。',
+    emojis: ['☕','🎡','🌃'] },
+  { day: 10, title: '最后购物 · 补货伴手礼', sub: 'Big C补货 · 休息整理', tag: '整理日',
+    location: '素坤逸区 · Big C · 酒店休整',
+    items: [
+      '<strong>上午：</strong>睡到自然醒，去酒店附近<strong>Big C</strong>或<strong>7-11</strong>补货伴手礼',
+      '<strong>伴手礼推荐：</strong>',
+      '<span style="padding-left:16px;">🎁 小老板海苔（各种口味）——Big C按箱买最划算</span>',
+      '<span style="padding-left:16px;">🎁 芒果干/榴莲干/菠萝干</span>',
+      '<span style="padding-left:16px;">🎁 手标泰式奶茶（ChaTraMue的茶叶/即溶奶茶）</span>',
+      '<span style="padding-left:16px;">🎁 泰式香料包（冬阴功、绿咖喱调料包）</span>',
+      '<span style="padding-left:16px;">🎁 药膏/药油（老虎膏、青草膏）</span>',
+      '<span style="padding-left:16px;">🎁 零食（Bento鱿鱼片、大哥花生豆、牛奶片）</span>',
+      '<strong>下午：</strong>回酒店整理行李，准备退房',
+      '<strong>傍晚：</strong>最后一顿泰餐！去一家正式的泰式餐厅好好吃一顿',
+      '<strong>晚上：</strong>早点休息，明天回国航班'
+    ],
+    meal: '午餐：7-11解决或者去附近小馆子 / 晚餐：推荐 Baan Phadthai（米其林推荐泰餐，性价比超高）',
+    tip: 'Big C的伴手礼买满2000泰铢可以退税！记得带护照去填退税单。行李不要超重，春秋航空优选飞含20KG行李额，超重罚款不便宜。',
+    emojis: ['🎁','🛍️','🧳'] },
+  { day: 11, title: '返回上海 · 满载而归', sub: '曼谷 → 上海 · 结束旅程', tag: '返程日',
+    location: '素万那普机场 → 上海浦东',
+    items: [
+      '<strong>上午：</strong>退房，前往素万那普机场（建议提前3小时到机场）',
+      '<strong>交通：</strong>坐机场快线（30分钟，45泰铢）或打车/Grab（约45分钟，300-400泰铢）',
+      '<strong>机场退税：</strong>如果在Big C等地方办了退税，到机场先找VAT REFUND柜台盖章（在值机前！），过安检后再去退税窗口拿钱。',
+      '<strong>春秋航空 9C7280 回程：</strong>12:45→18:05',
+      '<strong>下午：</strong>抵达上海浦东，回家',
+      '<strong>🌴 再见曼谷！</strong>期待下一次旅行！'
+    ],
+    meal: '午餐：机场内解决 / 机上简餐',
+    tip: '素万那普机场很大，建议提前3小时到。春秋航空在机场的柜台通常排长队，早到早安心。退税盖章在出发大厅的10号门附近，一定在值机前去盖。退税款可以选现金或退到信用卡。',
+    emojis: ['✈️','🏠','🌴'] }
+];
+
+/* ===== Render Itinerary ===== */
+function renderItinerary() {
+  const timeline = document.getElementById('timeline');
+  timeline.innerHTML = DAYS.map(d => {
+    const items = d.items.map(item => `<div class="day-item">${item}</div>`).join('');
+    const mealHtml = d.meal ? `<div class="day-meal">${d.meal}</div>` : '';
+    const tipHtml = d.tip ? `<div class="day-tip">${d.tip}</div>` : '';
+    const imgHtml = d.emojis
+      ? `<div class="day-images">${d.emojis.map(e =>
+          `<div class="day-img" style="background:linear-gradient(135deg,#ffd700,#ff8c00);display:flex;align-items:center;justify-content:center;font-size:24px;">${e}</div>`
+        ).join('')}</div>`
+      : '';
+
+    return `
+      <div class="day-card">
+        <div class="day-marker">${d.day}</div>
+        <div class="day-header" onclick="toggleDay(this)">
+          <div class="day-header-left">
+            <div class="day-title">第${d.day}天：${d.title}</div>
+            <div class="day-sub">${d.sub}</div>
+          </div>
+          <span class="day-tag">${d.tag}</span>
+          <span class="day-arrow">▼</span>
+        </div>
+        <div class="day-body">
+          <div class="day-body-inner">
+            <div class="day-location">${d.location}</div>
+            ${items}
+            ${mealHtml}
+            ${tipHtml}
+            ${imgHtml}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Open first day by default
+  const first = timeline.querySelector('.day-card');
+  if (first) first.classList.add('open');
+}
+
+/* ===== Render Budget ===== */
+function renderBudget() {
+  document.getElementById('budget-table').innerHTML = `
+    <table class="budget-table">
+      <thead>
+        <tr>
+          <th style="width:34%;">项目</th>
+          <th class="budget-wide" style="width:28%;">说明</th>
+          <th style="text-align:right;width:38%;">预估费用（2人合计）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>✈️ 往返机票</td>
+          <td class="budget-wide">春秋航空优选飞 · 直飞</td>
+          <td class="amount">¥4,736</td>
+        </tr>
+        <tr>
+          <td>🏨 住宿（10晚）</td>
+          <td class="budget-wide">素坤逸区舒适型酒店</td>
+          <td class="amount">¥2,500-4,000</td>
+        </tr>
+        <tr>
+          <td>🍽️ 餐饮（11天）</td>
+          <td class="budget-wide">含特色餐+日常+小吃</td>
+          <td class="amount">¥1,500-2,500</td>
+        </tr>
+        <tr>
+          <td>🚗 当地交通</td>
+          <td class="budget-wide">BTS/MRT/打车/包车</td>
+          <td class="amount">¥500-800</td>
+        </tr>
+        <tr>
+          <td>🎫 门票+活动</td>
+          <td class="budget-wide">大皇宫+水上市场+按摩等</td>
+          <td class="amount">¥500-1,000</td>
+        </tr>
+        <tr>
+          <td>🎁 购物+其他</td>
+          <td class="budget-wide">伴手礼、保险、签证</td>
+          <td class="amount">¥1,000-2,000</td>
+        </tr>
+        <tr class="total">
+          <td>📊 合计</td>
+          <td class="budget-wide"></td>
+          <td class="amount total-amount">约 ¥10,736-¥15,036 / 2人</td>
+        </tr>
+        <tr>
+          <td style="font-size:12px;color:#9ca3af;" colspan="3">≈ 人均 ¥5,368-¥7,518（含机票住宿餐饮玩乐购物）</td>
+        </tr>
+      </tbody>
+    </table>
+  `;
+}
+
+/* ===== Init ===== */
+renderItinerary();
+renderBudget();
+</script>
+
+</body>
+</html>
