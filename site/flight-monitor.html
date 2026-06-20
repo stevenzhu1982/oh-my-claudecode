@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>航班价格监控 · PVG↔BKK</title>
+<style>
+  :root {
+    --bg-primary: #f5f7fa;
+    --bg-secondary: #eef1f5;
+    --bg-card: #ffffff;
+    --border: #d1d5db;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-dim: #9ca3af;
+    --font-sans: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .header p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .header .route {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  .header .route span {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 700px;
+    width: 100%;
+  }
+
+  @media (max-width: 560px) {
+    .card-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .header h1 { font-size: 1.5rem; }
+    body { padding: 1rem; justify-content: flex-start; padding-top: 2rem; }
+  }
+
+  .airline-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .airline-card:hover {
+    border-color: #059669;
+    box-shadow: 0 8px 30px rgba(5,150,105,0.1);
+    transform: translateY(-3px);
+  }
+
+  .airline-card:active {
+    transform: translateY(0);
+  }
+
+  .airline-card .icon {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .airline-card .name {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .airline-card .name.spring { color: #059669; }
+  .airline-card .name.thai { color: #2563eb; }
+
+  .airline-card .desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .airline-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-top: 0.3rem;
+  }
+
+  .airline-card .tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+
+  .airline-card .tag.green {
+    background: rgba(5,150,105,0.08);
+    color: #059669;
+    border-color: rgba(5,150,105,0.2);
+  }
+
+  .airline-card .tag.blue {
+    background: rgba(37,99,235,0.08);
+    color: #2563eb;
+    border-color: rgba(37,99,235,0.2);
+  }
+
+  .airline-card .arrow {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+    transition: all 0.2s;
+  }
+
+  .airline-card:hover .arrow {
+    color: #059669;
+    transform: translateX(4px);
+  }
+
+  .airline-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .airline-card.spring::before { background: linear-gradient(90deg, #059669, #34d399); }
+  .airline-card.thai::before { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+
+  .footer {
+    margin-top: 2.5rem;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  .date-badge {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    background: var(--bg-secondary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>✈ 航班价格监控</h1>
+  <p>上海 PVG → 曼谷 BKK</p>
+  <div class="route">2027年春节 · 去程 <span>2/8-2/14</span> · 回程 <span>2/19-2/25</span></div>
+  <div class="date-badge">📅 多日期比价 · 2人 · 间隔≤11天</div>
+</div>
+
+<div class="card-grid">
+
+  <a href="/spring-monitor" class="airline-card spring">
+    <div class="icon">🟢</div>
+    <div class="name spring">春秋航空</div>
+    <div class="desc">
+      经济型 · 优选飞含20KG行李<br>
+      去程 9C7289/9C7281 · 回程 9C7280
+    </div>
+    <div class="tags">
+      <span class="tag green">¥1,012起</span>
+      <span class="tag">20KG行李</span>
+      <span class="tag">直飞</span>
+    </div>
+    <div class="arrow">→ 查看价格监控</div>
+  </a>
+
+  <a href="/thai-monitor" class="airline-card thai">
+    <div class="icon">🔵</div>
+    <div class="name thai">泰国航空</div>
+    <div class="desc">
+      全服务 · 含30KG行李+餐食<br>
+      去程 TG663 · 回程 TG662
+    </div>
+    <div class="tags">
+      <span class="tag blue">¥2,380起</span>
+      <span class="tag">30KG行李</span>
+      <span class="tag">含餐食</span>
+    </div>
+    <div class="arrow">→ 查看价格监控</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  数据来源各航司官网 · 价格实时变动 · 仅供参考
+</div>
+
+</body>
+</html>
