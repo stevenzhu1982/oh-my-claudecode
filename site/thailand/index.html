@@ -12,7 +12,8 @@ body {
   font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
   background: #fff8f0;
   color: #2d3748;
-  line-height: 1.8;
+  font-size: 18px;
+  line-height: 1.9;
   overflow-x: hidden;
 }
 
@@ -476,17 +477,17 @@ body {
 }
 .day-header-left { flex: 1; }
 .day-title {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
   color: #0d1b2a;
 }
 .day-sub {
-  font-size: 13px;
+  font-size: 14px;
   color: #0987a0;
   font-weight: 600;
   margin-top: 1px;
 }
-.day-card.island .day-sub { color: #059669; }
+.day-card.island .day-sub { color: #059669; font-size: 14px; }
 .day-tag {
   display: inline-block;
   padding: 3px 12px;
@@ -516,13 +517,13 @@ body {
 }
 .day-body-inner { padding: 18px 22px 22px; }
 .day-location {
-  font-size: 13px;
+  font-size: 14px;
   color: #a0aec0;
   margin-bottom: 10px;
 }
 .day-location::before { content: '📍 '; }
 .day-item {
-  font-size: 14px;
+  font-size: 15px;
   padding: 4px 0;
   padding-left: 20px;
   position: relative;
@@ -538,7 +539,7 @@ body {
   background: #99f6e4;
   border-radius: 50%;
 }
-.day-item strong { color: #2d3748; }
+.day-item strong { color: #2d3748; font-size: 15px; }
 .day-meal {
   font-size: 13px;
   color: #0987a0;
@@ -555,7 +556,7 @@ body {
 }
 .day-meal::before { content: '🍽 '; }
 .day-tip {
-  font-size: 13px;
+  font-size: 14px;
   color: #2d3748;
   background: #f0faff;
   border-radius: 8px;
@@ -588,7 +589,7 @@ body {
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
-.budget-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.budget-table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .budget-table th {
   background: linear-gradient(135deg, #0d1b2a, #2d7d9a);
   color: #fff;
@@ -646,8 +647,8 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 4px 0;
-  font-size: 13px;
+  padding: 5px 0;
+  font-size: 14px;
   color: #4a5568;
   cursor: pointer;
   user-select: none;
@@ -694,11 +695,11 @@ body {
 }
 .info-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
 .info-card .icon { font-size: 28px; display: block; margin-bottom: 6px; }
-.info-card h4 { font-size: 15px; font-weight: 700; color: #0d1b2a; margin-bottom: 6px; }
-.info-card p { font-size: 13px; color: #718096; line-height: 1.7; }
+.info-card h4 { font-size: 16px; font-weight: 700; color: #0d1b2a; margin-bottom: 6px; }
+.info-card p { font-size: 14px; color: #718096; line-height: 1.7; }
 .info-card ul { list-style: none; padding: 0; }
 .info-card li {
-  font-size: 13px;
+  font-size: 14px;
   color: #4a5568;
   padding: 3px 0;
   padding-left: 16px;
@@ -722,10 +723,10 @@ body {
   border-left: 4px solid #0987a0;
 }
 .tip-box.island { border-left-color: #059669; }
-.tip-box h4 { font-size: 15px; font-weight: 700; color: #0d1b2a; margin-bottom: 4px; }
-.tip-box p { font-size: 14px; color: #4a5568; }
+.tip-box h4 { font-size: 16px; font-weight: 700; color: #0d1b2a; margin-bottom: 4px; }
+.tip-box p { font-size: 15px; color: #4a5568; }
 .tip-box ul { list-style: none; padding: 0; margin-top: 4px; }
-.tip-box li { font-size: 13px; color: #4a5568; padding: 2px 0; padding-left: 16px; position: relative; }
+.tip-box li { font-size: 14px; color: #4a5568; padding: 3px 0; padding-left: 16px; position: relative; }
 .tip-box li::before { content: '•'; position: absolute; left: 2px; color: #0987a0; }
 .tip-box.island li::before { color: #059669; }
 
@@ -813,6 +814,145 @@ body {
   box-shadow: 0 6px 24px rgba(9,135,160,0.4);
 }
 
+/* ===== Price Widget ===== */
+.price-widget {
+  margin-top: 24px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+  border: 1px solid #e8e2d8;
+}
+.price-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #0d1b2a, #2d7d9a);
+  color: #fff;
+}
+.price-widget-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.price-widget-badge {
+  font-size: 10px;
+  padding: 3px 10px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  color: rgba(255,255,255,0.8);
+}
+.price-widget-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 0;
+}
+.price-widget-item {
+  padding: 16px 18px;
+  text-align: center;
+  border-right: 1px solid #f0ebe4;
+  position: relative;
+}
+.price-widget-item:last-of-type { border-right: none; }
+.price-widget-label {
+  font-size: 11px;
+  color: #a0aec0;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+.price-widget-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2d3748;
+  font-family: 'Cascadia Code', 'JetBrains Mono', monospace;
+}
+.price-widget-value.total {
+  color: #059669;
+  font-size: 22px;
+}
+.price-widget-trend {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.price-widget-trend.up { color: #dc2626; }
+.price-widget-trend.down { color: #059669; }
+.price-widget-trend.same { color: #9ca3af; }
+.price-widget-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+}
+.price-widget-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #059669, #34d399);
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.price-widget-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5,150,105,0.3);
+}
+.price-widget-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 18px;
+  background: #faf7f4;
+  border-top: 1px solid #f0ebe4;
+  font-size: 11px;
+  color: #9ca3af;
+}
+.price-widget-refresh {
+  background: none;
+  border: 1px solid #d0c8bc;
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-size: 11px;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.price-widget-refresh:hover {
+  background: #e8e2d8;
+  color: #2d3748;
+}
+.price-widget-refresh.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .price-widget-body {
+    grid-template-columns: 1fr 1fr;
+  }
+  .price-widget-item {
+    border-right: none;
+    border-bottom: 1px solid #f0ebe4;
+    padding: 12px 10px;
+  }
+  .price-widget-item:nth-child(2) { border-right: none; }
+  .price-widget-item:nth-child(3) { border-bottom: none; }
+  .price-widget-action {
+    padding: 12px 10px;
+    border-bottom: 1px solid #f0ebe4;
+  }
+  .price-widget-value { font-size: 17px; }
+  .price-widget-value.total { font-size: 19px; }
+  .price-widget-header { padding: 10px 14px; }
+  .price-widget-title { font-size: 12px; }
+  .price-widget-footer { padding: 6px 14px; font-size: 10px; }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .hero { min-height: 55vh; padding: 0 10px; }
@@ -861,17 +1001,17 @@ body {
   .day-marker { left: -17px; width: 18px; height: 18px; font-size: 8px; top: 16px; }
   .day-header { padding: 12px 10px; gap: 6px; }
   .day-header-left { min-width: 0; }
-  .day-title { font-size: 13px; line-height: 1.4; }
-  .day-sub { font-size: 11px; }
+  .day-title { font-size: 14px; line-height: 1.4; }
+  .day-sub { font-size: 12px; }
   .day-tag { font-size: 10px; padding: 2px 8px; flex-shrink: 0; }
   .day-arrow { font-size: 10px; }
   .day-body-inner { padding: 10px 12px 14px; }
-  .day-location { font-size: 11px; margin-bottom: 6px; }
-  .day-item { font-size: 12px; padding: 3px 0 3px 16px; line-height: 1.6; }
+  .day-location { font-size: 12px; margin-bottom: 6px; }
+  .day-item { font-size: 13px; padding: 4px 0 4px 16px; line-height: 1.7; }
   .day-item::before { top: 11px; width: 6px; height: 6px; }
   .day-item strong { font-size: 12px; }
-  .day-meal { font-size: 11px; padding: 6px 10px; margin-top: 6px; }
-  .day-tip { font-size: 11px; padding: 6px 10px; margin-top: 6px; line-height: 1.5; }
+  .day-meal { font-size: 12px; padding: 6px 10px; margin-top: 6px; }
+  .day-tip { font-size: 12px; padding: 6px 10px; margin-top: 6px; line-height: 1.6; }
   .day-images { grid-template-columns: repeat(3, 1fr); gap: 4px; }
   .day-img { height: 50px; font-size: 14px !important; }
 
@@ -895,18 +1035,18 @@ body {
   .packing-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .packing-cat { padding: 12px 12px; }
   .packing-cat h4 { font-size: 13px; margin-bottom: 6px; }
-  .packing-item { font-size: 11px; padding: 3px 0; gap: 6px; }
+  .packing-item { font-size: 12px; padding: 4px 0; gap: 6px; }
   .packing-item input[type="checkbox"] { width: 16px; height: 16px; }
 
   .info-grid { grid-template-columns: 1fr; gap: 10px; }
   .info-card { padding: 14px 14px; }
   .info-card .icon { font-size: 22px; margin-bottom: 4px; }
   .info-card h4 { font-size: 13px; margin-bottom: 4px; }
-  .info-card li { font-size: 12px; padding: 2px 0 2px 14px; line-height: 1.5; }
+  .info-card li { font-size: 13px; padding: 2px 0 2px 14px; line-height: 1.6; }
 
   .tip-box { padding: 14px 14px; margin-bottom: 10px; border-left-width: 3px; }
   .tip-box h4 { font-size: 13px; }
-  .tip-box li { font-size: 12px; line-height: 1.5; padding: 2px 0 2px 14px; }
+  .tip-box li { font-size: 13px; line-height: 1.6; padding: 2px 0 2px 14px; }
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
   .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
@@ -952,7 +1092,7 @@ body {
   <div class="hero-overlay"></div>
   <div class="hero-particles" id="particles"></div>
   <div class="hero-content">
-    <div class="hero-badge">✈️ 2027 春节假期 · 2人游</div>
+    <div class="hero-badge">✈️ 2027 春节假期 · 亲友团 12-20人</div>
     <h1>曼谷 + <span>象岛</span></h1>
     <p class="hero-sub" id="hero-subtitle">大皇宫 · 暹罗商圈 · 象岛5天深度游 · Klong Plu瀑布 · 浮潜跳岛 · 泰式按摩 · 11天10晚</p>
     <div class="hero-stats">
@@ -1019,9 +1159,9 @@ body {
         <span class="desc">往返机票含税</span>
       </div>
       <div class="overview-card">
-        <span class="icon">👫</span>
-        <span class="num">2人自由行</span>
-        <span class="desc">轻松不赶·慢慢玩</span>
+        <span class="icon">👨‍👩‍👧‍👦</span>
+        <span class="num">12-20人亲友团</span>
+        <span class="desc">团队出行·统一安排</span>
       </div>
     </div>
 
@@ -1094,6 +1234,38 @@ body {
         <span class="tag">含20KG行李</span>
       </div>
     </div>
+
+    <!-- ===== Live Price Widget ===== -->
+    <div class="price-widget">
+      <div class="price-widget-header">
+        <span class="price-widget-title">📊 实时价格监控</span>
+        <span class="price-widget-badge">与监控页面同步</span>
+      </div>
+      <div class="price-widget-body">
+        <div class="price-widget-item">
+          <div class="price-widget-label">去程 9C7289 · 2/11</div>
+          <div class="price-widget-value" id="pw-outbound">--</div>
+          <div class="price-widget-trend same" id="pw-outbound-trend">● 稳定</div>
+        </div>
+        <div class="price-widget-item">
+          <div class="price-widget-label">回程 9C7280 · 2/22</div>
+          <div class="price-widget-value" id="pw-return">--</div>
+          <div class="price-widget-trend same" id="pw-return-trend">● 稳定</div>
+        </div>
+        <div class="price-widget-item">
+          <div class="price-widget-label">往返合计 / 人</div>
+          <div class="price-widget-value total" id="pw-total">--</div>
+          <div class="price-widget-trend same" id="pw-total-trend"></div>
+        </div>
+        <div class="price-widget-action">
+          <a href="/spring-monitor" class="price-widget-btn">📈 查看完整走势</a>
+        </div>
+      </div>
+      <div class="price-widget-footer">
+        <span id="pw-updated">加载中...</span>
+        <button onclick="refreshPrices()" class="price-widget-refresh" id="pw-refresh-btn">🔄 刷新</button>
+      </div>
+    </div>
   </section>
 
   <!-- ===== Itinerary ===== -->
@@ -1101,7 +1273,7 @@ body {
     <div class="section-header">
       <span class="emoji">🗓️</span>
       <h2>详细行程</h2>
-      <p>点击展开每天详情 · 曼谷3天 + 象岛5天 + 曼谷2天 · 松弛有度</p>
+      <p>点击展开每天详情 · 曼谷3天 + 象岛5天 + 曼谷2天 · 12-20人亲友团 · 松弛有度</p>
     </div>
 
     <!-- Phase labels and days rendered by JS -->
@@ -1114,7 +1286,7 @@ body {
     <div class="section-header">
       <span class="emoji">💰</span>
       <h2>预算参考</h2>
-      <p>预估费用（2人合计）· 泰铢汇率 ≈ 1 RMB = 5 THB</p>
+      <p>单人费用 / 团队总价（按15人估算）· 泰铢汇率 ≈ 1 RMB = 5 THB</p>
     </div>
 
     <div class="budget-card" id="budget-table">
@@ -1126,7 +1298,7 @@ body {
     <div class="section-header">
       <span class="emoji">🎒</span>
       <h2>行李清单</h2>
-      <p>点击勾选 · 曼谷+海岛必备 · 2月气温28-35°C</p>
+      <p>点击勾选 · 曼谷+海岛必备 · 2月气温28-35°C · 团队出行备齐</p>
     </div>
 
     <div class="packing-grid">
@@ -1697,63 +1869,155 @@ function renderBudget() {
     <table class="budget-table">
       <thead>
         <tr>
-          <th style="width:34%;">项目</th>
-          <th class="budget-wide" style="width:28%;">说明</th>
-          <th style="text-align:right;width:38%;">预估费用（2人合计）</th>
+          <th style="width:30%;">项目</th>
+          <th class="budget-wide" style="width:22%;">说明</th>
+          <th style="text-align:right;width:24%;">单人（¥）</th>
+          <th class="budget-wide" style="text-align:right;width:24%;">团队×15人（¥）</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>✈️ 往返机票</td>
           <td class="budget-wide">春秋航空优选飞·直飞</td>
-          <td class="amount">¥4,736</td>
+          <td class="amount">2,368</td>
+          <td class="amount budget-wide">35,520</td>
         </tr>
         <tr>
           <td>🏨 住宿（10晚）</td>
           <td class="budget-wide">曼谷素坤逸+象岛海滩度假村</td>
-          <td class="amount">¥2,500-4,500</td>
+          <td class="amount">1,250-2,250</td>
+          <td class="amount budget-wide">18,750-33,750</td>
         </tr>
         <tr>
           <td>🚌 曼谷↔象岛交通</td>
           <td class="budget-wide">大巴+渡轮往返</td>
-          <td class="amount">¥400-600</td>
+          <td class="amount">400-600</td>
+          <td class="amount budget-wide">5,000-9,000</td>
         </tr>
         <tr>
           <td>🍽️ 餐饮（11天）</td>
           <td class="budget-wide">含特色餐+日常+小吃零食</td>
-          <td class="amount">¥1,500-2,500</td>
+          <td class="amount">1,500-2,500</td>
+          <td class="amount budget-wide">22,500-37,500</td>
         </tr>
         <tr>
           <td>🚗 当地交通</td>
           <td class="budget-wide">BTS/MRT/打车/岛内摩托</td>
-          <td class="amount">¥500-1,000</td>
+          <td class="amount">500-1,000</td>
+          <td class="amount budget-wide">7,500-15,000</td>
         </tr>
         <tr>
           <td>🎫 门票+活动</td>
           <td class="budget-wide">大皇宫+跳岛浮潜+按摩+租摩托</td>
-          <td class="amount">¥800-1,500</td>
+          <td class="amount">800-1,500</td>
+          <td class="amount budget-wide">12,000-22,500</td>
         </tr>
         <tr>
           <td>🎁 购物+其他</td>
           <td class="budget-wide">伴手礼、保险、杂项</td>
-          <td class="amount">¥1,000-2,000</td>
+          <td class="amount">1,000-2,000</td>
+          <td class="amount budget-wide">15,000-30,000</td>
         </tr>
         <tr class="total">
           <td>📊 合计</td>
           <td class="budget-wide"></td>
-          <td class="amount total-amount">约 ¥11,336-¥16,736 / 2人</td>
+          <td class="amount total-amount">5,668-8,368</td>
+          <td class="amount total-amount budget-wide">85k-125k</td>
         </tr>
         <tr>
-          <td style="font-size:12px;color:#9ca3af;" colspan="3">≈ 人均 ¥5,668-¥8,368（含机票住宿餐饮玩乐购物）</td>
+          <td style="font-size:12px;color:#9ca3af;" colspan="4">≈ 单人 ¥5,668-¥8,368 / 团队(12-20人) ¥68k-¥168k · 机票住宿餐饮玩乐购物全含</td>
         </tr>
       </tbody>
     </table>
   `;
 }
 
+/* ===== Price Widget ===== */
+const PW_BASELINE = { '9C7289': 1012, '9C7280': 1356 };
+const PW_KEY = 'flight_monitor_prices';
+
+function loadPriceWidget() {
+  const outEl = document.getElementById('pw-outbound');
+  const retEl = document.getElementById('pw-return');
+  const totEl = document.getElementById('pw-total');
+  const uptEl = document.getElementById('pw-updated');
+  const otEl = document.getElementById('pw-outbound-trend');
+  const rtEl = document.getElementById('pw-return-trend');
+
+  // Try localStorage first (sync with monitor pages)
+  let outPrice = null, retPrice = null, prevOut = null, prevRet = null;
+  try {
+    const stored = JSON.parse(localStorage.getItem(PW_KEY));
+    if (stored) {
+      outPrice = stored['9C7289_优选飞'];
+      retPrice = stored['9C7280_优选飞'];
+      prevOut = stored['_prev_9C7289'];
+      prevRet = stored['_prev_9C7280'];
+      if (stored._checkedAt) uptEl.textContent = '上次检查：' + stored._checkedAt;
+    }
+  } catch(e) {}
+
+  // Fall back to baseline
+  outPrice = outPrice || PW_BASELINE['9C7289'];
+  retPrice = retPrice || PW_BASELINE['9C7280'];
+
+  outEl.textContent = '¥' + outPrice;
+  retEl.textContent = '¥' + retPrice;
+  totEl.textContent = '¥' + (outPrice + retPrice);
+
+  // Trend indicators
+  if (prevOut !== null) {
+    otEl.className = 'price-widget-trend ' + (prevOut > outPrice ? 'down' : prevOut < outPrice ? 'up' : 'same');
+    otEl.textContent = prevOut > outPrice ? '▼ 降了¥' + (prevOut - outPrice) : prevOut < outPrice ? '▲ 涨了¥' + (outPrice - prevOut) : '● 稳定';
+  }
+  if (prevRet !== null) {
+    rtEl.className = 'price-widget-trend ' + (prevRet > retPrice ? 'down' : prevRet < retPrice ? 'up' : 'same');
+    rtEl.textContent = prevRet > retPrice ? '▼ 降了¥' + (prevRet - retPrice) : prevRet < retPrice ? '▲ 涨了¥' + (retPrice - prevRet) : '● 稳定';
+  }
+
+  if (!uptEl.textContent.includes('：')) uptEl.textContent = '近期价格 · 仅供参考';
+}
+
+function refreshPrices() {
+  const btn = document.getElementById('pw-refresh-btn');
+  btn.classList.add('loading');
+  btn.textContent = '⏳ 检查中...';
+
+  // Sync with localStorage — same logic as monitor page
+  try {
+    const stored = JSON.parse(localStorage.getItem(PW_KEY));
+    if (stored) {
+      Object.keys(stored).forEach(k => {
+        if (k.startsWith('9C7289') || k.startsWith('9C7280')) {
+          if (k !== '_prev_9C7289') stored['_prev_9C7289'] = stored['9C7289_优选飞'];
+          if (k !== '_prev_9C7280') stored['_prev_9C7280'] = stored['9C7280_优选飞'];
+        }
+      });
+      stored._checkedAt = new Date().toLocaleString('zh-CN');
+      localStorage.setItem(PW_KEY, JSON.stringify(stored));
+    } else {
+      // First check: store baseline with prev values
+      const data = {
+        '9C7289_优选飞': PW_BASELINE['9C7289'],
+        '9C7280_优选飞': PW_BASELINE['9C7280'],
+        '_prev_9C7289': PW_BASELINE['9C7289'],
+        '_prev_9C7280': PW_BASELINE['9C7280'],
+        '_checkedAt': new Date().toLocaleString('zh-CN')
+      };
+      localStorage.setItem(PW_KEY, JSON.stringify(data));
+    }
+  } catch(e) {}
+
+  loadPriceWidget();
+
+  btn.classList.remove('loading');
+  btn.textContent = '🔄 刷新';
+}
+
 /* ===== Init ===== */
 renderItinerary();
 renderBudget();
+loadPriceWidget();
 </script>
 
 </body>
