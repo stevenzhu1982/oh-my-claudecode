@@ -314,13 +314,88 @@
   .price-date.return.selected .price { color: var(--accent-green); }
   .price-date.return.best .price { color: var(--accent-cyan); }
 
-  .calendar-section-title {
-    font-size: 0.85rem;
+  .price-date.return.best .price { color: var(--accent-cyan); }
+  .price-date.lowest {
+    border-color: #f59e0b !important;
+    background: rgba(245,158,11,0.08) !important;
+    box-shadow: 0 0 12px rgba(245,158,11,0.15);
+    position: relative;
+  }
+  .price-date.lowest .price { color: #d97706 !important; }
+  .price-date.lowest::after {
+    content: '🏆 最低';
+    position: absolute;
+    top: -8px; right: -4px;
+    background: #f59e0b;
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    padding: 0.08rem 0.4rem;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .price-date.return.lowest::after {
+    content: '🏆 最低';
+  }
+  .price-date .cheap-tag {
+    display: inline-block;
+    font-size: 0.5rem;
+    font-family: var(--font-mono);
+    color: #d97706;
+    background: rgba(245,158,11,0.12);
+    padding: 0 0.25rem;
+    border-radius: 2px;
+    margin-top: 0.05rem;
+  }
+
+  .season-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .season-stat-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    text-align: center;
+  }
+  .season-stat-card.lowest {
+    border-color: rgba(245,158,11,0.4);
+    background: rgba(245,158,11,0.04);
+  }
+  .season-stat-card .ss-label {
+    font-size: 0.65rem;
     color: var(--text-dim);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+    letter-spacing: 0.5px;
+  }
+  .season-stat-card .ss-value {
+    font-family: var(--font-mono);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 0.1rem;
+  }
+  .season-stat-card .ss-value.green { color: var(--accent-green); }
+  .season-stat-card .ss-value.orange { color: var(--accent-orange); }
+  .season-stat-card .ss-value.purple { color: var(--accent-purple); }
+  .season-stat-card .ss-value.amber { color: #d97706; }
+  .season-stat-card .ss-sub {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    margin-top: 0.05rem;
+  }
+  .season-stat-card .ss-tag {
+    display: inline-block;
+    font-size: 0.55rem;
+    background: rgba(245,158,11,0.12);
+    color: #d97706;
+    padding: 0.05rem 0.35rem;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    margin-top: 0.1rem;
   }
 
   /* ===== Flight Cards ===== */
@@ -931,6 +1006,29 @@
       <span class="ph-info">2026.09 → 2027.01 · 直飞含税最低价 · 来源春秋官网</span>
     </div>
     <div class="panel-body">
+      <div class="season-stats">
+        <div class="season-stat-card">
+          <div class="ss-label">去程最低</div>
+          <div class="ss-value green">¥662</div>
+          <div class="ss-sub">周中 · 9月-10月中</div>
+        </div>
+        <div class="season-stat-card">
+          <div class="ss-label">周六最低</div>
+          <div class="ss-value orange">¥762</div>
+          <div class="ss-sub">9/5·9/12·10/17·10/31·11/7</div>
+        </div>
+        <div class="season-stat-card">
+          <div class="ss-label">回程最低</div>
+          <div class="ss-value purple">¥806</div>
+          <div class="ss-sub">9/12 · 9/26</div>
+        </div>
+        <div class="season-stat-card lowest">
+          <div class="ss-label">往返最低</div>
+          <div class="ss-value amber">¥1,468</div>
+          <div class="ss-sub">去¥662+回¥806</div>
+          <div class="ss-tag">🏆 最划算</div>
+        </div>
+      </div>
       <div class="chart-wrap">
         <div>
           <div class="chart-container">
@@ -959,12 +1057,12 @@
         <div>
           <div class="calendar-section-title">🛫 去程 · 上海 → 曼谷</div>
           <div class="price-grid" id="seasonOutboundGrid">
-            <div class="price-date best" data-price="762" data-date="2026-09-05">
+            <div class="price-date lowest" data-price="762" data-date="2026-09-05">
               <div class="day">周六</div>
               <div class="date">9/5</div>
               <div class="price">¥762</div>
             </div>
-            <div class="price-date best" data-price="762" data-date="2026-09-12">
+            <div class="price-date lowest" data-price="762" data-date="2026-09-12">
               <div class="day">周六</div>
               <div class="date">9/12</div>
               <div class="price">¥762</div>
@@ -974,27 +1072,27 @@
               <div class="date">9/26</div>
               <div class="price">¥1,462</div>
             </div>
-            <div class="price-date" data-price="1062" data-date="2026-10-03">
+            <div class="price-date best" data-price="1062" data-date="2026-10-03">
               <div class="day">周六</div>
               <div class="date">10/3</div>
               <div class="price">¥1,062</div>
             </div>
-            <div class="price-date best" data-price="762" data-date="2026-10-17">
+            <div class="price-date lowest" data-price="762" data-date="2026-10-17">
               <div class="day">周六</div>
               <div class="date">10/17</div>
               <div class="price">¥762</div>
             </div>
-            <div class="price-date best" data-price="762" data-date="2026-10-31">
+            <div class="price-date lowest" data-price="762" data-date="2026-10-31">
               <div class="day">周六</div>
               <div class="date">10/31</div>
               <div class="price">¥762</div>
             </div>
-            <div class="price-date best" data-price="762" data-date="2026-11-07">
+            <div class="price-date lowest" data-price="762" data-date="2026-11-07">
               <div class="day">周六</div>
               <div class="date">11/7</div>
               <div class="price">¥762</div>
             </div>
-            <div class="price-date" data-price="862" data-date="2026-11-21">
+            <div class="price-date best" data-price="862" data-date="2026-11-21">
               <div class="day">周六</div>
               <div class="date">11/21</div>
               <div class="price">¥862</div>
@@ -1004,7 +1102,7 @@
               <div class="date">12/5</div>
               <div class="price">¥962</div>
             </div>
-            <div class="price-date" data-price="862" data-date="2026-12-19">
+            <div class="price-date best" data-price="862" data-date="2026-12-19">
               <div class="day">周六</div>
               <div class="date">12/19</div>
               <div class="price">¥862</div>
@@ -1014,7 +1112,7 @@
               <div class="date">1/2</div>
               <div class="price">¥1,262</div>
             </div>
-            <div class="price-date" data-price="862" data-date="2027-01-16">
+            <div class="price-date best" data-price="862" data-date="2027-01-16">
               <div class="day">周六</div>
               <div class="date">1/16</div>
               <div class="price">¥862</div>
@@ -1029,22 +1127,22 @@
         <div>
           <div class="calendar-section-title">🛬 回程 · 曼谷 → 上海</div>
           <div class="price-grid" id="seasonReturnGrid">
-            <div class="price-date return" data-price="906" data-date="2026-09-05">
+            <div class="price-date return best" data-price="906" data-date="2026-09-05">
               <div class="day">周六</div>
               <div class="date">9/5</div>
               <div class="price">¥906</div>
             </div>
-            <div class="price-date return best" data-price="806" data-date="2026-09-12">
+            <div class="price-date return lowest" data-price="806" data-date="2026-09-12">
               <div class="day">周六</div>
               <div class="date">9/12</div>
               <div class="price">¥806</div>
             </div>
-            <div class="price-date return best" data-price="806" data-date="2026-09-26">
+            <div class="price-date return lowest" data-price="806" data-date="2026-09-26">
               <div class="day">周六</div>
               <div class="date">9/26</div>
               <div class="price">¥806</div>
             </div>
-            <div class="price-date return" data-price="906" data-date="2026-10-03">
+            <div class="price-date return best" data-price="906" data-date="2026-10-03">
               <div class="day">周六</div>
               <div class="date">10/3</div>
               <div class="price">¥906</div>
@@ -1064,7 +1162,7 @@
               <div class="date">11/7</div>
               <div class="price">¥906</div>
             </div>
-            <div class="price-date return" data-price="906" data-date="2026-11-21">
+            <div class="price-date return best" data-price="906" data-date="2026-11-21">
               <div class="day">周六</div>
               <div class="date">11/21</div>
               <div class="price">¥906</div>
@@ -1079,7 +1177,7 @@
               <div class="date">12/19</div>
               <div class="price">¥1,006</div>
             </div>
-            <div class="price-date return" data-price="906" data-date="2027-01-02">
+            <div class="price-date return best" data-price="906" data-date="2027-01-02">
               <div class="day">周六</div>
               <div class="date">1/2</div>
               <div class="price">¥906</div>
@@ -1089,7 +1187,7 @@
               <div class="date">1/16</div>
               <div class="price">¥906</div>
             </div>
-            <div class="price-date return" data-price="906" data-date="2027-01-23">
+            <div class="price-date return best" data-price="906" data-date="2027-01-23">
               <div class="day">周六</div>
               <div class="date">1/23</div>
               <div class="price">¥906</div>
