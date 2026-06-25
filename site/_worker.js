@@ -576,18 +576,20 @@ var pages_template_worker_default = {
       });
     }
 
-    // IPTV TV page: /TV and /tv.html always served from GitHub raw (bypasses ASSETS issue)
+    // IPTV TV page: /TV and /tv.html served from CDN (bypasses ASSETS SPA fallback)
     var _tvUrl = new URL(request.url);
     if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/" || _tvUrl.pathname === "/tv.html") {
-      var _ghResp = await fetch("https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site/tv.html");
-      if (_ghResp.ok) {
-        var _tvBody = await _ghResp.text();
-        var _tvResp = new Response(_tvBody, {
-          headers: { "Content-Type": "text/html;charset=utf-8" }
-        });
-        _tvResp.headers.append("Set-Cookie", COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure");
-        return _tvResp;
-      }
+      try {
+        var _tvResp = await fetch("https://cdn.jsdelivr.net/gh/stevenzhu1982/family-trip-2026@master/site/tv.html");
+        if (_tvResp.ok) {
+          var _tvBody = await _tvResp.text();
+          var _tvResult = new Response(_tvBody, {
+            headers: { "Content-Type": "text/html;charset=utf-8" }
+          });
+          _tvResult.headers.append("Set-Cookie", COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure");
+          return _tvResult;
+        }
+      } catch(e) { /* CDN fetch failed, fall through to ASSETS */ }
     }
 
     // Cookie header that refreshes on every response (30 day expiry)
