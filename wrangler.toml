@@ -1,4 +1,4 @@
-# Deploy trigger: 2026-05-16 (retry)
+# Deploy trigger: 2026-06-25 (IPTV TV page)
 name = "family-trip-2026"
 pages_build_output_dir = "site"
 
