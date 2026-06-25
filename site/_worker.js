@@ -579,6 +579,17 @@ var pages_template_worker_default = {
     // Rewrite /TV -> /tv.html for IPTV page
     var _tvUrl = new URL(request.url);
     if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/") {
+      // Serve TV page from GitHub raw content (bypasses ASSETS deployment issue)
+      var _ghResp = await fetch("https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site/tv.html");
+      if (_ghResp.ok) {
+        var _tvBody = await _ghResp.text();
+        var _tvResp = new Response(_tvBody, {
+          headers: { "Content-Type": "text/html;charset=utf-8" }
+        });
+        _tvResp.headers.append("Set-Cookie", COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure");
+        return _tvResp;
+      }
+      // fallback: try ASSETS
       _tvUrl.pathname = "/tv.html";
       request = new Request(_tvUrl, request);
     }
