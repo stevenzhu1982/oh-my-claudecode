@@ -576,11 +576,18 @@ var pages_template_worker_default = {
       });
     }
 
-    // Rewrite /TV -> /tv.html for IPTV page
+    // IPTV TV page: /TV and /tv.html always served from GitHub raw (bypasses ASSETS issue)
     var _tvUrl = new URL(request.url);
-    if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/") {
-      _tvUrl.pathname = "/tv.html";
-      request = new Request(_tvUrl, request);
+    if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/" || _tvUrl.pathname === "/tv.html") {
+      var _ghResp = await fetch("https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site/tv.html");
+      if (_ghResp.ok) {
+        var _tvBody = await _ghResp.text();
+        var _tvResp = new Response(_tvBody, {
+          headers: { "Content-Type": "text/html;charset=utf-8" }
+        });
+        _tvResp.headers.append("Set-Cookie", COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure");
+        return _tvResp;
+      }
     }
 
     // Cookie header that refreshes on every response (30 day expiry)
@@ -628,18 +635,6 @@ var pages_template_worker_default = {
         return cloneResponse(response);
       } else if ("ASSETS") {
         var assetResp = await env["ASSETS"].fetch(request);
-        if (assetResp.status === 404) {
-          var _ghUrl = "https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site" + new URL(request.url).pathname;
-          var _ghResp2 = await fetch(_ghUrl);
-          if (_ghResp2.ok) {
-            var _ext = new URL(request.url).pathname.split('.').pop();
-            var _mime = { html: 'text/html', js: 'application/javascript', css: 'text/css', png: 'image/png', jpg: 'image/jpeg', svg: 'image/svg+xml', json: 'application/json', pdf: 'application/pdf', mp4: 'video/mp4', mp3: 'audio/mpeg' };
-            var _ghBody2 = await _ghResp2.text();
-            var _ghResp3 = new Response(_ghBody2, { headers: { 'Content-Type': (_mime[_ext] || 'text/plain') + ';charset=utf-8' } });
-            _ghResp3.headers.append("Set-Cookie", COOKIE_HEADER);
-            return _ghResp3;
-          }
-        }
         var respWithCookie = new Response(assetResp.body, assetResp);
         respWithCookie.headers.append("Set-Cookie", COOKIE_HEADER);
         return respWithCookie;
