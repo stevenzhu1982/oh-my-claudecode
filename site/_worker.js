@@ -576,6 +576,13 @@ var pages_template_worker_default = {
       });
     }
 
+    // Rewrite /TV -> /tv.html for IPTV page
+    var _tvUrl = new URL(request.url);
+    if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/") {
+      _tvUrl.pathname = "/tv.html";
+      request = new Request(_tvUrl, request);
+    }
+
     // Cookie header that refreshes on every response (30 day expiry)
     var COOKIE_HEADER = COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure";
 
