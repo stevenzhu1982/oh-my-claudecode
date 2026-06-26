@@ -611,6 +611,25 @@ var pages_template_worker_default = {
       });
     }
 
+    // Serve static pages from GitHub raw content (fallback when ASSETS doesn't have them)
+    var _staticUrl = new URL(request.url);
+    if (_staticUrl.pathname === "/spring-monitor" || _staticUrl.pathname === "/spring-monitor.html") {
+      try {
+        var _ghResp = await fetch("https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site/spring-monitor.html");
+        if (_ghResp.ok) return new Response(_ghResp.body, { headers: { "Content-Type": "text/html;charset=utf-8", "Cache-Control": "public,max-age=300" }});
+      } catch(e) {}
+    }
+    if (_staticUrl.pathname === "/flight-monitor" || _staticUrl.pathname === "/flight-monitor.html") {
+      try {
+        var _fhResp = await fetch("https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site/flight-monitor.html");
+        if (_fhResp.ok) return new Response(_fhResp.body, { headers: { "Content-Type": "text/html;charset=utf-8", "Cache-Control": "public,max-age=300" }});
+      } catch(e) {}
+    }
+    // Thai Airways monitoring (if it exists)
+    if (_staticUrl.pathname === "/thai-monitor" || _staticUrl.pathname === "/thai-monitor.html") {
+      return new Response("", { status: 302, headers: { "Location": "https://raw.githubusercontent.com/stevenzhu1982/family-trip-2026/master/site/spring-monitor.html#THAI" }});
+    }
+
     // IPTV TV page: /TV and /tv.html redirect to GitHub Pages (or serve embedded HTML)
     var _tvUrl = new URL(request.url);
     if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/" || _tvUrl.pathname === "/tv.html") {
