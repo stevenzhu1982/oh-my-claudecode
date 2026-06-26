@@ -577,14 +577,22 @@ var pages_template_worker_default = {
       });
     }
 
-    // IPTV TV page: /TV and /tv.html served directly from embedded HTML
+    // IPTV TV page: /TV and /tv.html redirect to GitHub Pages (or serve embedded HTML)
     var _tvUrl = new URL(request.url);
     if (_tvUrl.pathname === "/TV" || _tvUrl.pathname === "/TV/" || _tvUrl.pathname === "/tv.html") {
-      var _tvResult = new Response(TV_HTML, {
-        headers: { "Content-Type": "text/html;charset=utf-8" }
-      });
-      _tvResult.headers.append("Set-Cookie", COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure");
-      return _tvResult;
+      try {
+        var _tvResult = new Response(TV_HTML, {
+          headers: { "Content-Type": "text/html;charset=utf-8" }
+        });
+        _tvResult.headers.append("Set-Cookie", COOKIE_NAME + "=" + PASSWORD + "; Path=/; Max-Age=2592000; SameSite=Lax; Secure");
+        return _tvResult;
+      } catch(e) {
+        // Fallback: redirect to GitHub Pages TV page
+        return new Response("", {
+          status: 302,
+          headers: { "Location": "https://stevenzhu1982.github.io/family-trip-2026/" }
+        });
+      }
     }
 
     // Cookie header that refreshes on every response (30 day expiry)
