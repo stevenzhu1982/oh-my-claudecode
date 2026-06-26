@@ -124,6 +124,33 @@ async function onRequest2(context) {
 }
 __name(onRequest2, "onRequest");
 
+// api/verify-stream
+async function onVerifyStream(context) {
+  const { request } = context;
+  const url = new URL(request.url);
+  const streamUrl = url.searchParams.get("url");
+  if (!streamUrl) {
+    return new Response(JSON.stringify({ ok: false, error: "Missing url parameter" }), {
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" }
+    });
+  }
+  const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, OPTIONS", "Access-Control-Allow-Headers": "Content-Type" };
+  if (request.method === "OPTIONS") return new Response(null, { headers: cors });
+  try {
+    const start = Date.now();
+    const resp = await fetch(streamUrl, { method: "HEAD", signal: AbortSignal.timeout(8000) });
+    const time = Date.now() - start;
+    return new Response(JSON.stringify({ ok: resp.ok, status: resp.status, time: time }), {
+      headers: { "Content-Type": "application/json", ...cors }
+    });
+  } catch(e) {
+    return new Response(JSON.stringify({ ok: false, status: 0, time: 8000, error: e.message }), {
+      headers: { "Content-Type": "application/json", ...cors }
+    });
+  }
+}
+__name(onVerifyStream, "onVerifyStream");
+
 // ../.wrangler/tmp/pages-wRSpKC/functionsRoutes-0.9718547786553169.mjs
 var routes = [
   {
@@ -139,6 +166,13 @@ var routes = [
     method: "",
     middlewares: [],
     modules: [onRequest2]
+  },
+  {
+    routePath: "/api/verify-stream",
+    mountPath: "/api",
+    method: "",
+    middlewares: [],
+    modules: [onVerifyStream]
   }
 ];
 

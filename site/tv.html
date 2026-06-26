@@ -276,6 +276,55 @@ body {
 /* ===== 国家国旗 emoji helper ===== */
 .flag { font-size: 1.1em; }
 
+/* ===== Health Badge ===== */
+.channel-card .health-dot {
+  position: absolute; top: 6px; right: 6px;
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--card-bg); z-index: 1;
+}
+.health-dot.verified { background: #48bb78; }
+.health-dot.dead { background: #fc8181; }
+.health-dot.unknown { background: #cbd5e0; }
+.channel-card:not(.no-stream) .health-dot.verified { box-shadow: 0 0 4px rgba(72,187,120,0.6); }
+
+/* ===== Verify Bar ===== */
+.verify-bar {
+  display: none; padding: 6px 16px;
+  background: #f0fff4; border-bottom: 1px solid #c6f6d5;
+  font-size: 12px; color: #276749; align-items: center; gap: 8px;
+}
+.verify-bar.show { display: flex; }
+.verify-bar .vb-fill-wrap {
+  flex: 1; height: 6px; background: #c6f6d5; border-radius: 4px; overflow: hidden; max-width: 300px;
+}
+.verify-bar .vb-fill {
+  height: 100%; width: 0%; background: #48bb78; border-radius: 4px; transition: width 0.3s;
+}
+.verify-bar .vb-status { white-space: nowrap; font-weight: 600; }
+.verify-bar .vb-close {
+  background: none; border: none; cursor: pointer; font-size: 14px;
+  color: #276749; padding: 2px 6px; border-radius: 4px; margin-left: auto;
+}
+.verify-bar .vb-close:hover { background: #c6f6d5; }
+
+#verifyBtn {
+  background: #48bb78; color: #fff; border: none;
+  padding: 6px 14px; border-radius: 8px; font-size: 12px;
+  cursor: pointer; transition: background 0.2s; white-space: nowrap;
+}
+#verifyBtn:hover { background: #38a169; }
+#verifyBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+#verifyBtn.verifying { animation: pulse 1.5s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+/* ===== Verify filter checkbox ===== */
+.verify-filter {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; color: var(--text-secondary); cursor: pointer;
+  white-space: nowrap; user-select: none;
+}
+.verify-filter input { accent-color: var(--accent); cursor: pointer; }
+
 /* ===== Toast ===== */
 .toast {
   position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
@@ -334,7 +383,10 @@ body {
 <!-- ===== Stats ===== -->
 <div class="stats-bar">
   <span id="statsText">📡 加载数据中...</span>
-  <button id="refreshBtn" onclick="loadAllData()">🔄 刷新</button>
+  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+    <button id="verifyBtn" onclick="verifyAllStreams()" title="测试所有直播链接的可用性">🔍 测试链接</button>
+    <button id="refreshBtn" onclick="loadAllData()">🔄 刷新</button>
+  </div>
 </div>
 
 <!-- ===== Filters ===== -->
@@ -347,10 +399,22 @@ body {
   </select>
   <input class="filter-search" id="searchFilter" type="search"
          placeholder="🔍 搜索频道名称..." oninput="applyFilters()">
+  <label class="verify-filter" id="hideDeadLabel" style="display:none;">
+    <input type="checkbox" id="hideDeadFilter" onchange="applyFilters()" checked>
+    隐藏失效
+  </label>
 </div>
 
 <!-- ===== Quick Country Picks ===== -->
 <div class="quick-picks" id="quickPicks"></div>
+
+<!-- ===== Verify Progress ===== -->
+<div class="verify-bar" id="verifyBar">
+  <span>🧪 测试链接中...</span>
+  <div class="vb-fill-wrap"><div class="vb-fill" id="verifyFill"></div></div>
+  <span class="vb-status" id="verifyStatus">0 / 0</span>
+  <button class="vb-close" onclick="closeVerifyBar()">✕</button>
+</div>
 
 <!-- ===== Loading ===== -->
 <div class="loading" id="loadingState">
@@ -438,6 +502,236 @@ const QUICK_COUNTRIES = [
 ];
 
 // ============================================================
+//  STREAM VERIFICATION
+// ============================================================
+const VERIFY = {
+  queue: [],          // [{chId, url}]
+  inProgress: false,
+  concurrency: 12,
+  tested: 0,
+  dead: 0,
+  total: 0,
+  cache: {},          // url -> {ok, time, testedAt}
+  cacheKey: 'tv_stream_status_v2',
+  cacheTTL: 6 * 3600 * 1000, // 6 hours
+};
+
+function loadVerifyCache() {
+  try {
+    const raw = localStorage.getItem(VERIFY.cacheKey);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.version !== 2) return;
+    const age = Date.now() - data.updatedAt;
+    if (age > VERIFY.cacheTTL) { localStorage.removeItem(VERIFY.cacheKey); return; }
+    VERIFY.cache = data.results || {};
+  } catch(e) { /* ignore corrupt cache */ }
+}
+
+function saveVerifyCache() {
+  try {
+    const data = {
+      version: 2,
+      updatedAt: Date.now(),
+      results: VERIFY.cache,
+    };
+    localStorage.setItem(VERIFY.cacheKey, JSON.stringify(data));
+  } catch(e) {
+    // localStorage full — clear oldest entries
+    if (e.name === 'QuotaExceededError') {
+      const entries = Object.entries(VERIFY.cache);
+      if (entries.length > 100) {
+        entries.sort((a, b) => (a[1].testedAt || 0) - (b[1].testedAt || 0));
+        const drop = Math.floor(entries.length * 0.3);
+        entries.slice(0, drop).forEach(([k]) => delete VERIFY.cache[k]);
+        try { localStorage.setItem(VERIFY.cacheKey, JSON.stringify({ version: 2, updatedAt: Date.now(), results: VERIFY.cache })); } catch(e2) { /* give up */ }
+      }
+    }
+  }
+}
+
+function applyCachedStatusToChannels() {
+  const cache = VERIFY.cache;
+  for (const ch of STATE.channels) {
+    const stream = ch._primaryStream;
+    if (!stream) continue;
+    const result = cache[stream.url];
+    if (result) {
+      ch._verified = result.ok ? 'ok' : 'dead';
+      ch._verifyTime = result.testedAt;
+    } else {
+      ch._verified = 'unknown';
+    }
+  }
+}
+
+function getChannelDeadCount() {
+  return STATE.channels.filter(c => c._verified === 'dead').length;
+}
+function getChannelOkCount() {
+  return STATE.channels.filter(c => c._verified === 'ok').length;
+}
+function getChannelUnknownCount() {
+  return STATE.channels.filter(c => !c._verified || c._verified === 'unknown').length;
+}
+
+function showHideDeadFilter() {
+  const label = document.getElementById('hideDeadLabel');
+  if (!label) return;
+  const hasDead = getChannelDeadCount() > 0;
+  label.style.display = hasDead ? 'inline-flex' : 'none';
+}
+
+async function testSingleStream(url) {
+  const start = performance.now();
+  try {
+    const resp = await fetch(url, {
+      method: 'HEAD',
+      mode: 'no-cors',
+      signal: AbortSignal.timeout(6000),
+    });
+    const elapsed = Math.round(performance.now() - start);
+    // no-cors opaque response: resp.ok is false but resp.type is 'opaque'
+    // If fetch resolves at all, server is reachable
+    return { ok: true, time: elapsed, status: 0 };
+  } catch (e) {
+    const elapsed = Math.round(performance.now() - start);
+    return { ok: false, time: elapsed, status: 0 };
+  }
+}
+
+async function processVerifyBatch() {
+  if (!VERIFY.queue.length || !VERIFY.inProgress) return;
+
+  const batch = VERIFY.queue.splice(0, VERIFY.concurrency);
+  const promises = batch.map(async (item) => {
+    // Check if already cached recently
+    const cached = VERIFY.cache[item.url];
+    if (cached && (Date.now() - cached.testedAt) < VERIFY.cacheTTL) {
+      VERIFY.tested++;
+      return;
+    }
+    const result = await testSingleStream(item.url);
+    VERIFY.cache[item.url] = { ok: result.ok, time: result.time, testedAt: Date.now() };
+    VERIFY.tested++;
+    if (!result.ok) VERIFY.dead++;
+    // Update channel status
+    const ch = STATE.channels.find(c => c.id === item.chId);
+    if (ch) {
+      ch._verified = result.ok ? 'ok' : 'dead';
+      ch._verifyTime = Date.now();
+    }
+    // Throttled cache save
+    if (VERIFY.tested % 30 === 0) saveVerifyCache();
+  });
+
+  await Promise.allSettled(promises);
+  updateVerifyUI();
+  applyFilters();
+  showHideDeadFilter();
+
+  if (VERIFY.queue.length > 0) {
+    // Schedule next batch asynchronously
+    setTimeout(() => processVerifyBatch(), 50);
+  } else {
+    // Done
+    VERIFY.inProgress = false;
+    saveVerifyCache();
+    document.getElementById('verifyBtn').disabled = false;
+    document.getElementById('verifyBtn').classList.remove('verifying');
+    document.getElementById('verifyBtn').textContent = '🔍 重新测试';
+    document.getElementById('verifyBar').classList.remove('show');
+    showToast('✅ 链接测试完成！已测试 ' + VERIFY.tested + ' 个链接，' +
+      (VERIFY.dead > 0 ? VERIFY.dead + ' 个失效已隐藏' : '全部可用'), 3000);
+    updateStats();
+    showHideDeadFilter();
+  }
+}
+
+function updateVerifyUI() {
+  const fill = document.getElementById('verifyFill');
+  const status = document.getElementById('verifyStatus');
+  const pct = VERIFY.total > 0 ? Math.round((VERIFY.tested / VERIFY.total) * 100) : 0;
+  if (fill) fill.style.width = pct + '%';
+  if (status) status.textContent = `${VERIFY.tested} / ${VERIFY.total} (${pct}%)`;
+}
+
+function verifyAllStreams() {
+  if (VERIFY.inProgress) return;
+  if (VERIFY.queue.length > 0 && VERIFY.inProgress) return;
+
+  // Collect all unique stream URLs
+  const seen = new Set();
+  VERIFY.queue = [];
+  for (const ch of STATE.channels) {
+    const stream = ch._primaryStream;
+    if (!stream || !stream.url) continue;
+    const key = stream.url;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    VERIFY.queue.push({ chId: ch.id, url: stream.url });
+  }
+
+  VERIFY.total = VERIFY.queue.length;
+  VERIFY.tested = 0;
+  VERIFY.dead = 0;
+  VERIFY.inProgress = true;
+
+  // UI
+  const btn = document.getElementById('verifyBtn');
+  btn.disabled = true;
+  btn.classList.add('verifying');
+  btn.textContent = '⏳ 测试中...';
+  document.getElementById('verifyBar').classList.add('show');
+  updateVerifyUI();
+
+  // Start processing
+  processVerifyBatch();
+}
+
+function closeVerifyBar() {
+  document.getElementById('verifyBar').classList.remove('show');
+}
+
+function startBackgroundVerify() {
+  // Only verify channels that have no cached status
+  const toVerify = STATE.channels.filter(ch => {
+    const stream = ch._primaryStream;
+    if (!stream || !stream.url) return false;
+    return !VERIFY.cache[stream.url];
+  });
+  if (toVerify.length === 0) {
+    showHideDeadFilter();
+    return;
+  }
+
+  // Queue only unknown streams
+  const seen = new Set();
+  VERIFY.queue = [];
+  for (const ch of toVerify) {
+    if (!ch._primaryStream?.url || seen.has(ch._primaryStream.url)) continue;
+    seen.add(ch._primaryStream.url);
+    VERIFY.queue.push({ chId: ch.id, url: ch._primaryStream.url });
+  }
+
+  if (VERIFY.queue.length === 0) return;
+
+  VERIFY.total = VERIFY.queue.length;
+  VERIFY.tested = 0;
+  VERIFY.dead = 0;
+  VERIFY.inProgress = true;
+
+  const btn = document.getElementById('verifyBtn');
+  btn.disabled = true;
+  btn.classList.add('verifying');
+  btn.textContent = '⏳ 测试中...';
+  document.getElementById('verifyBar').classList.add('show');
+  updateVerifyUI();
+
+  processVerifyBatch();
+}
+
+// ============================================================
 //  DATA LOADING
 // ============================================================
 async function loadAllData() {
@@ -473,11 +767,18 @@ async function loadAllData() {
       ch._primaryStream = ch._streams.find(s => s.status === 'online' && s.url) || ch._streams[0];
     }
 
+    // Load verification cache and apply to channels
+    loadVerifyCache();
+    applyCachedStatusToChannels();
+
     // Populate UI
     populateFilters();
     populateQuickPicks();
     applyFilters();
     updateStats();
+
+    // Start background verification for untested streams
+    setTimeout(startBackgroundVerify, 2000);
 
   } catch (err) {
     console.error('加载失败:', err);
@@ -553,10 +854,17 @@ function updateStats() {
   const total = STATE.channels.length;
   const withStreams = STATE.channels.filter(c => c._primaryStream).length;
   const countries = STATE.countries.length;
+  const okCount = getChannelOkCount();
+  const deadCount = getChannelDeadCount();
+  let extra = '';
+  if (okCount > 0 || deadCount > 0) {
+    extra = ` · <span style="color:#48bb78;">✅${okCount}</span>` +
+      (deadCount > 0 ? `<span style="color:#fc8181;"> ❌${deadCount}</span>` : '');
+  }
   document.getElementById('statsText').innerHTML =
     `📡 <strong>${total.toLocaleString()}</strong> 频道 · ` +
     `<strong>${withStreams.toLocaleString()}</strong> 可播放 · ` +
-    `<strong>${countries}</strong> 个国家/地区`;
+    `<strong>${countries}</strong> 个国家/地区${extra}`;
 }
 
 // ============================================================
@@ -649,6 +957,10 @@ function applyFilters() {
       c.id.toLowerCase().includes(search)
     );
   }
+  // Filter out verified-dead streams
+  if (document.getElementById('hideDeadFilter')?.checked) {
+    filtered = filtered.filter(c => c._verified !== 'dead');
+  }
 
   // Sort: channels with streams first, then by name
   filtered.sort((a, b) => {
@@ -690,13 +1002,17 @@ function renderChannels(channels) {
     const flag = FLAG_MAP[ch.country] || '';
     const logo = ch.logo || ch.logo_url || '';
     const cats = (ch.categories || []).slice(0, 2); // max 2 badges
+    const health = ch._verified || 'unknown';
+    const healthDot = hasStream ? `<span class="health-dot ${health}" title="${
+      health === 'ok' ? '已验证可用' : health === 'dead' ? '链接已失效' : '未测试'
+    }"></span>` : '';
 
     html += `
       <div class="channel-card ${hasStream ? '' : 'no-stream'}"
            onclick="${hasStream ? `playChannel('${escapeJS(ch.id)}')` : 'showToast(\'❌ 该频道暂无可用直播流\', 2000)'}"
            title="${escapeHTML(ch.name)}${hasStream ? '\n点击播放' : '\n暂无直播流'}">
-        <div class="logo-wrap">
-          ${logo ? `<img src="${escapeHTML(logo)}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=logo-fallback>📺</span>'">`
+        ${healthDot}
+        <div class="logo-wrap">         ${logo ? `<img src="${escapeHTML(logo)}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<span class=logo-fallback>📺</span>'">`
                  : '<span class="logo-fallback">📺</span>'}
         </div>
         <div class="name">${escapeHTML(ch.name)}</div>
