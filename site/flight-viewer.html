@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>机票文件查看</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#1a1a2e;
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.header{
+  display:flex;align-items:center;gap:12px;padding:12px 16px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:10;
+}
+.header a{
+  color:#fff;text-decoration:none;font-size:24px;width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(255,255,255,0.1);
+  transition:background 0.2s;
+}
+.header a:hover{background:rgba(255,255,255,0.2);}
+.header .info{flex:1;font-size:14px;opacity:0.8;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.header .page-indicator{font-size:13px;font-weight:600;white-space:nowrap;}
+
+.viewer-wrap{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  touch-action:none;
+}
+.viewer-wrap img{
+  max-width:100%;max-height:100%;
+  object-fit:contain;
+  display:block;
+  transform-origin:center center;
+  will-change:transform;
+  -webkit-user-drag:none;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+  pointer-events:none;
+}
+.viewer-wrap.zoomed img{
+  max-width:none;
+  max-height:none;
+  pointer-events:auto;
+}
+.zoom-indicator{
+  position:absolute;top:8px;right:8px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);
+  padding:2px 10px;border-radius:12px;
+  font-size:11px;color:#fff;z-index:3;
+  display:none;
+}
+
+/* Tap zones */
+.tap-zone{
+  position:absolute;top:0;bottom:0;width:40%;z-index:2;
+  display:flex;align-items:center;padding:20px;cursor:pointer;
+  opacity:0;transition:opacity 0.3s;
+}
+.tap-zone:hover{opacity:1;}
+.tap-zone .arrow{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;color:#fff;
+}
+.tap-left{left:0;justify-content:flex-start;}
+.tap-right{right:0;justify-content:flex-end;}
+.tap-left .arrow{left:10px;}
+.tap-right .arrow{right:10px;}
+
+/* Thumbnail strip */
+.thumb-strip{
+  display:flex;gap:6px;overflow-x:auto;padding:10px 16px;
+  background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.thumb-strip::-webkit-scrollbar{display:none;}
+.thumb-item{
+  width:50px;height:50px;min-width:50px;border-radius:6px;overflow:hidden;
+  border:2px solid transparent;cursor:pointer;opacity:0.5;transition:all 0.2s;
+}
+.thumb-item.active{border-color:#6c5ce7;opacity:1;}
+.thumb-item img{width:100%;height:100%;object-fit:cover;}
+
+/* Loading */
+.loading{
+  position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:#1a1a2e;
+}
+.loading .spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,0.1);border-top-color:#6c5ce7;border-radius:50%;animation:spin 0.8s infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{font-size:14px;opacity:0.6;}
+
+/* Swipe hint */
+.swipe-hint{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,0.6);padding:8px 18px;border-radius:20px;
+  font-size:12px;opacity:0.6;animation:fadeIn 0.5s;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}}
+
+@media (max-width:480px){
+  .header{padding:10px 12px;}
+  .header .info{font-size:12px;}
+  .thumb-item{width:40px;height:40px;min-width:40px;}
+}
+</style>
+</head>
+<body>
+
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  <p>加载中...</p>
+</div>
+
+<div class="header">
+  <a href="javascript:history.back()">&#x2716;</a>
+  <div class="info" id="fileInfo">机票文件</div>
+  <div class="page-indicator" id="pageIndicator">1 / 1</div>
+</div>
+
+<div class="viewer-wrap" id="viewer">
+  <div class="tap-zone tap-left" id="prevBtn"><div class="arrow">&#x276E;</div></div>
+  <img id="mainImage" src="" alt="机票文件页">
+  <div class="tap-zone tap-right" id="nextBtn"><div class="arrow">&#x276F;</div></div>
+  <div class="zoom-indicator" id="zoomIndicator">100%</div>
+</div>
+
+<div class="thumb-strip" id="thumbStrip"></div>
+
+<div class="swipe-hint" id="swipeHint">左右滑动或点击切换页面</div>
+
+<script>
+const params = new URLSearchParams(location.search);
+const folder = params.get('folder') || '';
+const prefix = params.get('file') || '';
+
+if (!folder || !prefix) {
+  document.getElementById('fileInfo').textContent = '参数错误';
+  document.getElementById('mainImage').alt = '缺少参数';
+  document.getElementById('loading').style.display = 'none';
+} else {
+  const displayName = decodeURIComponent(prefix)
+    .replace(/_\d+$/, '')
+    .replace(/_01$/, '')
+    .replace(/_(\d+)$/, ' (第$1页)');
+  document.getElementById('fileInfo').textContent = displayName;
+
+  const totalPages = parseInt(params.get('pages') || '0');
+  let startPage = parseInt(params.get('page') || '1');
+  let pages = [];
+  let currentPage = 1;
+
+  /* ===== Zoom State ===== */
+  let scale = 1;
+  let minScale = 1;
+  let maxScale = 1.5;
+  let panX = 0, panY = 0;
+  let isZoomed = false;
+
+  /* ===== Page Management ===== */
+  function init() {
+    if (totalPages > 0) {
+      pages = Array.from({length: totalPages}, (_, i) => i + 1);
+      buildUI();
+    } else {
+      detectPages();
+    }
+  }
+
+  function detectPages() {
+    const probe = new Image();
+    probe.onload = function() {
+      pages = [1];
+      tryMore(2);
+    };
+    probe.onerror = function() {
+      pages = [];
+      document.getElementById('fileInfo').textContent = '文件未找到';
+      document.getElementById('loading').style.display = 'none';
+    };
+    probe.src = `flights/${folder}/${enc(prefix)}_01.jpg?t=${Date.now()}`;
+  }
+
+  function tryMore(n) {
+    if (n > 100) { buildUI(); return; }
+    const img = new Image();
+    const pad = String(n).padStart(2, '0');
+    img.onload = function() {
+      pages.push(n);
+      tryMore(n + 1);
+    };
+    img.onerror = function() { buildUI(); };
+    img.src = `flights/${folder}/${enc(prefix)}_${pad}.jpg?t=${Date.now()}`;
+  }
+
+  function enc(s) {
+    return encodeURIComponent(s).replace(/%20/g, ' ').replace(/'/g, "%27");
+  }
+
+  function buildUI() {
+    if (pages.length === 0) {
+      document.getElementById('fileInfo').textContent = '未找到图片';
+      document.getElementById('loading').style.display = 'none';
+      return;
+    }
+    const thumbStrip = document.getElementById('thumbStrip');
+    thumbStrip.innerHTML = '';
+    pages.forEach(p => {
+      const pad = String(p).padStart(2, '0');
+      const thumb = document.createElement('div');
+      thumb.className = 'thumb-item' + (p === startPage ? ' active' : '');
+      thumb.dataset.page = p;
+      thumb.innerHTML = `<img src="flights/${folder}/${enc(prefix)}_${pad}.jpg" alt="第${p}页" loading="lazy">`;
+      thumb.addEventListener('click', () => goTo(p));
+      thumbStrip.appendChild(thumb);
+    });
+    currentPage = pages.includes(startPage) ? startPage : pages[0];
+    showPage(currentPage);
+    document.getElementById('swipeHint').style.display = 'block';
+    setTimeout(() => {
+      const h = document.getElementById('swipeHint');
+      if (h) h.style.display = 'none';
+    }, 3000);
+  }
+
+  function showPage(n) {
+    if (!pages.includes(n)) return;
+    resetZoom();
+    currentPage = n;
+    const pad = String(n).padStart(2, '0');
+    const img = document.getElementById('mainImage');
+    img.style.opacity = '0';
+    const newImg = new Image();
+    newImg.onload = function() {
+      img.src = newImg.src;
+      img.style.opacity = '1';
+      document.getElementById('loading').style.display = 'none';
+    };
+    newImg.onerror = function() {
+      document.getElementById('loading').style.display = 'none';
+    };
+    newImg.src = `flights/${folder}/${enc(prefix)}_${pad}.jpg`;
+    document.getElementById('pageIndicator').textContent = `${n} / ${pages.length}`;
+    document.querySelectorAll('.thumb-item').forEach(el => {
+      el.classList.toggle('active', parseInt(el.dataset.page) === n);
+    });
+    const active = document.querySelector('.thumb-item.active');
+    if (active) active.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
+  function goTo(n) {
+    if (n < 1 || n > pages.length) return;
+    showPage(n);
+  }
+  function nextPage() { goTo(currentPage + 1); }
+  function prevPage() { goTo(currentPage - 1); }
+
+  /* ===== Zoom Logic ===== */
+  const viewer = document.getElementById('viewer');
+  const img = document.getElementById('mainImage');
+  const zoomInd = document.getElementById('zoomIndicator');
+
+  function applyTransform() {
+    img.style.transform = `translate(${panX}px, ${panY}px) scale(${scale})`;
+    zoomInd.textContent = Math.round(scale * 100) + '%';
+    zoomInd.style.display = scale > 1 ? 'block' : 'none';
+    viewer.classList.toggle('zoomed', scale > 1);
+  }
+
+  function resetZoom() {
+    scale = 1; panX = 0; panY = 0;
+    applyTransform();
+  }
+
+  function doZoom(newScale, cx, cy) {
+    // Clamp
+    newScale = Math.min(Math.max(newScale, 1), maxScale);
+    if (newScale === 1) { resetZoom(); return; }
+
+    // Zoom toward (cx, cy) — the point under the fingers
+    const imgW = img.naturalWidth || img.width;
+    const imgH = img.naturalHeight || img.height;
+    const viewerW = viewer.clientWidth;
+    const viewerH = viewer.clientHeight;
+
+    // Current displayed size
+    const dispW = imgW * scale;
+    const dispH = imgH * scale;
+
+    // Ratio
+    const ratio = newScale / scale;
+
+    // New position so that (cx, cy) stays fixed
+    panX = cx - (cx - panX) * ratio;
+    panY = cy - (cy - panY) * ratio;
+
+    scale = newScale;
+
+    // Clamp pan so we don't go off screen too far
+    clampPan();
+    applyTransform();
+  }
+
+  function clampPan() {
+    const imgW = img.naturalWidth || img.width;
+    const imgH = img.naturalHeight || img.height;
+    const vw = viewer.clientWidth;
+    const vh = viewer.clientHeight;
+    const dispW = imgW * scale;
+    const dispH = imgH * scale;
+    const maxPanX = Math.max(0, (dispW - vw) / 2);
+    const maxPanY = Math.max(0, (dispH - vh) / 2);
+    panX = Math.min(Math.max(panX, -maxPanX), maxPanX);
+    panY = Math.min(Math.max(panY, -maxPanY), maxPanY);
+  }
+
+  /* Pinch & Pan (touch) */
+  let touches = [];
+  let lastDist = 0;
+  let lastCX = 0, lastCY = 0;
+  let isPinching = false;
+  let lastPanX = 0, lastPanY = 0;
+  let singleTouchStart = null;
+
+  viewer.addEventListener('touchstart', e => {
+    touches = Array.from(e.touches);
+    if (touches.length === 2) {
+      // Start pinch
+      isPinching = true;
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      lastDist = Math.sqrt(dx*dx + dy*dy);
+      lastCX = (touches[0].clientX + touches[1].clientX) / 2;
+      lastCY = (touches[0].clientY + touches[1].clientY) / 2;
+      lastPanX = panX;
+      lastPanY = panY;
+      e.preventDefault();
+    } else if (touches.length === 1 && scale > 1) {
+      // Pan while zoomed
+      singleTouchStart = { x: touches[0].clientX, y: touches[0].clientY, px: panX, py: panY };
+    } else if (touches.length === 1 && scale === 1) {
+      // Track for swipe detection only
+      singleTouchStart = { x: touches[0].clientX, y: touches[0].clientY, px: panX, py: panY, swipe: true };
+    }
+  }, { passive: false });
+
+  viewer.addEventListener('touchmove', e => {
+    const t = Array.from(e.touches);
+    if (t.length === 2 && isPinching) {
+      e.preventDefault();
+      const dx = t[0].clientX - t[1].clientX;
+      const dy = t[0].clientY - t[1].clientY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const cx = (t[0].clientX + t[1].clientX) / 2;
+      const cy = (t[0].clientY + t[1].clientY) / 2;
+      const ratio = dist / lastDist;
+      const newScale = Math.min(Math.max(scale * ratio, 1), maxScale);
+      doZoom(newScale, cx, cy);
+      lastDist = dist;
+    } else if (t.length === 1 && scale > 1 && singleTouchStart && !singleTouchStart.swipe) {
+      // Pan
+      panX = singleTouchStart.px + (t[0].clientX - singleTouchStart.x);
+      panY = singleTouchStart.py + (t[0].clientY - singleTouchStart.y);
+      clampPan();
+      applyTransform();
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  viewer.addEventListener('touchend', e => {
+    const remaining = e.touches.length;
+    if (remaining < 2) {
+      isPinching = false;
+    }
+    if (remaining === 0) {
+      // Swipe detection when not zoomed
+      if (scale === 1 && singleTouchStart && singleTouchStart.swipe) {
+        const endX = e.changedTouches[0].clientX;
+        const diff = singleTouchStart.x - endX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) nextPage();
+          else prevPage();
+        }
+      }
+      singleTouchStart = null;
+    }
+  }, { passive: true });
+
+  /* Double-tap to zoom in/out */
+  let lastTap = 0;
+  viewer.addEventListener('touchend', e => {
+    if (e.changedTouches.length === 1 && !isPinching) {
+      const now = Date.now();
+      if (now - lastTap < 300) {
+        // Double tap
+        const touch = e.changedTouches[0];
+        const rect = viewer.getBoundingClientRect();
+        const cx = touch.clientX - rect.left;
+        const cy = touch.clientY - rect.top;
+        if (scale > 1.1) {
+          resetZoom();
+        } else {
+          doZoom(1.2, cx, cy);
+        }
+        lastTap = 0;
+        e.preventDefault();
+      } else {
+        lastTap = now;
+      }
+    }
+  }, { passive: false });
+
+  /* Mouse wheel zoom (desktop) */
+  viewer.addEventListener('wheel', e => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      const rect = viewer.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      const delta = -e.deltaY * 0.001;
+      const newScale = Math.min(Math.max(scale * (1 + delta), 1), maxScale);
+      doZoom(newScale, cx, cy);
+    }
+  }, { passive: false });
+
+  /* Pinch gesture on trackpad (macOS) via wheel with ctrlKey */
+  viewer.addEventListener('wheel', e => {
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+  }, { passive: false });
+
+  // Button controls
+  document.getElementById('nextBtn').addEventListener('click', nextPage);
+  document.getElementById('prevBtn').addEventListener('click', prevPage);
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') nextPage();
+    if (e.key === 'ArrowLeft') prevPage();
+    if (e.key === 'Escape') resetZoom();
+  });
+
+  init();
+}
+</script>
+</body>
+</html>

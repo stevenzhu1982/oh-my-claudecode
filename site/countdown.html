@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="description" content="赵丽娜同学的专属倒计时工具 ✨ 为重要日子倒计时">
+<meta property="og:title" content="倒计时 · 送给赵丽娜">
+<meta property="og:description" content="赵丽娜同学的专属倒计时 · 记录每个重要时刻">
+<meta property="og:image" content="">
+<title>🌸 赵丽娜 · 倒计时</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow-x:hidden}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;
+  background:linear-gradient(-45deg,#1a0a2e,#2d1b69,#16213e,#0f3460,#e94560);
+  background-size:400% 400%;
+  animation:gradientShift 18s ease infinite;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:-webkit-fill-available;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  -webkit-font-smoothing:antialiased;
+}
+@keyframes gradientShift{
+  0%{background-position:0% 50%}
+  25%{background-position:100% 0%}
+  50%{background-position:100% 100%}
+  75%{background-position:0% 100%}
+  100%{background-position:0% 50%}
+}
+.bg-shape{
+  position:fixed;border-radius:50%;filter:blur(80px);opacity:0.25;
+  pointer-events:none;z-index:0;
+}
+.shape-1{
+  width:55vw;height:55vw;max-width:450px;max-height:450px;
+  background:#e94560;top:-15%;right:-10%;
+  animation:floatA 12s ease-in-out infinite;
+}
+.shape-2{
+  width:45vw;height:45vw;max-width:360px;max-height:360px;
+  background:#6c5ce7;bottom:-15%;left:-10%;
+  animation:floatB 14s ease-in-out infinite;
+}
+.shape-3{
+  width:35vw;height:35vw;max-width:280px;max-height:280px;
+  background:#ff6b9d;top:50%;left:40%;
+  animation:floatA 16s ease-in-out infinite reverse;
+}
+@keyframes floatA{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-30px) scale(1.05)}
+  66%{transform:translate(-20px,20px) scale(0.95)}
+}
+@keyframes floatB{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(-25px,35px) scale(1.08)}
+  66%{transform:translate(20px,-25px) scale(0.92)}
+}
+.container{
+  position:relative;z-index:1;width:100%;max-width:420px;
+  padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;
+}
+
+/* --- Dedicated To Banner --- */
+.to-banner{
+  text-align:center;padding:6px 0 2px;
+  position:relative;
+}
+.to-banner .line{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  font-size:0.7rem;color:rgba(255,255,255,0.25);letter-spacing:4px;
+  margin-bottom:6px;
+}
+.to-banner .line::before,.to-banner .line::after{
+  content:'';display:block;width:40px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2));
+}
+.to-banner .line::after{background:linear-gradient(90deg,rgba(255,255,255,0.2),transparent)}
+.to-banner .name-wrap{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.to-banner .name{
+  font-size:1.6rem;font-weight:800;letter-spacing:4px;
+  background:linear-gradient(135deg,#fff,#f0c0ff,#ff9ec4,#fff);
+  background-size:200% 200%;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:nameShine 4s ease-in-out infinite;
+  text-shadow:none;
+}
+@keyframes nameShine{
+  0%,100%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+}
+.to-banner .sub{
+  font-size:0.85rem;color:rgba(255,255,255,0.5);letter-spacing:3px;
+  margin-top:2px;font-weight:300;
+}
+.to-banner .deco-flower{font-size:1.2rem;animation:sway 3s ease-in-out infinite;display:inline-block}
+.to-banner .deco-flower:nth-child(1){animation-delay:0s}
+.to-banner .deco-flower:nth-child(3){animation-delay:1.5s}
+@keyframes sway{
+  0%,100%{transform:rotate(-5deg) scale(1)}
+  50%{transform:rotate(5deg) scale(1.1)}
+}
+
+/* Stardust particles around name */
+.stardust{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;overflow:hidden;
+}
+.stardust span{
+  position:absolute;display:block;width:3px;height:3px;
+  background:#fff;border-radius:50%;
+  opacity:0;animation:twinkle 3s ease-in-out infinite;
+}
+.stardust span:nth-child(1){top:15%;left:10%;animation-delay:0s;width:2px;height:2px}
+.stardust span:nth-child(2){top:25%;left:85%;animation-delay:1s;width:3px;height:3px}
+.stardust span:nth-child(3){top:55%;left:5%;animation-delay:2s;width:2px;height:2px}
+.stardust span:nth-child(4){top:75%;left:80%;animation-delay:0.5s;width:4px;height:4px}
+.stardust span:nth-child(5){top:40%;left:92%;animation-delay:1.5s;width:2px;height:2px}
+.stardust span:nth-child(6){top:85%;left:20%;animation-delay:2.5s;width:3px;height:3px}
+.stardust span:nth-child(7){top:10%;left:50%;animation-delay:0.8s;width:2px;height:2px}
+.stardust span:nth-child(8){top:60%;left:70%;animation-delay:1.8s;width:2px;height:2px}
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(0.5)}
+  50%{opacity:0.6;transform:scale(1.2)}
+}
+
+/* --- Header --- */
+.header{text-align:center;margin-bottom:2px;position:relative}
+.header .icon{font-size:1.8rem;display:block;margin-bottom:2px}
+.header h1{
+  font-size:1.3rem;font-weight:700;letter-spacing:2px;
+  background:linear-gradient(135deg,#fff 30%,#f8e8ff 70%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.subtitle{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:6px}
+
+/* --- Card --- */
+.card{
+  width:100%;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:24px;padding:28px 22px;
+  box-shadow:0 8px 48px rgba(0,0,0,0.25);
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:conic-gradient(from 0deg,transparent,rgba(255,255,255,0.03),transparent,rgba(255,255,255,0.03),transparent);
+  animation:cardGlow 10s linear infinite;
+}
+@keyframes cardGlow{100%{transform:rotate(360deg)}}
+.hidden{display:none!important}
+.prompt-text{font-size:0.95rem;color:rgba(255,255,255,0.7);font-weight:400;letter-spacing:1px}
+.prompt-icon{font-size:2.2rem;margin-bottom:2px}
+
+.cd-title{width:100%;text-align:center;position:relative;z-index:1}
+.cd-title .label{font-size:0.75rem;color:rgba(255,255,255,0.45);letter-spacing:3px;margin-bottom:4px}
+#input-title{
+  background:transparent;border:none;outline:none;color:#fff;
+  font-size:1rem;font-weight:600;text-align:center;width:100%;
+  padding:6px 8px;border-radius:8px;transition:background 0.2s;letter-spacing:2px;
+}
+#input-title:focus{background:rgba(255,255,255,0.1)}
+#input-title::placeholder{color:rgba(255,255,255,0.35)}
+
+.cd-days{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:2px 0;position:relative;z-index:1}
+#display-days{
+  font-size:clamp(3rem,16vw,5.5rem);font-weight:800;color:#fff;
+  text-shadow:0 2px 30px rgba(233,69,96,0.3);line-height:1;letter-spacing:-2px;
+  font-variant-numeric:tabular-nums;
+}
+.cd-days-label{font-size:1.2rem;font-weight:400;color:rgba(255,255,255,0.65)}
+
+.cd-time{display:flex;align-items:center;justify-content:center;gap:2px;position:relative;z-index:1}
+.cd-time-unit{
+  font-size:clamp(1.3rem,4.5vw,2rem);font-weight:700;color:rgba(255,255,255,0.9);
+  text-shadow:0 1px 10px rgba(0,0,0,0.2);font-variant-numeric:tabular-nums;
+  min-width:1.5em;text-align:center;
+}
+.cd-time-group{display:flex;flex-direction:column;align-items:center}
+.cd-time-lbl{font-size:0.6rem;color:rgba(255,255,255,0.35);text-align:center;margin-top:2px}
+.cd-time-sep{
+  font-size:clamp(1.1rem,3.5vw,1.6rem);font-weight:300;color:rgba(255,255,255,0.4);
+  margin:0 1px;animation:sepPulse 1s step-start infinite;user-select:none;
+}
+@keyframes sepPulse{0%,100%{opacity:1}50%{opacity:0.2}}
+
+.cd-target{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;z-index:1}
+.cd-target .label{font-size:0.7rem;color:rgba(255,255,255,0.4);letter-spacing:2px}
+.cd-target-row{display:flex;gap:8px;width:100%;justify-content:center}
+.cd-target-row input{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;padding:10px 14px;color:#fff;font-size:0.9rem;
+  outline:none;transition:all 0.2s;
+}
+.cd-target-row input::-webkit-calendar-picker-indicator{
+  filter:invert(0.85);cursor:pointer;padding:4px;
+}
+.cd-target-row input:focus{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.12)}
+.cd-target-row input[type=date]{flex:2;min-width:0}
+.cd-target-row input[type=time]{flex:1;min-width:0;text-align:center}
+.cd-target-row input::-webkit-datetime-edit,
+.cd-target-row input::-webkit-datetime-edit-fields-wrapper{color:#fff}
+
+.presets{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;position:relative;z-index:1}
+.preset-btn{
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  border-radius:12px;padding:9px 4px;color:rgba(255,255,255,0.75);
+  font-size:0.75rem;font-weight:500;cursor:pointer;transition:all 0.2s;
+  -webkit-tap-highlight-color:transparent;user-select:none;text-align:center;white-space:nowrap;
+}
+.preset-btn:active{transform:scale(0.95);background:rgba(255,255,255,0.12)}
+.preset-btn .emoji{display:block;font-size:1.1rem;margin-bottom:2px}
+
+.btn-row{width:100%;display:flex;gap:8px;position:relative;z-index:1}
+.btn-row .share-btn,.btn-row .reset-btn{width:50%}
+.share-btn{
+  background:linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.06));
+  border:1px solid rgba(255,255,255,0.18);border-radius:14px;
+  padding:13px 16px;color:#fff;font-size:0.9rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent;
+  user-select:none;text-align:center;letter-spacing:1px;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.share-btn:active{transform:scale(0.97);background:rgba(255,255,255,0.15)}
+.reset-btn{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:13px 16px;color:rgba(255,255,255,0.55);font-size:0.9rem;
+  font-weight:500;cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent;
+  user-select:none;text-align:center;letter-spacing:1px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.reset-btn:active{transform:scale(0.97);background:rgba(255,255,255,0.1)}
+
+.footer{text-align:center;padding:6px 0}
+.footer p{font-size:0.7rem;color:rgba(255,255,255,0.2);letter-spacing:4px;font-weight:300}
+
+.toast{
+  position:fixed;bottom:80px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.08);color:#fff;
+  padding:10px 20px;border-radius:12px;font-size:0.85rem;
+  opacity:0;transition:all 0.4s ease;pointer-events:none;z-index:100;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+#confetti-canvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:50;display:none;
+}
+#confetti-canvas.active{display:block}
+.celebration-msg{
+  position:fixed;top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  font-size:1.6rem;font-weight:800;text-align:center;z-index:60;
+  pointer-events:none;text-shadow:0 4px 30px rgba(0,0,0,0.4);
+  transition:transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+.celebration-msg.show{transform:translate(-50%,-50%) scale(1)}
+.celebration-msg .big{display:block;font-size:2.6rem;margin-bottom:4px}
+.celebration-msg .sub{font-size:0.9rem;font-weight:400;color:rgba(255,255,255,0.6)}
+.celebration-msg .lina{font-size:1.1rem;color:#f0c0ff;margin-top:4px;display:block}
+
+@media(min-width:480px){
+  .container{padding:32px 24px;gap:14px}
+  .card{padding:32px 28px}
+  .presets{gap:10px}
+  .preset-btn{padding:10px 6px;font-size:0.8rem}
+}
+@media(min-width:768px){
+  .container{max-width:460px;padding:40px}
+  #display-days{font-size:clamp(4rem,10vw,6rem)}
+}
+</style>
+</head>
+<body>
+
+<!-- Stardust particles -->
+<div class="stardust">
+  <span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+</div>
+
+<div class="bg-shape shape-1"></div>
+<div class="bg-shape shape-2"></div>
+<div class="bg-shape shape-3"></div>
+
+<div class="container">
+
+  <!-- Dedicated To Banner -->
+  <div class="to-banner">
+    <div class="line">—— 送给 ——</div>
+    <div class="name-wrap">
+      <span class="deco-flower">🌸</span>
+      <span class="name">赵丽娜</span>
+      <span class="deco-flower">🌷</span>
+    </div>
+    <div class="sub">✨ 每一个重要日子，都值得被期待 ✨</div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="icon">⏳</span>
+    <h1>倒计时</h1>
+    <p class="subtitle">— 为你专属定制 —</p>
+  </header>
+
+  <!-- Card -->
+  <div class="card">
+
+    <!-- Prompt -->
+    <div id="prompt-area" class="prompt-icon">📅</div>
+    <p id="prompt-text" class="prompt-text">选个日子，开始倒计时吧 ✨</p>
+
+    <!-- Countdown area -->
+    <div id="cd-area" class="hidden" style="width:100%;display:flex;flex-direction:column;align-items:center;gap:14px">
+      <div class="cd-title">
+        <div class="label">距离</div>
+        <input type="text" id="input-title" placeholder="给这个时刻起个名字..." value="距离">
+      </div>
+      <div class="cd-days">
+        <span id="display-days">--</span>
+        <span class="cd-days-label">天</span>
+      </div>
+      <div class="cd-time">
+        <div class="cd-time-group">
+          <span class="cd-time-unit" id="display-hours">--</span>
+          <div class="cd-time-lbl">时</div>
+        </div>
+        <span class="cd-time-sep">:</span>
+        <div class="cd-time-group">
+          <span class="cd-time-unit" id="display-minutes">--</span>
+          <div class="cd-time-lbl">分</div>
+        </div>
+        <span class="cd-time-sep">:</span>
+        <div class="cd-time-group">
+          <span class="cd-time-unit" id="display-seconds">--</span>
+          <div class="cd-time-lbl">秒</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Date picker -->
+    <div class="cd-target">
+      <div class="label" id="target-label">选择日期</div>
+      <div class="cd-target-row">
+        <input type="date" id="input-date">
+        <input type="time" id="input-time" value="00:00">
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Presets -->
+  <div class="presets">
+    <button class="preset-btn" data-preset="yuandan"><span class="emoji">🎉</span>元旦</button>
+    <button class="preset-btn" data-preset="chunjie"><span class="emoji">🧧</span>春节</button>
+    <button class="preset-btn" data-preset="guoqing"><span class="emoji">🇨🇳</span>国庆</button>
+    <button class="preset-btn" data-preset="shengri"><span class="emoji">🎂</span>生日</button>
+  </div>
+
+  <!-- Actions -->
+  <div class="btn-row">
+    <button class="share-btn" id="btn-share"><span>📤</span> 分享给朋友</button>
+    <button class="reset-btn" id="btn-reset"><span>↺</span> 重置</button>
+  </div>
+
+  <footer class="footer"><p>❤️ 珍惜每一天</p></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="celebration-msg" id="celebration-msg">
+  <span class="big">🎉</span>
+  <span>就是今天！</span>
+  <span class="lina">🌸 赵丽娜 · 此刻已至 🌷</span>
+  <span class="sub">时间到了，尽情享受吧 ✨</span>
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+(function(){
+'use strict';
+
+const K = 'countdown_state_zln';
+const CNY = {2024:'2024-02-10',2025:'2025-01-29',2026:'2026-02-17',2027:'2027-02-06',2028:'2028-01-26',2029:'2029-02-13',2030:'2030-02-03'};
+
+let S = { dateStr:'', timeStr:'00:00', title:'距离' };
+let ticker = null, confettiRA = null;
+let targetDate = null, reachedZero = false;
+
+const $ = id => document.getElementById(id);
+const pArea   = $('prompt-area');
+const pText   = $('prompt-text');
+const cdArea  = $('cd-area');
+const dDays   = $('display-days');
+const dHours  = $('display-hours');
+const dMins   = $('display-minutes');
+const dSecs   = $('display-seconds');
+const iTitle  = $('input-title');
+const iDate   = $('input-date');
+const iTime   = $('input-time');
+const toast   = $('toast');
+const canvas  = $('confetti-canvas');
+const celeb   = $('celebration-msg');
+const btnShare= $('btn-share');
+const btnReset= $('btn-reset');
+let toastTimer;
+
+let isActive = false;
+
+function showPrompt(){ pArea.classList.remove('hidden'); pText.classList.remove('hidden'); cdArea.classList.add('hidden'); }
+function showCd(){ pArea.classList.add('hidden'); pText.classList.add('hidden'); cdArea.classList.remove('hidden'); }
+
+function msg(text){
+  toast.textContent = text; toast.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>toast.classList.remove('show'), 2500);
+}
+
+function save(){
+  try { localStorage.setItem(K, JSON.stringify(S)); } catch(e){}
+}
+function load(){
+  const p = new URLSearchParams(window.location.search);
+  const uDate = p.get('date'), uTime = p.get('time'), uTitle = p.get('title');
+  if(uDate){ S.dateStr=uDate; S.timeStr=uTime||'00:00'; S.title=uTitle||'距离'; return true; }
+  try {
+    const d = JSON.parse(localStorage.getItem(K));
+    if(d && d.dateStr){ S.dateStr=d.dateStr; S.timeStr=d.timeStr||'00:00'; S.title=d.title||'距离'; return true; }
+  } catch(e){}
+  return false;
+}
+
+function tick(){
+  if(!targetDate) return;
+  const diff = targetDate.getTime() - Date.now();
+  if(diff <= 0){
+    if(!reachedZero){
+      reachedZero = true;
+      dDays.textContent='0'; dHours.textContent='00'; dMins.textContent='00'; dSecs.textContent='00';
+      triggerCelebration();
+    }
+    return;
+  }
+  dDays.textContent  = Math.floor(diff / 86400000);
+  dHours.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+  dMins.textContent  = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+  dSecs.textContent  = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+}
+
+function stopTicker(){ if(ticker){ clearInterval(ticker); ticker=null; }}
+
+function startCountdown(){
+  if(!S.dateStr) return;
+  targetDate = new Date(S.dateStr + 'T' + (S.timeStr||'00:00') + ':00');
+  if(isNaN(targetDate.getTime())) return;
+  reachedZero = false; isActive = true;
+  celeb.classList.remove('show'); stopConfetti();
+
+  showCd();
+  iTitle.value = S.title;
+  iDate.value  = S.dateStr;
+  iTime.value  = S.timeStr;
+
+  stopTicker(); tick(); ticker = setInterval(tick, 1000);
+  save();
+}
+
+function triggerCelebration(){ celeb.classList.add('show'); startConfetti(); }
+function stopConfetti(){ if(confettiRA){ cancelAnimationFrame(confettiRA); confettiRA=null; } canvas.classList.remove('active'); canvas.style.display='none'; }
+
+function startConfetti(){
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  canvas.style.display='block'; canvas.classList.add('active');
+  const COLORS = ['#FF6B9D','#FFD93D','#C084FC','#67E8F9','#FF9EC4','#FB923C','#A78BFA','#F472B6'];
+  const P = [];
+  for(let i=140;i--;) P.push({
+    x:Math.random()*canvas.width, y:-Math.random()*canvas.height-20,
+    w:Math.random()*10+5, h:Math.random()*6+3,
+    color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    vx:(Math.random()-0.5)*4, vy:Math.random()*3+2,
+    rot:Math.random()*360, rv:(Math.random()-0.5)*8, op:1
+  });
+  let frame=0; const MAX=330;
+  function anim(){
+    ctx.clearRect(0,0,canvas.width,canvas.height); frame++; let alive=false;
+    for(const p of P){
+      p.x+=p.vx; p.vy+=0.05; p.y+=p.vy; p.rot+=p.rv;
+      if(frame>MAX-60) p.op=Math.max(0,p.op-0.02);
+      if(p.y<canvas.height+20 && p.op>0){
+        alive=true; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+        ctx.globalAlpha=p.op; ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();
+      }
+    }
+    if(alive && frame<MAX) confettiRA=requestAnimationFrame(anim);
+    else { canvas.classList.remove('active'); canvas.style.display='none'; }
+  }
+  stopConfetti(); anim();
+}
+
+// Events
+iTitle.addEventListener('input', ()=>{ S.title=iTitle.value||'距离'; save(); });
+
+iDate.addEventListener('change', ()=>{
+  if(!iDate.value) return;
+  S.dateStr=iDate.value; S.timeStr=iTime.value||'00:00';
+  startCountdown();
+});
+iTime.addEventListener('change', ()=>{
+  if(!iDate.value) return;
+  S.timeStr=iTime.value||'00:00';
+  startCountdown();
+});
+
+const PRESETS = {
+  yuandan: { title:'元旦', m:1, d:1 },
+  guoqing: { title:'国庆', m:10, d:1 },
+};
+document.querySelectorAll('.preset-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const key = btn.dataset.preset;
+    const now = new Date();
+    if(key==='chunjie'){
+      let y=now.getFullYear(); let ds = CNY[y];
+      if(!ds || new Date(ds)<=now){ ds=CNY[y+1]; y++; }
+      if(!ds) ds=y+'-02-10';
+      S.dateStr=ds; S.title='春节';
+    } else if(key==='shengri'){
+      msg('在下方选择生日日期 ✨'); return;
+    } else if(PRESETS[key]){
+      const p=PRESETS[key];
+      let t=new Date(now.getFullYear(), p.m-1, p.d);
+      if(t<=now) t=new Date(now.getFullYear()+1, p.m-1, p.d);
+      const mm=String(t.getMonth()+1).padStart(2,'0'), dd=String(t.getDate()).padStart(2,'0');
+      S.dateStr=t.getFullYear()+'-'+mm+'-'+dd; S.title=p.title;
+    } else return;
+    S.timeStr='00:00';
+    startCountdown();
+  });
+});
+
+btnShare.addEventListener('click', ()=>{
+  if(!S.dateStr){ msg('先选个日期吧 📅'); return; }
+  const base = window.location.origin+window.location.pathname;
+  const p = new URLSearchParams();
+  p.set('date',S.dateStr);
+  if(S.timeStr!=='00:00') p.set('time',S.timeStr);
+  if(S.title!=='距离') p.set('title',S.title);
+  const url = base+'?'+p.toString();
+  if(navigator.share){
+    navigator.share({
+      title: S.title==='距离'?'赵丽娜的倒计时':`赵丽娜 · 距离${S.title}还有...`,
+      text: `和我一起倒计时${S.title==='距离'?'':'「'+S.title+'」'}吧！🌸`,
+      url
+    }).catch(()=>{});
+  } else {
+    const c = ()=>{
+      if(navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(url).then(()=>msg('✅ 复制好啦，发给朋友吧！')).catch(f);
+      else f();
+    };
+    const f = ()=>{
+      const ta=document.createElement('textarea'); ta.value=url;
+      ta.style.cssText='position:fixed;left:-9999px;top:0';
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); msg('✅ 复制好啦，发给朋友吧！'); } catch(e){ msg('请手动复制链接 📤'); }
+      document.body.removeChild(ta);
+    };
+    c();
+  }
+});
+
+// Reset
+btnReset.addEventListener('click', ()=>{
+  stopTicker(); stopConfetti(); celeb.classList.remove('show');
+  S = { dateStr:'', timeStr:'00:00', title:'距离' };
+  targetDate = null; reachedZero = false; isActive = false;
+  iDate.value = ''; iTime.value = '00:00'; iTitle.value = '距离';
+  try { localStorage.removeItem(K); } catch(e){}
+  showPrompt();
+  msg('已重置 ↺');
+});
+
+document.addEventListener('visibilitychange', ()=>{
+  if(!document.hidden && targetDate) tick();
+});
+
+// Init
+if(load()) startCountdown();
+else showPrompt();
+})();
+</script>
+</body>
+</html>

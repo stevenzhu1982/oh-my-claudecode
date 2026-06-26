@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>马来西亚之旅 · 座位图（打印版）</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:15px;background:#fff}
+h1{text-align:center;font-size:22px;margin:4px 0 2px;color:#1a1a2e}
+.subtitle{text-align:center;font-size:14px;color:#555;margin-bottom:12px}
+
+/* Flight box */
+.flight-box{border:2px solid #1a73e8;border-radius:10px;margin-bottom:16px;padding:14px;page-break-inside:avoid;break-inside:avoid}
+.flight-box .title{background:#1a73e8;color:#fff;margin:-14px -14px 12px;padding:10px 14px;border-radius:10px 10px 0 0;font-size:16px;font-weight:700}
+.flight-box .title .info{font-size:12px;font-weight:400;opacity:.9;margin-top:2px}
+
+/* Seat map */
+.plane{background:#f5f5f5;border-radius:8px;padding:10px 6px;margin-bottom:8px}
+.layout-label{text-align:center;font-size:12px;color:#777;margin-bottom:6px;font-weight:bold;letter-spacing:1px}
+.seat-row{display:flex;justify-content:center;gap:3px;margin-bottom:5px}
+.seat-row-label{width:24px;font-size:12px;color:#888;text-align:right;padding-right:4px;line-height:32px;flex-shrink:0}
+.seat{width:68px;height:48px;border-radius:5px;font-size:11px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;line-height:1.2;padding:1px;border:1.5px solid rgba(0,0,0,.12)}
+.seat .name{font-weight:700;font-size:12px}
+.seat .letter{font-size:8px;opacity:.7}
+.cabin-wall{width:14px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;color:#99a}
+.aisle{width:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;color:#bbb;writing-mode:vertical-rl}
+.aisle-wide{width:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:8px;color:#bbb;writing-mode:vertical-rl}
+.layout-33 .seat{width:62px}
+.layout-33 .seat-row{max-width:520px;margin:0 auto}
+
+/* Seat colors */
+.bk01{background:#dbeafe;border-color:#93c5fd;color:#1e40af}
+.bk03{background:#d1fae5;border-color:#86efac;color:#065f46}
+.bk04{background:#fef3c7;border-color:#fcd34d;color:#92400e}
+.bk04x{background:#fce7f3;border-color:#f9a8d4;color:#9d174d}
+.unavail{background:#f0f0f0;border-color:#ddd;color:#bbb;font-size:10px}
+
+/* Flight 2 smaller */
+.flight-box.small .seat{width:62px;height:44px}
+.flight-box.small .seat .name{font-size:11px}
+.flight-box.small .layout-33 .seat{width:56px}
+
+/* Summary */
+.summary-wrap{display:flex;gap:10px;flex-wrap:wrap}
+.summary-group{flex:1;min-width:200px;border:1px solid #ddd;border-radius:6px;padding:6px 8px}
+.summary-group .sg-title{font-size:13px;font-weight:700;margin-bottom:4px;padding-bottom:3px;border-bottom:1px solid #eee}
+.summary-group .sg-item{display:flex;justify-content:space-between;font-size:12px;padding:2px 0}
+.summary-group .sg-item .sg-name{font-weight:600}
+
+/* Legend */
+.legend{display:flex;gap:14px;justify-content:center;margin-bottom:8px;font-size:12px;color:#555;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:4px}
+.legend-color{width:18px;height:18px;border-radius:4px;border:1px solid rgba(0,0,0,.1)}
+
+.footer{text-align:center;font-size:11px;color:#999;padding-top:6px;border-top:1px solid #ddd;margin-top:4px}
+
+@media print{
+  @page{margin:8mm 8mm}
+  body{padding:0}
+  .flight-box{break-inside:avoid;page-break-inside:avoid}
+}
+@media(max-width:700px){
+  .seat{width:52px;height:40px;font-size:9px}
+  .seat .name{font-size:10px}
+  .layout-33 .seat{width:48px}
+  .flight-box.small .seat{width:48px;height:38px}
+  .flight-box.small .seat .name{font-size:10px}
+  .flight-box.small .layout-33 .seat{width:44px}
+}
+</style>
+</head>
+<body>
+
+<h1>🛩️ 马来西亚之旅 · 选座图</h1>
+<p class="subtitle">MH389 上海浦东→吉隆坡 8/4 · MH386 吉隆坡→上海浦东 8/13</p>
+
+<div class="legend">
+  <span class="legend-item"><span class="legend-color" style="background:#dbeafe;border-color:#93c5fd"></span> 订单01&amp;02</span>
+  <span class="legend-item"><span class="legend-color" style="background:#d1fae5;border-color:#86efac"></span> 订单03</span>
+  <span class="legend-item"><span class="legend-color" style="background:#fef3c7;border-color:#fcd34d"></span> 订单04</span>
+  <span class="legend-item"><span class="legend-color" style="background:#fce7f3;border-color:#f9a8d4"></span> 张醒(独立)</span>
+  <span class="legend-item"><span class="legend-color" style="background:#f0f0f0;border:1px solid #ddd"></span> 不可选</span>
+</div>
+
+<!-- FLIGHT 1: PVG→KUL -->
+<div class="flight-box">
+<div class="title">✈️ 去程 · MH389 上海(PVG) → 吉隆坡(KUL) <span class="info">8月4日 15:25–21:00 · 空客 A330-300 · 2-4-2 布局 (A C | D E F G | H K)</span></div>
+
+<div class="plane">
+  <div class="layout-label">🪟 A &nbsp; C &nbsp; ⸽ &nbsp; D E F G &nbsp; ⸽ &nbsp; H K 🪟</div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">28</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat unavail">不可选</div>
+    <div class="seat bk01"><span class="name">朱兴业</span><span class="letter">28E</span></div>
+    <div class="seat bk04"><span class="name">高国济</span><span class="letter">28F</span></div>
+    <div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">29</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk01"><span class="name">董美君</span><span class="letter">29H</span></div>
+    <div class="seat bk01"><span class="name">李济民</span><span class="letter">29K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">30</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk01"><span class="name">李园如</span><span class="letter">30H</span></div>
+    <div class="seat bk01"><span class="name">王嘉烽</span><span class="letter">30K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">31</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk01"><span class="name">高蓓菁</span><span class="letter">31H</span></div>
+    <div class="seat bk01"><span class="name">朱洺锋</span><span class="letter">31K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">32</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk01"><span class="name">马蔚蔚</span><span class="letter">32H</span></div>
+    <div class="seat bk01"><span class="name">马桂诚</span><span class="letter">32K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">33</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk04"><span class="name">张耀兴</span><span class="letter">33H</span></div>
+    <div class="seat bk04"><span class="name">高国萍</span><span class="letter">33K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">34</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk04"><span class="name">王 琳</span><span class="letter">34H</span></div>
+    <div class="seat bk04x"><span class="name">张 醒</span><span class="letter">34K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">35</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk03"><span class="name">王鼎玲</span><span class="letter">35H</span></div>
+    <div class="seat bk03"><span class="name">王何平</span><span class="letter">35K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">36</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="aisle">走道</div>
+    <div class="seat bk03"><span class="name">鲍培华</span><span class="letter">36H</span></div>
+    <div class="seat bk03"><span class="name">王建忠</span><span class="letter">36K</span></div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row">
+    <div class="seat-row-label">37</div><div class="cabin-wall">🪟</div>
+    <div class="seat" style="background:#e8e8e8">空</div><div class="seat" style="background:#e8e8e8">空</div><div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div>
+    <div class="seat" style="background:#e8e8e8">空</div>
+    <div class="seat" style="background:#e8e8e8">空</div>
+    <div class="seat" style="background:#e8e8e8">空</div>
+    <div class="aisle">走道</div>
+    <div class="seat" style="background:#e8e8e8">空</div>
+    <div class="seat bk03"><span class="name">何 雄</span><span class="letter">37K</span></div><div class="cabin-wall">🪟</div>
+  </div>
+</div>
+
+<div class="summary-wrap">
+  <div class="summary-group">
+    <div class="sg-title" style="background:#dbeafe;color:#1e40af">📦 订单01&amp;02（9人）28-32排</div>
+    <div class="sg-item"><span class="sg-name">朱兴业</span>28E</div>
+    <div class="sg-item"><span class="sg-name">董美君</span>29H</div>
+    <div class="sg-item"><span class="sg-name">李济民</span>29K</div>
+    <div class="sg-item"><span class="sg-name">李园如</span>30H</div>
+    <div class="sg-item"><span class="sg-name">王嘉烽</span>30K</div>
+    <div class="sg-item"><span class="sg-name">高蓓菁</span>31H</div>
+    <div class="sg-item"><span class="sg-name">朱洺锋</span>31K</div>
+    <div class="sg-item"><span class="sg-name">马蔚蔚</span>32H</div>
+    <div class="sg-item"><span class="sg-name">马桂诚</span>32K</div>
+  </div>
+  <div class="summary-group">
+    <div class="sg-title" style="background:#d1fae5;color:#065f46">📦 订单03（5人）35-37排</div>
+    <div class="sg-item"><span class="sg-name">王鼎玲</span>35H</div>
+    <div class="sg-item"><span class="sg-name">王何平</span>35K</div>
+    <div class="sg-item"><span class="sg-name">鲍培华</span>36H</div>
+    <div class="sg-item"><span class="sg-name">王建忠</span>36K</div>
+    <div class="sg-item"><span class="sg-name">何 雄</span>37K</div>
+  </div>
+  <div class="summary-group">
+    <div class="sg-title" style="background:#fef3c7;color:#92400e">📦 订单04 + 张醒（5人）28-34排</div>
+    <div class="sg-item"><span class="sg-name">高国济</span>28F</div>
+    <div class="sg-item"><span class="sg-name">张耀兴</span>33H</div>
+    <div class="sg-item"><span class="sg-name">高国萍</span>33K</div>
+    <div class="sg-item"><span class="sg-name">王 琳</span>34H</div>
+    <div class="sg-item"><span class="sg-name">张 醒</span>34K</div>
+  </div>
+</div>
+</div>
+
+<!-- FLIGHT 2: KUL→PVG -->
+<div class="flight-box small">
+<div class="title">✈️ 回程 · MH386 吉隆坡(KUL) → 上海(PVG) <span class="info">8月13日 19:35–次日01:10 · 波音 737-800 · 3-3 布局 (A B C | D E F)</span></div>
+
+<div class="plane">
+  <div class="layout-label">🪟 A B C &nbsp; ⸽ &nbsp; D E F 🪟</div>
+
+  <div class="seat-row layout-33">
+    <div class="seat-row-label">5</div><div class="cabin-wall">🪟</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div><div class="seat unavail">不可选</div>
+    <div class="aisle-wide">走道</div>
+    <div class="seat unavail">不可选</div><div class="seat unavail">不可选</div>
+    <div class="seat bk04"><span class="name">高国济</span><span class="letter">5F</span></div>
+    <div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row layout-33">
+    <div class="seat-row-label">6</div><div class="cabin-wall">🪟</div>
+    <div class="seat bk01"><span class="name">李济民</span><span class="letter">6A</span></div>
+    <div class="seat bk01"><span class="name">马桂诚</span><span class="letter">6B</span></div>
+    <div class="seat bk01"><span class="name">朱兴业</span><span class="letter">6C</span></div>
+    <div class="aisle-wide">走道</div>
+    <div class="seat bk01"><span class="name">董美君</span><span class="letter">6D</span></div>
+    <div class="seat bk01"><span class="name">高蓓菁</span><span class="letter">6E</span></div>
+    <div class="seat bk01"><span class="name">朱洺锋</span><span class="letter">6F</span></div>
+    <div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row layout-33">
+    <div class="seat-row-label">7</div><div class="cabin-wall">🪟</div>
+    <div class="seat bk03"><span class="name">王何平</span><span class="letter">7A</span></div>
+    <div class="seat bk03"><span class="name">王鼎玲</span><span class="letter">7B</span></div>
+    <div class="seat bk03"><span class="name">何 雄</span><span class="letter">7C</span></div>
+    <div class="aisle-wide">走道</div>
+    <div class="seat bk01"><span class="name">马蔚蔚</span><span class="letter">7D</span></div>
+    <div class="seat bk01"><span class="name">李园如</span><span class="letter">7E</span></div>
+    <div class="seat bk01"><span class="name">王嘉烽</span><span class="letter">7F</span></div>
+    <div class="cabin-wall">🪟</div>
+  </div>
+
+  <div class="seat-row layout-33">
+    <div class="seat-row-label">8</div><div class="cabin-wall">🪟</div>
+    <div class="seat bk04x"><span class="name">张 醒</span><span class="letter">8A</span></div>
+    <div class="seat bk04"><span class="name">王 琳</span><span class="letter">8B</span></div>
+    <div class="seat bk04"><span class="name">高国萍</span><span class="letter">8C</span></div>
+    <div class="aisle-wide">走道</div>
+    <div class="seat bk04"><span class="name">张耀兴</span><span class="letter">8D</span></div>
+    <div class="seat bk03"><span class="name">王建忠</span><span class="letter">8E</span></div>
+    <div class="seat bk03"><span class="name">鲍培华</span><span class="letter">8F</span></div>
+    <div class="cabin-wall">🪟</div>
+  </div>
+</div>
+
+<div class="summary-wrap">
+  <div class="summary-group">
+    <div class="sg-title" style="background:#dbeafe;color:#1e40af">📦 订单01&amp;02（9人）6-7排</div>
+    <div class="sg-item"><span class="sg-name">李济民</span>6A</div>
+    <div class="sg-item"><span class="sg-name">马桂诚</span>6B</div>
+    <div class="sg-item"><span class="sg-name">朱兴业</span>6C</div>
+    <div class="sg-item"><span class="sg-name">董美君</span>6D</div>
+    <div class="sg-item"><span class="sg-name">高蓓菁</span>6E</div>
+    <div class="sg-item"><span class="sg-name">朱洺锋</span>6F</div>
+    <div class="sg-item"><span class="sg-name">马蔚蔚</span>7D</div>
+    <div class="sg-item"><span class="sg-name">李园如</span>7E</div>
+    <div class="sg-item"><span class="sg-name">王嘉烽</span>7F</div>
+  </div>
+  <div class="summary-group">
+    <div class="sg-title" style="background:#d1fae5;color:#065f46">📦 订单03（5人）7-8排</div>
+    <div class="sg-item"><span class="sg-name">王何平</span>7A</div>
+    <div class="sg-item"><span class="sg-name">王鼎玲</span>7B</div>
+    <div class="sg-item"><span class="sg-name">何 雄</span>7C</div>
+    <div class="sg-item"><span class="sg-name">王建忠</span>8E</div>
+    <div class="sg-item"><span class="sg-name">鲍培华</span>8F</div>
+  </div>
+  <div class="summary-group">
+    <div class="sg-title" style="background:#fef3c7;color:#92400e">📦 订单04 + 张醒（5人）5-8排</div>
+    <div class="sg-item"><span class="sg-name">高国济</span>5F</div>
+    <div class="sg-item"><span class="sg-name">高国萍</span>8C</div>
+    <div class="sg-item"><span class="sg-name">王 琳</span>8B</div>
+    <div class="sg-item"><span class="sg-name">张耀兴</span>8D</div>
+    <div class="sg-item"><span class="sg-name">张 醒</span>8A</div>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+  马来西亚之旅 · 座位图 &nbsp;|&nbsp; 2026年8月 &nbsp;|&nbsp; 实际以官网确认为准
+</div>
+
+</body>
+</html>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026暑假 · 出行名单</title>
+<style>
+:root {
+  --bg: #fdf8f0;
+  --card-bg: #fffcf5;
+  --text-primary: #5a3e2b;
+  --text-secondary: #8b7355;
+  --accent: #e8934a;
+  --accent-light: #fef0e0;
+  --border: #e8d5b5;
+  --shadow: rgba(180, 140, 100, 0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+.container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #2d1b69 0%, #6c5ce7 30%, #e84393 60%, #2b6cb0 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.1;
+  animation: heroZoom 25s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.12); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(45,27,105,0.88) 0%, rgba(108,92,231,0.78) 50%, rgba(43,108,176,0.92) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  animation: fadeUp 1.2s ease-out;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-emoji { font-size: 64px; display: block; margin-bottom: 16px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); animation: float 6s ease-in-out infinite; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.hero h1 { font-size: clamp(28px,5vw,42px); font-weight:800; color:#fff; margin-bottom:8px; letter-spacing:2px; text-shadow:0 2px 20px rgba(0,0,0,0.3); }
+.hero p { font-size: clamp(15px,2.5vw,19px); color:rgba(255,255,255,0.8); max-width:500px; margin:0 auto; line-height:1.8; }
+.hero-wave { position:absolute; bottom:-2px; left:0; right:0; height:60px; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60Z' fill='%23fdf8f0'/%3E%3C/svg%3E") center/cover no-repeat; }
+
+/* ===== Card ===== */
+.card { background:var(--card-bg); border:2px solid var(--border); border-radius:20px; padding:24px 20px; box-shadow:0 4px 16px var(--shadow); margin-bottom:20px; }
+.card-title { font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:16px; padding-bottom:8px; border-bottom:2px dashed var(--border); }
+
+/* ===== Back link ===== */
+.back-link { display:inline-flex; align-items:center; gap:6px; color:#6c5ce7; text-decoration:none; font-weight:600; font-size:14px; margin-bottom:16px; }
+.back-link:hover { text-decoration:underline; }
+
+/* ===== Stats ===== */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
+.stat-card { background:var(--accent-light); border-radius:14px; padding:16px; text-align:center; }
+.stat-card .num { font-size:28px; font-weight:800; color:#2d1b69; }
+.stat-card .label { font-size:12px; color:var(--text-secondary); margin-top:2px; }
+
+/* ===== Group ===== */
+.group-section { margin-bottom:16px; }
+.group-header { display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:14px; cursor:pointer; font-weight:700; font-size:15px; }
+.group-header .count { font-weight:400; font-size:13px; opacity:0.8; }
+
+/* ===== Member Table ===== */
+.member-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+.member-table th { padding:8px 10px; text-align:left; border-bottom:2px solid var(--border); background:var(--accent-light); color:var(--text-primary); font-weight:700; font-size:12px; white-space:nowrap; }
+.member-table td { padding:8px 10px; border-bottom:1px solid var(--border); color:#4a5568; font-size:12px; }
+.member-table tr:last-child td { border-bottom:none; }
+.member-table .name-cell { font-weight:600; color:var(--text-primary); }
+.member-table .gender-m { color:#2b6cb0; }
+.member-table .gender-f { color:#e84393; }
+.member-table .expire-warn { color:#e53e3e; font-weight:600; }
+.member-table .expire-ok { color:#38a169; }
+
+/* ===== Footer ===== */
+.footer { text-align:center; padding:32px 16px; color:var(--text-secondary); font-size:13px; }
+.footer::before { content:''; display:block; width:40px; height:2px; background:var(--border); margin:0 auto 16px; }
+
+/* ===== Print ===== */
+@media print { .back-link, .hero, .footer { display:none !important; } }
+
+/* ===== Responsive ===== */
+@media (max-width:600px) {
+  .hero { min-height:35vh; }
+  .hero-emoji { font-size:48px; }
+  .stats { grid-template-columns:1fr 1fr; }
+  .member-table { font-size:11px; }
+  .member-table th, .member-table td { padding:6px 6px; }
+  .container { padding:0 10px; }
+}
+@media (max-width:480px) {
+  .hero { min-height:30vh; }
+  .hero-emoji { font-size:40px; }
+  .hero h1 { font-size:clamp(20px,5vw,22px); }
+  .stats { grid-template-columns:1fr 1fr; gap:8px; }
+  .stat-card .num { font-size:22px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display:none; }
+}
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-emoji">👥</span>
+    <h1>2026暑假 · 出行名单</h1>
+    <p>全团19人 · 4个家庭 · 护照信息 · 联系方式</p>
+  </div>
+  <div class="hero-wave"></div>
+</section>
+
+<div class="container">
+  <a href="index.html" class="back-link">← 返回主页</a>
+
+  <div class="stats">
+    <div class="stat-card"><div class="num">19</div><div class="label">总人数</div></div>
+    <div class="stat-card"><div class="num">4</div><div class="label">家庭组</div></div>
+    <div class="stat-card"><div class="num">15</div><div class="label">成人</div></div>
+    <div class="stat-card"><div class="num">4</div><div class="label">未成年人</div></div>
+  </div>
+
+  <div class="card" style="border-left:4px solid #5b21b6;">
+    <div class="card-title" style="border-bottom-color:transparent;margin-bottom:8px;">
+      <span style="background:#ede9fe;color:#5b21b6;padding:4px 14px;border-radius:8px;font-size:14px;">第一组 · 朱兴业家</span>
+      <span style="font-weight:400;font-size:13px;color:var(--text-secondary);margin-left:8px;">5人</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <div class="table-wrap"><table class="member-table">
+        <thead>
+          <tr>
+            <th style="min-width:80px;">姓名</th>
+            <th style="min-width:60px;">性别/年龄</th>
+            <th style="min-width:110px;">护照号</th>
+            <th style="min-width:110px;">有效期</th>
+            <th style="min-width:120px;">手机号</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="name-cell">朱兴业<br><span style="font-size:10px;color:var(--text-secondary);">ZHU XINGYE</span></td>
+            <td><span class="gender-m">♂</span> 43岁</td>
+            <td>EN4625365</td>
+            <td class="expire-ok">2034.10.10</td>
+            <td>13917055180</td>
+          </tr>
+          <tr>
+            <td class="name-cell">马蔚蔚<br><span style="font-size:10px;color:var(--text-secondary);">MA WEIWEI</span></td>
+            <td><span class="gender-f">♀</span> 42岁</td>
+            <td>ER1704610</td>
+            <td class="expire-ok">2036.05.28</td>
+            <td>13671581531</td>
+          </tr>
+          <tr>
+            <td class="name-cell">高蓓菁<br><span style="font-size:10px;color:var(--text-secondary);">GAO BEIJING</span></td>
+            <td><span class="gender-f">♀</span> 67岁</td>
+            <td>ER1704727</td>
+            <td class="expire-ok">2036.05.28</td>
+            <td>15821385258</td>
+          </tr>
+          <tr>
+            <td class="name-cell">马桂诚<br><span style="font-size:10px;color:var(--text-secondary);">MA GUICHENG</span></td>
+            <td><span class="gender-m">♂</span> 68岁</td>
+            <td>EH8135842</td>
+            <td class="expire-warn">2029.11.24</td>
+            <td>13681919819</td>
+          </tr>
+          <tr>
+            <td class="name-cell">朱洺锋<br><span style="font-size:10px;color:var(--text-secondary);">ZHU MINGFENG</span></td>
+            <td><span class="gender-m">♂</span> 13岁</td>
+            <td>ER1704701</td>
+            <td class="expire-ok">2031.05.28</td>
+            <td>13917055180</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:8px;padding:8px 12px;background:#f7fafc;border-radius:8px;font-size:11px;color:var(--text-secondary);">
+      📌 <strong>组内联系：</strong>朱兴业
+    </div>
+  </div>
+  <div class="card" style="border-left:4px solid #a1236b;">
+    <div class="card-title" style="border-bottom-color:transparent;margin-bottom:8px;">
+      <span style="background:#fce4ec;color:#a1236b;padding:4px 14px;border-radius:8px;font-size:14px;">第二组 · 李园如家</span>
+      <span style="font-weight:400;font-size:13px;color:var(--text-secondary);margin-left:8px;">4人</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="member-table">
+        <thead>
+          <tr>
+            <th style="min-width:80px;">姓名</th>
+            <th style="min-width:60px;">性别/年龄</th>
+            <th style="min-width:110px;">护照号</th>
+            <th style="min-width:110px;">有效期</th>
+            <th style="min-width:120px;">手机号</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="name-cell">董美君<br><span style="font-size:10px;color:var(--text-secondary);">DONG MEIJUN</span></td>
+            <td><span class="gender-f">♀</span> 73岁</td>
+            <td>EL5190366</td>
+            <td class="expire-ok">2033.12.18</td>
+            <td>13801701408</td>
+          </tr>
+          <tr>
+            <td class="name-cell">李济民<br><span style="font-size:10px;color:var(--text-secondary);">LI JIMIN</span></td>
+            <td><span class="gender-m">♂</span> 75岁</td>
+            <td>ER1704686</td>
+            <td class="expire-ok">2036.05.28</td>
+            <td>13901807250</td>
+          </tr>
+          <tr>
+            <td class="name-cell">李园如<br><span style="font-size:10px;color:var(--text-secondary);">LI YUANRU</span></td>
+            <td><span class="gender-f">♀</span> 47岁</td>
+            <td>EE5920253</td>
+            <td class="expire-warn">2028.12.20</td>
+            <td>13818882883</td>
+          </tr>
+          <tr>
+            <td class="name-cell">王嘉烽<br><span style="font-size:10px;color:var(--text-secondary);">WANG JIAFENG</span></td>
+            <td><span class="gender-m">♂</span> 12岁</td>
+            <td>EL5555851</td>
+            <td class="expire-warn">2029.03.06</td>
+            <td>13818882883</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:8px;padding:8px 12px;background:#f7fafc;border-radius:8px;font-size:11px;color:var(--text-secondary);">
+      📌 <strong>组内联系：</strong>董美君
+    </div>
+  </div>
+  <div class="card" style="border-left:4px solid #1a5e2a;">
+    <div class="card-title" style="border-bottom-color:transparent;margin-bottom:8px;">
+      <span style="background:#e8faf4;color:#1a5e2a;padding:4px 14px;border-radius:8px;font-size:14px;">第三组 · 王建忠家</span>
+      <span style="font-weight:400;font-size:13px;color:var(--text-secondary);margin-left:8px;">5人</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="member-table">
+        <thead>
+          <tr>
+            <th style="min-width:80px;">姓名</th>
+            <th style="min-width:60px;">性别/年龄</th>
+            <th style="min-width:110px;">护照号</th>
+            <th style="min-width:110px;">有效期</th>
+            <th style="min-width:120px;">手机号</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="name-cell">鲍培华<br><span style="font-size:10px;color:var(--text-secondary);">BAO PEIHUA</span></td>
+            <td><span class="gender-f">♀</span> 73岁</td>
+            <td>ER7826234</td>
+            <td class="expire-ok">2036.05.27</td>
+            <td>18939838506</td>
+          </tr>
+          <tr>
+            <td class="name-cell">王建忠<br><span style="font-size:10px;color:var(--text-secondary);">WANG JIANZHONG</span></td>
+            <td><span class="gender-m">♂</span> 77岁</td>
+            <td>EB3986606</td>
+            <td class="expire-warn">2027.09.29</td>
+            <td>15821915508</td>
+          </tr>
+          <tr>
+            <td class="name-cell">王鼎玲<br><span style="font-size:10px;color:var(--text-secondary);">WANG DINGLING</span></td>
+            <td><span class="gender-f">♀</span> 45岁</td>
+            <td>ER7832608</td>
+            <td class="expire-ok">2036.05.27</td>
+            <td>18964010692</td>
+          </tr>
+          <tr>
+            <td class="name-cell">何雄<br><span style="font-size:10px;color:var(--text-secondary);">HE XIONG</span></td>
+            <td><span class="gender-m">♂</span> 48岁</td>
+            <td>E97537347</td>
+            <td class="expire-warn">2027.03.19</td>
+            <td>15821232696</td>
+          </tr>
+          <tr>
+            <td class="name-cell">王何平<br><span style="font-size:10px;color:var(--text-secondary);">WANG HEPING</span></td>
+            <td><span class="gender-f">♀</span> 15岁</td>
+            <td>ER7832613</td>
+            <td class="expire-ok">2031.05.27</td>
+            <td>18964010692</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:8px;padding:8px 12px;background:#f7fafc;border-radius:8px;font-size:11px;color:var(--text-secondary);">
+      📌 <strong>组内联系：</strong>鲍培华
+    </div>
+  </div>
+  <div class="card" style="border-left:4px solid #92400e;">
+    <div class="card-title" style="border-bottom-color:transparent;margin-bottom:8px;">
+      <span style="background:#fef3c7;color:#92400e;padding:4px 14px;border-radius:8px;font-size:14px;">第四组 · 张耀兴家</span>
+      <span style="font-weight:400;font-size:13px;color:var(--text-secondary);margin-left:8px;">5人</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="member-table">
+        <thead>
+          <tr>
+            <th style="min-width:80px;">姓名</th>
+            <th style="min-width:60px;">性别/年龄</th>
+            <th style="min-width:110px;">护照号</th>
+            <th style="min-width:110px;">有效期</th>
+            <th style="min-width:120px;">手机号</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td class="name-cell">张耀兴<br><span style="font-size:10px;color:var(--text-secondary);">ZHANG YAOXING</span></td>
+            <td><span class="gender-m">♂</span> 71岁</td>
+            <td>EQ9384292</td>
+            <td class="expire-ok">2035.12.24</td>
+            <td>13601732502</td>
+          </tr>
+          <tr>
+            <td class="name-cell">高国萍<br><span style="font-size:10px;color:var(--text-secondary);">GAO GUOPING</span></td>
+            <td><span class="gender-f">♀</span> 68岁</td>
+            <td>ER7832146</td>
+            <td class="expire-ok">2036.05.28</td>
+            <td>15901985742</td>
+          </tr>
+          <tr>
+            <td class="name-cell">高国济<br><span style="font-size:10px;color:var(--text-secondary);">GAO GUOJI</span></td>
+            <td><span class="gender-m">♂</span> 62岁</td>
+            <td>ER7832147</td>
+            <td class="expire-ok">2036.05.28</td>
+            <td>13024193025</td>
+          </tr>
+          <tr>
+            <td class="name-cell">王琳<br><span style="font-size:10px;color:var(--text-secondary);">WANG LIN</span></td>
+            <td><span class="gender-f">♀</span> 40岁</td>
+            <td>EP6652326</td>
+            <td class="expire-ok">2035.06.12</td>
+            <td>13661729768</td>
+          </tr>
+          <tr>
+            <td class="name-cell">张醒<br><span style="font-size:10px;color:var(--text-secondary);">ZHANG XING</span></td>
+            <td><span class="gender-m">♂</span> 9岁</td>
+            <td>EP6652035</td>
+            <td class="expire-ok">2030.06.12</td>
+            <td>13661729768</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:8px;padding:8px 12px;background:#f7fafc;border-radius:8px;font-size:11px;color:var(--text-secondary);">
+      📌 <strong>组内联系：</strong>张耀兴
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📋 全团名单总表</div>
+    <div style="overflow-x:auto;">
+      <table class="member-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>护照号</th>
+            <th>有效期</th>
+            <th>组别</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+      <tr>
+        <td>1</td>
+        <td class="name-cell">朱兴业</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>43</td>
+        <td>EN4625365</td>
+        <td class="expire-ok">2034.10.10</td>
+        <td>第一组</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="name-cell">马蔚蔚</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>42</td>
+        <td>ER1704610</td>
+        <td class="expire-ok">2036.05.28</td>
+        <td>第一组</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="name-cell">高蓓菁</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>67</td>
+        <td>ER1704727</td>
+        <td class="expire-ok">2036.05.28</td>
+        <td>第一组</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="name-cell">马桂诚</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>68</td>
+        <td>EH8135842</td>
+        <td class="expire-warn">2029.11.24</td>
+        <td>第一组</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="name-cell">朱洺锋</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>13</td>
+        <td>ER1704701</td>
+        <td class="expire-ok">2031.05.28</td>
+        <td>第一组</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="name-cell">董美君</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>73</td>
+        <td>EL5190366</td>
+        <td class="expire-ok">2033.12.18</td>
+        <td>第二组</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="name-cell">李济民</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>75</td>
+        <td>ER1704686</td>
+        <td class="expire-ok">2036.05.28</td>
+        <td>第二组</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td class="name-cell">李园如</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>47</td>
+        <td>EE5920253</td>
+        <td class="expire-warn">2028.12.20</td>
+        <td>第二组</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td class="name-cell">王嘉烽</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>12</td>
+        <td>EL5555851</td>
+        <td class="expire-warn">2029.03.06</td>
+        <td>第二组</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td class="name-cell">鲍培华</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>73</td>
+        <td>ER7826234</td>
+        <td class="expire-ok">2036.05.27</td>
+        <td>第三组</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td class="name-cell">王建忠</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>77</td>
+        <td>EB3986606</td>
+        <td class="expire-warn">2027.09.29</td>
+        <td>第三组</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td class="name-cell">王鼎玲</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>45</td>
+        <td>ER7832608</td>
+        <td class="expire-ok">2036.05.27</td>
+        <td>第三组</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td class="name-cell">何雄</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>48</td>
+        <td>E97537347</td>
+        <td class="expire-warn">2027.03.19</td>
+        <td>第三组</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td class="name-cell">王何平</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>15</td>
+        <td>ER7832613</td>
+        <td class="expire-ok">2031.05.27</td>
+        <td>第三组</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td class="name-cell">张耀兴</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>71</td>
+        <td>EQ9384292</td>
+        <td class="expire-ok">2035.12.24</td>
+        <td>第四组</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td class="name-cell">高国萍</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>68</td>
+        <td>ER7832146</td>
+        <td class="expire-ok">2036.05.28</td>
+        <td>第四组</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td class="name-cell">高国济</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>62</td>
+        <td>ER7832147</td>
+        <td class="expire-ok">2036.05.28</td>
+        <td>第四组</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td class="name-cell">王琳</td>
+        <td><span class="gender-f">♀</span></td>
+        <td>40</td>
+        <td>EP6652326</td>
+        <td class="expire-ok">2035.06.12</td>
+        <td>第四组</td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td class="name-cell">张醒</td>
+        <td><span class="gender-m">♂</span></td>
+        <td>9</td>
+        <td>EP6652035</td>
+        <td class="expire-ok">2030.06.12</td>
+        <td>第四组</td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="background:#fff5f5;border-color:#fecaca;">
+    <div class="card-title" style="color:#e53e3e;">⚠️ 护照即将到期提醒</div>
+    <p style="font-size:13px;color:#c53030;line-height:1.7;">
+      以下成员的护照将在 <strong>2029年或之前</strong> 到期，出行前请注意确认是否需更换：<br>
+      马桂诚（2029.11.24）、李园如（2028.12.20）、王嘉烽（2029.03.06）、王建忠（2027.09.29）、何雄（2027.03.19）
+    </p>
+  </div></div>
+<div class="footer">👥 2026暑假 · 马来西亚亲子游 · 全团19人名单</div>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>

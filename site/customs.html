@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入境指南 · 马来西亚海关违禁品与携带规定</title>
+<style>
+:root {
+  --bg: #f0f4f8;
+  --card-bg: #ffffff;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --danger: #e53e3e;
+  --warning: #d69e2e;
+  --safe: #38a169;
+  --info: #3182ce;
+  --border: #e2e8f0;
+  --shadow: rgba(0,0,0,0.06);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+.container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 28vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('https://images.unsplash.com/photo-1580674285054-bed31e145f59?w=1600&q=80') center/cover no-repeat;
+  opacity: 0.08;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,32,44,0.92) 0%, rgba(45,55,72,0.85) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+}
+.hero-content .back-link {
+  display: inline-block; margin-bottom: 14px;
+  color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px;
+  transition: color 0.2s;
+}
+.hero-content .back-link:hover { color: #fff; }
+.hero-content h1 {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.hero-content p {
+  font-size: clamp(13px, 2vw, 16px);
+  color: rgba(255,255,255,0.8);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Update banner */
+.update-banner {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 24px 0;
+  font-size: 13px;
+  color: #856404;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.update-banner .icon { font-size: 20px; flex-shrink: 0; }
+
+/* Section */
+.section {
+  margin: 32px 0;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid var(--border);
+}
+.section-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.section-header .tag {
+  font-size: 11px;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.tag-danger { background: #fed7d7; color: #c53030; }
+.tag-warning { background: #fefcbf; color: #975a16; }
+.tag-safe { background: #c6f6d5; color: #276749; }
+.tag-info { background: #bee3f8; color: #2a4365; }
+
+/* Cards */
+.prohibited-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.prohibited-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 4px var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.prohibited-card:hover { box-shadow: 0 4px 12px var(--shadow); }
+.prohibited-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.prohibited-card .card-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.prohibited-card .card-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.prohibited-card .card-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.prohibited-card .card-body {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.prohibited-card .card-body ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 6px;
+}
+.prohibited-card .card-body ul li {
+  padding: 3px 0 3px 20px;
+  position: relative;
+}
+.prohibited-card .card-body ul li::before {
+  content: '•';
+  position: absolute;
+  left: 6px;
+  color: var(--text-secondary);
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+.tag-item {
+  font-size: 11px;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+.tag-red { background: #fed7d7; color: #c53030; }
+.tag-yellow { background: #fefcbf; color: #975a16; }
+.tag-green { background: #c6f6d5; color: #276749; }
+.tag-blue { background: #bee3f8; color: #2a4365; }
+.tag-gray { background: #edf2f7; color: #4a5568; }
+
+/* Danger card */
+.danger-card {
+  background: linear-gradient(135deg, #fff5f5, #fff);
+  border: 2px solid #fc8181;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.danger-card .card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.danger-card .card-icon {
+  font-size: 24px;
+}
+.danger-card .card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #c53030;
+}
+.danger-card .card-body {
+  font-size: 14px;
+  color: #742a2a;
+}
+
+/* Permit card */
+.permit-card {
+  background: #fff;
+  border: 1px solid #ecc94b;
+  border-left: 4px solid #ecc94b;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.permit-card .permit-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.permit-card .permit-icon { font-size: 18px; }
+.permit-card .permit-title { font-size: 15px; font-weight: 700; color: #975a16; }
+.permit-card .permit-body { font-size: 13px; color: #744210; }
+
+/* Table */
+.customs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px var(--shadow);
+}
+.customs-table th {
+  background: #2d3748;
+  color: #fff;
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+}
+.customs-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.customs-table tr:last-child td { border-bottom: none; }
+.customs-table tr:hover td { background: #f7fafc; }
+
+/* Info box */
+.info-box {
+  background: #ebf8ff;
+  border: 1px solid #bee3f8;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: #2a4365;
+  line-height: 1.7;
+}
+.info-box .info-title {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  color: #2b6cb0;
+}
+
+.warning-box {
+  background: #fffaf0;
+  border: 1px solid #feebc8;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: #744210;
+  line-height: 1.7;
+}
+.warning-box .warning-title {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  color: #c05621;
+}
+
+/* Flow Steps */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.step-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.step-card .step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: #fff;
+  margin-bottom: 8px;
+}
+.step-green .step-num { background: #38a169; }
+.step-yellow .step-num { background: #d69e2e; }
+.step-card .step-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.step-card .step-desc { font-size: 12px; color: var(--text-secondary); }
+
+/* Done checkmark */
+.done-list {
+  list-style: none;
+  padding: 0;
+}
+.done-list li {
+  padding: 6px 0 6px 28px;
+  position: relative;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.done-list li::before {
+  content: '✅';
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 16px;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+.footer .divider {
+  width: 40px; height: 2px;
+  background: var(--border);
+  margin: 0 auto 16px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .steps { grid-template-columns: 1fr; }
+  .customs-table { font-size: 12px; }
+  .customs-table th, .customs-table td { padding: 8px 10px; }
+}
+@media (max-width: 480px) {
+  .hero { min-height: 22vh; }
+}
+
+/* ===== 🚀 Mobile Optimization ===== */
+/* Prevent iOS zoom on input */
+input, textarea, select, button { font-size: 16px !important; }
+
+/* Larger touch targets */
+summary, .btn-submit, .nav-card, .info-strip, .hotel-booking-link,
+.day-row, .strip-action, button, .hotel-card, .qc-card,
+.back-link, .day-num { cursor: pointer; }
+summary { padding: 12px 14px; border-radius: 12px; }
+
+/* Smooth scrolling for all devices */
+html { scroll-behavior: smooth; }
+
+/* Back to top */
+.back-to-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, #2d1b69, #6c5ce7);
+  color: #fff; border: none; font-size: 22px;
+  cursor: pointer; z-index: 999;
+  box-shadow: 0 4px 16px rgba(45,27,105,0.3);
+  opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-to-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Fix table overflow on mobile */
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; padding: 0 4px; }
+.table-wrap::-webkit-scrollbar { height: 4px; }
+.table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* Details/summary touch optimization */
+details { border-radius: 12px; overflow: hidden; }
+summary::-webkit-details-marker { display: none; }
+summary {
+  list-style: none; user-select: none; -webkit-user-select: none;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Fix nav-card on touch devices */
+.nav-card { -webkit-tap-highlight-color: transparent; }
+.nav-card:active { transform: scale(0.97); }
+
+@media (max-width: 600px) {
+  .container { padding: 0 10px; }
+  .card { padding: 16px 14px; }
+  .hero { min-height: 50vh !important; }
+  .hero-content { padding: 30px 16px !important; }
+  .hero-emoji { font-size: 48px !important; }
+  .hero h1 { font-size: clamp(22px, 6vw, 28px) !important; }
+  .hero p { font-size: 14px !important; }
+
+  /* Better nav grid */
+  .nav-grid { gap: 10px; }
+  .nav-card { padding: 14px; }
+  .nav-card .icon { font-size: 28px; }
+  .nav-card .info .title { font-size: 14px; }
+  .nav-card .info .desc { font-size: 10px; }
+
+  /* Summary cards single col */
+  .summary-cards { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .summary-card { padding: 12px; }
+  .summary-card .num { font-size: 20px; }
+
+  /* Hotel summary */
+  .hotel-summary { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+
+  /* Stats */
+  .stats { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .stat-card .num { font-size: 22px; }
+
+  /* Info grid */
+  .info-grid { gap: 8px; }
+
+  /* Budget */
+  .budget-table { font-size: 12px; }
+  .budget-table th, .budget-table td { padding: 8px 8px; }
+
+  /* Packing */
+  .packing-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .packing-col { padding: 12px; }
+
+  /* Photos */
+  .photo-row, .photo-row-3 { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+  .photo-row-3 { grid-template-columns: repeat(3,1fr) !important; }
+  .spot-photo { border-radius: 10px; overflow: hidden; }
+
+  /* Hotel */
+  .hotel-img-wrap { height: 160px; }
+  .hotel-detail { grid-template-columns: 1fr 1fr !important; }
+
+  /* Comment */
+  .msg-text { padding-left: 0; margin-top: 6px; }
+  .msg-form input, .msg-form textarea { font-size: 16px; }
+  .msg-form .btn-submit { width: 100%; text-align: center; }
+
+  /* Tip boxes */
+  .tip-box { padding: 14px; }
+
+  /* Tables */
+  .member-table th, .member-table td { padding: 6px 6px; font-size: 11px; }
+
+  /* Quick compare (hotel-vote) */
+  .quick-compare { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .qc-card { padding: 10px 6px; }
+
+  /* Photo card 2-col -> 1-col on very small */
+  .card .photo-row { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 480px) {
+  .hero { min-height: 42vh !important; }
+  .hero-emoji { font-size: 36px !important; }
+  .hero h1 { font-size: clamp(18px, 5.5vw, 22px) !important; }
+
+  .container { padding: 0 8px; }
+  .card { padding: 14px 12px; }
+  .card-title { font-size: 16px; }
+
+  .nav-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .nav-card { padding: 12px; gap: 8px; }
+  .nav-card .icon { font-size: 24px; }
+
+  .photo-row-3 { grid-template-columns: 1fr 1fr !important; }
+  .hotel-summary { grid-template-columns: 1fr !important; }
+
+  .hotel-img-wrap { height: 130px; }
+  .back-to-top { width: 42px; height: 42px; font-size: 18px; bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 380px) {
+  .hero { min-height: 35vh !important; }
+  .nav-grid { grid-template-columns: 1fr; }
+  .quick-compare { grid-template-columns: 1fr; }
+  .packing-grid { grid-template-columns: 1fr; }
+  .budget-table { font-size: 11px; }
+  .member-table th:nth-child(3), .member-table td:nth-child(3) { display: none; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device optimizations */
+  .nav-card:hover { transform: none; }
+  .hotel-card:hover { border-color: var(--border); }
+  .info-strip:hover { background: var(--accent-light); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <a class="back-link" href="index.html">&larr; 返回主页</a>
+    <h1>🛂 入境指南</h1>
+    <p>马来西亚海关违禁品清单 · 携带限额 · 申报流程 · 药品 &amp; 食品规定</p>
+    <p style="margin-top:6px;font-size:13px;opacity:0.65;">根据马来西亚皇家海关局、卫生部及中国领事服务网信息整理 · 2026年6月更新</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Update Banner -->
+  <div class="update-banner">
+    <span class="icon">📢</span>
+    <div>
+      <strong>2026年重要更新：</strong>马来西亚自2026年4月1日起全面禁止电子垃圾（E-waste）进口；烟草产品免税额度已取消，不到1包！超量无论多少均需缴税 · 实际执行极严<br>小红书多人反映被开箱数烟。请以海关现场规定为准。
+    </div>
+  </div>
+
+  <!-- Quick Summary -->
+  <div class="section">
+    <div class="section-header">
+      <h2>⚡ 快速概要</h2>
+    </div>
+    <div class="steps" style="margin-bottom:16px;">
+      <div class="step-card step-green">
+        <div class="step-num">✓</div>
+        <div class="step-title">走绿色通道</div>
+        <div class="step-desc">未携带超额/受限物品时<br>仍可能被随机抽查</div>
+      </div>
+      <div class="step-card step-yellow">
+        <div class="step-num">!</div>
+        <div class="step-title">走红色通道</div>
+        <div class="step-desc">携带需申报/缴税/不确定物品时<br>主动申报 &gt; 被查获</div>
+      </div>
+    </div>
+    <div class="warning-box">
+      <span class="warning-title">⚠️ 重要提醒</span>
+      马来西亚对毒品犯罪<strong>零容忍</strong>，贩毒最高可判<strong>死刑</strong>。入境时务必如实申报，切勿代人携带不明物品。违者最高罚款<strong>RM 500,000</strong>（约77万人民币）或<strong>5年监禁</strong>。
+    </div>
+  </div>
+
+  <!-- ===== 1. 毒品 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-danger">❌ 严禁</span>
+      <h2>毒品与违禁药物</h2>
+    </div>
+    <div class="danger-card">
+      <div class="card-header">
+        <span class="card-icon">💀</span>
+        <div class="card-title">零容忍 · 最高可判死刑</div>
+      </div>
+      <div class="card-body">
+        马来西亚是全世界对毒品管制最严格的国家之一。根据《1952年危险药物法》，<strong>贩卖/持有/运输毒品</strong>可被判处<strong>强制死刑或无期徒刑</strong>。
+      </div>
+    </div>
+    <div class="prohibited-grid">
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">🚫</div>
+          <div>
+            <div class="card-title">禁止携带的毒品类型</div>
+            <div class="card-sub">一经查获，立即逮捕</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>大麻（Ganja/Cannabis）</strong>、大麻制品、CBD油、THC产品</li>
+            <li><strong>冰毒（Methamphetamine）</strong>、海洛因、吗啡、可卡因</li>
+            <li><strong>摇头丸（Ecstasy）</strong>、LSD、迷幻药</li>
+            <li><strong>电子烟烟油</strong>（含大麻成分或THC）</li>
+            <li><strong>任何注射器</strong>（除非有医疗证明）</li>
+          </ul>
+          <div class="tag-list">
+            <span class="tag-item tag-red">死刑风险</span>
+            <span class="tag-item tag-red">终身监禁</span>
+            <span class="tag-item tag-yellow">海关重点查缉</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. 药品 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-danger">❌ 严禁</span>
+      <span class="tag tag-warning">⚠ 受限</span>
+      <h2>药品管制</h2>
+    </div>
+
+    <div class="prohibited-grid">
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">💊</div>
+          <div>
+            <div class="card-title">绝对禁止的药品成分</div>
+            <div class="card-sub">含有以下成分的药品严禁携带</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:6px 4px;font-weight:700;">成分类别</th>
+              <th style="text-align:left;padding:6px 4px;font-weight:700;">常见含该成分的药品</th>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 4px;"><strong>麻黄碱</strong><br><span style="font-size:11px;color:var(--text-secondary);">冰毒原料</span></td>
+              <td style="padding:6px 4px;">白加黑、泰诺、康泰克、鼻炎片、柴连口服液、大活络丸、复方川贝止咳糖浆、急支糖浆</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 4px;"><strong>吗啡/阿片</strong><br><span style="font-size:11px;color:var(--text-secondary);">强成瘾性</span></td>
+              <td style="padding:6px 4px;">复方甘草片、小儿止泻灵、咳速停、强力枇杷露、肠胃宁、咳喘宁</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 4px;"><strong>多潘立酮</strong><br><span style="font-size:11px;color:var(--text-secondary);">心脏风险</span></td>
+              <td style="padding:6px 4px;">吗丁啉（胃药）、多潘立酮片</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 4px;"><strong>士的宁</strong><br><span style="font-size:11px;color:var(--text-secondary);">中枢神经兴奋</span></td>
+              <td style="padding:6px 4px;">跌打万花油、风湿关节炎片、骨刺胶囊</td>
+            </tr>
+          </table>
+          <div class="tag-list" style="margin-top:10px;">
+            <span class="tag-item tag-red">严禁携带</span>
+            <span class="tag-item tag-red">查获必扣</span>
+            <span class="tag-item tag-yellow">严重可遣返</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fefcbf;">📋</div>
+          <div>
+            <div class="card-title">处方药 &amp; 慢性病药品</div>
+            <div class="card-sub">可携带但需符合以下要求</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>保留药品<strong>原包装、标签及说明书</strong></li>
+            <li>携带中英文<strong>医生处方</strong>（注明药品名、剂量、用法、患者姓名）</li>
+            <li>建议携带<strong>医生证明信</strong>（英文或中英文对照）</li>
+            <li>不超过<strong>30天用量</strong></li>
+            <li>入境走<strong>红色通道</strong>主动申报</li>
+          </ul>
+          <div class="tag-list">
+            <span class="tag-item tag-green">可携带</span>
+            <span class="tag-item tag-yellow">需申报</span>
+            <span class="tag-item tag-blue">需处方</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#c6f6d5;">✅</div>
+          <div>
+            <div class="card-title">推荐携带的"安全"药品</div>
+            <div class="card-sub">不含违禁成分的常用药</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;padding:6px 4px;font-weight:700;">类别</th>
+              <th style="text-align:left;padding:6px 4px;font-weight:700;">推荐药品</th>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 4px;"><strong>感冒发烧</strong></td>
+              <td style="padding:6px 4px;">999感冒灵（确认不含麻黄碱）、板蓝根、连花清瘟、布洛芬</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 4px;"><strong>肠胃不适</strong></td>
+              <td style="padding:6px 4px;">蒙脱石散（思密达）、健胃消食片、奥美拉唑、黄连素</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 4px;"><strong>过敏/外伤</strong></td>
+              <td style="padding:6px 4px;">氯雷他定、皮炎平（少量）、云南白药、创可贴、红霉素软膏</td>
+            </tr>
+            <tr>
+              <td style="padding:6px 4px;"><strong>其他</strong></td>
+              <td style="padding:6px 4px;">维生素、保济丸、藿香正气水</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="permit-card">
+        <div class="permit-header">
+          <span class="permit-icon">⚠️</span>
+          <span class="permit-title">中药 &amp; 动物成分特别提醒</span>
+        </div>
+        <div class="permit-body">
+          <strong>绝对禁止：</strong>含猪/狗动物源成分的药品、虎骨、熊胆、穿山甲、犀牛角、羚羊角<br>
+          <strong>严格限制：</strong>燕窝（通常被扣）、牛黄解毒丸（含牛黄/雄黄）<br>
+          <strong>建议：</strong>中药最好不带，马来西亚华人药店可买到多数常用中成药
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. 食品 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-danger">❌ 严禁</span>
+      <span class="tag tag-warning">⚠ 受限</span>
+      <h2>食品 &amp; 农产品</h2>
+    </div>
+
+    <div class="prohibited-grid">
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">🥩</div>
+          <div>
+            <div class="card-title">禁止携带的食品</div>
+            <div class="card-sub">宗教禁忌+检疫规定</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>猪肉及所有猪肉制品</strong> — 腊肉、腊肠、火腿、猪肉干、猪肉脯、猪油（马来西亚为穆斯林国家）</li>
+            <li><strong>新鲜肉类、蛋类、海鲜</strong> — 未经检疫</li>
+            <li><strong>新鲜水果、蔬菜</strong> — 可能携带病虫害</li>
+            <li><strong>来自菲律宾/印尼</strong>的可可豆、红毛丹、龙眼等特定水果</li>
+          </ul>
+          <div class="tag-list">
+            <span class="tag-item tag-red">猪肉制品 100%没收</span>
+            <span class="tag-item tag-red">新鲜水果 严禁</span>
+            <span class="tag-item tag-yellow">真空包装也不行</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#c6f6d5;">🍫</div>
+          <div>
+            <div class="card-title">可携带的食品（合理范围内）</div>
+            <div class="card-sub">总价值不超过约RM 150</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>零食饼干</strong>、巧克力、糖果等包装食品 ✅</li>
+            <li>方便面、速食 ✅</li>
+            <li>茶叶、咖啡 ✅</li>
+            <li>调味料（不含肉类的酱料）✅</li>
+            <li>真空包装的海鲜干货（如干贝、虾米）✅ 适量</li>
+          </ul>
+          <div style="margin-top:8px;padding:8px 10px;background:#fefcbf;border-radius:8px;font-size:13px;">
+            ⚠️ 即使可携带，也建议走红色通道申报，避免被抽查时说不清
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. 烟酒电子烟 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-warning">⚠ 受限</span>
+      <h2>香烟 · 酒类 · 电子烟</h2>
+    </div>
+    <table class="customs-table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>免税额/限额</th>
+          <th>超量后果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>🚬 香烟</strong></td>
+          <td>
+            <span style="color:var(--danger);font-weight:700;">仅限19支</span><br>
+            <span style="font-size:12px;">不到1包！超量无论多少均需缴税 <strong>实际执行极严</strong><br>小红书多人反映被开箱数烟</span>
+          </td>
+          <td>未申报缴税 → 没收+罚款</td>
+        </tr>
+        <tr>
+          <td><strong>💨 电子烟</strong></td>
+          <td>
+            <span style="color:var(--danger);font-weight:700;">不享受免税</span><br>
+            <span style="font-size:12px;">设备+烟油（含/不含尼古丁）均受限</span>
+          </td>
+          <td>没收+罚款+法律诉讼风险</td>
+        </tr>
+        <tr>
+          <td><strong>🍺 酒类</strong></td>
+          <td>
+            <strong>≤ 1升/人</strong><br>
+            <span style="font-size:12px;">仅限于非穆斯林旅客</span>
+          </td>
+          <td>超额需走红色通道申报缴税</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="info-box" style="margin-top:12px;">
+      <span class="info-title">📌 重要提示</span>
+      <strong>家庭配额不可合并使用</strong> — 每人配额独立计算。例如夫妻两人不能合并带1瓶2升的酒。
+    </div>
+  </div>
+
+  <!-- ===== 5. 现金 · 贵重物品 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-warning">⚠ 需申报</span>
+      <h2>现金 &amp; 贵重物品</h2>
+    </div>
+    <table class="customs-table">
+      <thead>
+        <tr>
+          <th>物品</th>
+          <th>限额/规定</th>
+          <th>申报要求</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>💰 现金（马币）</strong></td>
+          <td>≥ RM 10,000/人</td>
+          <td rowspan="2">必须申报<br>未申报=没收超额+罚款</td>
+        </tr>
+        <tr>
+          <td><strong>💰 现金（外币）</strong></td>
+          <td>≥ USD 10,000 或等值</td>
+        </tr>
+        <tr>
+          <td><strong>📷 相机/电子产品</strong></td>
+          <td>单价超过USD 1,000建议申报</td>
+          <td>证明自用，避免被征关税</td>
+        </tr>
+        <tr>
+          <td><strong>💎 珠宝/奢侈品</strong></td>
+          <td>总值超过RM 10,000</td>
+          <td>需申报说明自用</td>
+        </tr>
+        <tr>
+          <td><strong>🎁 礼品/纪念品</strong></td>
+          <td>总值不超过RM 500（陆路）<br>RM 1,000（空路）</td>
+          <td>超额需申报缴税</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== 6. 违禁品总表 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-danger">❌ 严禁</span>
+      <h2>其他违禁品</h2>
+    </div>
+    <div class="prohibited-grid">
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">🗡️</div>
+          <div>
+            <div class="card-title">武器 &amp; 危险品</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>匕首、弹簧刀、<strong>仿注射器的笔/铅笔</strong></li>
+            <li>枪支、弹药、仿真枪、玩具枪</li>
+            <li>鞭炮、烟花、打火机气罐</li>
+            <li>腐蚀性/放射性/有毒化学品</li>
+            <li>防弹衣、钢盔（需许可证）</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">🔞</div>
+          <div>
+            <div class="card-title">色情 &amp; 侵权物品</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>色情书籍、照片、影片、光盘</li>
+            <li>手机/电脑内的色情内容</li>
+            <li>成人玩具</li>
+            <li>仿冒名牌商品（假包、假表、假鞋）</li>
+            <li>盗版书籍、软件</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">📿</div>
+          <div>
+            <div class="card-title">宗教 &amp; 文化禁忌</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>印有古兰经经文的衣物/饰品</strong>（即使作为装饰）</li>
+            <li><strong>以色列相关物品</strong> — 国旗、六芒星饰品、纪念品</li>
+            <li>煽动性/反政府材料</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">🦁</div>
+          <div>
+            <div class="card-title">动植物 &amp; 生态保护</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>活体动物、植物、<strong>种子、土壤</strong></li>
+            <li><strong>海龟蛋</strong>、珊瑚（活的或死的）</li>
+            <li>食人鱼（所有品种）</li>
+            <li>象牙、犀牛角、穿山甲等濒危物种制品</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">📻</div>
+          <div>
+            <div class="card-title">电子 &amp; 通信设备</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li><strong>无人机</strong> — 需提前申请许可（沙巴州严禁私自携带）</li>
+            <li>68-87 MHz 及 108-174 MHz 频段的无线电接收器</li>
+            <li>多色复印机（如Rank Xerox 6500等）</li>
+            <li>对讲机/无线电设备 — 需MCMC许可</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prohibited-card">
+        <div class="card-header">
+          <div class="card-icon" style="background:#fed7d7;">♻️</div>
+          <div>
+            <div class="card-title">电子垃圾</div>
+            <span class="tag-item tag-red" style="font-size:11px;">🆕 2026年新增</span>
+          </div>
+        </div>
+        <div class="card-body">
+          自2026年4月1日起，马来西亚全面禁止电子垃圾（E-waste）进口。<br>
+          包括各类有害电子废弃物，违反者可被处以重罚。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- ===== 小红书实测避坑 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-warning">📕 实测</span>
+      <h2>小红书游客亲测 · 避坑提醒</h2>
+      <p>来自近期赴马游客的真实经验，这些坑千万别踩！</p>
+    </div>
+
+    <div class="customs-card">
+      <div class="card-title">⚠️ 最容易踩雷的5件事</div>
+      <div class="card-body">
+        <ol style="margin:0;padding-left:20px;font-size:14px;color:#4a5568;line-height:2.2;">
+          <li><strong>🚬 香烟只能带19支</strong> — 不到1包！海关会开箱一根根数，超量直接罚款。已经有多个游客反映被严查。</li>
+          <li><strong>🥩 猪肉脯千万别带</strong> — 马来西亚是穆斯林国家，猪肉制品100%没收+罚款。有游客说带了猪肉脯被海关当众训斥。</li>
+          <li><strong>💊 感冒药要检查成分</strong> — 白加黑、康泰克含麻黄碱=禁药。连花清瘟、999感冒灵（不含麻黄碱的版本）安全。</li>
+          <li><strong>🔥 自热火锅不能带上飞机</strong> — 含生石灰/压力液体，托运和随身都禁止。想带的话到马来西亚当地买。</li>
+          <li><strong>📦 不要帮任何人带东西</strong> — 帮朋友带的包裹里可能有违禁品，查出就是你全责，严重可遣返！机场陌生人给的东西更不能拿。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="customs-card">
+      <div class="card-title">🧳 出发前最后检查清单</div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:#4a5568;">
+          <div style="background:#d4edda;border-radius:8px;padding:10px;">
+            <div style="font-weight:700;color:#0e5e1e;margin-bottom:4px;">✅ 托运行李检查</div>
+            · 无猪肉制品<br>
+            · 无新鲜水果蔬菜<br>
+            · 无自热火锅/自热米饭<br>
+            · 喷雾不超过100ml<br>
+            · 电子设备关机/飞行模式
+          </div>
+          <div style="background:#d4edda;border-radius:8px;padding:10px;">
+            <div style="font-weight:700;color:#0e5e1e;margin-bottom:4px;">✅ 随身行李检查</div>
+            · 充电宝≤20000mAh · 仅1个<br>
+            · 护照+机票打印件<br>
+            · MDAC电子入境卡<br>
+            · 酒店预订单打印件<br>
+            · 药品原包装+英文处方
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- ===== 小红书实测避坑 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-warning">实测</span>
+      <h2>小红书游客亲测 · 避坑提醒</h2>
+      <p>来自近期赴马游客的真实经验，这些坑千万别踩！</p>
+    </div>
+
+    <div class="customs-card">
+      <div class="card-title">最容易踩雷的5件事</div>
+      <div class="card-body">
+        <ol style="margin:0;padding-left:20px;font-size:14px;color:#4a5568;line-height:2.2;">
+          <li><strong>香烟只能带19支</strong> — 不到1包！海关会开箱一根根数，超量直接罚款。已经有多个游客反映被严查。</li>
+          <li><strong>猪肉脯千万别带</strong> — 马来西亚是穆斯林国家，猪肉制品100%没收+罚款。有游客说带了猪肉脯被海关当众训斥。</li>
+          <li><strong>感冒药要检查成分</strong> — 白加黑、康泰克含麻黄碱=禁药。连花清瘟、999感冒灵（不含麻黄碱版本）安全。</li>
+          <li><strong>自热火锅不能带上飞机</strong> — 含生石灰/压力液体，托运和随身都禁止。想带的话到马来西亚当地买。</li>
+          <li><strong>不要帮任何人带东西</strong> — 帮朋友带的包裹里可能有违禁品，查出就是你全责，严重可遣返！机场陌生人给的东西更不能拿。</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="customs-card">
+      <div class="card-title">出发前最后检查清单</div>
+      <div class="card-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:#4a5568;">
+          <div style="background:#d4edda;border-radius:8px;padding:10px;">
+            <div style="font-weight:700;color:#0e5e1e;margin-bottom:4px;">托运检查</div>
+            · 无猪肉制品<br>
+            · 无新鲜水果蔬菜<br>
+            · 无自热火锅<br>
+            · 喷雾不超过100ml
+          </div>
+          <div style="background:#d4edda;border-radius:8px;padding:10px;">
+            <div style="font-weight:700;color:#0e5e1e;margin-bottom:4px;">随身检查</div>
+            · 充电宝<=20000mAh 仅1个<br>
+            · 护照+机票打印件<br>
+            · MDAC入境卡+酒店订单<br>
+            · 药品原包装+英文处方
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. 入境流程 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-info">📋 流程</span>
+      <h2>入境申报流程</h2>
+    </div>
+
+    <div class="info-box">
+      <span class="info-title">📌 第一步：出发前填写MDAC</span>
+      中国公民免签入境（≤30天）需在出发前<strong>72小时内</strong>在线填写马来西亚电子入境卡（MDAC）→ <a href="https://imigresen-online.imi.gov.my/mdac/main" target="_blank" style="color:#2b6cb0;">imigresen-online.imi.gov.my</a><br>
+      填写后保存或打印确认页面，入境时可能需出示。
+    </div>
+
+    <div class="warning-box">
+      <span class="warning-title">✈️ 第二步：选择通道</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+        <div style="background:#c6f6d5;border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:24px;font-weight:800;color:#276749;">🟢</div>
+          <div style="font-weight:700;color:#276749;">绿色通道</div>
+          <div style="font-size:12px;color:#276749;">Nothing to Declare</div>
+          <div style="font-size:11px;margin-top:6px;">未携带超额/受限物品<br>仍可能被随机抽查</div>
+        </div>
+        <div style="background:#fefcbf;border-radius:10px;padding:12px;text-align:center;">
+          <div style="font-size:24px;font-weight:800;color:#975a16;">🔴</div>
+          <div style="font-weight:700;color:#975a16;">红色通道</div>
+          <div style="font-size:12px;color:#975a16;">Goods to Declare</div>
+          <div style="font-size:11px;margin-top:6px;">有需申报/缴税物品<br><strong>不确定时也走此通道</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <span class="info-title">📌 第三步：配合检查</span>
+      <ul class="done-list">
+        <li>如实回答海关官员询问</li>
+        <li>主动展示药品处方/医生证明</li>
+        <li>不确定的物品主动询问是否需申报</li>
+        <li>切忌撒谎 — 海关有权直接遣返</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 8. 打包清单 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-info">🧳 参考</span>
+      <h2>建议打包清单</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:16px;">
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:10px;color:#38a169;">✅ 可以放心带的</h3>
+        <ul style="list-style:none;padding:0;font-size:13px;">
+          <li style="padding:3px 0;">📱 手机/笔记本/平板</li>
+          <li style="padding:3px 0;">📷 自用相机（1-2台可）</li>
+          <li style="padding:3px 0;">🔌 充电宝（≤20000mAh，随身）</li>
+          <li style="padding:3px 0;">👗 换洗衣物、洗漱用品</li>
+          <li style="padding:3px 0;">🍫 包装零食、饼干、巧克力</li>
+          <li style="padding:3px 0;">☕ 茶叶、速溶咖啡</li>
+          <li style="padding:3px 0;">💊 安全药品（见上文）</li>
+          <li style="padding:3px 0;">💵 适量现金（建议500-2000马币）</li>
+          <li style="padding:3px 0;">🌂 雨伞、防晒用品</li>
+        </ul>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid #fc8181;border-radius:12px;padding:16px;">
+        <h3 style="font-size:15px;font-weight:700;margin-bottom:10px;color:#e53e3e;">❌ 千万不要带的</h3>
+        <ul style="list-style:none;padding:0;font-size:13px;">
+          <li style="padding:3px 0;">💀 任何毒品/大麻制品</li>
+          <li style="padding:3px 0;">🥩 猪肉及其制品</li>
+          <li style="padding:3px 0;">🍎 新鲜水果/蔬菜/肉类</li>
+          <li style="padding:3px 0;">💊 含麻黄碱/吗啡的药品</li>
+          <li style="padding:3px 0;">🚬 电子烟/烟油</li>
+          <li style="padding:3px 0;">🔞 色情内容（含手机内）</li>
+          <li style="padding:3px 0;">💣 鞭炮/烟花/打火机气罐</li>
+          <li style="padding:3px 0;">🛸 无人机（无许可）</li>
+          <li style="padding:3px 0;">🎭 仿冒名牌（假包假表）</li>
+          <li style="padding:3px 0;">🗡️ 匕首/弹簧刀/仿真枪</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 9. 常见问题 ===== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="tag tag-info">❓ FAQ</span>
+      <h2>常见问题</h2>
+    </div>
+
+    <div class="prohibited-card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <strong style="color:var(--text-primary);">Q：充电宝可以托运吗？</strong><br>
+        <span style="color:var(--text-secondary);">A：<strong>不可以。</strong>充电宝必须随身携带，严禁放入托运行李。</span>
+      </div>
+    </div>
+    <div class="prohibited-card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <strong style="color:var(--text-primary);">Q：带了处方药一定要申报吗？</strong><br>
+        <span style="color:var(--text-secondary);">A：个人合理用量+有英文处方可免申报，但<strong>建议走红色通道主动说明</strong>，避免被抽查时说不清。</span>
+      </div>
+    </div>
+    <div class="prohibited-card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <strong style="color:var(--text-primary);">Q：不申报被查到会怎样？</strong><br>
+        <span style="color:var(--text-secondary);">A：最高罚款<strong>RM 500,000</strong>（约77万人民币）+ 监禁<strong>最高5年</strong>，同时没收物品。</span>
+      </div>
+    </div>
+    <div class="prohibited-card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <strong style="color:var(--text-primary);">Q：马来西亚海关对中国旅客抽查率高吗？</strong><br>
+        <span style="color:var(--text-secondary);">A：抽查率约10%，高峰期略高。诚实申报最重要。</span>
+      </div>
+    </div>
+    <div class="prohibited-card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <strong style="color:var(--text-primary);">Q：可以帮别人带东西入境吗？</strong><br>
+        <span style="color:var(--text-secondary);">A：<strong>千万不要</strong>帮人带不明物品，尤其是药品、粉末、电子烟等。查出违禁品你承担全部法律责任。</span>
+      </div>
+    </div>
+    <div class="prohibited-card" style="margin-bottom:10px;">
+      <div class="card-body">
+        <strong style="color:var(--text-primary);">Q：马来西亚入境需要填写什么？</strong><br>
+        <span style="color:var(--text-secondary);">A：中国公民免签入境需在出发前<strong>72小时内</strong>填写<strong>MDAC电子入境卡</strong>（网址见上文），同时需携带往返机票和酒店预订单。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <div class="footer">
+    <div class="divider"></div>
+    <p style="font-size:13px;font-weight:600;">📋 以上信息根据马来西亚皇家海关局、马来西亚卫生部、中国领事服务网及各大旅行平台整理</p>
+    <p style="font-size:12px;margin-top:6px;">更新日期：2026年6月 · 海关政策可能随时调整，出发前请以官方最新通告为准</p>
+    <p style="margin-top:12px;"><a href="index.html" style="color:#3182ce;text-decoration:none;">&larr; 返回主页</a></p>
+    <p style="margin-top:16px;font-size:11px;color:#a0aec0;">
+      参考来源：Royal Malaysian Customs Department · 马来西亚药品管制局（NPRA）· 中国驻马来西亚大使馆 · 马来西亚AIP GEN 1.3
+    </p>
+  </div>
+
+</div>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+
+<script>
+/* Back to top button */
+(function() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) { btn.classList.add('show'); }
+    else { btn.classList.remove('show'); }
+  });
+  btn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+
+</body>
+</html>
